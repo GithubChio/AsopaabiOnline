@@ -38,9 +38,10 @@ namespace AsopaabiOnline.Modelo
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("DefaultConnection");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-GID5PN2;Database=ASOPAABI_ONLINE;User ID=sa;Password=1234");
             }
         }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -167,6 +168,10 @@ namespace AsopaabiOnline.Modelo
 
             modelBuilder.Entity<Cliente>(entity =>
             {
+                entity.Property(e => e.Id)
+                   .HasColumnName("id")
+                   .ValueGeneratedNever();
+
                 entity.Property(e => e.TipoDni).HasColumnName("TipoDni");
                 entity.Property(e => e.Dni)
                     .IsRequired()
@@ -176,7 +181,7 @@ namespace AsopaabiOnline.Modelo
                 entity.Property(e => e.FechaDeNacimiento).HasColumnType("datetime");
 
                 entity.Property(e => e.IdUsuario)
-                    .IsRequired()
+                    .IsRequired(false)
                     .HasMaxLength(450);
 
                 entity.Property(e => e.PrimerApellido)

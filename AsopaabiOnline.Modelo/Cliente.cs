@@ -14,13 +14,14 @@ namespace AsopaabiOnline.Modelo
             //Pedido = new HashSet<Pedido>();
         }
         [Key]
+
         public int Id { get; set; }
 
         [Required (ErrorMessage ="el tipo de DNI es requerido")]
         [Display(Name = "Tipo de DNI")]
         [EnumDataType(typeof(TipoDeDni))]
         public int TipoDni { get; set; }
-        [Required(ErrorMessage = "el tipo de DNI es requerido")]
+        [Required(ErrorMessage = "el DNI es requerido")]
         public string Dni { get; set; }
 
         
@@ -58,7 +59,7 @@ namespace AsopaabiOnline.Modelo
         [Display(Name = "Tipo de Actividad")]
         [EnumDataType(typeof(TipoDeActividad))]
         public int TipoActividad { get; set; }
-
+        [NotMapped]
         public string IdUsuario { get; set; }
         [NotMapped]
         public virtual AspNetUsers IdUsuarioNavigation { get; set; }

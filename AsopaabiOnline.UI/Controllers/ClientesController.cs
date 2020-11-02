@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AsopaabiOnline.AccesoADatos;
 using AsopaabiOnline.LogicaDeNegocio;
 using AsopaabiOnline.Modelo;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsopaabiOnline.UI.Controllers
@@ -28,19 +29,21 @@ namespace AsopaabiOnline.UI.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
+                   CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
                     elCoordinador.Agregar(elCliente);
-                    return RedirectToAction("Mostrar", "Clientes");
-
+                    return RedirectToAction("Mostrar");
                 }
+
 
                 return View();
             }
             catch
             {
+
                 return View();
             }
-            }
+        }
+
         [HttpGet]
         [Route("Clientes/Mostrar")]
         public IActionResult Mostrar()
