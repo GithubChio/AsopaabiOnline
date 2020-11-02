@@ -168,9 +168,8 @@ namespace AsopaabiOnline.Modelo
 
             modelBuilder.Entity<Cliente>(entity =>
             {
-                entity.Property(e => e.Id)
-                   .HasColumnName("id")
-                   .ValueGeneratedNever();
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.TipoDni).HasColumnName("TipoDni");
                 entity.Property(e => e.Dni)
@@ -332,7 +331,7 @@ namespace AsopaabiOnline.Modelo
                 entity.Property(e => e.IdPedido).HasColumnName("Id_Pedido");
 
                 entity.Property(e => e.IdUsuario)
-                    .IsRequired()
+                    .IsRequired(false)
                     .HasColumnName("Id_Usuario")
                     .HasMaxLength(450);
 

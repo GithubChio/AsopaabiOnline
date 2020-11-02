@@ -16,32 +16,36 @@ namespace AsopaabiOnline.AccesoADatos
 
         public List<Cliente> ObtenerListaDeClientes()
         {
-          var laBaseDeDatos = new Contexto();
+            var laBaseDeDatos = new Contexto();
             var elResultado = from elCliente in laBaseDeDatos.Cliente
                               select elCliente;
 
             return elResultado.ToList();
         }
 
-        public List<Cliente> ObtenerListaDeClientesConCedulaFisica()
+        public Cliente ObtenerClientePorId(int id)
         {
             var laBaseDeDatos = new Contexto();
-            var elResultado = from elCliente in laBaseDeDatos.Cliente
-                              where elCliente.TipoDni==(int)Modelo.TipoDeDni.CedulaFisica
-                              select elCliente;
-
-            return elResultado.ToList();
-           
+            var elResultado = laBaseDeDatos.Cliente.Find(id);
+            return elResultado;
         }
 
-        public List<Cliente> ObtenerListaDeClientesConCedulaJuridica()
+        public void Actualizar(Cliente elCliente)
         {
             var laBaseDeDatos = new Contexto();
-            var elResultado = from elCliente in laBaseDeDatos.Cliente
-                              where elCliente.TipoDni == (int)Modelo.TipoDeDni.CedulaJuridica
-                              select elCliente;
+            var elClienteEnlaBD = ObtenerClientePorId(elCliente.Id);
 
-            return elResultado.ToList();
+            elClienteEnlaBD.Id = elCliente.Id;
+            elClienteEnlaBD.TipoDni = elCliente.TipoDni;
+            elClienteEnlaBD.Dni = elCliente.Dni;
+            elClienteEnlaBD.PrimerNombre = elCliente.PrimerNombre;
+            elClienteEnlaBD.SegundoNombre = elCliente.SegundoNombre;
+            elClienteEnlaBD.PrimerApellido = elCliente.PrimerApellido;
+            elClienteEnlaBD.SegundoApellido = elCliente.SegundoApellido;
+
+            laBaseDeDatos.Entry(elClienteEnlaBD).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            laBaseDeDatos.SaveChanges();
+
         }
     }
 }

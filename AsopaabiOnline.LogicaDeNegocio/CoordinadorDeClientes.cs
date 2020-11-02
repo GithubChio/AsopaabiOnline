@@ -20,15 +20,19 @@ namespace AsopaabiOnline.LogicaDeNegocio
             return elGestor.ObtenerListaDeClientes();
         }
 
-        public List<Modelo.Cliente> ListarClientesConCedulaFisica()
+        public void Actualizar(Modelo.Cliente elCliente)
         {
             GestorDeClientes elGestor = new GestorDeClientes();
-            return elGestor.ObtenerListaDeClientesConCedulaFisica();
-        }
-        public List<Modelo.Cliente> ListarClientesConCedulaJuridica()
-        {
-            GestorDeClientes elGestor = new GestorDeClientes();
-            return elGestor.ObtenerListaDeClientesConCedulaJuridica();
-        }
+            Modelo.Cliente elClienteAActualizar = elGestor.ObtenerClientePorId(elCliente.Id);
+
+            elClienteAActualizar.Id = elCliente.Id;
+            elClienteAActualizar.TipoDni = elCliente.TipoDni;
+            elClienteAActualizar.Dni = elCliente.Dni;
+            elClienteAActualizar.PrimerNombre = elCliente.PrimerNombre;
+            elClienteAActualizar.SegundoNombre = elCliente.SegundoNombre;
+            elClienteAActualizar.PrimerApellido = elCliente.PrimerApellido;
+            elClienteAActualizar.SegundoApellido = elCliente.SegundoApellido;
+
+            elGestor.Actualizar(elClienteAActualizar);
     }
 }

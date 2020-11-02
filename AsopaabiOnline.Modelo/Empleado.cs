@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AsopaabiOnline.Modelo
 {
@@ -10,8 +12,10 @@ namespace AsopaabiOnline.Modelo
         public string SegundoNombre { get; set; }
         public string PrimerApellido { get; set; }
         public string SegundoApellido { get; set; }
+        [NotMapped]
         public int TipoDeEmpleado { get; set; }
         public int IdPedido { get; set; }
+        [NotMapped]
         public string IdUsuario { get; set; }
 
         public virtual Pedido IdPedidoNavigation { get; set; }
