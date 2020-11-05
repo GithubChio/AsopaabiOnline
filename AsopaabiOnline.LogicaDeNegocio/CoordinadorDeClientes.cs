@@ -10,7 +10,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
 
         {
             GestorDeClientes elGestor = new GestorDeClientes();
-            elCliente.TipoDeCliente = (int)Modelo.TipoDeCliente.Nuevo;
+            elCliente.TipoDeCliente = Modelo.TipoDeCliente.Nuevo;
             elGestor.Agregar(elCliente);
         }
 
@@ -18,6 +18,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
         {
             GestorDeClientes elGestor = new GestorDeClientes();
             return elGestor.ObtenerListaDeClientes();
+
         }
 
         public void Actualizar(Modelo.Cliente elCliente)
@@ -34,5 +35,51 @@ namespace AsopaabiOnline.LogicaDeNegocio
             elClienteAActualizar.SegundoApellido = elCliente.SegundoApellido;
 
             elGestor.Actualizar(elClienteAActualizar);
+        }
+
+        public Modelo.Cliente ObtenerClientePorId(int id)
+        {
+            GestorDeClientes elGestor = new GestorDeClientes();
+
+            return elGestor.ObtenerClientePorId(id);
+        }
+
+        public int ObtenerEdad(Modelo.Cliente  elCliente)
+        {
+            GestorDeClientes elGestor = new GestorDeClientes();
+           int elAñoDeNacimiento = elGestor.ObtenerAñoDeNacimiento(elCliente);
+            DateTime laFechaActual = DateTime.Now.Date;
+            int elAñoActual = laFechaActual.Year;
+      
+            int laEdad=0;
+
+            laEdad =(elAñoActual - elAñoDeNacimiento);
+            return laEdad;
+
+        }
+
+        public void Eliminar(Modelo.Cliente elCliente)
+        {
+            GestorDeClientes elGestor = new GestorDeClientes();
+            Modelo.Cliente elClienteAEliminar = elGestor.ObtenerClientePorId(elCliente.Id);
+            elGestor.Eliminar(elClienteAEliminar);
+
+        }
+
+        public void CambiarAClienteRegular(Modelo.Cliente elCliente)
+        {
+            GestorDeClientes elGestor = new GestorDeClientes();
+            Modelo.Cliente ClienteACambiar = elGestor.ObtenerClientePorId(elCliente.Id);
+            ClienteACambiar.TipoDeCliente = Modelo.TipoDeCliente.Regular;
+            elGestor.Actualizar(ClienteACambiar);
+        }
+
+        public void CambiarAClienteFrecuente(Modelo.Cliente elCliente)
+        {
+            GestorDeClientes elGestor = new GestorDeClientes();
+            Modelo.Cliente ClienteACambiar = elGestor.ObtenerClientePorId(elCliente.Id);
+            ClienteACambiar.TipoDeCliente = Modelo.TipoDeCliente.Frecuente;
+            elGestor.Actualizar(ClienteACambiar);
+        }
     }
 }

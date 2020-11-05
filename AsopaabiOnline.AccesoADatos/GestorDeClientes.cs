@@ -30,22 +30,39 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado;
         }
 
-        public void Actualizar(Cliente elCliente)
+        public void Actualizar(Cliente elClienteAActualizar)
         {
             var laBaseDeDatos = new Contexto();
-            var elClienteEnlaBD = ObtenerClientePorId(elCliente.Id);
-
-            elClienteEnlaBD.Id = elCliente.Id;
-            elClienteEnlaBD.TipoDni = elCliente.TipoDni;
-            elClienteEnlaBD.Dni = elCliente.Dni;
-            elClienteEnlaBD.PrimerNombre = elCliente.PrimerNombre;
-            elClienteEnlaBD.SegundoNombre = elCliente.SegundoNombre;
-            elClienteEnlaBD.PrimerApellido = elCliente.PrimerApellido;
-            elClienteEnlaBD.SegundoApellido = elCliente.SegundoApellido;
+            var elClienteEnlaBD = ObtenerClientePorId(elClienteAActualizar.Id);
+          
+            elClienteEnlaBD.Id = elClienteAActualizar.Id;
+            elClienteEnlaBD.TipoDni = elClienteAActualizar.TipoDni;
+            elClienteEnlaBD.Dni = elClienteAActualizar.Dni;
+            elClienteEnlaBD.PrimerNombre = elClienteAActualizar.PrimerNombre;
+            elClienteEnlaBD.SegundoNombre = elClienteAActualizar.SegundoNombre;
+            elClienteEnlaBD.PrimerApellido = elClienteAActualizar.PrimerApellido;
+            elClienteEnlaBD.SegundoApellido = elClienteAActualizar.SegundoApellido;
+            elClienteEnlaBD.TipoDeCliente = elClienteAActualizar.TipoDeCliente;
 
             laBaseDeDatos.Entry(elClienteEnlaBD).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             laBaseDeDatos.SaveChanges();
 
+        }
+
+        public int ObtenerAñoDeNacimiento(Cliente elCliente)
+        {
+            var elClienteEnlaBD = ObtenerClientePorId(elCliente.Id);
+            var elAño = elClienteEnlaBD.FechaDeNacimiento.Year;
+            return elAño;
+        }
+
+        public void Eliminar(Cliente elClienteAEliminar)
+        {
+            var laBaseDeDatos = new Contexto();
+            var elClienteEnlaBD = ObtenerClientePorId(elClienteAEliminar.Id);
+            laBaseDeDatos.Cliente.Remove(elClienteEnlaBD);
+            laBaseDeDatos.Remove(elClienteEnlaBD).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            laBaseDeDatos.SaveChanges();
         }
     }
 }

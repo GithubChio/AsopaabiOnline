@@ -169,9 +169,6 @@ namespace AsopaabiOnline.Modelo
             modelBuilder.Entity<Cliente>(entity =>
             {
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.TipoDni).HasColumnName("TipoDni");
                 entity.Property(e => e.Dni)
                     .IsRequired()
                     .HasMaxLength(20)
@@ -179,9 +176,7 @@ namespace AsopaabiOnline.Modelo
 
                 entity.Property(e => e.FechaDeNacimiento).HasColumnType("datetime");
 
-                entity.Property(e => e.IdUsuario)
-                    .IsRequired(false)
-                    .HasMaxLength(450);
+                entity.Property(e => e.IdUsuario).HasMaxLength(450);
 
                 entity.Property(e => e.PrimerApellido)
                     .IsRequired()
@@ -202,13 +197,9 @@ namespace AsopaabiOnline.Modelo
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.TipoDeCliente).HasColumnName("TipoDeCliente");
-                entity.Property(e => e.TipoActividad).HasColumnName("TipoActividad");
-
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Cliente)
                     .HasForeignKey(d => d.IdUsuario)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Cliente_AspNetUsers");
             });
 
@@ -331,7 +322,6 @@ namespace AsopaabiOnline.Modelo
                 entity.Property(e => e.IdPedido).HasColumnName("Id_Pedido");
 
                 entity.Property(e => e.IdUsuario)
-                    .IsRequired(false)
                     .HasColumnName("Id_Usuario")
                     .HasMaxLength(450);
 
@@ -369,7 +359,6 @@ namespace AsopaabiOnline.Modelo
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Empleado)
                     .HasForeignKey(d => d.IdUsuario)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_EMPLEADO_AspNetUsers");
             });
 
