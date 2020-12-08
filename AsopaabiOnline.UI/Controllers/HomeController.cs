@@ -18,12 +18,17 @@ namespace AsopaabiOnline.UI.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Tienda()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacidad()
+        {
+            return View();
+        }
+
+        public  IActionResult AcercaDeNosotros()
         {
             return View();
         }

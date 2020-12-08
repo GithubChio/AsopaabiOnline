@@ -43,8 +43,8 @@ namespace AsopaabiOnline.UI
             }
             else
             {
-                app.UseExceptionHandler("/Clientes/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseExceptionHandler("/Inicio/Error");
+               
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -58,7 +58,8 @@ namespace AsopaabiOnline.UI
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    
+                    pattern: "{controller=Home}/{action=Tienda}/{id?}");
             });
         }
     }

@@ -11,6 +11,8 @@ namespace AsopaabiOnline.Modelo
         [Display(Name = "Soda/Restaurante")]
         Soda_Restaurante = 2,
         AutoConsumo = 3,
-        Supermercado = 4
+        Supermercado = 4,
+        Otros = 5,
+
     }
 }

@@ -22,7 +22,7 @@ namespace AsopaabiOnline.AccesoADatos
 
             return elResultado.ToList();
         }
-
+       
         public Cliente ObtenerClientePorId(int id)
         {
             var laBaseDeDatos = new Contexto();
@@ -56,6 +56,9 @@ namespace AsopaabiOnline.AccesoADatos
             return elAño;
         }
 
+       
+
+        
         public void Eliminar(Cliente elClienteAEliminar)
         {
             var laBaseDeDatos = new Contexto();
@@ -64,5 +67,7 @@ namespace AsopaabiOnline.AccesoADatos
             laBaseDeDatos.Remove(elClienteEnlaBD).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             laBaseDeDatos.SaveChanges();
         }
+
+       
     }
 }

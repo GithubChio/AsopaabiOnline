@@ -5,6 +5,7 @@
 }
 
 <h1>Clientes</h1>
+<hr />
 <p> <a class="btn btn-outline-warning" asp-controller="Clientes" asp-action="Agregar">Agregar</a></p>
 
 
@@ -40,9 +41,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.TipoActividad)
                 </th>
-                @*<th>
+                <th>
             @Html.DisplayNameFor(model=>model.Edad)
-        </th>*@
+                </th>
 
 
                 <th></th>
@@ -79,33 +80,31 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.TipoActividad)
                 </td>
-                @*<th>
+                <th>
             @Html.DisplayFor(modelItem => item.Edad)
-        </th>*@
+                </th>
 
 
                 <td>
-                    <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a> |
-                    <a asp-action="CambiarAClienteRegular" asp-route-id="@item.Id">Cambiar a cliente regular</a> |
-                    <a asp-action="CambiarAClienteFrecuente" asp-route-id="@item.Id">Cambiar a cliente frecuente</a> |
-                    <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a>
 
+                    <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a>  |
+                    <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a> |
+                    <a asp-controller="TelefonosDeClientes" asp-action="Agregar" asp-route-id="@item.Id">Agregar teléfono</a> |
+                    <a asp-action="CambiarAClienteRegular" asp-route-id="@item.Id">Cambiar a cliente regular</a> |
+                    <a asp-action="CambiarAClienteFrecuente" asp-route-id="@item.Id">Cambiar a cliente frecuente</a>
                 </td>
             </tr>
+            
             }
             
         </tbody>
 
 
     </table>
+    <hr />
+
 }
 else
 {
-    <div class="card">
-        <div class="card-header">
-            Aún no hay clientes agregados
-
-        </div>
-    </div>
-    
+<h3> Aún no hay empleados agregados</h3>
 }

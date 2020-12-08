@@ -1,0 +1,76 @@
+﻿@model AsopaabiOnline.Modelo.ClienteTelefono
+
+
+@{
+    ViewBag.Title = "Teléfonos";
+}
+
+<h3>Teléfonos de Clientes</h3>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+
+        <form asp-controller="TelefonosDeClientes" asp-action="Agregar" method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="alert alert-primary" style="width:1000px;">
+                <h3>Agregar</h3>
+            </div>
+            <div>
+                <label asp-for="IdCliente" class="control-label"></label>
+                <input disabled asp-for="IdCliente" class="control-label" />
+            </div>
+            <table>
+
+
+                <thead>
+                    <tr>
+
+                        <th>
+                            <label asp-for="Telefono1" class="control-label"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Telefono2" class="control-label"></label>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+
+                        <td>
+                            <input style="width:150px;" asp-for="Telefono1" class="form-control" />
+                            <span asp-validation-for="Telefono1" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input style="width:150px;" asp-for="Telefono2" class="form-control" />
+                            <span asp-validation-for="Telefono2" class="text-danger"></span>
+                        </td>
+                        <td>  <input type="submit" value="Guardar" class="btn btn-outline-success" /></td>
+                    </tr>
+
+                </tbody>
+
+
+
+
+            </table>
+
+
+
+
+
+
+        </form>
+    </div>
+</div>
+<br />
+<br />
+<div>
+
+    <a class="btn btn-outline-secondary" asp-action="Mostrar" asp-controller="Clientes"> Volver </a>
+</div>

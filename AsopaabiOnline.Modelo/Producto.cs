@@ -17,8 +17,8 @@ namespace AsopaabiOnline.Modelo
         public double PrecioCosto { get; set; }
         public double PrecioUnitario { get; set; }
         public int Utilidad { get; set; }
-        public int Categoria { get; set; }
-        public int Estado { get; set; }
+        public Categoria Categoria { get; set; }
+        public Estado Estado { get; set; }
 
         public virtual ICollection<DetallePedido> DetallePedido { get; set; }
     }

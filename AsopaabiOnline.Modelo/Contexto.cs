@@ -15,25 +15,25 @@ namespace AsopaabiOnline.Modelo
         {
         }
 
-        public DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
-        public DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
-        public DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
-        public DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
-        public DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
-        public DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public DbSet<Canton> Canton { get; set; }
-        public DbSet<Cliente> Cliente { get; set; }
-        public DbSet<ClienteTelefono> ClienteTelefono { get; set; }
-        public DbSet<DetallePedido> DetallePedido { get; set; }
-        public DbSet<DireccionPedido> DireccionPedido { get; set; }
-        public DbSet<Distrito> Distrito { get; set; }
-        public DbSet<Empleado> Empleado { get; set; }
-        public DbSet<HistorialPedido> HistorialPedido { get; set; }
-        public DbSet<Pago> Pago { get; set; }
-        public DbSet<Pedido> Pedido { get; set; }
-        public DbSet<Producto> Producto { get; set; }
-        public DbSet<Provincia> Provincia { get; set; }
+        public virtual  DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
+        public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Canton> Canton { get; set; }
+        public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<ClienteTelefono> ClienteTelefono { get; set; }
+        public virtual DbSet<DetallePedido> DetallePedido { get; set; }
+        public virtual DbSet<DireccionPedido> DireccionPedido { get; set; }
+        public virtual DbSet<Distrito> Distrito { get; set; }
+        public virtual DbSet<Empleado> Empleado { get; set; }
+        public virtual DbSet<HistorialPedido> HistorialPedido { get; set; }
+        public virtual DbSet<Pago> Pago { get; set; }
+        public virtual DbSet<Pedido> Pedido { get; set; }
+        public virtual  DbSet<Producto> Producto { get; set; }
+        public virtual DbSet<Provincia> Provincia { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -169,10 +169,7 @@ namespace AsopaabiOnline.Modelo
             modelBuilder.Entity<Cliente>(entity =>
             {
 
-                entity.Property(e => e.Dni)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
+                entity.Property(e => e.Dni).IsRequired() .HasMaxLength(20)  .IsUnicode(false);
 
                 entity.Property(e => e.FechaDeNacimiento).HasColumnType("datetime");
 

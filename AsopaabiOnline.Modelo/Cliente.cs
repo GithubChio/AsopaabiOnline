@@ -17,37 +17,38 @@ namespace AsopaabiOnline.Modelo
 
         public int Id { get; set; }
 
-        [Required (ErrorMessage ="el tipo de DNI es requerido")]
+        [Required ]
         [Display(Name = "Tipo de DNI")]
-      
         public TipoDeDni TipoDni { get; set; }
+        
         [Required(ErrorMessage = "el DNI es requerido")]
         [Display(Name ="DNI")]
         public string Dni { get; set; }
 
         
         [Required(ErrorMessage = "Su primer nombre es requerido")]
-        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$",ErrorMessage ="Ingrese unicamente letras y la primera en mayúscula")]
         [Display(Name = "Primer Nombre")]
         public string PrimerNombre { get; set; }
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$",ErrorMessage ="Ingrese unicamente letras y la primera en mayúscula")]
         [Display(Name = "Segundo Nombre")]
         public string SegundoNombre { get; set; }
 
         [Required(ErrorMessage = "Su primer apellido es requerido")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Ingrese unicamente letras y la primera en mayúscula")]
         [Display(Name = "Primer Apellido")]
         public string PrimerApellido { get; set; }
 
         [Required(ErrorMessage = "Su segundo apellido es requerido")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Ingrese unicamente letras y la primera en mayúscula")]
         [Display(Name = "Segundo Apellido")]
         public string SegundoApellido { get; set; }
 
 
         [Required(ErrorMessage = "Su fecha de nacimiento es requerida")]
         [Display(Name = "Fecha de Nacimiento")]
-        [Range(typeof(DateTime), "31/12/1925", "31/12/2002",
-    ErrorMessage = "El valor de {0} debe ser entre {1} y {2}")]
+        [Range(typeof(DateTime), "31-12-1925", "31-12-2003",ErrorMessage = "No se aceptan menores de edad")]
         [DataType(DataType.Date)]
         public DateTime FechaDeNacimiento { get; set; }
         [Required]
@@ -56,11 +57,11 @@ namespace AsopaabiOnline.Modelo
         public TipoDeCliente TipoDeCliente { get; set; }
         [Required]
         [Display(Name = "Tipo de Actividad")]
-        //[EnumDataType(typeof(TipoDeActividad))]
+        
         public TipoDeActividad TipoActividad { get; set; }
         [NotMapped]
         public int Edad { get; set; }
-      
+        [NotMapped]
         public string IdUsuario { get; set; }
    
         public virtual AspNetUsers IdUsuarioNavigation { get; set; }

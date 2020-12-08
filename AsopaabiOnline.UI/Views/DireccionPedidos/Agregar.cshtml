@@ -1,0 +1,78 @@
+﻿@model AsopaabiOnline.Modelo.DireccionPedido
+
+@{
+    ViewBag.Title = "AgregarDireccion";
+
+}
+<h3>Dirección de los pedidos</h3>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+    
+        <form asp-controller="DireccionPedidos" asp-action="Agregar" method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          
+
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            <label asp-for="IdProvincia" class="control-label"></label>
+                        </th>
+                        <th>
+                            <label asp-for="IdCanton" class="control-label"></label>
+                        </th>
+                        <th>
+                            <label asp-for="IdDistrito" class="control-label"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Detalles" class="control-label"></label>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <select id="SeleccionDeProvincia" asp-for="IdProvincia" asp-items=@(new SelectList(Model.LaListaDeProvincias,"Id","Nombre")) class="form-control" style="width:230px;">
+                                <option selected="selected" disabled value="">Seleccione una opción</option>
+                            </select>
+
+                            <span asp-validation-for="IdProvincia" class="text-danger"></span>
+                            <div ><a @ViewBag.mensaje></a>  </div>
+                        </td>
+                        <td>
+                            @*<select asp-for="IdCanton" asp-items="new SelectList(Model.LaListaDeCantones)" class="form-control">
+                                <option selected="selected" disabled value="">Seleccione una opción</option>
+                            </select>
+                            <span asp-validation-for="IdCanton" class="text-danger"></span>*@
+                        </td>
+                        <td>
+                            @*<select asp-for="IdDistrito" asp-items="new SelectList(Model.LaListaDeDistritos)" class="form-control">
+                                <option selected="selected" disabled value="">Seleccione una opción</option>
+                            </select>
+                            <span asp-validation-for="IdDistrito" class="text-danger"></span>*@
+                        </td>
+
+                        <td>
+                            <input asp-for="Detalles" class="form-control" />
+                            <span asp-validation-for="Detalles" class="text-danger"></span>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <hr />
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-outline-success" />
+
+            </div>
+
+        </form>
+</div>
+ </div>
+
+

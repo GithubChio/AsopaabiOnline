@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AsopaabiOnline.Modelo
 {
@@ -13,8 +14,12 @@ namespace AsopaabiOnline.Modelo
         public int Id { get; set; }
         public string Nombre { get; set; }
         public int IdCanton { get; set; }
-
+      
+       
+       [NotMapped]
         public virtual Canton IdCantonNavigation { get; set; }
+    
+        [NotMapped]
         public virtual ICollection<DireccionPedido> DireccionPedido { get; set; }
     }
 }

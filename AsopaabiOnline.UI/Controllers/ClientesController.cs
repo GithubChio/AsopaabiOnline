@@ -18,6 +18,7 @@ namespace AsopaabiOnline.UI.Controllers
         [Route("Clientes/Agregar")]
         public IActionResult Agregar()
         {
+         
             return View();
         }
 
@@ -27,10 +28,9 @@ namespace AsopaabiOnline.UI.Controllers
         {
             try
             {
-
-                
                     CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
                     elCoordinador.Agregar(elCliente);
+                
                      return RedirectToAction("Mostrar");
 
             }
@@ -46,9 +46,12 @@ namespace AsopaabiOnline.UI.Controllers
         public IActionResult Mostrar()
         {
             CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
-           
+            
+          
             return View(elCoordinador.ListarClientes());
         }
+
+       
 
         [HttpGet]
         [Route("Clientes/Actualizar")]
@@ -153,5 +156,8 @@ namespace AsopaabiOnline.UI.Controllers
                 return View();
             }
         }
+
+
+       
     }
 }
