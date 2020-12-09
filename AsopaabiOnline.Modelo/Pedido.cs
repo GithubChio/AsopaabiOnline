@@ -17,8 +17,8 @@ namespace AsopaabiOnline.Modelo
         public DateTime FechaPedido { get; set; }
         public DateTime FechaEntrega { get; set; }
         public string Notas { get; set; }
-        public int Estado { get; set; }
-        public int TipoDePago { get; set; }
+        public EstadoDePedido Estado { get; set; }
+       
         public int IdDireccion { get; set; }
         public int IdCliente { get; set; }
 

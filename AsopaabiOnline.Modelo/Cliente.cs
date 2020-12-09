@@ -14,7 +14,7 @@ namespace AsopaabiOnline.Modelo
             //Pedido = new HashSet<Pedido>();
         }
         [Key]
-
+        [Display(Name = "Id Cliente")]
         public int Id { get; set; }
 
         [Required ]

@@ -14,7 +14,7 @@
     <table class="table table-responsive">
         <thead>
             <tr>
-               
+
                 <th>
                     @Html.DisplayNameFor(model => model.PrimerNombre)
                 </th>
@@ -27,45 +27,52 @@
                 <th>
                     @Html.DisplayNameFor(model => model.SegundoApellido)
                 </th>
-               
+                <th>
+                    @Html.DisplayNameFor(model => model.TipoDeEmpleado)
+                </th>
+
                 <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PrimerNombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SegundoNombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PrimerApellido)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SegundoApellido)
-                    </td>
-                   
-                    <td>
-                        <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a> |
-                        <a asp-action="CambiarAAsistente" asp-route-id="@item.Id">Cambiar a empleado asistente</a> |
-                        <a asp-action="CambiarAAdministrador" asp-route-id="@item.Id">Cambiar a empleado administrador</a> |
-                        <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a>
+            <tr>
 
-                    </td>
-                </tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrimerNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SegundoNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrimerApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SegundoApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoDeEmpleado)
+                </td>
+
+                <td>
+                    <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a> |
+                    <a asp-action="CambiarAEmpleadoAsistente"  asp-route-id="@item.Id">Cambiar a empleado asistente</a> |
+                    <a asp-action="CambiarAEmpleadoAdministrador" asp-route-id="@item.Id">Cambiar a empleado administrador</a> |
+                    <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a>
+
+                </td>
+            </tr>
             }
 
         </tbody>
 
 
     </table>
+    <hr />
 }
 else
 {
-<h3> Aún no hay empleados agregados</h3>
+    <h3> Aún no hay empleados agregados</h3>
 
 }

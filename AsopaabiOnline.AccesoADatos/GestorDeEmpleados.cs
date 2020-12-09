@@ -27,5 +27,36 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+        public Empleado ObtenerEmpleadoPorId(int id)
+        {
+            var laBaseDeDatos = new Contexto();
+            var elResultado = laBaseDeDatos.Empleado.Find(id);
+            return elResultado;
+        }
+
+        public void Actualizar(Empleado elEmpleadoAActualizar)
+        {
+            var laBaseDeDatos = new Contexto();
+            var elEmpleadoEnLaBD = ObtenerEmpleadoPorId(elEmpleadoAActualizar.Id);
+
+            elEmpleadoEnLaBD.Id = elEmpleadoAActualizar.Id;
+            elEmpleadoEnLaBD.PrimerNombre = elEmpleadoAActualizar.PrimerNombre;
+            elEmpleadoEnLaBD.SegundoNombre = elEmpleadoAActualizar.SegundoNombre;
+            elEmpleadoEnLaBD.PrimerApellido = elEmpleadoAActualizar.PrimerApellido;
+            elEmpleadoEnLaBD.SegundoApellido = elEmpleadoAActualizar.SegundoApellido;
+            elEmpleadoEnLaBD.TipoDeEmpleado = elEmpleadoAActualizar.TipoDeEmpleado;
+
+            laBaseDeDatos.Entry(elEmpleadoEnLaBD).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            laBaseDeDatos.SaveChanges();
+        }
+
+        public void Eliminar(Empleado elEmpleadoAEliminar)
+        {
+            var laBaseDeDatos = new Contexto();
+            var elEmpleadoEnLaBD = ObtenerEmpleadoPorId(elEmpleadoAEliminar.Id);
+            laBaseDeDatos.Empleado.Remove(elEmpleadoEnLaBD);
+            laBaseDeDatos.Remove(elEmpleadoEnLaBD).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            laBaseDeDatos.SaveChanges();
+        }
     }
 }

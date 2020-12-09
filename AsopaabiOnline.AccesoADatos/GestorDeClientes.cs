@@ -23,7 +23,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
        
-        public Cliente ObtenerClientePorId(int id)
+        public Cliente ObtenerEmpleadoPorId(int id)
         {
             var laBaseDeDatos = new Contexto();
             var elResultado = laBaseDeDatos.Cliente.Find(id);
@@ -33,7 +33,7 @@ namespace AsopaabiOnline.AccesoADatos
         public void Actualizar(Cliente elClienteAActualizar)
         {
             var laBaseDeDatos = new Contexto();
-            var elClienteEnlaBD = ObtenerClientePorId(elClienteAActualizar.Id);
+            var elClienteEnlaBD = ObtenerEmpleadoPorId(elClienteAActualizar.Id);
           
             elClienteEnlaBD.Id = elClienteAActualizar.Id;
             elClienteEnlaBD.TipoDni = elClienteAActualizar.TipoDni;
@@ -51,7 +51,7 @@ namespace AsopaabiOnline.AccesoADatos
 
         public int ObtenerAñoDeNacimiento(Cliente elCliente)
         {
-            var elClienteEnlaBD = ObtenerClientePorId(elCliente.Id);
+            var elClienteEnlaBD = ObtenerEmpleadoPorId(elCliente.Id);
             var elAño = elClienteEnlaBD.FechaDeNacimiento.Year;
             return elAño;
         }
@@ -62,7 +62,7 @@ namespace AsopaabiOnline.AccesoADatos
         public void Eliminar(Cliente elClienteAEliminar)
         {
             var laBaseDeDatos = new Contexto();
-            var elClienteEnlaBD = ObtenerClientePorId(elClienteAEliminar.Id);
+            var elClienteEnlaBD = ObtenerEmpleadoPorId(elClienteAEliminar.Id);
             laBaseDeDatos.Cliente.Remove(elClienteEnlaBD);
             laBaseDeDatos.Remove(elClienteEnlaBD).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             laBaseDeDatos.SaveChanges();

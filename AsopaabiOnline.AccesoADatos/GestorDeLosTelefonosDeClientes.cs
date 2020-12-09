@@ -24,7 +24,7 @@ namespace AsopaabiOnline.AccesoADatos
             Modelo.Cliente elNuevoCliente = new Cliente();
             GestorDeClientes elGestorDeClientes = new GestorDeClientes();
 
-            elNuevoCliente = elGestorDeClientes.ObtenerClientePorId(id);
+            elNuevoCliente = elGestorDeClientes.ObtenerEmpleadoPorId(id);
 
             var elResultado = from losTelefonosDelCliente in laBaseDeDatos.ClienteTelefono
                               where losTelefonosDelCliente.IdCliente == elNuevoCliente.Id

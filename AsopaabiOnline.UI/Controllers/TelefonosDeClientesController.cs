@@ -39,5 +39,16 @@ namespace AsopaabiOnline.UI.Controllers
 
 
 
+        [HttpGet]
+        [Route("TelefonosDeClientes/Mostrar")]
+        public IActionResult Mostrar(int id)
+        {
+            CoordinadorDeLosTelefonosDeClientes elCoordinador = new CoordinadorDeLosTelefonosDeClientes();
+
+
+            return View(elCoordinador.ListarTelefonosDeClientes(id));
+        }
+
+
     }
 }

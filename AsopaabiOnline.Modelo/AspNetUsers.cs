@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AsopaabiOnline.Modelo
 {
@@ -31,11 +32,18 @@ namespace AsopaabiOnline.Modelo
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
 
+       
+        [NotMapped]
         public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
+        [NotMapped]
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
+        [NotMapped]
         public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
+        [NotMapped]
         public virtual ICollection<AspNetUserTokens> AspNetUserTokens { get; set; }
+        [NotMapped]
         public virtual ICollection<Cliente> Cliente { get; set; }
+        [NotMapped]
         public virtual ICollection<Empleado> Empleado { get; set; }
     }
 }

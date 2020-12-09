@@ -2,7 +2,7 @@
 
 namespace AsopaabiOnline.Modelo
 {
-    public enum Estado
+    public enum EstadoDeProducto
     {
         Disponible = 1,
         [Description("En Oferta")]

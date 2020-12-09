@@ -41,7 +41,7 @@ namespace AsopaabiOnline.Modelo
                 optionsBuilder.UseSqlServer("Server=DESKTOP-GID5PN2;Database=ASOPAABI_ONLINE;User ID=sa;Password=1234");
             }
         }
-        
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -169,7 +169,7 @@ namespace AsopaabiOnline.Modelo
             modelBuilder.Entity<Cliente>(entity =>
             {
 
-                entity.Property(e => e.Dni).IsRequired() .HasMaxLength(20)  .IsUnicode(false);
+                entity.Property(e => e.Dni).IsRequired().HasMaxLength(20).IsUnicode(false);
 
                 entity.Property(e => e.FechaDeNacimiento).HasColumnType("datetime");
 
@@ -383,25 +383,25 @@ namespace AsopaabiOnline.Modelo
             });
 
             modelBuilder.Entity<Pago>(entity =>
-            {
-                entity.ToTable("PAGO");
+        {
+            entity.ToTable("PAGO");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+            entity.Property(e => e.Id)
+                .HasColumnName("id")
+                .ValueGeneratedNever();
 
-                entity.Property(e => e.IdPedido).HasColumnName("id_Pedido");
+            entity.Property(e => e.IdPedido).HasColumnName("id_Pedido");
 
-                entity.Property(e => e.Monto).HasColumnName("monto");
+            entity.Property(e => e.Monto).HasColumnName("monto");
 
-                entity.Property(e => e.OpcionesDePago).HasColumnName("opcionesDePago");
+            entity.Property(e => e.OpcionesDePago).HasColumnName("opcionesDePago");
 
-                entity.HasOne(d => d.IdPedidoNavigation)
-                    .WithMany(p => p.Pago)
-                    .HasForeignKey(d => d.IdPedido)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PAGO_PEDIDO");
-            });
+            entity.HasOne(d => d.IdPedidoNavigation)
+                .WithMany(p => p.Pago)
+                .HasForeignKey(d => d.IdPedido)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_PAGO_PEDIDO");
+        });
 
             modelBuilder.Entity<Pedido>(entity =>
             {
@@ -430,8 +430,6 @@ namespace AsopaabiOnline.Modelo
                     .HasColumnName("notas")
                     .HasMaxLength(200)
                     .IsUnicode(false);
-
-                entity.Property(e => e.TipoDePago).HasColumnName("tipoDePago");
 
                 entity.HasOne(d => d.IdClienteNavigation)
                     .WithMany(p => p.Pedido)
@@ -504,3 +502,4 @@ namespace AsopaabiOnline.Modelo
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
+

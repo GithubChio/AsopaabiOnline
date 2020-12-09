@@ -1,0 +1,80 @@
+﻿@model IEnumerable<AsopaabiOnline.Modelo.ClienteTelefono>
+
+@{
+    ViewData["Title"] = "MostrarTelefonos";
+}
+
+<br />
+<h1>Teléfonos de Clientes</h1>
+
+<br />
+
+
+
+@if (Model.Any())
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdCliente)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefono1)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefono2)
+                </th>
+
+
+
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdCliente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefono1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefono2)
+                    </td>
+
+
+                    <td>
+
+                        <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a>  |
+                        <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a> |
+
+                    </td>
+                </tr>
+
+            }
+
+        </tbody>
+
+
+    </table>
+    <br />
+    <a class="btn btn-outline-secondary" asp-controller="Clientes" asp-action="Mostrar"> Volver </a>
+
+
+}
+else
+{
+
+    <br />
+
+    <h3> No hay teléfonos agregados para este cliente</h3>
+    <br />
+    
+    <a class="btn btn-outline-secondary" asp-controller="Clientes" asp-action="Mostrar"> Volver </a>
+}

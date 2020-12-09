@@ -11,7 +11,7 @@ namespace AsopaabiOnline.UI.Controllers
     {
         [HttpGet]
         [Route("DireccionPedidos/Agregar")]
-        public IActionResult Agregar(int id)
+        public IActionResult Agregar()
         {
 
             Modelo.DireccionPedido laDireccionDelPedido = new Modelo.DireccionPedido();
