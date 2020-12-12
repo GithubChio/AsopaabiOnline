@@ -26,7 +26,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
         public void Actualizar(Modelo.Cliente elCliente)
         {
             GestorDeClientes elGestor = new GestorDeClientes();
-            Modelo.Cliente elClienteAActualizar = elGestor.ObtenerEmpleadoPorId(elCliente.Id);
+            Modelo.Cliente elClienteAActualizar = elGestor.ObtenerClientePorId(elCliente.Id);
 
             elClienteAActualizar.Id = elCliente.Id;
             elClienteAActualizar.TipoDni = elCliente.TipoDni;
@@ -43,7 +43,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
         {
             GestorDeClientes elGestor = new GestorDeClientes();
 
-            return elGestor.ObtenerEmpleadoPorId(id);
+            return elGestor.ObtenerClientePorId(id);
         }
 
         //public int ObtenerIdDelCliente(int id)
@@ -74,7 +74,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
         public void Eliminar(Modelo.Cliente elCliente)
         {
             GestorDeClientes elGestor = new GestorDeClientes();
-            Modelo.Cliente elClienteAEliminar = elGestor.ObtenerEmpleadoPorId(elCliente.Id);
+            Modelo.Cliente elClienteAEliminar = elGestor.ObtenerClientePorId(elCliente.Id);
             elGestor.Eliminar(elClienteAEliminar);
 
         }
@@ -82,7 +82,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
         public void CambiarAClienteRegular(Modelo.Cliente elCliente)
         {
             GestorDeClientes elGestor = new GestorDeClientes();
-            Modelo.Cliente ClienteACambiar = elGestor.ObtenerEmpleadoPorId(elCliente.Id);
+            Modelo.Cliente ClienteACambiar = elGestor.ObtenerClientePorId(elCliente.Id);
             ClienteACambiar.TipoDeCliente = Modelo.TipoDeCliente.Regular;
             elGestor.Actualizar(ClienteACambiar);
         }
@@ -90,7 +90,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
         public void CambiarAClienteFrecuente(Modelo.Cliente elCliente)
         {
             GestorDeClientes elGestor = new GestorDeClientes();
-            Modelo.Cliente ClienteACambiar = elGestor.ObtenerEmpleadoPorId(elCliente.Id);
+            Modelo.Cliente ClienteACambiar = elGestor.ObtenerClientePorId(elCliente.Id);
             ClienteACambiar.TipoDeCliente = Modelo.TipoDeCliente.Frecuente;
             elGestor.Actualizar(ClienteACambiar);
         }

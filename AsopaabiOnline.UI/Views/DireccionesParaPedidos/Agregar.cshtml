@@ -10,7 +10,7 @@
 <div class="row">
     <div class="col-md-4">
     
-        <form asp-controller="DireccionPedidos" asp-action="Agregar" method="post">
+        <form asp-controller="DireccionesParaPedidos" asp-action="Agregar" method="post">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
           
@@ -68,7 +68,7 @@
             <br />
             <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-outline-success" />
-
+                <a class="btn btn-outline-secondary" asp-action="Mostrar">Volver</a>
             </div>
 
         </form>

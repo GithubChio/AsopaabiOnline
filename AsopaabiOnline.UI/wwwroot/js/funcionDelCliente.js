@@ -64,8 +64,10 @@ function validarCedulaJuridica(evt) {
 }
 
 
+//$('select[]')
 
-////var elTipoDeDniSeleccionado = document.getElementById('tipoDni').value;
+
+////var elTipoDeDniSeleccionado = document.getElementById('#tipoDeDni').value;
 ////var elDni = document.getElementById('Dni').value;
 ////var DniFisica = /^[1-9]-\d{3}-\d{3}$/;
 ////var DniJuridica = /^[1-9]-\d{3}-\d{6}$/

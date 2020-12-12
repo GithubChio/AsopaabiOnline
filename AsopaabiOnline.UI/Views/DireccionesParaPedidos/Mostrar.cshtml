@@ -1,0 +1,72 @@
+﻿@model IEnumerable<AsopaabiOnline.Modelo.DireccionPedido>
+
+@{
+    ViewData["Title"] = "MostrarDirecciones";
+}
+
+<h1>Direcciones</h1>
+<hr />
+<p> <a class="btn btn-outline-warning" asp-controller="DireccionesParaPedidos" asp-action="Agregar">Agregar</a></p>
+
+
+@if (Model.Any())
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.IdProvincia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdCanton)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdDistrito)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Detalles)
+                </th>
+                
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdProvincia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdCanton)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdDistrito)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Detalles)
+                    </td>
+                    
+
+                    <td>
+                        <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a> 
+                       
+                       
+
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+
+    </table>
+    <hr />
+}
+else
+{
+    <h3> Aún no hay Direcciones agregadas</h3>
+}

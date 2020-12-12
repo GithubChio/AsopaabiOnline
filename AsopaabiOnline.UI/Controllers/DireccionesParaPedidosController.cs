@@ -7,10 +7,10 @@ using AsopaabiOnline.LogicaDeNegocio;
 
 namespace AsopaabiOnline.UI.Controllers
 {
-    public class DireccionPedidosController : Controller
+    public class DireccionesParaPedidosController : Controller
     {
         [HttpGet]
-        [Route("DireccionPedidos/Agregar")]
+        [Route("DireccionesParaPedidos/Agregar")]
         public IActionResult Agregar()
         {
 
@@ -30,12 +30,13 @@ namespace AsopaabiOnline.UI.Controllers
             return View(laDireccionDelPedido);
         }
 
-        [Route("DireccionPedidos/Agregar")]
+        [HttpPost]
+        [Route("DireccionesParaPedidos/Agregar")]
         public IActionResult Agregar(Modelo.DireccionPedido laDireccion)
         {
             try
             { 
-                CoordinadorDeDireccionesDeLosPedidos elCoordinador = new CoordinadorDeDireccionesDeLosPedidos();
+                CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
 
                 elCoordinador.Agregar(laDireccion);
                 return RedirectToAction("Mostrar");
@@ -45,6 +46,41 @@ namespace AsopaabiOnline.UI.Controllers
                 return View();
             }
 
+
+        }
+
+        [Route("DireccionesParaPedidos/Mostrar")]
+        public IActionResult Mostrar()
+        {
+            CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
+            return  View(elCoordinador.ListarDirecciones());
+        }
+
+
+        [HttpGet]
+        [Route("DireccionesParaPedidos/Actualizar")]
+        public IActionResult Actualizar(int id)
+        {
+            CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
+            var laDireccionEncontrada = elCoordinador.ObtenerDireccionesPorId(id);
+
+            return View(laDireccionEncontrada);
+        }
+
+        [HttpPost]
+        [Route("DireccionesParaPedidos/Actualizar")]
+        public IActionResult Actualizar(Modelo.DireccionPedido laDireccion)
+        {
+            try
+            {
+                CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
+                elCoordinador.Actualizar(laDireccion);
+                return RedirectToAction("Mostrar");
+            }
+            catch
+            {
+                return View();
+            }
 
         }
 

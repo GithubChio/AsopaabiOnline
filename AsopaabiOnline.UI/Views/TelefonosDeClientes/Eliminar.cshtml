@@ -1,0 +1,41 @@
+﻿@model AsopaabiOnline.Modelo.ClienteTelefono
+
+
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<h1>Eliminar</h1>
+<hr />
+<h3 style="text-align:center;">¿Está seguro que desea eliminar los telefonos de estos clientes?</h3>
+
+<div>
+
+    <hr />
+    <dl class="row">
+
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Telefono1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Telefono1)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Telefono2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Telefono2)
+        </dd>
+       
+
+    </dl>
+    <hr />
+    <form asp-action="Eliminar" asp-controller="TelefonosDeClientes">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Sí" class="btn btn-outline-danger" style="width:50px;" />
+
+        <a class="btn btn-outline-secondary" asp-action="Mostrar" asp-controller="Clientes">No</a>
+
+    </form>
+</div>
