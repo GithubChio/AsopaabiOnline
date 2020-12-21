@@ -14,12 +14,12 @@ namespace AsopaabiOnline.UI.Controllers
         [HttpGet]
         public IActionResult Agregar(int id)
         {
-            CoordinadorDeLosTelefonosDeClientes elCoordinador = new CoordinadorDeLosTelefonosDeClientes();
+            //CoordinadorDeLosTelefonosDeClientes elCoordinador = new CoordinadorDeLosTelefonosDeClientes();
+                
+            //var idClienteEncontrado = elCoordinador.ObtenerIdDelClienteParaLostelefonos(id);
+          
 
-            var idClienteEncontrado = elCoordinador.ObtenerIdDelClienteParaLostelefonos(id);
-
-
-            return View(idClienteEncontrado);
+            return View(/*idClienteEncontrado*/);
         }
         [Route("TelefonosDeClientes/Agregar")]
         [HttpPost]
@@ -48,7 +48,7 @@ namespace AsopaabiOnline.UI.Controllers
         public IActionResult Mostrar(int id)
         {
             CoordinadorDeLosTelefonosDeClientes elCoordinador = new CoordinadorDeLosTelefonosDeClientes();
-
+            ViewBag.IdDelCliente = id;
 
             return View(elCoordinador.ListarTelefonosDeClientes(id));
         }

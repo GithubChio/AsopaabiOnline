@@ -28,9 +28,12 @@ namespace AsopaabiOnline.Modelo
       
         [Display(Name = "Tipo de empleado")]
         public TipoDeEmpleado TipoDeEmpleado { get; set; }
+       
         [NotMapped]
         [Display(Name = "Pedido")]
+
         public int IdPedido { get; set; }
+       
         [Display(Name = "Correo eléctronico")]
         public string IdUsuario { get; set; }
 

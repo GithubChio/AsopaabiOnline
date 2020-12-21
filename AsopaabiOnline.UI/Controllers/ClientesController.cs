@@ -19,6 +19,7 @@ namespace AsopaabiOnline.UI.Controllers
         public IActionResult Agregar()
         {
          
+
             return View();
         }
 
@@ -31,7 +32,8 @@ namespace AsopaabiOnline.UI.Controllers
                     CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
                     elCoordinador.Agregar(elCliente);
                 
-                     return RedirectToAction("Mostrar");
+                   
+                return RedirectToAction("Mostrar");
 
             }
             catch
@@ -46,8 +48,7 @@ namespace AsopaabiOnline.UI.Controllers
         public IActionResult Mostrar()
         {
             CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
-            
-          
+
             return View(elCoordinador.ListarClientes());
         }
 

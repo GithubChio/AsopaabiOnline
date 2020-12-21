@@ -1,0 +1,89 @@
+﻿@model IEnumerable<AsopaabiOnline.Modelo.Pedido>
+
+@{
+    ViewData["Title"] = "MostrarPedidos";
+}
+
+<h1>Pedidos</h1>
+<hr />
+<p> <a class="btn btn-outline-warning" asp-controller="Productos" asp-action="Agregar">Agregar</a></p>
+
+
+@if (Model.Any())
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaPedido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaEntrega)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Notas)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdDireccion)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.IdCliente)
+                </th>
+               
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaPedido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaEntrega)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Notas)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdDireccion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdCliente)
+                    </td>
+                   
+                    <td>
+                        <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a> |
+                        <a asp-action="CambiarAPedidoEnProceso" asp-route-id="@item.Id">Cambiar a pedido en proceso</a> |
+                        <a asp-action="CambiarAPedidoFinalizado" asp-route-id="@item.Id">Cambiar a pedido finalizado</a> 
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+
+    </table>
+    <hr />
+}
+else
+{
+    <h3> Aún no hay pedidos agregados</h3>
+
+}
+

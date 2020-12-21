@@ -14,7 +14,9 @@
     <table class="table table-responsive">
         <thead>
             <tr>
-
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.IdProvincia)
                 </th>
@@ -27,7 +29,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Detalles)
                 </th>
-                
+
 
                 <th></th>
             </tr>
@@ -35,29 +37,31 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdProvincia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCanton)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdDistrito)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Detalles)
+                </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdProvincia)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdCanton)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdDistrito)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Detalles)
-                    </td>
-                    
 
-                    <td>
-                        <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a> 
-                       
-                       
+                <td>
+                    <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a>
 
-                    </td>
-                </tr>
+
+
+                </td>
+            </tr>
             }
 
         </tbody>

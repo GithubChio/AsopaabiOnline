@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AsopaabiOnline.Modelo
 {
-    public enum Categoria
+    public enum CategoriaDeProducto
     {
         Fruta = 1,
         Hortalizas = 2,

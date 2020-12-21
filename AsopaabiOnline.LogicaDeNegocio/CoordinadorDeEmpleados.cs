@@ -65,7 +65,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
             GestorDeEmpleados elGestor = new GestorDeEmpleados();
             Modelo.Empleado elEmpleadoACambiar = elGestor.ObtenerEmpleadoPorId(elEmpleado.Id);
 
-            elEmpleadoACambiar.TipoDeEmpleado = Modelo.TipoDeEmpleado.Asistente;
+            elEmpleadoACambiar.TipoDeEmpleado = Modelo.TipoDeEmpleado.Administrador;
             elGestor.Actualizar(elEmpleadoACambiar);
         }
     }

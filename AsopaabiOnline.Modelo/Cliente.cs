@@ -17,9 +17,9 @@ namespace AsopaabiOnline.Modelo
         [Display(Name = "Id Cliente")]
         public int Id { get; set; }
 
-        [Required ]
+        [Required(ErrorMessage = "El tipo de dni es requerido")]
         [Display(Name = "Tipo de DNI")]
-        public TipoDeDni TipoDni { get; set; }
+        public TipoDeDni? TipoDni { get; set; }
         
         [Required(ErrorMessage = "el DNI es requerido")]
         [Display(Name ="DNI")]
@@ -51,14 +51,15 @@ namespace AsopaabiOnline.Modelo
         [Range(typeof(DateTime), "31-12-1925", "31-12-2003",ErrorMessage = "No se aceptan menores de edad")]
         [DataType(DataType.Date)]
         public DateTime FechaDeNacimiento { get; set; }
-        [Required]
+
+        [Required (ErrorMessage ="El tipo de cliente es requerido")]
         [Display(Name = "Tipo de Cliente")]
         //[EnumDataType(typeof(TipoDeCliente))]
-        public TipoDeCliente TipoDeCliente { get; set; }
-        [Required]
+        public TipoDeCliente? TipoDeCliente { get; set; }
+        [Required(ErrorMessage = "El tipo de actividad es requerido")]
         [Display(Name = "Tipo de Actividad")]
         
-        public TipoDeActividad TipoActividad { get; set; }
+        public TipoDeActividad? TipoActividad { get; set; }
         [NotMapped]
         public int Edad { get; set; }
         [NotMapped]

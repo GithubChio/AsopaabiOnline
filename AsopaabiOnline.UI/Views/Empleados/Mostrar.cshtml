@@ -14,7 +14,9 @@
     <table class="table table-responsive">
         <thead>
             <tr>
-
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.PrimerNombre)
                 </th>
@@ -38,7 +40,9 @@
             @foreach (var item in Model)
             {
             <tr>
-
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PrimerNombre)
                 </td>
@@ -57,7 +61,7 @@
 
                 <td>
                     <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a> |
-                    <a asp-action="CambiarAEmpleadoAsistente"  asp-route-id="@item.Id">Cambiar a empleado asistente</a> |
+                    <a asp-action="CambiarAEmpleadoAsistente" asp-route-id="@item.Id">Cambiar a empleado asistente</a> |
                     <a asp-action="CambiarAEmpleadoAdministrador" asp-route-id="@item.Id">Cambiar a empleado administrador</a> |
                     <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a>
 

@@ -1,13 +1,21 @@
 ﻿@model IEnumerable<AsopaabiOnline.Modelo.ClienteTelefono>
 
 @{
-    ViewData["Title"] = "MostrarTelefonos";
+    ViewData["Title"] = "Mostrar";
 }
 
 <br />
-<h1>Teléfonos de Clientes</h1>
-
+<a>
+    <h1>
+        <img src="~/imagenes/Iconos/telefono.png" width="50" height="50" class="d-inline-block align-top" alt="">
+        Teléfonos de Clientes
+    </h1>
+</a>
+<hr />
+<p> <a class="btn btn-outline-warning" asp-controller="TelefonosDeClientes" asp-action="Agregar" asp-route-id="@ViewBag.IdDelCliente">Agregar</a></p>
+<hr />
 <br />
+
 
 
 
@@ -75,6 +83,6 @@ else
 
     <h3> No hay teléfonos agregados para este cliente</h3>
     <br />
-    
+
     <a class="btn btn-outline-secondary" asp-controller="Clientes" asp-action="Mostrar"> Volver </a>
 }

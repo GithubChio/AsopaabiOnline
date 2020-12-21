@@ -18,6 +18,7 @@ namespace AsopaabiOnline.UI.Controllers
             CoordinadorDeUsuarios elCoordinadorDeUsuarios =new  CoordinadorDeUsuarios();
 
             elEmpleado.LaListaDeUsuarios = elCoordinadorDeUsuarios.ListarUsuarios();
+
             return View(elEmpleado);
         }
       
@@ -29,8 +30,8 @@ namespace AsopaabiOnline.UI.Controllers
             try
             {
 
-
                 CoordinadorDeEmpleados elCoordinador = new CoordinadorDeEmpleados();
+
                 elCoordinador.Agregar(elEmpleado);
                 return RedirectToAction("Mostrar");
 

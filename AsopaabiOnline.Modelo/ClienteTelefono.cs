@@ -17,17 +17,17 @@ namespace AsopaabiOnline.Modelo
 
         public int IdCliente { get; set; }
 
-        
         [Required(ErrorMessage = "Debe agregar un número teléfonico")]
-        [Display(Name ="Telefono #1")]
+        [Display(Name = "Telefono #1")]
         [RegularExpression(@"^(\d{8})$", ErrorMessage = "el número de celular debe tener 8 digitos númericos")]
-       
+
         public int Telefono1 { get; set; }
 
-        [Display(Name = "Telefono #2")]
         [Required(ErrorMessage = "Debe agregar un número teléfonico")]
-        [RegularExpression(@"^(\d{8})$", ErrorMessage = "el número de celular debe tener 8 digitos númericos")]
+        [Display(Name = "Telefono #2")]
         
+        [RegularExpression(@"^(\d{8})$", ErrorMessage = "el número de celular debe tener 8 digitos númericos")]
+
         public int Telefono2 { get; set; }
       
       

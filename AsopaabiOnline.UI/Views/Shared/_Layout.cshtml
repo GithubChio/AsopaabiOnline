@@ -18,7 +18,7 @@
   
     <link href="assets/css/style.css" rel="stylesheet">
 
-    <script type="text/javascript" src="~/js/funcionDelCliente.js"></script>
+   
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
     <link rel="stylesheet"  href="~/css/site.css" />
@@ -29,37 +29,54 @@
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light badge-pill border-top box-shadow mb-3" >
             <div class="container">
-
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Tienda">
-                    <img src="~/imagenes/logo.jpeg" width="60" height="60" class="d-inline-block align-top" alt="">
-                    Asopaabi Online
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <div style="margin-right:60px ">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Tienda">
+                        <img src="~/imagenes/logo.jpeg" width="60" height="60" class="d-inline-block align-top" alt="">
+                        Asopaabi Online
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    
                     <ul class="navbar-nav flex-grow-1">
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                               Ir a 
+
+                        <li class="nav-item">
+
+                            <a class="nav-link text-dark " asp-area="" asp-controller="Clientes" asp-action="Mostrar">
+                                <img src="~/imagenes/Iconos/clientes.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                Clientes
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item " asp-controller="Clientes" asp-action="Mostrar">Lista de Clientes</a>
-                                <a class="dropdown-item " asp-controller="Empleados" asp-action="Mostrar">Lista de Empleados</a>
-                               
-                                
-                            </div>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark " asp-area="" asp-controller="Empleados" asp-action="Mostrar">
+                                <img src="~/imagenes/Iconos/equipo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                            Empleados</a>
+                        </li>
+
 
                         <li class="nav-item dropdown">
                             <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Pedidos
+                                <img src="~/imagenes/Iconos/online-shopping.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                Tienda
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="#" asp-action="Agregar">Pedidos</a>
-                                <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">Direccion</a>
+                                <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
+                                    <img src="~/imagenes/Iconos/direccion.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                  Direccion</a>
+                                <a class="dropdown-item" asp-controller="Productos" asp-action="Mostrar">
+                                    <img src="~/imagenes/Iconos/alimentos-saludables.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                    Productos
+                                </a>
+                                <a class="dropdown-item" asp-controller="Pedidos" asp-action="Mostrar">
+                                    <img src="~/imagenes/Iconos/anadir-al-carrito.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                    Pedidos
+                                </a>
+
+
 
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Historial</a>

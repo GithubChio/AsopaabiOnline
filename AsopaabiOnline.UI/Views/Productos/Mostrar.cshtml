@@ -1,0 +1,94 @@
+﻿@model IEnumerable<AsopaabiOnline.Modelo.Producto>
+
+@{
+    ViewData["Title"] = "MostrarProductos";
+}
+
+<h1>Productos</h1>
+<hr />
+<p> <a class="btn btn-outline-warning" asp-controller="Productos" asp-action="Agregar">Agregar</a></p>
+
+
+@if (Model.Any())
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnidadDeMedida)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PrecioCosto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PrecioUnitario)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Utilidad)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Categoria)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estado)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnidadDeMedida)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrecioCosto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrecioUnitario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Utilidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+
+                <td>
+                    <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a> |
+                    <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a>
+
+                </td>
+            </tr>
+            }
+
+        </tbody>
+
+
+    </table>
+    <hr />
+}
+else
+{
+    <h3> Aún no hay productos agregados</h3>
+
+}

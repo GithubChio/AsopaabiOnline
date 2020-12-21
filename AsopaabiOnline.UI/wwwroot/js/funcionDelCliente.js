@@ -7,70 +7,63 @@ document.addEventListener( //Cuando se cargó la página
         //var btnValidar = document.getElementById('guardar');
 
         var btnTipoDeDni = document.getElementById('tipoDeDni');
-        btnTipoDeDni.addEventListener('mousemove', ValidarDNI);
+        btnTipoDeDni.addEventListener('click', ValidarDNI);
     }
 );
 
 
 
-function ValidarDNI(evt) {
+//function ValidarDNI(evt) {
    
-    $("#tipoDeDni").change(function () {
-        var opcion = "",
-            laOpcionGuardada = "",
-            mostrar = "";
-        $("#tipoDeDni option:selected").each(function () {
-            opcion += $(this).text() + " "
-        });
-
-                laOpcionGuardada = opcion;
-                mostrar = laOpcionGuardada + "aqui";
+//    $("#tipoDeDni").change(function () {
+//        var opcion = "",
+//            mostrar = "";
+//        $("#tipoDeDni option:selected").each(function () {
+//            opcion += $(this).text() + " "
+//        });
+//        mostrar = "la opcion es:" + opcion;
           
            
             
-        $("#mostrar").text(mostrar);
+//        $("#mostrar").text(mostrar); }).trigger("change");
 
-
-
-        })
-        .trigger("change");
-
-}
-
-function validarCedulaFisica(evt) {
+//}
+function ValidarDNI(evt) {
     var numeroDeCedula = document.getElementById('Dni').value,
-        elResultado = document.getElementById('elResultado'),
-        cedulaValida = /^[1-9]-\d{3}-\d{3}$/;
+        imprimir = document.getElementById('elResultado'),
+        cedulaFisicaValida = /^[1-9]-\d{3}-\d{3}$/,
+        cedulaJuridicaValida = /^[1-9]-\d{3}-\d{6}$/;
 
-    
-   if (cedulaValida.test(numeroDeCedula)) {
-     
-    } else {
-       elResultado.innerText = ' La Cédula: ' + numeroDeCedula + ' es inválida, Formato: 5-255-668';
-    }
+    $("#tipoDeDni").click(function (evento) {
+        var elResultado = '';
+        for (var recorrer = 1; recorrer <= $(this).val(); recorrer++) {
+            elResultado += crear(recorrer);
+        }
+        $("#mostrar").elResultado(elResultado);
+    });
+
+    var crear = function (num) {
+
+
+      
+        if (num = 1) {
+
+
+                if (cedulaFisicaValida.test(numeroDeCedula)) {
+
+                } else  { imprimir.innerText = ' La Cédula: ' + numeroDeCedula + ' es inválida, Formato: 5-255-668'; }
+
+            } else if (num = 2) {
+               if (cedulaJuridicaValida.test(numeroDeCedula)) {
+
+                } else {
+                    imprimir.innerText = ' La Cédula: ' + numeroDeCedula + ' es inválida, Formato: 5-255-618266';
+                }
+
+            }
+        
+            
+
+    };
+
 }
-
-function validarCedulaJuridica(evt) {
-    var numeroDeCedula = document.getElementById('Dni').value,
-        elResultado = document.getElementById('elResultado'),
-        cedulaValida = /^[1-9]-\d{3}-\d{6}$/;
-
-
-    if (cedulaValida.test(numeroDeCedula)) {
-
-    } else {
-        elResultado.innerText = ' La Cédula: ' + numeroDeCedula + ' es inválida, Formato: 2-255-645868';
-    }
-}
-
-
-//$('select[]')
-
-
-////var elTipoDeDniSeleccionado = document.getElementById('#tipoDeDni').value;
-////var elDni = document.getElementById('Dni').value;
-////var DniFisica = /^[1-9]-\d{3}-\d{3}$/;
-////var DniJuridica = /^[1-9]-\d{3}-\d{6}$/
-////if (elTipoDeDniSeleccionado !== "") {
-
-////}

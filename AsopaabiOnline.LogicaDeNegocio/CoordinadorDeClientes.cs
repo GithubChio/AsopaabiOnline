@@ -11,7 +11,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
         {
             GestorDeClientes elGestor = new GestorDeClientes();
             elCliente.TipoDeCliente = Modelo.TipoDeCliente.Nuevo;
-            ObtenerEdad(elCliente);
+           
             elGestor.Agregar(elCliente);
         }
 
@@ -46,14 +46,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
             return elGestor.ObtenerClientePorId(id);
         }
 
-        //public int ObtenerIdDelCliente(int id)
-        //{
-        //    GestorDeClientes elGestor = new GestorDeClientes();
-
-        //    var elCliente=elGestor.ObtenerClientePorId(id);
-        //    return elCliente.Id;
-        //}
-
+   
         public int ObtenerEdad(Modelo.Cliente  elCliente)
         {
             
@@ -71,6 +64,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
         }
 
        
+        
         public void Eliminar(Modelo.Cliente elCliente)
         {
             GestorDeClientes elGestor = new GestorDeClientes();
