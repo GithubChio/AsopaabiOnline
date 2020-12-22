@@ -1,14 +1,13 @@
 ﻿@model IEnumerable<AsopaabiOnline.Modelo.Cliente>
 
 @{
-    ViewData["Title"] = "MostrarClientes";
+    ViewBag.Title = "Clientes";
 }
 
-<h1>Clientes</h1>
+
+<h3>@ViewBag.Title</h3>
 <hr />
 <p> <a class="btn btn-outline-warning" asp-controller="Clientes" asp-action="Agregar">Agregar</a></p>
-
-
 
 @if (Model.Any())
 {
@@ -45,9 +44,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.TipoActividad)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Edad)
-                </th>
+
 
 
                 <th></th>
@@ -88,18 +85,17 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.TipoActividad)
                     </td>
-                    <th>
-                        @Html.DisplayFor(modelItem => item.Edad)
-                    </th>
+
 
 
                     <td>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a></li>
+                            <li class="list-group-item">  <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a></li>
+                            <li class="list-group-item"> <a asp-controller="TelefonosDeClientes" asp-action="Mostrar" asp-route-id="@item.Id">Teléfonos</a></li>
+                            <li class="list-group-item">  <a asp-action="CambiarTipoDeCliente" asp-route-id="@item.Id">Cambiar tipo de cliente</a></li>
+                        </ul>
 
-                        <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a>|
-                        <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a> 
-                        <a asp-controller="TelefonosDeClientes" asp-action="Mostrar" asp-route-id="@item.Id">Teléfonos</a>|
-                        <a asp-action="CambiarAClienteRegular" asp-route-id="@item.Id">Cambiar a cliente regular</a> 
-                        <a asp-action="CambiarAClienteFrecuente" asp-route-id="@item.Id">Cambiar a cliente frecuente</a>
                     </td>
                 </tr>
 
@@ -114,5 +110,6 @@
 }
 else
 {
-    <h3> Aún no hay clientes agregados</h3>
+    <br />
+    <h3> No hay clientes agregados</h3>
 }

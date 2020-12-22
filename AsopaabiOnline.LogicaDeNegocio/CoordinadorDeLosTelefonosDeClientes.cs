@@ -11,7 +11,6 @@ namespace AsopaabiOnline.LogicaDeNegocio
         public void Agregar(Modelo.ClienteTelefono elTelefonoDelCliente)
         {
             GestorDeLosTelefonosDeClientes elGestor = new GestorDeLosTelefonosDeClientes();
-           
             elGestor.Agregar(elTelefonoDelCliente);
         }
 

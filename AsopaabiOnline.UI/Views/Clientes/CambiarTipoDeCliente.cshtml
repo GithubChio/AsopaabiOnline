@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Cambiar Tipo de Cliente";
+}
+<hr />
+<h1>@ViewData["Title"]</h1>
+
+<br />
+<ul class="list-group list-group-flush">
+    <li class="list-group-item"><a asp-action="CambiarAClienteRegular" asp-route-id="@ViewBag.IdDelCliente">Cambiar a cliente regular</a></li>
+    <li class="list-group-item"><a asp-action="CambiarAClienteFrecuente" asp-route-id="@ViewBag.IdDelCliente">Cambiar a cliente frecuente</a></li>
+    </ul>
+<br />
+<a class="btn btn-outline-secondary" asp-action="Mostrar">Volver</a>

@@ -159,6 +159,17 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
-       
+        [HttpGet]
+        [Route("Clientes/CambiarTipoDeCliente")]
+
+        public IActionResult CambiarTipoDeCliente(int id)
+        {
+            CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
+            var elClienteEncontrado = elCoordinador.ObtenerClientePorId(id);
+            ViewBag.IdDelCliente = elClienteEncontrado.Id;
+           
+            return View();
+        }
+
     }
 }

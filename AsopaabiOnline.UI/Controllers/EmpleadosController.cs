@@ -14,6 +14,7 @@ namespace AsopaabiOnline.UI.Controllers
         public IActionResult Agregar()
         {
 
+
             Modelo.Empleado elEmpleado = new Modelo.Empleado();
             CoordinadorDeUsuarios elCoordinadorDeUsuarios =new  CoordinadorDeUsuarios();
 
@@ -29,9 +30,9 @@ namespace AsopaabiOnline.UI.Controllers
         {
             try
             {
-
-                CoordinadorDeEmpleados elCoordinador = new CoordinadorDeEmpleados();
-
+             
+               CoordinadorDeEmpleados elCoordinador = new CoordinadorDeEmpleados();
+               
                 elCoordinador.Agregar(elEmpleado);
                 return RedirectToAction("Mostrar");
 
@@ -156,6 +157,15 @@ namespace AsopaabiOnline.UI.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Empleados/CambiarTipoDeEmpleado")]
+        public IActionResult CambiarTipoDeEmpleado(int id)
+        {
+            CoordinadorDeEmpleados elCoordinador = new CoordinadorDeEmpleados();
+            var elEmpleadoEncontrado = elCoordinador.ObtenerEmpleadoPorId(id);
+            @ViewBag.IdDeEmpleado = elEmpleadoEncontrado.Id;
+            return View();
+        }
     }
 
 }

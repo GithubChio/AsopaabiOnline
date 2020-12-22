@@ -14,12 +14,16 @@ namespace AsopaabiOnline.UI.Controllers
         [HttpGet]
         public IActionResult Agregar(int id)
         {
-            //CoordinadorDeLosTelefonosDeClientes elCoordinador = new CoordinadorDeLosTelefonosDeClientes();
-                
-            //var idClienteEncontrado = elCoordinador.ObtenerIdDelClienteParaLostelefonos(id);
-          
+            
+                CoordinadorDeLosTelefonosDeClientes elCoordinador = new CoordinadorDeLosTelefonosDeClientes();
 
-            return View(/*idClienteEncontrado*/);
+                var idDelClienteEncontrado = elCoordinador.ObtenerIdDelClienteParaLostelefonos(id);
+                 //ViewBag.IdDelCliente = idDelClienteEncontrado.IdCliente;
+
+                return View(idDelClienteEncontrado);
+            
+            
+            
         }
         [Route("TelefonosDeClientes/Agregar")]
         [HttpPost]
@@ -28,11 +32,22 @@ namespace AsopaabiOnline.UI.Controllers
             
             try
             {
-                
-                CoordinadorDeLosTelefonosDeClientes elCoordinador = new CoordinadorDeLosTelefonosDeClientes();
-                elCoordinador.Agregar(elTelefonoDelCliente);
-                return RedirectToAction("Mostrar", "Clientes");
-            }
+                if (ModelState.IsValid)
+                {
+
+
+                    CoordinadorDeLosTelefonosDeClientes elCoordinador = new CoordinadorDeLosTelefonosDeClientes();
+                    elCoordinador.Agregar(elTelefonoDelCliente);
+                    return RedirectToAction("Mostrar", "Clientes");
+                }
+                else
+                {
+                    return
+                        ViewBag.elMensaje = "¡Error!, llene todos los campos correctamente";
+                      
+                }
+
+                }
             catch
             {
 

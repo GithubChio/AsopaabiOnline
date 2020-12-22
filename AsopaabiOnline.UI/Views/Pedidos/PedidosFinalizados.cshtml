@@ -1,0 +1,97 @@
+﻿@model IEnumerable<AsopaabiOnline.Modelo.Pedido>
+
+
+@{
+    ViewBag.Title = "Pedidos Finalizados";
+}
+
+
+<h3>@ViewBag.Title</h3>
+
+@if (!Model.Any())
+{
+<hr />
+<br />
+}
+
+
+@if (Model.Any())
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaPedido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaEntrega)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Notas)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdDireccion)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.IdCliente)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaPedido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaEntrega)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdDireccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCliente)
+                </td>
+                <td>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a></li>
+                  
+                </ul>
+                </td>
+            </tr>
+            }
+
+        </tbody>
+
+
+    </table>
+    <hr />
+    <br />
+    <a class="btn btn-outline-secondary" asp-action="Mostrar">Volver</a>
+}
+else
+{
+    <h3>No hay pedidos finalizados</h3>
+    <br />
+    <a class="btn btn-outline-secondary" asp-action="Mostrar">Volver</a>
+}

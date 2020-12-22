@@ -1,17 +1,18 @@
 ﻿@model IEnumerable<AsopaabiOnline.Modelo.Pedido>
 
+
 @{
-    ViewBag.Title = "Pedidos";
+    ViewBag.Title = "Pedidos En Proceso";
 }
 
 
-
 <h3>@ViewBag.Title</h3>
-<hr />
-<a class="btn btn-outline-warning" asp-controller="Pedidos" asp-action="Agregar">Agregar</a>
-<a class="btn btn-outline-success" asp-controller="Pedidos" asp-action="PedidosRecientes">Pedidos Recientes</a>
-<a class="btn btn-outline-info " asp-controller="Pedidos" asp-action="PedidosEnProceso">Pedidos En Proceso</a>
-<a class="btn btn-outline-dark" asp-controller="Pedidos" asp-action="PedidosFinalizados">Pedidos Finalizados</a>
+@if (!Model.Any())
+{
+    <hr />
+    <br />
+}
+
 
 @if (Model.Any())
 {
@@ -80,6 +81,7 @@
 
 
                     </td>
+
                 </tr>
             }
 
@@ -87,12 +89,14 @@
 
 
     </table>
+
     <hr />
+    <br />
+    <a class="btn btn-outline-secondary" asp-action="Mostrar">Volver</a>
 }
 else
 {
+    <h3> No hay pedidos en proceso</h3>
     <br />
-    <h3> No hay pedidos agregados</h3>
-
+    <a class="btn btn-outline-secondary" asp-action="Mostrar">Volver</a>
 }
-

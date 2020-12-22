@@ -62,7 +62,7 @@ namespace AsopaabiOnline.UI.Controllers
             {
                 CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
                 elCoordinador.CambiarAPedidoEnProceso(elPedido);
-                return RedirectToAction("Mostrar");
+                return RedirectToAction("PedidosEnProceso");
             }
             catch
             {
@@ -87,7 +87,7 @@ namespace AsopaabiOnline.UI.Controllers
             {
                 CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
                 elCoordinador.CambiarAPedidoFinalizado(elPedido);
-                return RedirectToAction("Mostrar");
+                return RedirectToAction("PedidosFinalizados");
             }
             catch
             {
@@ -120,6 +120,40 @@ namespace AsopaabiOnline.UI.Controllers
             }
         }
 
+
+        [HttpGet]
+        [Route("Pedidos/CambiarEstadoDePedido")]
+        public IActionResult CambiarEstadoDePedido(int id)
+        {
+            CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
+            var elPedidoEncontrado = elCoordinador.ObtenerPedidoPorId(id);
+            ViewBag.IdDelPedido = elPedidoEncontrado.Id;
+            return View();
+        }
+
+        [HttpGet]
+        [Route("Pedidos/PedidosRecientes")]
+        public IActionResult PedidosRecientes()
+        {
+            CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
+            return View(elCoordinador.ListarPedidosRecientes());
+        }
+
+        [HttpGet]
+        [Route("Pedidos/PedidosEnProceso")]
+        public IActionResult PedidosEnProceso()
+        {
+            CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
+            return View(elCoordinador.ListarPedidosEnProceso());
+        }
+
+        [HttpGet]
+        [Route("Pedidos/PedidosFinalizados")]
+        public IActionResult PedidosFinalizados()
+        {
+            CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
+            return View(elCoordinador.ListarPedidosFinalizados());
+        }
 
     }
 }

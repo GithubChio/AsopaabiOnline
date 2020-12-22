@@ -12,26 +12,27 @@ namespace AsopaabiOnline.Modelo
 
         [Key]
         public int Id { get; set; }
-       
+
+        [Required(ErrorMessage = "Campo requerido")]
         [Display(Name = "Id del Cliente")]
 
         public int IdCliente { get; set; }
 
-        [Required(ErrorMessage = "Debe agregar un número teléfonico")]
+        [Required(ErrorMessage = "El número teléfonico es requerido")]
         [Display(Name = "Telefono #1")]
         [RegularExpression(@"^(\d{8})$", ErrorMessage = "el número de celular debe tener 8 digitos númericos")]
 
         public int Telefono1 { get; set; }
 
-        [Required(ErrorMessage = "Debe agregar un número teléfonico")]
+        [Required(ErrorMessage = "El número teléfonico es requerido")]
         [Display(Name = "Telefono #2")]
-        
+
         [RegularExpression(@"^(\d{8})$", ErrorMessage = "el número de celular debe tener 8 digitos númericos")]
 
         public int Telefono2 { get; set; }
       
       
-        [NotMapped]
+     
         public virtual Cliente IdClienteNavigation { get; set; }
     }
 }

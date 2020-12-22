@@ -1,19 +1,25 @@
 ﻿@model IEnumerable<AsopaabiOnline.Modelo.ClienteTelefono>
 
+
 @{
-    ViewData["Title"] = "Mostrar";
+    ViewBag.Title = "Teléfonos de Clientes";
 }
 
-<br />
+
+
 <a>
     <h1>
         <img src="~/imagenes/Iconos/telefono.png" width="50" height="50" class="d-inline-block align-top" alt="">
-        Teléfonos de Clientes
+        @ViewBag.Title
     </h1>
 </a>
 <hr />
-<p> <a class="btn btn-outline-warning" asp-controller="TelefonosDeClientes" asp-action="Agregar" asp-route-id="@ViewBag.IdDelCliente">Agregar</a></p>
-<hr />
+@if (!Model.Any())
+{
+    <p> <a class="btn btn-outline-warning" asp-controller="TelefonosDeClientes" asp-action="Agregar" asp-route-id="@ViewBag.IdDelCliente">Agregar</a></p>
+    <hr />
+}
+
 <br />
 
 
@@ -21,6 +27,7 @@
 
 @if (Model.Any())
 {
+
     <table class="table table-responsive">
         <thead>
             <tr>
@@ -58,9 +65,11 @@
 
 
                     <td>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a></li>
+                            <li class="list-group-item"> <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a></li>
+                        </ul>
 
-                        <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a>  |
-                        <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a> |
 
                     </td>
                 </tr>

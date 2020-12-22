@@ -9,7 +9,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
 {
     public class CoordinadorDeProductos
     {
-        private readonly IHostingEnvironment hosting;
+        //private readonly IHostingEnvironment hosting;
         public void Agregar(Modelo.Producto elProducto)
         {
             GestorDeProductos elGestor = new GestorDeProductos();
@@ -49,20 +49,20 @@ namespace AsopaabiOnline.LogicaDeNegocio
 
         }
 
-        public void GuardarLaImagen(Modelo.Producto elProduto)
-        {
+        //public void GuardarLaImagen(Modelo.Producto elProduto)
+        //{
             
-            string rutaDeLaImagen = null;
-            if (elProduto.Imagen != null)
-            {
-                string rutaDeLaCarpeta = Path.Combine(hosting.WebRootPath, "imagenes");
-                rutaDeLaImagen = Guid.NewGuid().ToString() + elProduto.Imagen.FileName;
-                string rutaDefinitiva = Path.Combine(rutaDeLaCarpeta, rutaDeLaImagen);
-                elProduto.Imagen.CopyTo(new FileStream(rutaDefinitiva, FileMode.Create));
-            }
+        //    string rutaDeLaImagen = null;
+        //    if (elProduto.Imagen != null)
+        //    {
+        //        string rutaDeLaCarpeta = Path.Combine(hosting.WebRootPath, "imagenes");
+        //        rutaDeLaImagen = Guid.NewGuid().ToString() + elProduto.Imagen.FileName;
+        //        string rutaDefinitiva = Path.Combine(rutaDeLaCarpeta, rutaDeLaImagen);
+        //        elProduto.Imagen.CopyTo(new FileStream(rutaDefinitiva, FileMode.Create));
+        //    }
 
-            elProduto.Imagen = rutaDeLaImagen;
-        }
+        //    elProduto.Imagen = rutaDeLaImagen;
+        //}
 
 
     }

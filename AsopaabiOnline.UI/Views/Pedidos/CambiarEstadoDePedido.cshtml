@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Cambiar Tipo de Pedido";
+}
+<hr />
+<h1>@ViewData["Title"]</h1>
+
+<br />
+<ul class="list-group list-group-flush">
+    <li class="list-group-item"><a asp-action="CambiarAPedidoEnProceso" asp-route-id="@ViewBag.IdDelPedido">Cambiar a pedido en proceso</a>  </li>
+    <li class="list-group-item"><a asp-action="CambiarAPedidoFinalizado" asp-route-id="@ViewBag.IdDelPedido">Cambiar a pedido finalizado</a></li>
+</ul>
+<br />
+
+<a class="btn btn-outline-secondary" asp-action="Mostrar">Volver</a>
