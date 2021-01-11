@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Proxies;
 
 namespace AsopaabiOnline.Modelo
 {
@@ -8,6 +8,7 @@ namespace AsopaabiOnline.Modelo
     {
         public Contexto()
         {
+         
         }
 
         public Contexto(DbContextOptions<Contexto> options)
@@ -38,8 +39,9 @@ namespace AsopaabiOnline.Modelo
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-GID5PN2;Database=ASOPAABI_ONLINE;User ID=sa;Password=1234");
+                optionsBuilder.UseLazyLoadingProxies(useLazyLoadingProxies:true).UseSqlServer("Server=DESKTOP-GID5PN2;Database=ASOPAABI_ONLINE;User ID=sa;Password=1234");
             }
+           
         }
 
 
@@ -314,10 +316,6 @@ namespace AsopaabiOnline.Modelo
             {
                 entity.ToTable("EMPLEADO");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.IdPedido).HasColumnName("Id_Pedido");
-
                 entity.Property(e => e.IdUsuario)
                     .HasColumnName("Id_Usuario")
                     .HasMaxLength(450);
@@ -346,12 +344,6 @@ namespace AsopaabiOnline.Modelo
                     .IsUnicode(false);
 
                 entity.Property(e => e.TipoDeEmpleado).HasColumnName("tipoDeEmpleado");
-
-                entity.HasOne(d => d.IdPedidoNavigation)
-                    .WithMany(p => p.Empleado)
-                    .HasForeignKey(d => d.IdPedido)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EMPLEADO_PEDIDO");
 
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Empleado)
@@ -448,37 +440,27 @@ namespace AsopaabiOnline.Modelo
             {
                 entity.ToTable("PRODUCTO");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Categoria).HasColumnName("categoria");
-
-                entity.Property(e => e.Descripcion)
-                    .IsRequired()
-                    .HasColumnName("descripcion")
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Estado).HasColumnName("estado");
 
                 entity.Property(e => e.Imagen)
                     .IsRequired()
                     .HasColumnName("imagen")
-                    .HasMaxLength(15)
+                    .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.PrecioCosto).HasColumnName("precioCosto");
-
-                entity.Property(e => e.PrecioUnitario).HasColumnName("precioUnitario");
-
-                entity.Property(e => e.UnidadDeMedida)
+                entity.Property(e => e.Nombre)
                     .IsRequired()
-                    .HasColumnName("unidadDeMedida")
-                    .HasMaxLength(10)
+                    .HasColumnName("nombre")
+                    .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Utilidad).HasColumnName("utilidad");
+                entity.Property(e => e.Precio).HasColumnName("precio");
+
+                entity.Property(e => e.UnidadDeMedida).HasColumnName("unidadDeMedida");
             });
 
             modelBuilder.Entity<Provincia>(entity =>

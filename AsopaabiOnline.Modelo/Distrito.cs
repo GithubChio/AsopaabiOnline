@@ -16,10 +16,8 @@ namespace AsopaabiOnline.Modelo
         public int IdCanton { get; set; }
       
        
-       [NotMapped]
         public virtual Canton IdCantonNavigation { get; set; }
     
-        [NotMapped]
         public virtual ICollection<DireccionPedido> DireccionPedido { get; set; }
     }
 }

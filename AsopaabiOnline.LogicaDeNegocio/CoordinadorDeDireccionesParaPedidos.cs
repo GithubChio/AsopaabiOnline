@@ -37,8 +37,6 @@ namespace AsopaabiOnline.LogicaDeNegocio
         }
        
 
-       
-
 
 
         public Modelo.DireccionPedido ObtenerDireccionesPorId(int id)
@@ -46,7 +44,16 @@ namespace AsopaabiOnline.LogicaDeNegocio
             GestorDeDireccionesParaPedidos elGestor = new GestorDeDireccionesParaPedidos();
             return elGestor.ObtenerDireccionesPorId(id);
         }
-            
+       
+        
+
+
+        public void Eliminar(Modelo.DireccionPedido laDireccionAEliminar)
+        {
+            GestorDeDireccionesParaPedidos elGestor = new GestorDeDireccionesParaPedidos();
+            Modelo.DireccionPedido laDireccion = elGestor.ObtenerDireccionesPorId(laDireccionAEliminar.Id);
+            elGestor.Eliminar(laDireccion);
+        }
     }
 
        

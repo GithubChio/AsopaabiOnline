@@ -20,6 +20,7 @@ namespace AsopaabiOnline.UI.Controllers
 
             elEmpleado.LaListaDeUsuarios = elCoordinadorDeUsuarios.ListarUsuarios();
 
+           
             return View(elEmpleado);
         }
       
@@ -28,12 +29,14 @@ namespace AsopaabiOnline.UI.Controllers
         [Route("Empleados/Agregar")]
         public IActionResult Agregar(Modelo.Empleado elEmpleado)
         {
+          
+
             try
             {
-             
-               CoordinadorDeEmpleados elCoordinador = new CoordinadorDeEmpleados();
                
-                elCoordinador.Agregar(elEmpleado);
+                    CoordinadorDeEmpleados elCoordinador = new CoordinadorDeEmpleados();
+                    elCoordinador.Agregar(elEmpleado);
+               
                 return RedirectToAction("Mostrar");
 
             }

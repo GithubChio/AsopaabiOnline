@@ -29,48 +29,46 @@
                         <th>
                             <label asp-for="SegundoApellido" class="control-label" style="width:120px;"></label>
                         </th>
-                        @*<th>
-                            <label asp-for="TipoDeEmpleado" class="control-label" style="width:130px;"></label>
-                        </th>*@
+                        
                         <th>
                             <label asp-for="IdUsuario" class="control-label"></label>
                         </th>
+                    
+                    
+                    
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr>
                         <td>
-                            <input asp-for="PrimerNombre" class="form-control"  style="width:120px;"/>
+                            <input asp-for="PrimerNombre" class="form-control" style="width:120px;" />
                             <span asp-validation-for="PrimerNombre" class="text-danger"></span>
                         </td>
                         <td>
-                            <input asp-for="SegundoNombre" class="form-control" style="width:120px;"/>
+                            <input asp-for="SegundoNombre" class="form-control" style="width:120px;" />
                             <span asp-validation-for="SegundoNombre" class="text-danger"></span>
                         </td>
                         <td>
-                            <input asp-for="PrimerApellido" class="form-control"  style="width:120px;"/>
+                            <input asp-for="PrimerApellido" class="form-control" style="width:120px;" />
                             <span asp-validation-for="PrimerApellido" class="text-danger"></span>
                         </td>
                         <td>
-                            <input asp-for="SegundoApellido" class="form-control" style="width:120px;"/>
+                            <input asp-for="SegundoApellido" class="form-control" style="width:120px;" />
                             <span asp-validation-for="SegundoApellido" class="text-danger"></span>
                         </td>
-                        @*<td>
-                            <select asp-for="TipoDeEmpleado" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.TipoDeEmpleado>()" class="form-control" style="width:210px;">
-                                <option selected="selected" disabled value="">Seleccione una opción</option>
-                            </select>
-                            <span asp-validation-for="TipoDeEmpleado" class="text-danger" style="width:200px;"></span>
-                        </td>*@
+
 
                         <td>
-                            <select  asp-for="IdUsuario" asp-items=@(new SelectList(Model.LaListaDeUsuarios,"Id","Email")) class="form-control" style="width:210px;">
+                            <select asp-for="IdUsuario" asp-items=@(new SelectList(Model.LaListaDeUsuarios,"Id","Email")) class="form-control" style="width:210px;">
                                 <option selected="selected" disabled value="">Seleccione una opción</option>
                             </select>
 
                             <span asp-validation-for="IdUsuario" class="text-danger"></span>
-                           
+
                         </td>
+
+                        
 
                     </tr>
 
@@ -88,8 +86,3 @@
 
     </div>
 </div>
-
-<div>
-    
-</div>
-

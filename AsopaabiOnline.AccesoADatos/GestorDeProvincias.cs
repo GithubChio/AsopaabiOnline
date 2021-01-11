@@ -12,7 +12,7 @@ namespace AsopaabiOnline.AccesoADatos
 
       
 
-        public List<Provincia> ObtenerListaDeClientes()
+        public List<Provincia> ObtenerListaDeProvincias()
         {
             var laBaseDeDatos = new Contexto();
             var elResultado = from lasProvincias in laBaseDeDatos.Provincia

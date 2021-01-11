@@ -50,6 +50,14 @@ namespace AsopaabiOnline.AccesoADatos
             laBaseDeDatos.SaveChanges();
         }
 
-       
+        public void Eliminar(DireccionPedido laDireccionAEliminar)
+        {
+            var laBaseDeDatos = new Contexto();
+            var laDireccionEnlaBD = ObtenerDireccionesPorId(laDireccionAEliminar.Id);
+
+            laBaseDeDatos.DireccionPedido.Remove(laDireccionEnlaBD);
+            laBaseDeDatos.Remove(laDireccionEnlaBD).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            laBaseDeDatos.SaveChanges();
+        }
     }
 }

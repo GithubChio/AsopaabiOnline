@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿
+
+using System.ComponentModel.DataAnnotations;
+
 
 namespace AsopaabiOnline.Modelo
 {
     public enum CategoriaDeProducto
     {
-        Fruta = 1,
+        Frutas = 1,
         Hortalizas = 2,
-        [Description("Raíces y Tubérculos")]
+        [Display(Name = "Raíces y Tubérculos")]
+        
         Raices_y_Tuberculos = 3,
-        [Description("Flores Aromáticas")]
+        [Display(Name = "Flores Aromáticas")]
+        
         FloresAromaticas = 4,
         Otro = 5
 

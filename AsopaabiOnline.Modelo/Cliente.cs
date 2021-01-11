@@ -48,7 +48,7 @@ namespace AsopaabiOnline.Modelo
 
         [Required(ErrorMessage = "Su fecha de nacimiento es requerida")]
         [Display(Name = "Fecha de Nacimiento")]
-        [Range(typeof(DateTime), "31-12-1925", "31-12-2003",ErrorMessage = "No se aceptan menores de edad")]
+        [Range(typeof(DateTime), "31-12-1925", "31-12-2003", ErrorMessage = "No se aceptan menores de edad")]
         [DataType(DataType.Date)]
         public DateTime FechaDeNacimiento { get; set; }
 
@@ -61,7 +61,7 @@ namespace AsopaabiOnline.Modelo
         
         public TipoDeActividad? TipoActividad { get; set; }
         [NotMapped]
-        public int Edad { get; set; }
+        public int Edad { get { return (DateTime.Now - FechaDeNacimiento).Days / 365;} }
         [NotMapped]
         public string IdUsuario { get; set; }
    
@@ -73,5 +73,7 @@ namespace AsopaabiOnline.Modelo
         public virtual ICollection<HistorialPedido> HistorialPedido { get; set; }
         [NotMapped]
         public virtual ICollection<Pedido> Pedido { get; set; }
+
+        
     }
 }

@@ -22,18 +22,14 @@
                 <thead>
                     <tr>
                         <th>
-                            <label asp-for="Imagen" class="control-label" style="width:350px;"></label>
+                            <label asp-for="Imagen" class="control-label" style="width:350px; margin-left:1rem"></label>
                         </th>
                         
                         <th>
-                            <label asp-for="Descripcion" class="control-label" ></label>
+                            <label asp-for="Nombre" class="control-label" style="margin-left:0rem;" ></label>
                         </th>
-                        <th>
-                            <label asp-for="UnidadDeMedida" class="control-label" style="width:150px;"></label>
-                        </th>
-                        <th>
-                            <label asp-for="PrecioCosto" class="control-label" style="width:150px;"></label>
-                        </th>
+                        
+                        
 
 
                     </tr>
@@ -43,8 +39,8 @@
                         <td>
                             <div class="col-sm-12"  >
                                 <div class="custom-file text-center">
-                                    <input asp-for="Imagen" type="file" class="form-control custom-file-input"    accept="image/png, image/jpeg" id="laImagen" style="width:150px;" />
-                                    <label asp-for="Imagen" class="custom-file-label" for="laImagen">selecciona una imagen</label>
+                                    <input asp-for="ImageFile" type="file" class="form-control custom-file-input"    accept="image/png, image/jpeg" id="laImagen" style="width:150px;"  required/>
+                                    <label asp-for="ImageFile" class="custom-file-label" for="laImagen">selecciona una imagen</label>
 
 
                                 </div>
@@ -52,20 +48,12 @@
                         </td>
 
                         <td>
-                                <textarea asp-for="Descripcion" class="form-control" style="width:220px;height:100px;"  >  </textarea>
-                                <span asp-validation-for="Descripcion" class="text-danger"></span>
+                                <input asp-for="Nombre" class="form-control"  style="width:220px;" placeholder="Ejemplo:Fresas"/>
+                                <span asp-validation-for="Nombre" class="text-danger"></span>
                            
                         </td>
-                        <td>
-                            <select asp-for="UnidadDeMedida" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.UnidadesDeMedida>()" class="form-control" style="width:250px;">
-                                <option selected="selected" disabled value="">Seleccione una opción</option>
-                            </select>
-                            <span asp-validation-for="UnidadDeMedida" class="text-danger" style="width:220px;"></span>
-                        </td>
-                        <td>
-                            <input asp-for="PrecioCosto" class="form-control" style="width:150px;" />
-                            <span asp-validation-for="PrecioCosto" class="text-danger"></span>
-                        </td>
+                        
+                       
 
                     </tr>
                 </tbody>
@@ -78,42 +66,40 @@
                 <thead>
                     <tr>
                         <th>
-                            <label asp-for="PrecioUnitario" class="control-label" style="width:150px;"></label>
+                            <label asp-for="UnidadDeMedida" class="control-label" style="width:150px;margin-left:1rem"></label>
                         </th>
                         <th>
-                            <label asp-for="Utilidad" class="control-label" style="width:150px;"></label>
+                            <label asp-for="Precio" class="control-label" style="width:150px;margin-left:1rem;"></label>
                         </th>
+
+
+
                         <th>
-                            <label asp-for="Categoria" class="control-label"></label>
+                            <label asp-for="Categoria" class="control-label" style="width:150px;margin-left:1rem"></label>
                         </th>
-                        <th>
-                            <label asp-for="Estado" class="control-label" style="width:200px;"></label>
                     </tr>
                 </thead>
 
 
                 <tbody>
                     <tr>
+                        <td>
+                            <select asp-for="UnidadDeMedida" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.UnidadesDeMedida>()" class="form-control" style="width:250px;margin-left:1rem " required>
+                                <option selected="selected" disabled value="">Seleccione una opción</option>
+                            </select>
+                            <span asp-validation-for="UnidadDeMedida" class="text-danger" style="width:220px;"></span>
+                        </td>
+                        <td>
+
+                            <input asp-for="Precio" class="form-control" style="width:200px;margin-left:1rem " placeholder="Ejemplo:₡700" />
+                            <span asp-validation-for="Precio" class="text-danger"></span>
+                        </td>
 
                         <td>
-                            <input asp-for="PrecioUnitario" class="form-control" style="width:150px;" />
-                            <span asp-validation-for="PrecioUnitario" class="text-danger"></span>
-                        </td>
-                        <td>
-                            <input asp-for="Utilidad" class="form-control" style="width:150px;" />
-                            <span asp-validation-for="Utilidad" class="text-danger"></span>
-                        </td>
-                        <td>
-                            <select asp-for="Categoria" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.CategoriaDeProducto>()" class="form-control" style="width:250px;">
+                            <select asp-for="Categoria" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.CategoriaDeProducto>()" class="form-control" style="width:250px;margin-left:1rem " required>
                                 <option selected="selected" disabled value="">Seleccione una opción</option>
                             </select>
                             <span asp-validation-for="Categoria" class="text-danger" style="width:220px;"></span>
-                        </td>
-                        <td>
-                            <select asp-for="Estado" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.EstadoDeProducto>()" class="form-control" style="width:250px;">
-                                <option selected="selected" disabled value="">Seleccione una opción</option>
-                            </select>
-                            <span asp-validation-for="Estado" class="text-danger" style="width:220px;"></span>
                         </td>
 
 

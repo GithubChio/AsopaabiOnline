@@ -47,24 +47,6 @@ namespace AsopaabiOnline.LogicaDeNegocio
         }
 
    
-        public int ObtenerEdad(Modelo.Cliente  elCliente)
-        {
-            
-            GestorDeClientes elGestor = new GestorDeClientes();
-           int elAñoDeNacimiento = elGestor.ObtenerAñoDeNacimiento(elCliente);
-            DateTime laFechaActual = DateTime.Now.Date;
-            int elAñoActual = laFechaActual.Year;
-      
-            int laEdad=0;
-
-            laEdad =(elAñoActual - elAñoDeNacimiento);
-
-            return laEdad;
-
-        }
-
-       
-        
         public void Eliminar(Modelo.Cliente elCliente)
         {
             GestorDeClientes elGestor = new GestorDeClientes();

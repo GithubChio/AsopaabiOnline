@@ -8,7 +8,7 @@ namespace AsopaabiOnline.Modelo
     {
         public Provincia()
         {
-            Canton = new HashSet<Canton>();
+            //    Canton = new HashSet<Canton>();
             DireccionPedido = new HashSet<DireccionPedido>();
         }
 
@@ -19,7 +19,7 @@ namespace AsopaabiOnline.Modelo
        
          [NotMapped]
         public virtual ICollection<Canton> Canton { get; set; }
-        [NotMapped]
+
         public virtual ICollection<DireccionPedido> DireccionPedido { get; set; }
     }
 }

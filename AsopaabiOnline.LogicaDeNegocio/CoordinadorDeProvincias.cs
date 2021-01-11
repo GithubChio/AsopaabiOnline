@@ -14,7 +14,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
         public List<Modelo.Provincia> ListarProvincias()
         {
             GestorDeProvincias elGestor = new GestorDeProvincias();
-            return elGestor.ObtenerListaDeClientes();
+            return elGestor.ObtenerListaDeProvincias();
 
         }
 

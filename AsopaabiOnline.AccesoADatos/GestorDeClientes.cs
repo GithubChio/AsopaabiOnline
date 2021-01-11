@@ -49,16 +49,7 @@ namespace AsopaabiOnline.AccesoADatos
 
         }
 
-        public int ObtenerAñoDeNacimiento(Cliente elCliente)
-        {
-            var elClienteEnlaBD = ObtenerClientePorId(elCliente.Id);
-            var elAño = elClienteEnlaBD.FechaDeNacimiento.Year;
-            return elAño;
-        }
-
-       
-
-        
+     
         public void Eliminar(Cliente elClienteAEliminar)
         {
             var laBaseDeDatos = new Contexto();

@@ -23,7 +23,7 @@ namespace AsopaabiOnline.Modelo
         [NotMapped]
         public virtual Provincia IdProvinciaNavigation { get; set; }
 
-        [NotMapped]
+      
         public virtual ICollection<DireccionPedido> DireccionPedido { get; set; }
 
         [NotMapped]

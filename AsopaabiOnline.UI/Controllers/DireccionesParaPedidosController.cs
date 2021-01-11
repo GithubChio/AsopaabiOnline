@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AsopaabiOnline.LogicaDeNegocio;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity;
 
 namespace AsopaabiOnline.UI.Controllers
 {
@@ -15,18 +17,13 @@ namespace AsopaabiOnline.UI.Controllers
         {
 
             Modelo.DireccionPedido laDireccionDelPedido = new Modelo.DireccionPedido();
-            //CoordinadorDeDistritos elCoordinadorDeDistritos = new CoordinadorDeDistritos();
-            //CoordinadorDeCantones elCoordinadorDeCantones = new CoordinadorDeCantones();
+            
             CoordinadorDeProvincias elCoordinadorDeProvincias = new CoordinadorDeProvincias();
 
 
             laDireccionDelPedido.LaListaDeProvincias = elCoordinadorDeProvincias.ListarProvincias();
-            if (ViewBag.SeleccionDeProvincia != null)
-            {
-                ViewBag.mensaje = "Debe seleccionar uno ";
-            }
-            //    laDireccionDelPedido.LaListaDeCantones = elCoordinadorDeCantones.ListarCantonesPorIdDeProvincia(laDireccionDelPedido.IdProvincia);
-            //laDireccionDelPedido.LaListaDeDistritos = elCoordinadorDeDistritos.ListarDistritosPorIdDeCanton(laDireccionDelPedido.IdDistrito);
+          
+         
             return View(laDireccionDelPedido);
         }
 
@@ -35,24 +32,47 @@ namespace AsopaabiOnline.UI.Controllers
         public IActionResult Agregar(Modelo.DireccionPedido laDireccion)
         {
             try
-            { 
-                CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
-
-                elCoordinador.Agregar(laDireccion);
-                return RedirectToAction("Mostrar");
-            }
-            catch
             {
+               
+                    CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
+                    elCoordinador.Agregar(laDireccion);
+                    return RedirectToAction("Mostrar");
+               
+
+            }
+            catch (Exception excepcion)
+            {
+                Console.WriteLine(excepcion);
                 return View();
             }
-
+           
 
         }
 
+     
+
+
+        public JsonResult CargarCantones(int id)
+        {
+            CoordinadorDeCantones elCoordinador = new CoordinadorDeCantones();
+            var losCantones = elCoordinador.ListarCantonesPorIdDeProvincia(id);
+            return Json(new SelectList(losCantones, "Id", "Nombre"));
+        }
+
+        public JsonResult CargarDistritos(int id)
+        {
+            CoordinadorDeDistritos elCoordinador = new CoordinadorDeDistritos();
+            var losDistritos = elCoordinador.ListarDistritosPorIdDeCanton(id);
+            return Json(new SelectList(losDistritos, "Id", "Nombre"));
+        }
+
+        [HttpGet]
         [Route("DireccionesParaPedidos/Mostrar")]
         public IActionResult Mostrar()
         {
             CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
+          
+            
             return  View(elCoordinador.ListarDirecciones());
         }
 
@@ -63,6 +83,7 @@ namespace AsopaabiOnline.UI.Controllers
         {
             CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
             var laDireccionEncontrada = elCoordinador.ObtenerDireccionesPorId(id);
+
 
             return View(laDireccionEncontrada);
         }
@@ -84,6 +105,35 @@ namespace AsopaabiOnline.UI.Controllers
 
         }
 
+        [HttpGet]
+        [Route("DireccionesParaPedidos/Eliminar")]
+        public IActionResult Eliminar(int id)
+        {
+            CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
+            var laDireccionEncontrada = elCoordinador.ObtenerDireccionesPorId(id);
 
+
+            return View(laDireccionEncontrada);
+        }
+
+        [HttpPost]
+        [Route("DireccionesParaPedidos/Eliminar")]
+        public IActionResult Eliminar(Modelo.DireccionPedido laDireccion)
+        {
+            try
+            {
+                CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
+                elCoordinador.Eliminar(laDireccion);
+                return RedirectToAction("Mostrar");
+            }
+            catch
+            {
+
+                ViewBag.mensaje = "No se puede eliminar porque esta direccion tiene un pedido";
+               return  View();
+               
+            }
+
+        }
     }
 }

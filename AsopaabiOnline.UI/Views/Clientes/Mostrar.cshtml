@@ -44,7 +44,12 @@
                 <th>
                     @Html.DisplayNameFor(model => model.TipoActividad)
                 </th>
-
+                <th>
+                    @Html.DisplayNameFor(model => model.Edad)
+                </th>
+                <th>
+                    <label>Opciones</label>
+                </th>
 
 
                 <th></th>
@@ -53,51 +58,53 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+            <tr>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TipoDni)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Dni)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PrimerNombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SegundoNombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PrimerApellido)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SegundoApellido)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaDeNacimiento)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TipoDeCliente)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TipoActividad)
-                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoDni)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dni)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrimerNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SegundoNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrimerApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SegundoApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaDeNacimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoDeCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoActividad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Edad)
+                </td>
 
 
+                <td>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a></li>
+                        <li class="list-group-item">  <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a></li>
+                        <li class="list-group-item"> <a asp-controller="TelefonosDeClientes" asp-action="Mostrar" asp-route-id="@item.Id">Teléfonos</a></li>
+                        <li class="list-group-item">  <a asp-action="CambiarTipoDeCliente" asp-route-id="@item.Id">Cambiar tipo de cliente</a></li>
+                    </ul>
 
-                    <td>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a></li>
-                            <li class="list-group-item">  <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a></li>
-                            <li class="list-group-item"> <a asp-controller="TelefonosDeClientes" asp-action="Mostrar" asp-route-id="@item.Id">Teléfonos</a></li>
-                            <li class="list-group-item">  <a asp-action="CambiarTipoDeCliente" asp-route-id="@item.Id">Cambiar tipo de cliente</a></li>
-                        </ul>
-
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
             }
 

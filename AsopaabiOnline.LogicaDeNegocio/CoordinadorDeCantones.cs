@@ -7,8 +7,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
 {
    public class CoordinadorDeCantones
     {
-
-       public List<Modelo.Canton> ObtenerCantonesDeSanJose()
+        public List<Modelo.Canton> ObtenerCantonesDeSanJose()
         {
             GestorDeCantones elGestor = new GestorDeCantones();
             return elGestor.ObtenerListaDeCantonesDeSanJose();
@@ -58,15 +57,13 @@ namespace AsopaabiOnline.LogicaDeNegocio
        
         public List<Modelo.Canton> ListarCantonesPorIdDeProvincia(int idProvincia)
         {
-          
             CoordinadorDeProvincias elCoordinador = new CoordinadorDeProvincias();
             var laProvincia = elCoordinador.ObtenerProviciasPorId(idProvincia);
 
             if (laProvincia.Id == 1)
             {
                 return ObtenerCantonesDeSanJose();
-            }
-            else if (laProvincia.Id == 2)
+            }else if (laProvincia.Id == 2)
             {
                 return ObtenerCantonesDeAlajuela();
             }
@@ -86,12 +83,16 @@ namespace AsopaabiOnline.LogicaDeNegocio
             {
                 return ObtenerCantonesDePuntarenas();
             }
-            else
+            else 
             {
                 return ObtenerCantonesDeLimon();
             }
+            
 
         }
+
+
+
 
     }
 }

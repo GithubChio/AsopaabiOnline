@@ -18,15 +18,17 @@ namespace AsopaabiOnline.Modelo
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="La fecha de pedido es requerida")]
+       
         [DataType(DataType.Date)]
         [Display(Name ="Fecha de Pedido")]
         public DateTime FechaPedido { get; set; }
 
-        [Required(ErrorMessage = "La fecha de entrega es requerida")]
+       
         [Display(Name = "Fecha de Entrega")]
         [DataType(DataType.Date)]
         public DateTime FechaEntrega { get; set; }
+
+
 
         [Required(ErrorMessage = "Las notas son requeridas")]
         public string Notas { get; set; }
@@ -36,12 +38,18 @@ namespace AsopaabiOnline.Modelo
 
        
         [NotMapped]
+        [Display(Name ="Id de Direccion")]
         public int IdDireccion { get; set; }
         [NotMapped]
+        [Display(Name = "Id de Cliente")]
         public int IdCliente { get; set; }
 
         
+        [NotMapped]
+        public List<Modelo.DireccionPedido> ListaDeDirecciones { get; set; }
 
+        [NotMapped]
+        public List<Modelo.Cliente> ListaDeClientes { get; set; }
 
 
         [NotMapped]

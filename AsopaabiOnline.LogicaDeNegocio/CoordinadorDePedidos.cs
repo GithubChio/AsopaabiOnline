@@ -9,6 +9,15 @@ namespace AsopaabiOnline.LogicaDeNegocio
     public class CoordinadorDePedidos
     {
 
+        public void Agregar(Modelo.Pedido elPedido)
+        {
+          
+            GestorDePedidos elGestor = new GestorDePedidos();
+            elPedido.Estado = Modelo.EstadoDePedido.Reciente;
+            elPedido.FechaPedido = DateTime.Now;
+            elGestor.Agregar(elPedido);
+        }
+
         public Modelo.Pedido ObtenerPedidoPorId(int id)
         {
             GestorDePedidos elGestor = new GestorDePedidos();

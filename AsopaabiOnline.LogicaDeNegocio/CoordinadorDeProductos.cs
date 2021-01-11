@@ -9,7 +9,6 @@ namespace AsopaabiOnline.LogicaDeNegocio
 {
     public class CoordinadorDeProductos
     {
-        //private readonly IHostingEnvironment hosting;
         public void Agregar(Modelo.Producto elProducto)
         {
             GestorDeProductos elGestor = new GestorDeProductos();
@@ -28,14 +27,10 @@ namespace AsopaabiOnline.LogicaDeNegocio
             var elProductoAActualizar = elGestor.ObtenerProductoPorId(elProducto.Id);
 
             elProductoAActualizar.Id = elProducto.Id;
-            elProductoAActualizar.Imagen = elProducto.Imagen;
-            elProductoAActualizar.Descripcion = elProducto.Descripcion;
+            elProductoAActualizar.Nombre = elProducto.Nombre;
             elProductoAActualizar.UnidadDeMedida = elProducto.UnidadDeMedida;
-            elProductoAActualizar.PrecioCosto = elProducto.PrecioCosto;
-            elProductoAActualizar.PrecioUnitario = elProducto.PrecioUnitario;
-            elProductoAActualizar.Utilidad = elProducto.Utilidad;
-            elProductoAActualizar.Categoria = elProductoAActualizar.Categoria;
-            elProductoAActualizar.Estado = elProducto.Estado;
+            elProductoAActualizar.Precio = elProducto.Precio;
+           
 
             elGestor.Actualizar(elProductoAActualizar);
             
@@ -48,22 +43,109 @@ namespace AsopaabiOnline.LogicaDeNegocio
             elGestor.Eliminar(elProductoAEliminar);
 
         }
+        
+        public Modelo.Producto ObtenerProductoPorId(int id)
+        {
+            GestorDeProductos elGestor = new GestorDeProductos();
+            return elGestor.ObtenerProductoPorId(id);
+        }
 
-        //public void GuardarLaImagen(Modelo.Producto elProduto)
-        //{
-            
-        //    string rutaDeLaImagen = null;
-        //    if (elProduto.Imagen != null)
-        //    {
-        //        string rutaDeLaCarpeta = Path.Combine(hosting.WebRootPath, "imagenes");
-        //        rutaDeLaImagen = Guid.NewGuid().ToString() + elProduto.Imagen.FileName;
-        //        string rutaDefinitiva = Path.Combine(rutaDeLaCarpeta, rutaDeLaImagen);
-        //        elProduto.Imagen.CopyTo(new FileStream(rutaDefinitiva, FileMode.Create));
-        //    }
+        public void CambiarACategoriaFrutas(Modelo.Producto elProducto)
+        {
+            GestorDeProductos elGestor = new GestorDeProductos();
+            var elProductoACambiar = elGestor.ObtenerProductoPorId(elProducto.Id);
 
-        //    elProduto.Imagen = rutaDeLaImagen;
-        //}
+            elProductoACambiar.Categoria = Modelo.CategoriaDeProducto.Frutas;
+            elGestor.Actualizar(elProductoACambiar);
+
+        }
+        public void CambiarACategoriaHortalizas(Modelo.Producto elProducto)
+        {
+            GestorDeProductos elGestor = new GestorDeProductos();
+            var elProductoACambiar = elGestor.ObtenerProductoPorId(elProducto.Id);
+
+            elProductoACambiar.Categoria = Modelo.CategoriaDeProducto.Hortalizas;
+            elGestor.Actualizar(elProductoACambiar);
+        }
+        public void CambiarACategoriaRaicesYTuberculos(Modelo.Producto elProducto)
+        {
+            GestorDeProductos elGestor = new GestorDeProductos();
+            var elProductoACambiar = elGestor.ObtenerProductoPorId(elProducto.Id);
+
+            elProductoACambiar.Categoria = Modelo.CategoriaDeProducto.Raices_y_Tuberculos;
+            elGestor.Actualizar(elProductoACambiar);
+        }
+        public void CambiarACategoriaFloresAromaticas(Modelo.Producto elProducto)
+        {
+            GestorDeProductos elGestor = new GestorDeProductos();
+            var elProductoACambiar = elGestor.ObtenerProductoPorId(elProducto.Id);
+
+            elProductoACambiar.Categoria = Modelo.CategoriaDeProducto.FloresAromaticas;
+            elGestor.Actualizar(elProductoACambiar);
+        }
+        public void CambiarACategoriaOtro(Modelo.Producto elProducto)
+        {
+            GestorDeProductos elGestor = new GestorDeProductos();
+            var elProductoACambiar = elGestor.ObtenerProductoPorId(elProducto.Id);
+
+            elProductoACambiar.Categoria = Modelo.CategoriaDeProducto.Otro;
+            elGestor.Actualizar(elProductoACambiar);
+        }
+
+        public void CambiarAEstadoDisponible(Modelo.Producto elProducto)
+        {
+            GestorDeProductos elGestor = new GestorDeProductos();
+            var elProductoACambiar = elGestor.ObtenerProductoPorId(elProducto.Id);
+
+            elProductoACambiar.Estado = Modelo.EstadoDeProducto.Disponible;
+            elGestor.Actualizar(elProductoACambiar);
+
+        }
+        public void CambiarAEstadoEnOferta(Modelo.Producto elProducto)
+        {
+            GestorDeProductos elGestor = new GestorDeProductos();
+            var elProductoACambiar = elGestor.ObtenerProductoPorId(elProducto.Id);
+
+            elProductoACambiar.Estado = Modelo.EstadoDeProducto.EnOferta;
+            elGestor.Actualizar(elProductoACambiar);
+
+        }
+        public void CambiarAEstadoNoDisponible(Modelo.Producto elProducto)
+        {
+            GestorDeProductos elGestor = new GestorDeProductos();
+            var elProductoACambiar = elGestor.ObtenerProductoPorId(elProducto.Id);
+
+            elProductoACambiar.Estado = Modelo.EstadoDeProducto.NoDisponible;
+            elGestor.Actualizar(elProductoACambiar);
+
+        }
 
 
+        public List<Modelo.Producto> ListaDeFrutas()
+        {
+            GestorDeProductos elGestor = new GestorDeProductos();
+            return elGestor.ObtenerListaDeProductosConCategoriaDeFruta();
+        }
+        public List<Modelo.Producto> ListaDeHortalizas()
+        {
+            GestorDeProductos elGestor = new GestorDeProductos();
+            return elGestor.ObtenerListaDeProductosConCategoriaHortalizas();
+        }
+        public List<Modelo.Producto> ListaDeRaicesYTuberculos()
+        {
+            GestorDeProductos elGestor = new GestorDeProductos();
+            return elGestor.ObtenerListaDeProductosConCategoriaRaicesYTuberculos();
+        }
+        public List<Modelo.Producto> ListaDeFloresAromaticas()
+        {
+            GestorDeProductos elGestor = new GestorDeProductos();
+            return elGestor.ObtenerListaDeProductosConCategoriaFloresAromaticas();
+        }
+
+        public List<Modelo.Producto> ListaDeOtrosProductos()
+        {
+            GestorDeProductos elGestor = new GestorDeProductos();
+            return elGestor.ObtenerListaDeProductosConCategoriaOtros();
+        }
     }
 }

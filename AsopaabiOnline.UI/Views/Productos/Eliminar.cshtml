@@ -1,0 +1,48 @@
+﻿@model AsopaabiOnline.Modelo.Producto
+
+
+@{
+   ViewBag.Title = "Eliminar";
+}
+
+<h1>@ViewBag.Title</h1>
+<hr />
+<h3 style="text-align:center;">¿Está seguro que desea eliminar este producto?</h3>
+
+<div>
+
+    <hr />
+    <dl class="row">
+
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UnidadDeMedida)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UnidadDeMedida)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+        
+
+
+    </dl>
+    <hr />
+    <form asp-action="Eliminar" asp-controller="Empleados">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Sí" class="btn btn-outline-danger" style="width:50px;" />
+
+        <a class="btn btn-outline-secondary" asp-action="Mostrar">No</a>
+
+    </form>
+</div>

@@ -32,7 +32,6 @@
                             <label asp-for="SegundoNombre" class="control-label" style="width:150px;"></label>
                         </th>
 
-
                     </tr>
                 </thead>
                 <tbody>
@@ -45,7 +44,7 @@
                             <span asp-validation-for="Dni" class="text-danger"></span>
                         </td>
                         <td>
-                            <select id="tipoDeDni" asp-for="TipoDni" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.TipoDeDni>()" class="form-control" style="width:220px;">
+                            <select id="tipoDeDni" asp-for="TipoDni" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.TipoDeDni>()" class="form-control" style="width:220px;" >
                                 <option selected="selected" disabled value="">Seleccione una opción</option>
                             </select>
                             <span asp-validation-for="TipoDni" class="text-danger"></span>
@@ -97,7 +96,7 @@
                             <span asp-validation-for="SegundoApellido" class="text-danger"></span>
                         </td>
                         <td>
-                            <input asp-for="FechaDeNacimiento" class="form-control" style="width:200px;" />
+                            <input asp-for="FechaDeNacimiento" class="form-control" style="width:200px;"  required/>
                             <span asp-validation-for="FechaDeNacimiento" class="text-danger"></span>
                         </td>
                         <td>
@@ -130,5 +129,68 @@
 </div>
 
 
+@section Scripts{
+<script>
 
-<script type="text/javascript" src="~/js/funcionDelCliente.js"></script>
+
+
+
+
+    document.addEventListener( 'DOMContentLoaded',
+        function (evt) {
+            var btnTipoDeDni = document.getElementById('tipoDeDni');
+            btnTipoDeDni.addEventListener('click', ValidarDNI);
+
+        });
+
+
+        function ValidarDNI(evt) {
+            var numeroDeCedula = document.getElementById('Dni').value,
+                imprimir = document.getElementById('elResultado'),
+                cedulaFisicaValida = /^[1-9]-\d{3}-\d{3}$/,
+                cedulaJuridicaValida = /^[1-9]-\d{3}-\d{6}$/;
+
+            $("#tipoDeDni").click(function (evento) {
+
+                var elResultado = '';
+                for (var recorrer = 1; recorrer <= $(this).val(); recorrer++) {
+                    elResultado += crear(recorrer);
+
+
+                }
+                $("#mostrar").elResultado(elResultado);
+            });
+
+            var crear = function (num) {
+                if (num = 1) {
+
+                    if (cedulaFisicaValida.test(numeroDeCedula)) {
+
+
+                    } else {
+                        imprimir.innerText = ' La Cédula: ' + numeroDeCedula + ' es inválida, Formato: 5-255-668';
+                        
+                    }
+
+                } else if (num = 2)
+                 {
+                    if (cedulaJuridicaValida.test(numeroDeCedula)) {
+
+                    } else {
+                        imprimir.innerText = ' La Cédula: ' + numeroDeCedula + ' es inválida, Formato: 5-255-618266';
+                    }
+
+                }
+
+
+
+            };
+
+    };
+
+</script>
+
+
+}
+
+    @*<script type="text/javascript" src="~/js/funcionDelCliente.js"></script>*@

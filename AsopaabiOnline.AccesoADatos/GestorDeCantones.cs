@@ -15,7 +15,10 @@ namespace AsopaabiOnline.AccesoADatos
                               where elCanton.IdProvincia ==1
                               select elCanton;
             return elResultado.ToList();  
+
         }
+
+       
         public List<Modelo.Canton> ObtenerListaDeCantonesDeAlajuela()
         {
             var laBaseDeDatos = new Contexto();
@@ -24,6 +27,9 @@ namespace AsopaabiOnline.AccesoADatos
                               select elCanton;
             return elResultado.ToList();
         }
+
+        
+
         public List<Modelo.Canton> ObtenerListaDeCantonesDeCartago()
         {
             var laBaseDeDatos = new Contexto();

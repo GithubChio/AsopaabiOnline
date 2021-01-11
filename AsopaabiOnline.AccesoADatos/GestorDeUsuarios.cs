@@ -15,5 +15,13 @@ namespace AsopaabiOnline.AccesoADatos
                               select elUsuario;
             return elResultado.ToList();
         }
+
+        public AspNetUsers ObtenerUsuarioPorId(int id)
+        {
+            var laBaseDeDatos = new Contexto();
+            var elResultado = laBaseDeDatos.AspNetUsers.Find(id);
+            return elResultado;
+
+        }
     }
 }

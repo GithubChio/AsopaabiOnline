@@ -24,6 +24,8 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+        
+
         public Modelo.Producto  ObtenerProductoPorId(int id)
         {
             var laBaseDeDatos = new Contexto();
@@ -38,11 +40,10 @@ namespace AsopaabiOnline.AccesoADatos
 
             elProductoEnLaBD.Id = elProductoAActualizar.Id;
             elProductoEnLaBD.Imagen = elProductoAActualizar.Imagen;
-            elProductoEnLaBD.Descripcion = elProductoAActualizar.Descripcion;
+            elProductoEnLaBD.Nombre = elProductoAActualizar.Nombre;
             elProductoEnLaBD.UnidadDeMedida = elProductoAActualizar.UnidadDeMedida;
-            elProductoEnLaBD.PrecioCosto = elProductoAActualizar.PrecioCosto;
-            elProductoEnLaBD.PrecioUnitario = elProductoAActualizar.PrecioUnitario;
-            elProductoEnLaBD.Utilidad = elProductoAActualizar.Utilidad;
+            elProductoEnLaBD.Precio = elProductoAActualizar.Precio;
+                    
             elProductoEnLaBD.Categoria = elProductoAActualizar.Categoria;
             elProductoEnLaBD.Estado = elProductoAActualizar.Estado;
 
@@ -59,6 +60,59 @@ namespace AsopaabiOnline.AccesoADatos
             laBaseDeDatos.Producto.Remove(elProductoEnLaBD);
             laBaseDeDatos.Remove(elProductoEnLaBD).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             laBaseDeDatos.SaveChanges();
+        }
+
+        public List<Producto> ObtenerListaDeProductosConCategoriaDeFruta()
+        {
+            var laBaseDeDatos = new Contexto();
+            var elResultado = from elProducto in laBaseDeDatos.Producto
+                              where elProducto.Categoria == CategoriaDeProducto.Frutas
+                              select elProducto;
+
+            return elResultado.ToList();
+
+        }
+        public List<Producto> ObtenerListaDeProductosConCategoriaHortalizas()
+        {
+            var laBaseDeDatos = new Contexto();
+            var elResultado = from elProducto in laBaseDeDatos.Producto
+                              where elProducto.Categoria == CategoriaDeProducto.Hortalizas
+                              select elProducto;
+
+            return elResultado.ToList();
+
+        }
+        public List<Producto> ObtenerListaDeProductosConCategoriaRaicesYTuberculos()
+        {
+            var laBaseDeDatos = new Contexto();
+            var elResultado = from elProducto in laBaseDeDatos.Producto
+                              where elProducto.Categoria == CategoriaDeProducto.Raices_y_Tuberculos
+                              select elProducto;
+
+            return elResultado.ToList();
+
+        }
+
+        public List<Producto> ObtenerListaDeProductosConCategoriaFloresAromaticas()
+        {
+            var laBaseDeDatos = new Contexto();
+            var elResultado = from elProducto in laBaseDeDatos.Producto
+                              where elProducto.Categoria == CategoriaDeProducto.FloresAromaticas
+                              select elProducto;
+
+            return elResultado.ToList();
+
+        }
+
+        public List<Producto> ObtenerListaDeProductosConCategoriaOtros()
+        {
+            var laBaseDeDatos = new Contexto();
+            var elResultado = from elProducto in laBaseDeDatos.Producto
+                              where elProducto.Categoria == CategoriaDeProducto.Otro
+                              select elProducto;
+
+            return elResultado.ToList();
+
         }
     }
 }

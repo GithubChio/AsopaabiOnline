@@ -9,7 +9,37 @@ namespace AsopaabiOnline.UI.Controllers
 {
     public class PedidosController : Controller
     {
-        
+        [HttpGet]
+        [Route("Pedidos/Agregar")]
+        public IActionResult Agregar()
+        {
+            Modelo.Pedido elPedido = new Modelo.Pedido();
+            CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
+            elPedido.ListaDeDirecciones = elCoordinador.ListarDirecciones();
+
+           
+            CoordinadorDeClientes coordinadorDeClientes = new CoordinadorDeClientes();
+            elPedido.ListaDeClientes = coordinadorDeClientes.ListarClientes();
+            return View(elPedido);
+        }
+
+        [HttpPost]
+        [Route("Pedidos/Agregar")]
+        public IActionResult Agregar(Modelo.Pedido elPedido)
+        {
+            try
+            {
+                CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
+                elCoordinador.Agregar(elPedido);
+                return RedirectToAction("Mostrar");
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
 
         [HttpGet]
         [Route("Pedidos/Mostrar")]

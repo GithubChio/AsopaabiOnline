@@ -1,13 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Cambiar Tipo de Cliente";
+    ViewData["Title"] = "Cambiar tipo de cliente";
 }
 <hr />
-<h1>@ViewData["Title"]</h1>
+<h1>@ViewData["Title"] a:</h1>
 
 <br />
-<ul class="list-group list-group-flush">
-    <li class="list-group-item"><a asp-action="CambiarAClienteRegular" asp-route-id="@ViewBag.IdDelCliente">Cambiar a cliente regular</a></li>
-    <li class="list-group-item"><a asp-action="CambiarAClienteFrecuente" asp-route-id="@ViewBag.IdDelCliente">Cambiar a cliente frecuente</a></li>
-    </ul>
+<nav class="nav flex-column">
+    <a class="nav-link" asp-action="CambiarAClienteRegular" asp-route-id="@ViewBag.IdDelCliente">• Cliente regular</a>
+    <a class="nav-link" asp-action="CambiarAClienteFrecuente" asp-route-id="@ViewBag.IdDelCliente">• Cliente frecuente</a>
+</nav>
 <br />
+<hr />
 <a class="btn btn-outline-secondary" asp-action="Mostrar">Volver</a>

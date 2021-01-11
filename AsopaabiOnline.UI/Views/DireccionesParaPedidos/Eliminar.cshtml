@@ -1,0 +1,54 @@
+﻿@model AsopaabiOnline.Modelo.DireccionPedido
+
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h1>@ViewBag.Title</h1>
+<hr />
+<h3 style="text-align:center;">¿Está seguro que desea eliminar esta Dirección?</h3>
+
+<div>
+
+    <hr />
+    <dl class="row">
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdProvincia)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdCanton)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdDistrito)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdDistrito)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Detalles)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Detalles)
+        </dd>
+
+        <div style="color:red;">
+           @ViewBag.mensaje
+        </div>
+    </dl>
+    <hr />
+    <form asp-action="Eliminar">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Sí" class="btn btn-outline-danger" style="width:50px;" />
+
+        <a class="btn btn-outline-secondary" asp-action="Mostrar">No</a>
+
+    </form>
+</div>

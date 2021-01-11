@@ -9,11 +9,11 @@
 
 <div class="row">
     <div class="col-md-4">
-    
+
         <form asp-controller="DireccionesParaPedidos" asp-action="Agregar" method="post">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-          
+
 
 
             <table>
@@ -23,10 +23,10 @@
                             <label asp-for="IdProvincia" class="control-label"></label>
                         </th>
                         <th>
-                            <label asp-for="IdCanton" class="control-label"></label>
+                            <label asp-for="IdCanton" class="control-label" style="width:210px;"></label>
                         </th>
                         <th>
-                            <label asp-for="IdDistrito" class="control-label"></label>
+                            <label asp-for="IdDistrito" class="control-label" style="width:210px;"></label>
                         </th>
                         <th>
                             <label asp-for="Detalles" class="control-label"></label>
@@ -36,28 +36,29 @@
                 <tbody>
                     <tr>
                         <td>
-                            <select id="SeleccionDeProvincia" asp-for="IdProvincia" asp-items=@(new SelectList(Model.LaListaDeProvincias,"Id","Nombre")) class="form-control" style="width:230px;">
+                            <select id="provincias" asp-for="IdProvincia" asp-items=@(new SelectList(Model.LaListaDeProvincias,"Id","Nombre")) class="form-control" style="width:230px;" required>
                                 <option selected="selected" disabled value="">Seleccione una opción</option>
                             </select>
-
+                            
                             <span asp-validation-for="IdProvincia" class="text-danger"></span>
-                            <div ><a @ViewBag.mensaje></a>  </div>
+
                         </td>
                         <td>
-                            @*<select asp-for="IdCanton" asp-items="new SelectList(Model.LaListaDeCantones)" class="form-control">
-                                <option selected="selected" disabled value="">Seleccione una opción</option>
+
+                            <select id="cantones" asp-for="IdCanton" class="form-control" required>
+                              
                             </select>
-                            <span asp-validation-for="IdCanton" class="text-danger"></span>*@
+                            <span asp-validation-for="IdCanton" class="text-danger"></span>
                         </td>
                         <td>
-                            @*<select asp-for="IdDistrito" asp-items="new SelectList(Model.LaListaDeDistritos)" class="form-control">
-                                <option selected="selected" disabled value="">Seleccione una opción</option>
+                            <select id="distritos"  asp-for="IdDistrito" class="form-control" required>
+                            
                             </select>
-                            <span asp-validation-for="IdDistrito" class="text-danger"></span>*@
+                            <span asp-validation-for="IdDistrito" class="text-danger"></span>
                         </td>
 
                         <td>
-                            <input asp-for="Detalles" class="form-control" />
+                            <textarea asp-for="Detalles" class="form-control" style="width:210px; height:80px;" required></textarea>
                             <span asp-validation-for="Detalles" class="text-danger"></span>
                         </td>
 
@@ -72,7 +73,74 @@
             </div>
 
         </form>
+    </div>
 </div>
- </div>
 
 
+@section Scripts{
+    <script type="text/javascript">
+
+       
+
+        $(document).ready(function () {
+            $("#provincias").change(function () {
+                $("#cantones").empty();
+                $("#distritos").empty();
+
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("CargarCantones")',
+
+                    dataType: 'json',
+
+                    data: { id: $("#provincias").val() },
+
+                    success: function (direcciones) {
+                        $("#cantones").append('<option value="' + -1 + '">' + "Seleccione una opción" +'</option>');
+
+                        $.each(direcciones, function (recorrer, cantones) {
+                            $("#cantones").append('<option value="' + cantones.value + '">' + cantones.text + '</option>');
+                        });
+                    } 
+                       
+                           
+                });
+                return false;
+            })
+
+
+
+        })
+
+
+        $(document).ready(function () {
+            $("#cantones").change(function () {
+                $("#distritos").empty();
+               
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("CargarDistritos")',
+
+                    dataType: 'json',
+
+                    data: { id: $("#cantones").val() },
+                    
+
+                    success: function (direcciones) {
+                        $("#distritos").append('<option value="' + -1 + '">' + "Seleccione una opción" +'</option>');
+
+                        $.each(direcciones, function (recorrer, cantones) {
+                            $("#distritos").append('<option value="' + cantones.value + '">' + cantones.text + '</option>');
+                        });
+                    }  
+                    
+                });
+                return false;
+            })
+
+
+
+        })
+
+    </script>
+}

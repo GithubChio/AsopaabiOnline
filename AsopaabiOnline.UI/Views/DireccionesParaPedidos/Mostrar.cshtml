@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<AsopaabiOnline.Modelo.DireccionPedido>
 
 @{
-    ViewData["Title"] = "MostrarDirecciones";
+    ViewBag.Title = "Direcciones";
 }
 
-<h1>Direcciones</h1>
+
+<h3>@ViewBag.Title</h3>
 <hr />
 <p> <a class="btn btn-outline-warning" asp-controller="DireccionesParaPedidos" asp-action="Agregar">Agregar</a></p>
 
@@ -29,7 +30,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Detalles)
                 </th>
-
+                <th>
+                    <label>Opciones</label>
+                </th>
 
                 <th></th>
             </tr>
@@ -37,31 +40,36 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdProvincia)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdCanton)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdDistrito)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Detalles)
-                </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+
+                     @Html.DisplayFor(modelItem => item.IdProvinciaNavigation.Nombre)
+                        
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdCantonNavigation.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdDistritoNavigation.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Detalles)
+                    </td>
 
 
-                <td>
-                    <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a>
-
-
-
-                </td>
-            </tr>
+                    <td>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a></li>
+                            <li class="list-group-item">  <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a></li>
+                            
+                        </ul>
+                      
+                    </td>
+                </tr>
             }
 
         </tbody>

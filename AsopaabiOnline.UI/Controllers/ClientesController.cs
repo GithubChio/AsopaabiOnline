@@ -101,6 +101,7 @@ namespace AsopaabiOnline.UI.Controllers
             }
             catch
             {
+                ViewBag.mensaje = "No se puede eliminar por que este cliente tiene pedidos";
                 return View();
             }
         }
