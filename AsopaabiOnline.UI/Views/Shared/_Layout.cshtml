@@ -40,7 +40,7 @@
                     </button>
                 </div>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    
+
                     <ul class="navbar-nav flex-grow-1">
 
 
@@ -54,7 +54,8 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark " asp-area="" asp-controller="Empleados" asp-action="Mostrar">
                                 <img src="~/imagenes/Iconos/equipo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                            Empleados</a>
+                                Empleados
+                            </a>
                         </li>
 
 
@@ -66,7 +67,8 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
                                     <img src="~/imagenes/Iconos/direccion.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                                  Direccion</a>
+                                    Direccion
+                                </a>
                                 <a class="dropdown-item" asp-controller="Productos" asp-action="Mostrar">
                                     <img src="~/imagenes/Iconos/alimentos-saludables.png" width="30" height="30" class="d-inline-block align-top" alt="">
                                     Productos
@@ -85,14 +87,32 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark " asp-area="" asp-controller="Home" asp-action="AcercaDeNosotros">Acerca de Nosotros</a>
+                            <a class="nav-link text-dark " asp-controller="Home" asp-action="AcercaDeNosotros">Acerca de Nosotros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacidad">Privacidad</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Privacidad">Privacidad</a>
                         </li>
+
+                      
 
                     </ul>
                 </div>
+
+                @*<ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Account" asp-action="Register">
+                            Registrarse
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Account" asp-action="Login">
+                            Inicio Sesión
+                        </a>
+                    </li>
+                </ul>*@
+
+
+
             </div>
         </nav>
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Proxies;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 
 namespace AsopaabiOnline.Modelo
 {
@@ -128,6 +130,10 @@ namespace AsopaabiOnline.Modelo
 
             modelBuilder.Entity<AspNetUsers>(entity =>
             {
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
+
                 entity.HasIndex(e => e.NormalizedEmail)
                     .HasName("EmailIndex");
 

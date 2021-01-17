@@ -1,14 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+using AsopaabiOnline.Modelo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AsopaabiOnline.UI;
+
 namespace AsopaabiOnline.UI
 {
     public class Startup
@@ -26,12 +27,15 @@ namespace AsopaabiOnline.UI
 
             services.AddControllersWithViews();
             services.AddMvc();
-            services.AddDbContext<AsopaabiOnline.Modelo.Contexto>(options =>
+           
+            services.AddDbContext<Contexto>(options =>
                    options.UseSqlServer(
                        Configuration.GetConnectionString("DefaultConnection")));
-           
-            services.AddRazorPages();
+
             
+
+            services.AddRazorPages();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +55,7 @@ namespace AsopaabiOnline.UI
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            //app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

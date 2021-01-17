@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 using AsopaabiOnline.AccesoADatos;
 using AsopaabiOnline.LogicaDeNegocio;
 using AsopaabiOnline.Modelo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsopaabiOnline.UI.Controllers
 {
+
+    [Authorize]
     public class  ClientesController : Controller
     {
        
