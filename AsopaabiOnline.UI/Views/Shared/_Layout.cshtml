@@ -41,6 +41,9 @@
                 </div>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
 
+                    <partial name="_LoginPartial" />
+
+
                     <ul class="navbar-nav flex-grow-1">
 
 
@@ -93,19 +96,19 @@
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="Privacidad">Privacidad</a>
                         </li>
 
-                      
+
 
                     </ul>
                 </div>
 
                 @*<ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Account" asp-action="Register">
+                        <a class="nav-link" asp-controller="Administrador" asp-action="Register">
                             Registrarse
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Account" asp-action="Login">
+                        <a class="nav-link" asp-controller="Administrador" asp-action="Login">
                             Inicio Sesión
                         </a>
                     </li>

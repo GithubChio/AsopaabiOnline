@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsopaabiOnline.Modelo", "As
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsopaabiOnline.UI", "AsopaabiOnline.UI\AsopaabiOnline.UI.csproj", "{90845D1F-B6D6-491F-BAE0-679E18467BA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsopaabiOnline.AccesoADatos", "AsopaabiOnline.AccesoADatos\AsopaabiOnline.AccesoADatos.csproj", "{08A94723-5990-4BFA-97F4-A911D5037353}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsopaabiOnline.AccesoADatos", "AsopaabiOnline.AccesoADatos\AsopaabiOnline.AccesoADatos.csproj", "{08A94723-5990-4BFA-97F4-A911D5037353}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsopaabiOnline.LogicaDeNegocio", "AsopaabiOnline.LogicaDeNegocio\AsopaabiOnline.LogicaDeNegocio.csproj", "{277BA784-C608-4902-AD40-47ACB8013D3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsopaabiOnline.LogicaDeNegocio", "AsopaabiOnline.LogicaDeNegocio\AsopaabiOnline.LogicaDeNegocio.csproj", "{277BA784-C608-4902-AD40-47ACB8013D3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -27,13 +27,18 @@ namespace AsopaabiOnline.UI
 
             services.AddControllersWithViews();
             services.AddMvc();
-           
-            services.AddDbContext<Contexto>(options =>
+
+            //services.AddDbContext<Contexto>(options =>
+            //       options.UseSqlServer(
+            //           Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<Data.ApplicationDbContext>(options =>
                    options.UseSqlServer(
                        Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+               .AddEntityFrameworkStores<Data.ApplicationDbContext>();
             
-
             services.AddRazorPages();
 
         }
@@ -55,7 +60,7 @@ namespace AsopaabiOnline.UI
             app.UseStaticFiles();
 
             app.UseRouting();
-            //app.UseAuthentication();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

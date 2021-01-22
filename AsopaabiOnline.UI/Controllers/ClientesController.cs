@@ -11,12 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AsopaabiOnline.UI.Controllers
 {
-
-    [Authorize]
     public class  ClientesController : Controller
     {
        
-
+       
         [HttpGet]
         [Route("Clientes/Agregar")]
         public IActionResult Agregar()
@@ -46,6 +44,8 @@ namespace AsopaabiOnline.UI.Controllers
             }
         }
 
+
+        
         [HttpGet]
         [Route("Clientes/Mostrar")]
         public IActionResult Mostrar()

@@ -37,6 +37,9 @@ namespace AsopaabiOnline.Modelo
         public virtual DbSet<Pedido> Pedido { get; set; }
         public virtual  DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
+       
+        
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
