@@ -1,0 +1,40 @@
+﻿@model AsopaabiOnline.UI.Models.Role
+
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h1>@ViewBag.Title</h1>
+<hr />
+<h3 style="text-align:center;">¿Está seguro que desea eliminar este rol?</h3>
+
+<div>
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+
+
+    </dl>
+    <hr />
+    <form asp-action="DeleteRole" asp-controller="Cuenta" method="post">
+        <input type="hidden" asp-for="id" />
+        <input type="submit" value="Sí" class="btn btn-outline-danger" style="width:50px;" />
+
+        <a class="btn btn-outline-secondary" asp-action="ListOfRoles">No</a>
+
+    </form>
+</div>

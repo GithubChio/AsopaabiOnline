@@ -9,7 +9,7 @@
             <a class="nav-link text-dark" asp-controller="Home" asp-action="Tienda" title="Manage">Hola @User.Identity.Name!</a>
         </li>
         <li class="nav-item">
-            <form class="form-inline" asp-controller="Administrador" asp-action="Logout" asp-route-returnUrl="@Url.Action("Tienda", "Home", new { usuario = "" })">
+            <form class="form-inline" asp-controller="Cuenta" asp-action="Logout" asp-route-returnUrl="@Url.Action("Tienda", "Home", new { usuario = "" })">
                 <button type="submit" class="nav-link btn btn-link text-dark">Cerrar Sesión</button>
             </form>
         </li>
@@ -17,10 +17,10 @@
     else
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Administrador" asp-action="Register">Registro</a>
+            <a class="nav-link text-dark" asp-controller="Cuenta" asp-action="Register">Registro</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Administrador" asp-action="Login">Inicio Sesión </a>
+            <a class="nav-link text-dark" asp-controller="Cuenta" asp-action="Login">Inicio Sesión </a>
         </li>
     }
 </ul>

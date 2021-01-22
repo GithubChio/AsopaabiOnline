@@ -36,7 +36,7 @@ namespace AsopaabiOnline.UI
                    options.UseSqlServer(
                        Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
                .AddEntityFrameworkStores<Data.ApplicationDbContext>();
             
             services.AddRazorPages();
@@ -68,7 +68,7 @@ namespace AsopaabiOnline.UI
                 endpoints.MapControllerRoute(
                     name: "default",
                     
-                    pattern: "{controller=Administrador}/{action=Login}/{id?}");
+                    pattern: "{controller=Cuenta}/{action=Login}/{id?}");
             });
         }
     }
