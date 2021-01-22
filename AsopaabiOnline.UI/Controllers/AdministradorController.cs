@@ -87,12 +87,12 @@ namespace AsopaabiOnline.UI.Controllers
             return View(model);
         }
 
-        [HttpGet]
+     
         public async Task<IActionResult> LogoutAsync()
         {
             await signInManager.SignOutAsync();
 
-            return RedirectToAction("Tienda", "Home");
+            return RedirectToAction("Login", "Administrador");
 
             
 

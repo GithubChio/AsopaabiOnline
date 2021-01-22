@@ -23,6 +23,7 @@ namespace AsopaabiOnline.UI.Models
 
         public void OnGet()
         {
+
         }
 
         public async Task<IActionResult> OnPost(string returnUrl = null)

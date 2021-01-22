@@ -68,7 +68,7 @@ namespace AsopaabiOnline.UI
                 endpoints.MapControllerRoute(
                     name: "default",
                     
-                    pattern: "{controller=Home}/{action=Tienda}/{id?}");
+                    pattern: "{controller=Administrador}/{action=Login}/{id?}");
             });
         }
     }
