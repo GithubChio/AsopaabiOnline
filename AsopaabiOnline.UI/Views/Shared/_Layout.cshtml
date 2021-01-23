@@ -48,61 +48,66 @@
 
                     <ul class="navbar-nav flex-grow-1">
 
+                        @if (User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
+                        {
+                            <li class="nav-item">
 
-                        <li class="nav-item">
-
-                            <a class="nav-link text-dark " asp-area="" asp-controller="Clientes" asp-action="Mostrar">
-                                <img src="~/imagenes/Iconos/clientes.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                                Clientes
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark " asp-area="" asp-controller="Empleados" asp-action="Mostrar">
-                                <img src="~/imagenes/Iconos/equipo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                                Empleados
-                            </a>
-                        </li>
-
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="~/imagenes/Iconos/online-shopping.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                                Tienda
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
-                                    <img src="~/imagenes/Iconos/direccion.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                                    Direccion
+                                <a class="nav-link text-dark " asp-area="" asp-controller="Clientes" asp-action="Mostrar">
+                                    <img src="~/imagenes/Iconos/clientes.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                    Clientes
                                 </a>
-                                <a class="dropdown-item" asp-controller="Productos" asp-action="Mostrar">
-                                    <img src="~/imagenes/Iconos/alimentos-saludables.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                                    Productos
-                                </a>
-                                <a class="dropdown-item" asp-controller="Pedidos" asp-action="Mostrar">
-                                    <img src="~/imagenes/Iconos/anadir-al-carrito.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                                    Pedidos
-                                </a>
+                            </li>
+                        }
+                            @if (User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark " asp-area="" asp-controller="Empleados" asp-action="Mostrar">
+                                        <img src="~/imagenes/Iconos/equipo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                        Empleados
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="~/imagenes/Iconos/online-shopping.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                        Tienda
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
+                                            <img src="~/imagenes/Iconos/direccion.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                            Direccion
+                                        </a>
+                                        <a class="dropdown-item" asp-controller="Productos" asp-action="Mostrar">
+                                            <img src="~/imagenes/Iconos/alimentos-saludables.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                            Productos
+                                        </a>
+                                        <a class="dropdown-item" asp-controller="Pedidos" asp-action="Mostrar">
+                                            <img src="~/imagenes/Iconos/anadir-al-carrito.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                            Pedidos
+                                        </a>
 
-                                <a class="dropdown-item" asp-controller="Cuenta" asp-action="ListOfRoles">
+                                        <a class="dropdown-item" asp-controller="Cuenta" asp-action="ListOfRoles">
 
-                                    Roles
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Historial</a>
-                            </div>
-                           
-                            
-                        </li>
+                                            Roles
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Historial</a>
+                                    </div>
 
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark " asp-controller="Home" asp-action="AcercaDeNosotros">Acerca de Nosotros</a>
-                        </li>
-                       
+                                </li>
+                            }
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark " asp-controller="Home" asp-action="AcercaDeNosotros">Acerca de Nosotros</a>
+                            </li>
 
 
 
-                    </ul>
+
+                        </ul>
                 </div>
                 }
                

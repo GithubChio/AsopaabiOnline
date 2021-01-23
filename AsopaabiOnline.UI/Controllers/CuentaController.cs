@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using AsopaabiOnline.UI.Models;
 using Microsoft.Extensions.Logging;
-
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
+using System.Text.Encodings.Web;
 
 namespace AsopaabiOnline.UI.Controllers
 {
@@ -15,11 +18,15 @@ namespace AsopaabiOnline.UI.Controllers
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly UserManager<IdentityUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
-        public CuentaController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
+        private readonly IEmailSender emailSender;
+        private readonly string DefaultRoleName = "Administrador";
+
+        public CuentaController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager, IEmailSender emailSender)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
+            this.emailSender = emailSender;
         }
 
         public string ReturnUrl { get; set; }
@@ -40,8 +47,9 @@ namespace AsopaabiOnline.UI.Controllers
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await signInManager.SignInAsync(user, isPersistent: false);
-                    
+
+                    //await signInManager.SignInAsync(user, isPersistent: false);
+                    await userManager.AddToRoleAsync(user, DefaultRoleName);
                     return RedirectToAction("Agregar", "Clientes");
 
                 }
@@ -201,6 +209,94 @@ namespace AsopaabiOnline.UI.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+
+        public async Task<IActionResult> ForgotPassword(ForgotPassword input)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.FindByEmailAsync(input.Email);
+                if (user == null )
+                {
+                    // Don't reveal that the user does not exist or is not confirmed
+                    return RedirectToAction("ForgotPasswordConfirmation");
+                }
+
+                var code = await userManager.GeneratePasswordResetTokenAsync(user);
+               // code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var callbackUrl = Url.Action( action: "ResetPassword", controller:"Cuenta",values: new { userId=user.UserName,code = code}, protocol: Request.Scheme);
+
+                await emailSender.SendEmailAsync( input.Email,"Restablecer Contraseña",
+                    $"Por favor restablezca su contraseña dando <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>click aquí</a>.");
+
+                return RedirectToAction("ForgotPasswordConfirmation");
+            }
+
+            return View();
+        }
+
+
+
+        public IActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ResetPassword(string code = null)
+        {
+            if (code == null)
+            {
+                return BadRequest("Se debe proporcionar un código para restablecer la contraseña.");
+            }
+            else
+            {
+                ResetPassword  resetPassword = new ResetPassword
+                {
+                    Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
+                };
+                return View(resetPassword);
+            }
+        }
+
+
+        [HttpPost]
+
+        public async Task<IActionResult> ResetPassword(ResetPassword Input)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.FindByEmailAsync(Input.Email);
+                if (user == null)
+                {
+                    // Don't reveal that the user does not exist
+                    return RedirectToAction("ResetPasswordConfirmation");
+                }
+
+                var result = await userManager.ResetPasswordAsync(user,Input.Code, Input.Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ResetPasswordConfirmation");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+            return View();
+        }
+
+        public IActionResult ResetPasswordConfirmation()
+        {
+            return View();
         }
 
 

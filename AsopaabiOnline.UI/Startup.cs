@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AsopaabiOnline.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using AsopaabiOnline.UI.Services;
 
 namespace AsopaabiOnline.UI
 {
@@ -37,9 +39,11 @@ namespace AsopaabiOnline.UI
                        Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
-               .AddEntityFrameworkStores<Data.ApplicationDbContext>();
+               .AddEntityFrameworkStores<Data.ApplicationDbContext>().AddDefaultTokenProviders();
             
             services.AddRazorPages();
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
         }
 
