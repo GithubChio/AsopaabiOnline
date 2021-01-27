@@ -9,8 +9,8 @@ namespace AsopaabiOnline.Modelo
     {
         public Pedido()
         {
+
             DetallePedido = new HashSet<DetallePedido>();
-            Empleado = new HashSet<Empleado>();
             HistorialPedido = new HashSet<HistorialPedido>();
             Pago = new HashSet<Pago>();
         }
@@ -37,32 +37,22 @@ namespace AsopaabiOnline.Modelo
         public EstadoDePedido Estado { get; set; }
 
        
-        [NotMapped]
+     
         [Display(Name ="Id de Direccion")]
         public int IdDireccion { get; set; }
-        [NotMapped]
+
+       
         [Display(Name = "Id de Cliente")]
         public int IdCliente { get; set; }
 
-        
+
         [NotMapped]
         public List<Modelo.DireccionPedido> ListaDeDirecciones { get; set; }
 
-        [NotMapped]
-        public List<Modelo.Cliente> ListaDeClientes { get; set; }
-
-
-        [NotMapped]
-        public virtual Cliente IdClienteNavigation { get; set; }
-        [NotMapped]
+        public virtual AspNetUsers IdClienteNavigation { get; set; }
         public virtual DireccionPedido IdDireccionNavigation { get; set; }
-        [NotMapped]
         public virtual ICollection<DetallePedido> DetallePedido { get; set; }
-        [NotMapped]
-        public virtual ICollection<Empleado> Empleado { get; set; }
-        [NotMapped]
         public virtual ICollection<HistorialPedido> HistorialPedido { get; set; }
-        [NotMapped]
         public virtual ICollection<Pago> Pago { get; set; }
     }
 }

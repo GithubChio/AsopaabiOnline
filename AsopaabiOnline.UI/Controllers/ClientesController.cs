@@ -5,174 +5,156 @@ using System.Threading.Tasks;
 using AsopaabiOnline.AccesoADatos;
 using AsopaabiOnline.LogicaDeNegocio;
 using AsopaabiOnline.Modelo;
+using AsopaabiOnline.UI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsopaabiOnline.UI.Controllers
 {
-    public class  ClientesController : Controller
+    public class ClientesController : Controller
     {
-       
-       
-        [HttpGet]
-        [Route("Clientes/Agregar")]
-        public IActionResult Agregar()
-        {
-         
+        private readonly UserManager<User> userManager;
 
-            return View();
+        //[HttpGet]
+        //public async Task<IActionResult> Perfil(string input)
+        //{
+
+        //    var user = await userManager.FindByNameAsync(input);
+        //    if (user == null)
+        //    {
+        //        ViewBag.ErrorMessage = $"el perfil con el nombre= {input} no fue encontrado";
+        //        return View("Error");
+        //    }
+        //    else
+        //    {
+        //        User model = new Models.User()
+        //        {
+        //            Id = user.Id,
+        //            DNI= user.DNI,
+        //            FirstName = user.FirstName,
+        //            SecondName = user.SecondName,
+        //            FirstLastName = user.FirstLastName,
+        //            SecondLastName = user.SecondLastName,
+                    
+
+        //        };
+
+        //        return View(user);
+
+        //    }
+        //}
+
+
+
+
+        [HttpGet]
+
+        public async Task<IActionResult> EditarPerfil(string id)
+        {
+
+            var user = await userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"el usuario con el id= {id} no fue encontrado";
+                return View("Error");
+            }
+            else
+            {
+                User userToEdit = new Models.User()
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    SecondName = user.SecondName,
+                    FirstLastName = user.FirstLastName,
+                    SecondLastName = user.SecondLastName,
+                    PhoneNumber = user.PhoneNumber,
+                    PhoneNumber2 = user.PhoneNumber2,
+                    ActivityType = user.ActivityType
+
+                };
+
+                return View(userToEdit);
+            }
+
         }
 
         [HttpPost]
-        [Route("Clientes/Agregar")]
-        public IActionResult Agregar(Modelo.Cliente elCliente)
+
+        public async Task<IActionResult> EditarPerfil(User input)
         {
             try
             {
-                    CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
-                    elCoordinador.Agregar(elCliente);
-                
-                   
-                return RedirectToAction("Mostrar");
+                var user = await userManager.FindByIdAsync(input.Id);
+                if (user == null)
+                {
+                    ViewBag.ErrorMessage = $"el usuario con el id= {input} no fue encontrado";
+                    return View("Error");
+                }
+                else
+                {
+                    user.Id = input.Id;
+                    user.FirstName = input.FirstName;
+                    user.SecondName = input.SecondName;
+                    user.FirstLastName = input.FirstLastName;
+                    user.SecondLastName = input.SecondLastName;
+                    user.PhoneNumber = input.PhoneNumber;
+                    user.PhoneNumber2 = input.PhoneNumber2;
+                    user.ActivityType = input.ActivityType;
 
-            }
-            catch
-            {
 
-                return View();
-            }
-        }
+                    var elResultado = await userManager.UpdateAsync(user);
 
-
-        
-        [HttpGet]
-        [Route("Clientes/Mostrar")]
-        public IActionResult Mostrar()
-        {
-            CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
-
-            return View(elCoordinador.ListarClientes());
-        }
-
-       
-
-        [HttpGet]
-        [Route("Clientes/Actualizar")]
-        public IActionResult Actualizar(int id)
-        {
-            CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
-            var elClienteEncontrado = elCoordinador.ObtenerClientePorId(id);
-          
-            return View(elClienteEncontrado);
-        }
-        [HttpPost]
-        [Route("Clientes/Actualizar")]
-        public IActionResult Actualizar(Modelo.Cliente elCliente)
-        {
-            try
-            {
-                CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
-                elCoordinador.Actualizar(elCliente);
-                return RedirectToAction("Mostrar");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        [HttpGet]
-        [Route("Clientes/Eliminar")]
-        public IActionResult Eliminar(int id)
-        {
-            CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
-            var elClienteEncontrado = elCoordinador.ObtenerClientePorId(id);
-
-            return View(elClienteEncontrado);
-        }
-
-        [HttpPost]
-        [Route("Clientes/Eliminar")]
-        public IActionResult Eliminar(Modelo.Cliente elCliente)
-        {
-            try
-            {
-                CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
-                elCoordinador.Eliminar(elCliente);
-                return RedirectToAction("Mostrar");
-            }
-            catch
-            {
-                ViewBag.mensaje = "No se puede eliminar por que este cliente tiene pedidos";
-                return View();
-            }
-        }
-
-        [HttpGet]
-        [Route("Clientes/CambiarAClienteRegular")]
-        public IActionResult CambiarAClienteRegular(int id)
-        {
-            CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
-            var elClienteEncontrado = elCoordinador.ObtenerClientePorId(id);
-
-            return View(elClienteEncontrado);
-        }
-
-        [HttpPost]
-        [Route("Clientes/CambiarAClienteRegular")]
-        public IActionResult CambiarAClienteRegular(Modelo.Cliente elCliente)
-        {
-            try
-            {
-                CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
-                elCoordinador.CambiarAClienteRegular(elCliente);
-                return RedirectToAction("Mostrar");
+                    if (elResultado.Succeeded)
+                    {
+                        return RedirectToAction("Profile", "Cuenta");
+                    }
+                    foreach (var elError in elResultado.Errors)
+                    {
+                        ModelState.AddModelError("", elError.Description);
+                    }
+                }
+                return View(input);
             }
             catch
             {
                 return View();
             }
+
         }
+
 
 
         [HttpGet]
-        [Route("Clientes/CambiarAClienteFrecuente")]
-        public IActionResult CambiarAClienteFrecuente(int id)
+        public async Task<IActionResult> VerDetalles(string id)
         {
-            CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
-            var elClienteEncontrado = elCoordinador.ObtenerClientePorId(id);
-
-            return View(elClienteEncontrado);
-        }
-
-        [HttpPost]
-        [Route("Clientes/CambiarAClienteFrecuente")]
-        public IActionResult CambiarAClienteFrecuente(Modelo.Cliente elCliente)
-        {
-            try
-            {
-                CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
-                elCoordinador.CambiarAClienteFrecuente(elCliente);
-                return RedirectToAction("Mostrar");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-
-        [HttpGet]
-        [Route("Clientes/CambiarTipoDeCliente")]
-
-        public IActionResult CambiarTipoDeCliente(int id)
-        {
-            CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
-            var elClienteEncontrado = elCoordinador.ObtenerClientePorId(id);
-            ViewBag.IdDelCliente = elClienteEncontrado.Id;
+            var user = await userManager.FindByIdAsync(id);
            
-            return View();
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"el usuario con el id= {id} no fue encontrado";
+                return View("Error");
+            }
+            else
+            {
+                User userToEdit = new Models.User()
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    SecondName = user.SecondName,
+                    FirstLastName = user.FirstLastName,
+                    SecondLastName = user.SecondLastName,
+                    PhoneNumber = user.PhoneNumber,
+                    PhoneNumber2 = user.PhoneNumber2,
+                    ActivityType = user.ActivityType,
+                    
+
+                };
+
+                return View(user);
+            }
+
+
         }
 
     }

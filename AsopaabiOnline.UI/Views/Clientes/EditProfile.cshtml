@@ -1,0 +1,85 @@
+﻿@model AsopaabiOnline.UI.Models.User
+
+@{
+    ViewBag.Title = "EditarUsuario";
+}
+
+<h3>Editar</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        <form asp-controller="Cuenta" asp-action="EditUser" method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <br />
+
+
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label" ></label>
+               <input asp-for="FirstName"class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+                <div id="mostrar"> </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="SecondName" class="control-label" ></label>
+                <input asp-for="SecondName" class="form-control"  />
+                <span asp-validation-for="SecondName" class="text-danger"></span>
+
+
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstLastName" class="control-label" ></label>
+                <input asp-for="FirstLastName" class="form-control"  />
+                <span asp-validation-for="FirstLastName" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="SecondLastName" class="control-label" ></label>
+                <input asp-for="SecondLastName" class="form-control"  />
+                <span asp-validation-for="SecondLastName" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label" ></label>
+                <input asp-for="PhoneNumber" class="form-control"  />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PhoneNumber2" class="control-label"></label>
+                <input asp-for="PhoneNumber2" class="form-control"  required />
+                <span asp-validation-for="PhoneNumber2" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ActivityType" class="control-label"></label>
+                <select asp-for="ActivityType" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.TipoDeActividad>()" class="form-control" style="width:250px;">
+                    <option selected="selected" disabled value="">Seleccione una opción</option>
+                </select>
+                <span asp-validation-for="ActivityType" class="text-danger" s></span>
+
+            </div>
+
+            <br />
+            <hr />
+            <br />
+            <div class="form-group col-md-9 " >
+
+
+                <input type="submit" id="guardar" value="Guardar" class="btn btn-outline-success" />
+                <a class="btn btn-outline-secondary" asp-action="Mostrar"> Volver </a>
+            </div>
+
+
+        </form>
+
+
+    </div>
+</div>
+

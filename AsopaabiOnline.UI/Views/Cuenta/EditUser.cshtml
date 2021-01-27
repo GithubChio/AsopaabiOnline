@@ -1,0 +1,92 @@
+﻿@model AsopaabiOnline.UI.Models.User
+
+@{
+    ViewBag.Title = "Editar Usuario";
+}
+
+<h3>Editar este usuario</h3>
+<hr />
+
+<dl class="row">
+ 
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.DNI)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.DNI)
+    </dd>
+
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Name)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.LastName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.LastName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.UserType)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.UserType)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.CustomerType)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.CustomerType)
+    </dd>
+
+</dl>
+
+
+<hr />
+
+
+<div class="row">
+    <div class="col-md-4">
+
+        <form asp-controller="Cuenta" asp-action="EditUser" method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="CustomerType" class="control-label"></label>
+                <select asp-for="CustomerType" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.TipoDeCliente>()" class="form-control" style="width:250px;" required>
+                    <option selected="selected" disabled value="">Seleccione una opción</option>
+                </select>
+                <span asp-validation-for="CustomerType" class="text-danger" s></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="UserType" class="control-label"></label>
+                <select asp-for="UserType" asp-items="Html.GetEnumSelectList<AsopaabiOnline.UI.Models.Enums.UserType>()" class="form-control" style="width:250px;" required>
+                    <option selected="selected" disabled value="">Seleccione una opción</option>
+                </select>
+                <span asp-validation-for="UserType" class="text-danger" s></span>
+
+            </div>
+
+            <br />
+            <hr />
+            <br />
+            <div class="form-group col-md-9 ">
+
+
+                <input type="submit" id="guardar" value="Guardar" class="btn btn-outline-success" />
+                <a class="btn btn-outline-secondary" asp-action="UserList"> Volver </a>
+            </div>
+
+
+        </form>
+
+
+    </div>
+</div>
+
+

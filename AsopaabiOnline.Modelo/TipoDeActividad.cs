@@ -12,7 +12,7 @@ namespace AsopaabiOnline.Modelo
         Soda_Restaurante = 2,
         AutoConsumo = 3,
         Supermercado = 4,
-        Otros = 5,
+        Otro = 5,
 
     }
 }

@@ -8,56 +8,56 @@ namespace AsopaabiOnline.LogicaDeNegocio
     public class CoordinadorDeLosTelefonosDeClientes
     {
         
-        public void Agregar(Modelo.ClienteTelefono elTelefonoDelCliente)
-        {
-            GestorDeLosTelefonosDeClientes elGestor = new GestorDeLosTelefonosDeClientes();
-            elGestor.Agregar(elTelefonoDelCliente);
-        }
+        //public void Agregar(Modelo.ClienteTelefono elTelefonoDelCliente)
+        //{
+        //    GestorDeLosTelefonosDeClientes elGestor = new GestorDeLosTelefonosDeClientes();
+        //    elGestor.Agregar(elTelefonoDelCliente);
+        //}
 
-        public Modelo.ClienteTelefono  ObtenerIdDelClienteParaLostelefonos(int id)
-        {
-            var elTelefonoDeCliente = new Modelo.ClienteTelefono();
-            CoordinadorDeClientes elCoordinadorDeClientes = new CoordinadorDeClientes();
+        //public Modelo.ClienteTelefono  ObtenerIdDelClienteParaLostelefonos(int id)
+        //{
+        //    var elTelefonoDeCliente = new Modelo.ClienteTelefono();
+        //    CoordinadorDeClientes elCoordinadorDeClientes = new CoordinadorDeClientes();
 
-            var elClienteEncontrado = elCoordinadorDeClientes.ObtenerClientePorId(id);
-            elTelefonoDeCliente.IdCliente = elClienteEncontrado.Id;
+        //    var elClienteEncontrado = elCoordinadorDeClientes.ObtenerClientePorId(id);
+        //    elTelefonoDeCliente.IdCliente = elClienteEncontrado.Id;
 
-            return elTelefonoDeCliente;
-        }
-
-
-         public Modelo.ClienteTelefono ObtenerTelefonoPorId(int id)
-        {
-            GestorDeLosTelefonosDeClientes elGestor = new GestorDeLosTelefonosDeClientes();
-            return elGestor.ObtenerTelefonoPorId(id);
-        }
-        public List<Modelo.ClienteTelefono> ListarTelefonosDeClientes(int id)
-        {
-            GestorDeLosTelefonosDeClientes elGestor = new GestorDeLosTelefonosDeClientes();
-            return elGestor.ObtenerListaDeTelefonosDeClientes(id);
-        }
+        //    return elTelefonoDeCliente;
+        //}
 
 
-        public void Actualizar(Modelo.ClienteTelefono elTelefonoDelCliente)
-        {
-            GestorDeLosTelefonosDeClientes elGestor = new GestorDeLosTelefonosDeClientes();
-            Modelo.ClienteTelefono elTelefonoAActualizar = elGestor.ObtenerTelefonoPorId(elTelefonoDelCliente.Id);
+        // public Modelo.ClienteTelefono ObtenerTelefonoPorId(int id)
+        //{
+        //    GestorDeLosTelefonosDeClientes elGestor = new GestorDeLosTelefonosDeClientes();
+        //    return elGestor.ObtenerTelefonoPorId(id);
+        //}
+        //public List<Modelo.ClienteTelefono> ListarTelefonosDeClientes(int id)
+        //{
+        //    GestorDeLosTelefonosDeClientes elGestor = new GestorDeLosTelefonosDeClientes();
+        //    return elGestor.ObtenerListaDeTelefonosDeClientes(id);
+        //}
 
-            elTelefonoAActualizar.Id = elTelefonoDelCliente.Id;
-            elTelefonoAActualizar.Telefono1 = elTelefonoDelCliente.Telefono1;
-            elTelefonoAActualizar.Telefono2 = elTelefonoDelCliente.Telefono2;
 
-            elGestor.Actualizar(elTelefonoAActualizar);
-        }
+        //public void Actualizar(Modelo.ClienteTelefono elTelefonoDelCliente)
+        //{
+        //    GestorDeLosTelefonosDeClientes elGestor = new GestorDeLosTelefonosDeClientes();
+        //    Modelo.ClienteTelefono elTelefonoAActualizar = elGestor.ObtenerTelefonoPorId(elTelefonoDelCliente.Id);
+
+        //    elTelefonoAActualizar.Id = elTelefonoDelCliente.Id;
+        //    elTelefonoAActualizar.Telefono1 = elTelefonoDelCliente.Telefono1;
+        //    elTelefonoAActualizar.Telefono2 = elTelefonoDelCliente.Telefono2;
+
+        //    elGestor.Actualizar(elTelefonoAActualizar);
+        //}
 
 
-        public void Eliminar(Modelo.ClienteTelefono elTelefonoDelCliente)
-        {
-            GestorDeLosTelefonosDeClientes elGestor = new GestorDeLosTelefonosDeClientes();
-            Modelo.ClienteTelefono elTelefonoAEliminar = elGestor.ObtenerTelefonoPorId(elTelefonoDelCliente.Id);
+        //public void Eliminar(Modelo.ClienteTelefono elTelefonoDelCliente)
+        //{
+        //    GestorDeLosTelefonosDeClientes elGestor = new GestorDeLosTelefonosDeClientes();
+        //    Modelo.ClienteTelefono elTelefonoAEliminar = elGestor.ObtenerTelefonoPorId(elTelefonoDelCliente.Id);
 
-            elGestor.Eliminar(elTelefonoAEliminar);
-        }
+        //    elGestor.Eliminar(elTelefonoAEliminar);
+        //}
 
     }
 }

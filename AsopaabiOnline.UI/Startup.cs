@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using AsopaabiOnline.UI;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using AsopaabiOnline.UI.Services;
+using AsopaabiOnline.UI.Models;
 
 namespace AsopaabiOnline.UI
 {
@@ -38,7 +39,7 @@ namespace AsopaabiOnline.UI
                    options.UseSqlServer(
                        Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddIdentity<User,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
                .AddEntityFrameworkStores<Data.ApplicationDbContext>().AddDefaultTokenProviders();
             
             services.AddRazorPages();

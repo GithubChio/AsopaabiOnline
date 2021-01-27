@@ -18,7 +18,7 @@ namespace AsopaabiOnline.Modelo
         {
         }
 
-        public virtual  DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
+        public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
@@ -26,29 +26,24 @@ namespace AsopaabiOnline.Modelo
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Canton> Canton { get; set; }
-        public virtual DbSet<Cliente> Cliente { get; set; }
-        public virtual DbSet<ClienteTelefono> ClienteTelefono { get; set; }
         public virtual DbSet<DetallePedido> DetallePedido { get; set; }
         public virtual DbSet<DireccionPedido> DireccionPedido { get; set; }
         public virtual DbSet<Distrito> Distrito { get; set; }
-        public virtual DbSet<Empleado> Empleado { get; set; }
+        public virtual DbSet<EfmigrationsHistory> EfmigrationsHistory { get; set; }
         public virtual DbSet<HistorialPedido> HistorialPedido { get; set; }
         public virtual DbSet<Pago> Pago { get; set; }
         public virtual DbSet<Pedido> Pedido { get; set; }
-        public virtual  DbSet<Producto> Producto { get; set; }
+        public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
-       
-        
-        
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseLazyLoadingProxies(useLazyLoadingProxies:true).UseSqlServer("Server=DESKTOP-GID5PN2;Database=ASOPAABI_ONLINE;User ID=sa;Password=1234");
-            }
-           
-        }
 
+                optionsBuilder.UseSqlServer("Server=DESKTOP-GID5PN2;Database=ASOPAABI_ONLINE;User ID=sa;Password=1234;");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -92,10 +87,6 @@ namespace AsopaabiOnline.Modelo
 
                 entity.HasIndex(e => e.UserId);
 
-                entity.Property(e => e.LoginProvider).HasMaxLength(128);
-
-                entity.Property(e => e.ProviderKey).HasMaxLength(128);
-
                 entity.Property(e => e.UserId).IsRequired();
 
                 entity.HasOne(d => d.User)
@@ -105,26 +96,28 @@ namespace AsopaabiOnline.Modelo
 
             modelBuilder.Entity<AspNetUserRoles>(entity =>
             {
-                entity.HasKey(e => new { e.UserId, e.RoleId });
+                entity.HasNoKey();
 
                 entity.HasIndex(e => e.RoleId);
 
+                entity.Property(e => e.RoleId).IsRequired();
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
                 entity.HasOne(d => d.Role)
-                    .WithMany(p => p.AspNetUserRoles)
+                    .WithMany()
                     .HasForeignKey(d => d.RoleId);
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserRoles)
+                    .WithMany()
                     .HasForeignKey(d => d.UserId);
             });
 
             modelBuilder.Entity<AspNetUserTokens>(entity =>
             {
                 entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
-
-                entity.Property(e => e.LoginProvider).HasMaxLength(128);
-
-                entity.Property(e => e.Name).HasMaxLength(128);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.AspNetUserTokens)
@@ -133,10 +126,6 @@ namespace AsopaabiOnline.Modelo
 
             modelBuilder.Entity<AspNetUsers>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
-
                 entity.HasIndex(e => e.NormalizedEmail)
                     .HasName("EmailIndex");
 
@@ -145,11 +134,35 @@ namespace AsopaabiOnline.Modelo
                     .IsUnique()
                     .HasFilter("([NormalizedUserName] IS NOT NULL)");
 
+                entity.Property(e => e.Dni)
+                    .HasColumnName("DNI")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Email).HasMaxLength(256);
+
+                entity.Property(e => e.FirstLastName)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
 
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
+
+                entity.Property(e => e.SecondLastName)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SecondName)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
             });
@@ -167,7 +180,7 @@ namespace AsopaabiOnline.Modelo
                 entity.Property(e => e.Nombre)
                     .IsRequired()
                     .HasColumnName("nombre")
-                    .HasMaxLength(15)
+                    .HasMaxLength(20)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.IdProvinciaNavigation)
@@ -175,61 +188,6 @@ namespace AsopaabiOnline.Modelo
                     .HasForeignKey(d => d.IdProvincia)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CANTON_PROVINCIA");
-            });
-
-            modelBuilder.Entity<Cliente>(entity =>
-            {
-
-                entity.Property(e => e.Dni).IsRequired().HasMaxLength(20).IsUnicode(false);
-
-                entity.Property(e => e.FechaDeNacimiento).HasColumnType("datetime");
-
-                entity.Property(e => e.IdUsuario).HasMaxLength(450);
-
-                entity.Property(e => e.PrimerApellido)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PrimerNombre)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.SegundoApellido)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.SegundoNombre)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.IdUsuarioNavigation)
-                    .WithMany(p => p.Cliente)
-                    .HasForeignKey(d => d.IdUsuario)
-                    .HasConstraintName("FK_Cliente_AspNetUsers");
-            });
-
-            modelBuilder.Entity<ClienteTelefono>(entity =>
-            {
-                entity.ToTable("CLIENTE_TELEFONO");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.IdCliente).HasColumnName("id_Cliente");
-
-                entity.Property(e => e.Telefono1).HasColumnName("telefono_1");
-
-                entity.Property(e => e.Telefono2).HasColumnName("telefono_2");
-
-                entity.HasOne(d => d.IdClienteNavigation)
-                    .WithMany(p => p.ClienteTelefono)
-                    .HasForeignKey(d => d.IdCliente)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_CLIENTE_TELEFONO_Cliente");
             });
 
             modelBuilder.Entity<DetallePedido>(entity =>
@@ -311,7 +269,7 @@ namespace AsopaabiOnline.Modelo
                 entity.Property(e => e.Nombre)
                     .IsRequired()
                     .HasColumnName("nombre")
-                    .HasMaxLength(15)
+                    .HasMaxLength(25)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.IdCantonNavigation)
@@ -321,43 +279,18 @@ namespace AsopaabiOnline.Modelo
                     .HasConstraintName("FK_DISTRITO_CANTON");
             });
 
-            modelBuilder.Entity<Empleado>(entity =>
+            modelBuilder.Entity<EfmigrationsHistory>(entity =>
             {
-                entity.ToTable("EMPLEADO");
+                entity.HasKey(e => e.MigrationId)
+                    .HasName("PK___EFMigrationsHistory");
 
-                entity.Property(e => e.IdUsuario)
-                    .HasColumnName("Id_Usuario")
-                    .HasMaxLength(450);
+                entity.ToTable("___EFMigrationsHistory");
 
-                entity.Property(e => e.PrimerApellido)
+                entity.Property(e => e.MigrationId).HasMaxLength(150);
+
+                entity.Property(e => e.ProductVersion)
                     .IsRequired()
-                    .HasColumnName("primerApellido")
-                    .HasMaxLength(15)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PrimerNombre)
-                    .IsRequired()
-                    .HasColumnName("primerNombre")
-                    .HasMaxLength(15)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.SegundoApellido)
-                    .IsRequired()
-                    .HasColumnName("segundoApellido")
-                    .HasMaxLength(15)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.SegundoNombre)
-                    .HasColumnName("segundoNombre")
-                    .HasMaxLength(15)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.TipoDeEmpleado).HasColumnName("tipoDeEmpleado");
-
-                entity.HasOne(d => d.IdUsuarioNavigation)
-                    .WithMany(p => p.Empleado)
-                    .HasForeignKey(d => d.IdUsuario)
-                    .HasConstraintName("FK_EMPLEADO_AspNetUsers");
+                    .HasMaxLength(32);
             });
 
             modelBuilder.Entity<HistorialPedido>(entity =>
@@ -366,7 +299,10 @@ namespace AsopaabiOnline.Modelo
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.IdCliente).HasColumnName("Id_Cliente");
+                entity.Property(e => e.IdCliente)
+                    .IsRequired()
+                    .HasColumnName("Id_Cliente")
+                    .HasMaxLength(450);
 
                 entity.Property(e => e.IdPedido).HasColumnName("Id_Pedido");
 
@@ -374,7 +310,7 @@ namespace AsopaabiOnline.Modelo
                     .WithMany(p => p.HistorialPedido)
                     .HasForeignKey(d => d.IdCliente)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_HISTORIAL_PEDIDO_Cliente");
+                    .HasConstraintName("FK_HISTORIAL_PEDIDO_AspNetUsers");
 
                 entity.HasOne(d => d.IdPedidoNavigation)
                     .WithMany(p => p.HistorialPedido)
@@ -384,25 +320,25 @@ namespace AsopaabiOnline.Modelo
             });
 
             modelBuilder.Entity<Pago>(entity =>
-        {
-            entity.ToTable("PAGO");
+            {
+                entity.ToTable("PAGO");
 
-            entity.Property(e => e.Id)
-                .HasColumnName("id")
-                .ValueGeneratedNever();
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
 
-            entity.Property(e => e.IdPedido).HasColumnName("id_Pedido");
+                entity.Property(e => e.IdPedido).HasColumnName("id_Pedido");
 
-            entity.Property(e => e.Monto).HasColumnName("monto");
+                entity.Property(e => e.Monto).HasColumnName("monto");
 
-            entity.Property(e => e.OpcionesDePago).HasColumnName("opcionesDePago");
+                entity.Property(e => e.OpcionesDePago).HasColumnName("opcionesDePago");
 
-            entity.HasOne(d => d.IdPedidoNavigation)
-                .WithMany(p => p.Pago)
-                .HasForeignKey(d => d.IdPedido)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_PAGO_PEDIDO");
-        });
+                entity.HasOne(d => d.IdPedidoNavigation)
+                    .WithMany(p => p.Pago)
+                    .HasForeignKey(d => d.IdPedido)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PAGO_PEDIDO");
+            });
 
             modelBuilder.Entity<Pedido>(entity =>
             {
@@ -422,7 +358,10 @@ namespace AsopaabiOnline.Modelo
                     .HasColumnName("fecha_Pedido")
                     .HasColumnType("date");
 
-                entity.Property(e => e.IdCliente).HasColumnName("id_Cliente");
+                entity.Property(e => e.IdCliente)
+                    .IsRequired()
+                    .HasColumnName("id_Cliente")
+                    .HasMaxLength(450);
 
                 entity.Property(e => e.IdDireccion).HasColumnName("id_Direccion");
 
@@ -436,7 +375,7 @@ namespace AsopaabiOnline.Modelo
                     .WithMany(p => p.Pedido)
                     .HasForeignKey(d => d.IdCliente)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PEDIDO_Cliente");
+                    .HasConstraintName("FK_PEDIDO_AspNetUsers");
 
                 entity.HasOne(d => d.IdDireccionNavigation)
                     .WithMany(p => p.Pedido)

@@ -8,62 +8,62 @@ namespace AsopaabiOnline.AccesoADatos
 {
     public class GestorDeLosTelefonosDeClientes
     {
-        public void Agregar(ClienteTelefono elTelefonoDelCliente)
-        {
-            Modelo.Contexto laBaseDeDatos = new Contexto();
+        //public void Agregar(ClienteTelefono elTelefonoDelCliente)
+        //{
+        //    Modelo.Contexto laBaseDeDatos = new Contexto();
             
-            laBaseDeDatos.ClienteTelefono.Add(elTelefonoDelCliente);
-            laBaseDeDatos.Entry(elTelefonoDelCliente).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+        //    laBaseDeDatos.ClienteTelefono.Add(elTelefonoDelCliente);
+        //    laBaseDeDatos.Entry(elTelefonoDelCliente).State = Microsoft.EntityFrameworkCore.EntityState.Added;
             
-            laBaseDeDatos.SaveChanges();
-        }
+        //    laBaseDeDatos.SaveChanges();
+        //}
 
-        public List<ClienteTelefono> ObtenerListaDeTelefonosDeClientes(int id)
-        {
-            Modelo.Contexto laBaseDeDatos = new Contexto();
-            Modelo.Cliente elNuevoCliente = new Cliente();
-            GestorDeClientes elGestorDeClientes = new GestorDeClientes();
+        //public List<ClienteTelefono> ObtenerListaDeTelefonosDeClientes(int id)
+        //{
+        //    Modelo.Contexto laBaseDeDatos = new Contexto();
+        //    Modelo.Cliente elNuevoCliente = new Cliente();
+        //    GestorDeClientes elGestorDeClientes = new GestorDeClientes();
 
-            elNuevoCliente = elGestorDeClientes.ObtenerClientePorId(id);
+        //    elNuevoCliente = elGestorDeClientes.ObtenerClientePorId(id);
 
-            var elResultado = from losTelefonosDelCliente in laBaseDeDatos.ClienteTelefono
-                              where losTelefonosDelCliente.IdCliente == elNuevoCliente.Id
-                              select losTelefonosDelCliente;
+        //    var elResultado = from losTelefonosDelCliente in laBaseDeDatos.ClienteTelefono
+        //                      where losTelefonosDelCliente.IdCliente == elNuevoCliente.Id
+        //                      select losTelefonosDelCliente;
 
-            return elResultado.ToList();
-        }
+        //    return elResultado.ToList();
+        //}
 
-        public ClienteTelefono ObtenerTelefonoPorId(int id)
-        {
-            var LaBaseDeDatos = new Contexto();
-            var elResultado = LaBaseDeDatos.ClienteTelefono.Find(id);
-            return elResultado;
-        }
+        //public ClienteTelefono ObtenerTelefonoPorId(int id)
+        //{
+        //    var LaBaseDeDatos = new Contexto();
+        //    var elResultado = LaBaseDeDatos.ClienteTelefono.Find(id);
+        //    return elResultado;
+        //}
 
-        public void Actualizar(ClienteTelefono elTelefonoAActualizar)
-        {
-            var laBaseDeDatos = new Contexto();
-            var elTelefonoEnLaBD = ObtenerTelefonoPorId(elTelefonoAActualizar.Id);
+        //public void Actualizar(ClienteTelefono elTelefonoAActualizar)
+        //{
+        //    var laBaseDeDatos = new Contexto();
+        //    var elTelefonoEnLaBD = ObtenerTelefonoPorId(elTelefonoAActualizar.Id);
             
-            elTelefonoEnLaBD.Id = elTelefonoAActualizar.Id;
-            elTelefonoEnLaBD.Telefono1 = elTelefonoAActualizar.Telefono1;
-            elTelefonoEnLaBD.Telefono2 = elTelefonoAActualizar.Telefono2;
+        //    elTelefonoEnLaBD.Id = elTelefonoAActualizar.Id;
+        //    elTelefonoEnLaBD.Telefono1 = elTelefonoAActualizar.Telefono1;
+        //    elTelefonoEnLaBD.Telefono2 = elTelefonoAActualizar.Telefono2;
 
 
-            laBaseDeDatos.Entry(elTelefonoEnLaBD).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            laBaseDeDatos.SaveChanges();
-        }
+        //    laBaseDeDatos.Entry(elTelefonoEnLaBD).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+        //    laBaseDeDatos.SaveChanges();
+        //}
 
 
-        public void Eliminar(ClienteTelefono elTelefonoAEliminar)
-        {
-            var laBaseDeDatos = new Contexto();
-            var elTelefonoEnLaBD = ObtenerTelefonoPorId(elTelefonoAEliminar.Id);
+        //public void Eliminar(ClienteTelefono elTelefonoAEliminar)
+        //{
+        //    var laBaseDeDatos = new Contexto();
+        //    var elTelefonoEnLaBD = ObtenerTelefonoPorId(elTelefonoAEliminar.Id);
 
-            laBaseDeDatos.ClienteTelefono.Remove(elTelefonoEnLaBD);
-            laBaseDeDatos.Remove(elTelefonoEnLaBD).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
-            laBaseDeDatos.SaveChanges();
-        }
+        //    laBaseDeDatos.ClienteTelefono.Remove(elTelefonoEnLaBD);
+        //    laBaseDeDatos.Remove(elTelefonoEnLaBD).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+        //    laBaseDeDatos.SaveChanges();
+        //}
 
 
     }

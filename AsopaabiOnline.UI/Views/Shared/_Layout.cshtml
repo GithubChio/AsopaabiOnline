@@ -7,22 +7,26 @@
 
     <!-- Vendor CSS Files -->
     @*<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">*@
+        <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+        <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+        <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+        <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
+        <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="assets/vendor/aos/aos.css" rel="stylesheet">*@
 
     <!-- Template Main CSS File -->
-  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
     <link href="assets/css/style.css" rel="stylesheet">
 
-   
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
-    <link rel="stylesheet"  href="~/css/site.css" />
-    
+    <link rel="stylesheet" href="~/css/site.css" />
+
 </head>
 <body>
     <header>
@@ -41,74 +45,77 @@
                 </div>
                 @if (User.Identity.IsAuthenticated)
                 {
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
 
-                    <partial name="_LoginPartial" />
+                <partial name="_LoginPartial" />
 
 
-                    <ul class="navbar-nav flex-grow-1">
 
-                        @if (User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
-                        {
-                            <li class="nav-item">
+               
 
-                                <a class="nav-link text-dark " asp-area="" asp-controller="Clientes" asp-action="Mostrar">
-                                    <img src="~/imagenes/Iconos/clientes.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                                    Clientes
+
+                <ul class="navbar-nav flex-grow-1">
+
+
+                    @if (User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="~/imagenes/Iconos/online-shopping.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                Tienda
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
+                                    <img src="~/imagenes/Iconos/direccion.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                    Direccion
                                 </a>
-                            </li>
-                        }
-                            @if (User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark " asp-area="" asp-controller="Empleados" asp-action="Mostrar">
-                                        <img src="~/imagenes/Iconos/equipo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                                        Empleados
-                                    </a>
-                                </li>
-                            }
-                            @if (User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
-                            {
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img src="~/imagenes/Iconos/online-shopping.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                                        Tienda
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
-                                            <img src="~/imagenes/Iconos/direccion.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                                            Direccion
-                                        </a>
-                                        <a class="dropdown-item" asp-controller="Productos" asp-action="Mostrar">
-                                            <img src="~/imagenes/Iconos/alimentos-saludables.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                                            Productos
-                                        </a>
-                                        <a class="dropdown-item" asp-controller="Pedidos" asp-action="Mostrar">
-                                            <img src="~/imagenes/Iconos/anadir-al-carrito.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                                            Pedidos
-                                        </a>
-
-                                        <a class="dropdown-item" asp-controller="Cuenta" asp-action="ListOfRoles">
-
-                                            Roles
-                                        </a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Historial</a>
-                                    </div>
+                                <a class="dropdown-item" asp-controller="Productos" asp-action="Mostrar">
+                                    <img src="~/imagenes/Iconos/alimentos-saludables.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                    Productos
+                                </a>
+                                <a class="dropdown-item" asp-controller="Pedidos" asp-action="Mostrar">
+                                    <img src="~/imagenes/Iconos/anadir-al-carrito.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                    Pedidos
+                                </a>
 
 
-                                </li>
-                            }
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Historial</a>
+                            </div>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark " asp-controller="Home" asp-action="AcercaDeNosotros">Acerca de Nosotros</a>
-                            </li>
+
+                        </li>
+
+                        //----------------------------------------------------
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                Configuracion
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="Cuenta" asp-action="UserList">Usuarios</a>
+
+                                <a class="dropdown-item" asp-controller="Cuenta" asp-action="RolesList">Roles </a>
+
+                                @*<div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Historial</a>*@
+                            </div>
+
+
+                        </li>
+
+                    }
+
+                    @*<li class="nav-item">
+                <a class="nav-link text-dark " asp-controller="Home" asp-action="AcercaDeNosotros">Acerca de Nosotros</a>
+            </li>*@
 
 
 
 
-                        </ul>
-                </div>
+                </ul>
+            </div>
                 }
                
 
@@ -131,6 +138,9 @@
         <div class="container">
             &copy; 2020 - AsopaabiOnline- <a asp-area="" asp-controller="Home" asp-action="Privacidad">Privacy</a>
         </div>
+
+
+
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

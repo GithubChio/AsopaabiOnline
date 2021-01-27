@@ -6,6 +6,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210121054205_CreateIdentitySchema.cs" />
+    <Compile Remove="Migrations\20210121054205_CreateIdentitySchema.Designer.cs" />
+    <Compile Remove="Migrations\20210123212133_name.cs" />
+    <Compile Remove="Migrations\20210123212133_name.Designer.cs" />
+    <Compile Remove="Migrations\20210123213936_fullname.cs" />
+    <Compile Remove="Migrations\20210123213936_fullname.Designer.cs" />
+    <Compile Remove="Migrations\20210123214255_fullname.cs" />
+    <Compile Remove="Migrations\20210123214255_fullname.Designer.cs" />
+    <Compile Remove="Migrations\20210123215557_User.cs" />
+    <Compile Remove="Migrations\20210123215557_User.Designer.cs" />
+    <Compile Remove="Migrations\20210123221310_User.cs" />
+    <Compile Remove="Migrations\20210123221310_User.Designer.cs" />
+    <Compile Remove="Migrations\20210124002151_User.cs" />
+    <Compile Remove="Migrations\20210124002151_User.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
@@ -24,6 +41,10 @@
   <ItemGroup>
     <ProjectReference Include="..\AsopaabiOnline.LogicaDeNegocio\AsopaabiOnline.LogicaDeNegocio.csproj" />
     <ProjectReference Include="..\AsopaabiOnline.Modelo\AsopaabiOnline.Modelo.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
