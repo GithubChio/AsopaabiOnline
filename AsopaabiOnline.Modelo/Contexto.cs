@@ -40,8 +40,7 @@ namespace AsopaabiOnline.Modelo
         {
             if (!optionsBuilder.IsConfigured)
             {
-
-                optionsBuilder.UseSqlServer("Server=DESKTOP-GID5PN2;Database=ASOPAABI_ONLINE;User ID=sa;Password=1234;");
+                optionsBuilder.UseLazyLoadingProxies(useLazyLoadingProxies: true).UseSqlServer("Server=DESKTOP-GID5PN2;Database=ASOPAABI_ONLINE;User ID=sa;Password=1234");
             }
         }
 
@@ -133,6 +132,8 @@ namespace AsopaabiOnline.Modelo
                     .HasName("UserNameIndex")
                     .IsUnique()
                     .HasFilter("([NormalizedUserName] IS NOT NULL)");
+
+                entity.Property(e => e.DateOfBirth).HasColumnType("date");
 
                 entity.Property(e => e.Dni)
                     .HasColumnName("DNI")

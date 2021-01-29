@@ -43,7 +43,7 @@ namespace AsopaabiOnline.Modelo
 
        
         [Display(Name = "Id de Cliente")]
-        public int IdCliente { get; set; }
+        public string IdCliente { get; set; }
 
 
         [NotMapped]

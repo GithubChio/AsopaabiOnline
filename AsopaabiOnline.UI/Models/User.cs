@@ -13,6 +13,10 @@ namespace AsopaabiOnline.UI.Models
     public class User: IdentityUser
     {
 
+        public User()
+        {
+
+        }
 
 
         [Required(ErrorMessage = "Por favor ingrese su Cedula")]
@@ -38,7 +42,7 @@ namespace AsopaabiOnline.UI.Models
         public string SecondLastName { get; set; }
 
         [DataType(DataType.Text)]
-        [Display(Name = "Numero de telefono secundario")]
+        [Display(Name = "Número de teléfono secundario")]
         [RegularExpression(@"^(\d{8})$", ErrorMessage = "el número de celular debe tener 8 digitos númericos")]
         public string PhoneNumber2 { get; set; }
 
@@ -49,15 +53,15 @@ namespace AsopaabiOnline.UI.Models
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
-        [Display(Name = "Tipo de Actividad")]
+        [Display(Name = "Tipo de actividad")]
         [EnumDataType(typeof(TipoDeActividad))]
         public TipoDeActividad ActivityType { get; set; }
 
-        [Display(Name = "Tipo de Cliente")]
+        [Display(Name = "Tipo de cliente")]
         [EnumDataType(typeof(TipoDeCliente))]
         public TipoDeCliente CustomerType { get; set; }
         
-        [Display(Name = "Tipo de Usuario")]
+        [Display(Name = "Tipo de usuario")]
         [EnumDataType(typeof(UserType))]
         public UserType   UserType { get; set; }
 

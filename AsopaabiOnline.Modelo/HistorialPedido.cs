@@ -7,7 +7,7 @@ namespace AsopaabiOnline.Modelo
     {
         public int Id { get; set; }
         public int IdPedido { get; set; }
-        public int IdCliente { get; set; }
+        public string IdCliente { get; set; }
 
         public virtual AspNetUsers IdClienteNavigation { get; set; }
         public virtual Pedido IdPedidoNavigation { get; set; }

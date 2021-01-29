@@ -14,49 +14,60 @@ namespace AsopaabiOnline.UI.Controllers
 {
     public class ClientesController : Controller
     {
+        private readonly SignInManager<User> signInManager;
         private readonly UserManager<User> userManager;
 
-        //[HttpGet]
-        //public async Task<IActionResult> Perfil(string input)
-        //{
+        public ClientesController (UserManager<User> userManager, SignInManager<User> signInManager)
+        {
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+        }
 
-        //    var user = await userManager.FindByNameAsync(input);
-        //    if (user == null)
-        //    {
-        //        ViewBag.ErrorMessage = $"el perfil con el nombre= {input} no fue encontrado";
-        //        return View("Error");
-        //    }
-        //    else
-        //    {
-        //        User model = new Models.User()
-        //        {
-        //            Id = user.Id,
-        //            DNI= user.DNI,
-        //            FirstName = user.FirstName,
-        //            SecondName = user.SecondName,
-        //            FirstLastName = user.FirstLastName,
-        //            SecondLastName = user.SecondLastName,
-                    
+        [TempData]
+        public string StatusMessage { get; set; }
 
-        //        };
 
-        //        return View(user);
+        [HttpGet]
+        public async Task<IActionResult> Perfil()
+        {
 
-        //    }
-        //}
+            var user = await userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"el perfil con el nombre= {User} no fue encontrado";
+                return View("Error");
+            }
+            else
+            {
+                User model = new Models.User()
+                {
+                    Id = user.Id,
+                    DNI = user.DNI,
+                    FirstName = user.FirstName,
+                    SecondName = user.SecondName,
+                    FirstLastName = user.FirstLastName,
+                    SecondLastName = user.SecondLastName,
+
+
+                };
+
+                return View(model);
+
+            }
+        }
 
 
 
 
         [HttpGet]
 
-        public async Task<IActionResult> EditarPerfil(string id)
+        public async Task<IActionResult> EditarPerfil()
         {
 
-            var user = await userManager.FindByIdAsync(id);
+            var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
-                ViewBag.ErrorMessage = $"el usuario con el id= {id} no fue encontrado";
+                ViewBag.ErrorMessage = $"el usuario con el id= {User} no fue encontrado";
                 return View("Error");
             }
             else
@@ -68,6 +79,7 @@ namespace AsopaabiOnline.UI.Controllers
                     SecondName = user.SecondName,
                     FirstLastName = user.FirstLastName,
                     SecondLastName = user.SecondLastName,
+                  
                     PhoneNumber = user.PhoneNumber,
                     PhoneNumber2 = user.PhoneNumber2,
                     ActivityType = user.ActivityType
@@ -85,7 +97,7 @@ namespace AsopaabiOnline.UI.Controllers
         {
             try
             {
-                var user = await userManager.FindByIdAsync(input.Id);
+                var user = await userManager.GetUserAsync(User);
                 if (user == null)
                 {
                     ViewBag.ErrorMessage = $"el usuario con el id= {input} no fue encontrado";
@@ -93,7 +105,7 @@ namespace AsopaabiOnline.UI.Controllers
                 }
                 else
                 {
-                    user.Id = input.Id;
+                  ;
                     user.FirstName = input.FirstName;
                     user.SecondName = input.SecondName;
                     user.FirstLastName = input.FirstLastName;
@@ -107,7 +119,9 @@ namespace AsopaabiOnline.UI.Controllers
 
                     if (elResultado.Succeeded)
                     {
-                        return RedirectToAction("Profile", "Cuenta");
+                        await signInManager.RefreshSignInAsync(user);
+                        StatusMessage = "Su perfil ha sido actualizado";
+                        return RedirectToAction("Perfil", "Clientes");
                     }
                     foreach (var elError in elResultado.Errors)
                     {
@@ -126,24 +140,27 @@ namespace AsopaabiOnline.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> VerDetalles(string id)
+        public async Task<IActionResult> VerDetalles()
         {
-            var user = await userManager.FindByIdAsync(id);
-           
+            var user = await userManager.GetUserAsync(User);
+
             if (user == null)
             {
-                ViewBag.ErrorMessage = $"el usuario con el id= {id} no fue encontrado";
+                ViewBag.ErrorMessage = $"el usuario con el id= {User} no fue encontrado";
                 return View("Error");
             }
             else
             {
-                User userToEdit = new Models.User()
+                User userDetails = new Models.User()
                 {
                     Id = user.Id,
+                    DNI= user.DNI,
                     FirstName = user.FirstName,
                     SecondName = user.SecondName,
                     FirstLastName = user.FirstLastName,
                     SecondLastName = user.SecondLastName,
+                    DateOfBirth = user.DateOfBirth,
+                    Email = user.Email,
                     PhoneNumber = user.PhoneNumber,
                     PhoneNumber2 = user.PhoneNumber2,
                     ActivityType = user.ActivityType,
@@ -151,7 +168,7 @@ namespace AsopaabiOnline.UI.Controllers
 
                 };
 
-                return View(user);
+                return View(userDetails);
             }
 
 

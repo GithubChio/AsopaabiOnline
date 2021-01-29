@@ -22,7 +22,7 @@
 
             <div class="form-group">
                 <label asp-for="DNI"></label>
-                <input id="Dni" asp-for="DNI" onclick="return ValidarDNI()" class="form-control" />
+                <input id="Dni" asp-for="DNI"  class="form-control" />
                 <div id="elResultado" class="text-danger" />
             </div>
 
@@ -108,8 +108,8 @@
 
 
 
-
     <script type="text/javascript">
+        var dniType = 0;
 
         function mostrarPassword() {
             var cambio = document.getElementById("txtPassword");
@@ -156,9 +156,36 @@
             });
 
             $("#tipoDeDni").change(function () {
-                let test = $("#tipoDeDni").val();
-                console.log(test);
+                let DNITYPE = $("#tipoDeDni").val();
+                console.log(DNITYPE)
+                if (DNITYPE == 1) {
+                    dniType = 1
+                } else {
+                    dniType = 2
+                }
             });;
+
+            $("#Dni").on('keypress', function (e) {
+                if (dniType == 1) {
+                    var pressed = String.fromCharCode(e.which);
+                    var final = this.value + pressed;
+                    if (!final.match (^\d{ 1, 10 }(\.|\.\d{ 1, 10 }) ? $ / i) ) {
+                        e.preventDefault(); // or return false;
+                    }
+                    console.log("one")
+                    //test regex
+                    ///^\d{ 1, 10 } (\.|\.\d{ 1, 10 }) ? $ / i
+                    // $(this).val().match(/^[1-9]-\d{3}-\d{3}$/,)
+                } else {
+                    console.log("two")
+                    var pressed = String.fromCharCode(e.which);
+                    var final = this.value + pressed;
+                    if (!final.match(/^[1-9]-\d{3}-\d{6}$/)) {
+                        e.preventDefault(); // or return false;
+                    }
+                    // $(this).val().match(/^[1-9]-\d{3}-\d{6}$/)
+                }
+            });
 
         });
 

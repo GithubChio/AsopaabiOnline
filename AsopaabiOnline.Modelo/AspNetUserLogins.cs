@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AsopaabiOnline.Modelo
 {
@@ -10,6 +11,7 @@ namespace AsopaabiOnline.Modelo
         public string ProviderDisplayName { get; set; }
         public string UserId { get; set; }
 
+        [NotMapped]
         public virtual AspNetUsers User { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace AsopaabiOnline.UI.Controllers
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IEmailSender emailSender;
-        private readonly string DefaultRoleName = "Cliente";
+        private readonly string DefaultRoleName = "Administrador";
 
         public CuentaController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager, IEmailSender emailSender)
         {
@@ -175,7 +175,8 @@ namespace AsopaabiOnline.UI.Controllers
                 string roleName = "";
                 var user = await userManager.FindByIdAsync(input.Id);
                
-                //var oldRoleName = userManager.GetRolesAsync(user);
+                var oldRoleList = await userManager.GetRolesAsync(user);
+              
                 if (user == null)
                 {
                     ViewBag.ErrorMessage = $"el rol con el id= {input.Id} no fue encontrado";
@@ -185,10 +186,18 @@ namespace AsopaabiOnline.UI.Controllers
                 {
                     user.Id = input.Id;
                     user.UserType = input.UserType;
+
+                    
                    
                     if (input.UserType.Equals(AsopaabiOnline.UI.Models.Enums.UserType.Administrador))
                     {
                         roleName ="Administrador";
+                      
+                        foreach( var oldRoleName in oldRoleList.ToList())
+                        {
+                            await userManager.RemoveFromRoleAsync(user,oldRoleName);
+                        }
+                      
                         await userManager.AddToRoleAsync(user, roleName);
 
 
@@ -197,12 +206,21 @@ namespace AsopaabiOnline.UI.Controllers
                     else if (input.UserType.Equals(AsopaabiOnline.UI.Models.Enums.UserType.AsistenteAdministrativo))
                     {
                         roleName = "AsistenteAdministrativo";
+                        foreach (var oldRoleName in oldRoleList.ToList())
+                        {
+                            await userManager.RemoveFromRoleAsync(user, oldRoleName);
+                        }
+                        
                         await userManager.AddToRoleAsync(user, roleName);
                     
 
                     }
                     else
                     {
+                        foreach (var oldRoleName in oldRoleList.ToList())
+                        {
+                            await userManager.RemoveFromRoleAsync(user, oldRoleName);
+                        }
                         roleName = "Cliente";
                         await userManager.AddToRoleAsync(user, roleName);
                        

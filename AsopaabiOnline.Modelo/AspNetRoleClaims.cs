@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AsopaabiOnline.Modelo
 {
@@ -10,6 +11,8 @@ namespace AsopaabiOnline.Modelo
         public string ClaimType { get; set; }
         public string ClaimValue { get; set; }
 
+
+        [NotMapped]
         public virtual AspNetRoles Role { get; set; }
     }
 }

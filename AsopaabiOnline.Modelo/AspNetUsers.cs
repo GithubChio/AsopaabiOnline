@@ -38,14 +38,20 @@ namespace AsopaabiOnline.Modelo
         public string SecondName { get; set; }
         public string FirstLastName { get; set; }
         public string SecondLastName { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public int? CustomerType { get; set; }
         public int? ActivityType { get; set; }
         public int Usertype { get; set; }
 
+        [NotMapped]
         public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
+        [NotMapped]
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
+        [NotMapped]
         public virtual ICollection<AspNetUserTokens> AspNetUserTokens { get; set; }
+        [NotMapped]
         public virtual ICollection<HistorialPedido> HistorialPedido { get; set; }
+        [NotMapped]
         public virtual ICollection<Pedido> Pedido { get; set; }
     }
 }
