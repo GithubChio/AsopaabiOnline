@@ -3,16 +3,11 @@
 
 
 @{
-    ViewBag.Title = "Lista de usuarios";
+    ViewBag.Title = "Lista de clientes";
 }
 
 <h2> @ViewBag.Title</h2>
-
-<a class="btn btn-outline-success mb-3" style="width:auto" asp-action="Register" asp-controller="Cuenta">Registrar un usuario nuevo</a>
-
-<a class="btn btn-outline-success mb-3" style="width:auto" asp-action="CustomerUsers" asp-controller="Cuenta">Registrar un usuario nuevo</a>
-
-
+<br />
 
 @if (Model.Any())
 
@@ -32,9 +27,7 @@
                 <th>
                     <label>Email</label>
                 </th>
-                <th>
-                    <label>Tipo de usuario</label>
-                </th>
+            
 
                 <th>
                     <label> Opciones</label>
@@ -59,14 +52,12 @@
                     <td>
                         <h5 class="card-title">@user.Email</h5>
                     </td>
-                    <td>
-                        <h5 class="card-title">@user.UserType</h5>
-                    </td>
+                   
                     <td>
                         <ul class="list-group list-group-flush">
 
-                            <li class="list-group-item"> <a asp-action="EditUser" asp-controller="Cuenta" class="btn btn-outline-info" asp-route-id="@user.Id">Editar </a></li>
-                            <li class="list-group-item"> <a asp-action="UserDetails" asp-controller="Cuenta" class="btn btn-outline-success" asp-route-id="@user.Id">Detalles </a></li>
+                          
+                            <li class="list-group-item"> <a asp-action="UserDetails" asp-controller="Administrador" class="btn btn-outline-success" asp-route-id="@user.Id">Detalles </a></li>
                         </ul>
 
                     </td>
@@ -83,14 +74,12 @@ else
 {
     <div class="card">
         <div class="card-header">
-            No hay usuarios creados
+            No hay clientes creados
         </div>
     </div>
     <div class="card-body">
 
         <a class="btn btn-outline-success" style="width:auto"
-           asp-controller="Cuenta" asp-action="Register">Registro</a>
+           asp-controller="Cuenta" asp-action="Register">Registrar como cliente nuevo</a>
     </div>
 }
-
-

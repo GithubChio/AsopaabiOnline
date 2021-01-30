@@ -20,7 +20,7 @@ namespace AsopaabiOnline.UI.Controllers
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IEmailSender emailSender;
-        private readonly string DefaultRoleName = "Administrador";
+        private readonly string DefaultRoleName = "Cliente";
 
         public CuentaController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager, IEmailSender emailSender)
         {
@@ -122,165 +122,9 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult UserList()
-        {
-            var list = userManager.Users;
-            return View(list);
-        }
-
+      
 
         
-
-        [HttpGet]
-
-        public async Task<IActionResult> EditUser(string id)
-        {
-            var user = await userManager.FindByIdAsync(id);
-            if (user == null)
-            {
-                ViewBag.ErrorMessage = $"el usuario con el id= {id} no fue encontrado";
-                return View("Error");
-            }
-            else
-            {
-                User userToEdit = new Models.User()
-                {
-                    Id = user.Id,
-                    DNI= user.DNI,
-                    FirstName = user.FirstName,
-                    SecondName = user.SecondName,
-                    FirstLastName = user.FirstLastName,
-                    SecondLastName = user.SecondLastName,
-                    PhoneNumber = user.PhoneNumber,
-                    PhoneNumber2 = user.PhoneNumber2,
-                    ActivityType = user.ActivityType,
-                    UserType = user.UserType,
-                    CustomerType= user.CustomerType
-                 
-
-                };
-
-                return View(userToEdit);
-            }
-
-        }
-
-        [HttpPost]
-
-        public async Task<IActionResult> EditUser(User input)
-        {
-            try
-            {
-                string roleName = "";
-                var user = await userManager.FindByIdAsync(input.Id);
-               
-                var oldRoleList = await userManager.GetRolesAsync(user);
-              
-                if (user == null)
-                {
-                    ViewBag.ErrorMessage = $"el rol con el id= {input.Id} no fue encontrado";
-                    return View("Error");
-                }
-                else
-                {
-                    user.Id = input.Id;
-                    user.UserType = input.UserType;
-
-                    
-                   
-                    if (input.UserType.Equals(AsopaabiOnline.UI.Models.Enums.UserType.Administrador))
-                    {
-                        roleName ="Administrador";
-                      
-                        foreach( var oldRoleName in oldRoleList.ToList())
-                        {
-                            await userManager.RemoveFromRoleAsync(user,oldRoleName);
-                        }
-                      
-                        await userManager.AddToRoleAsync(user, roleName);
-
-
-
-                    }
-                    else if (input.UserType.Equals(AsopaabiOnline.UI.Models.Enums.UserType.AsistenteAdministrativo))
-                    {
-                        roleName = "AsistenteAdministrativo";
-                        foreach (var oldRoleName in oldRoleList.ToList())
-                        {
-                            await userManager.RemoveFromRoleAsync(user, oldRoleName);
-                        }
-                        
-                        await userManager.AddToRoleAsync(user, roleName);
-                    
-
-                    }
-                    else
-                    {
-                        foreach (var oldRoleName in oldRoleList.ToList())
-                        {
-                            await userManager.RemoveFromRoleAsync(user, oldRoleName);
-                        }
-                        roleName = "Cliente";
-                        await userManager.AddToRoleAsync(user, roleName);
-                       
-                    }
-                    var elResultado = await userManager.UpdateAsync(user);
-
-                    if (elResultado.Succeeded)
-                    {
-                        return RedirectToAction("UserList", "Cuenta");
-                    }
-                    foreach (var elError in elResultado.Errors)
-                    {
-                        ModelState.AddModelError("", elError.Description);
-                    }
-                }
-                return View(input);
-            }
-            catch
-            {
-                return View();
-            }
-
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> UserDetails(string id)
-        {
-            var user = await userManager.FindByIdAsync(id);
-            var roles = await userManager.GetRolesAsync(user);
-            ViewBag.Roles = roles.ToList();
-            if (user == null)
-            {
-                ViewBag.ErrorMessage = $"el usuario con el id= {id} no fue encontrado";
-                return View("Error");
-            }
-            else
-            {
-                User userDetails = new Models.User()
-                {
-                    Id = user.Id,
-                    FirstName = user.FirstName,
-                    SecondName = user.SecondName,
-                    FirstLastName = user.FirstLastName,
-                    SecondLastName = user.SecondLastName,
-                    DateOfBirth = user.DateOfBirth,
-                    PhoneNumber = user.PhoneNumber,
-                    PhoneNumber2 = user.PhoneNumber2,
-                    ActivityType = user.ActivityType,
-                    UserType = user.UserType,
-                    CustomerType = user.CustomerType,
-                    
-                   
-                };
-
-                return View(user);
-            }
-
-
-        }
-
 
         [HttpGet]
         public IActionResult AddRole()
@@ -313,7 +157,7 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListOfRoles()
+        public IActionResult RolesList()
         {
             var list = roleManager.Roles;
             return View(list);

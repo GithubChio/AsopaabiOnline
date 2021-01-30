@@ -58,7 +58,6 @@ namespace AsopaabiOnline.UI.Controllers
 
 
 
-
         [HttpGet]
 
         public async Task<IActionResult> EditarPerfil()
@@ -173,6 +172,10 @@ namespace AsopaabiOnline.UI.Controllers
 
 
         }
+
+        
+
+
 
     }
 }

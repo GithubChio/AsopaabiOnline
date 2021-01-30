@@ -18,7 +18,7 @@ namespace AsopaabiOnline.UI.Controllers
             elPedido.ListaDeDirecciones = elCoordinador.ListarDirecciones();
 
            
-            CoordinadorDeClientes coordinadorDeClientes = new CoordinadorDeClientes();
+            
             //elPedido.ListaDeClientes = coordinadorDeClientes.ListarClientes();
             return View(elPedido);
         }
