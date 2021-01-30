@@ -12,6 +12,7 @@ using AsopaabiOnline.UI;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using AsopaabiOnline.UI.Services;
 using AsopaabiOnline.UI.Models;
+using System;
 
 namespace AsopaabiOnline.UI
 {
@@ -39,12 +40,27 @@ namespace AsopaabiOnline.UI
                    options.UseSqlServer(
                        Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
                .AddEntityFrameworkStores<Data.ApplicationDbContext>().AddDefaultTokenProviders();
             
             services.AddRazorPages();
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
+
+          /*  services.Configure<DataProtectionTokenProviderOptions>(o => o.TokenLifespan = TimeSpan.FromMinutes(1))*/;
+            services.ConfigureApplicationCookie(options => 
+            {
+                
+               
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromSeconds(60);
+                options.LoginPath = "/Cuenta/Login";
+                options.LogoutPath = "/Cuenta/Logout";
+               
+                options.SlidingExpiration = true;
+
+
+            });
 
         }
 

@@ -10,13 +10,14 @@ namespace AsopaabiOnline.UI.Controllers
 {
     public class AdministradorController : Controller
     {
-
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
-        public  AdministradorController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public  AdministradorController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
         }
 
 
@@ -224,5 +225,112 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
+
+
+
+        [HttpGet]
+        public IActionResult AddRole()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddRole(Role role)
+        {
+            if (ModelState.IsValid)
+            {
+                IdentityRole newRole = new IdentityRole
+                {
+                    Name = role.Name
+                };
+                IdentityResult result = await roleManager.CreateAsync(newRole);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("RolesList", "Administrador");
+                }
+                foreach (IdentityError elError in result.Errors)
+                {
+                    ModelState.AddModelError("", elError.Description);
+                }
+
+            }
+            return View(role);
+        }
+
+        [HttpGet]
+        public IActionResult RolesList()
+        {
+            var list = roleManager.Roles;
+            return View(list);
+        }
+
+
+        [HttpGet]
+
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"el rol con el id= {id} no fue encontrado";
+                return View("Error");
+            }
+            else
+            {
+                Role roleToDelete = new Role()
+                {
+                    id = role.Id,
+                    Name = role.Name
+                };
+
+                return View(roleToDelete);
+            }
+
+        }
+
+        [HttpPost]
+
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteRole(Role Rol)
+        {
+            try
+            {
+                var role = await roleManager.FindByIdAsync(Rol.id);
+                if (role == null)
+                {
+                    ViewBag.ErrorMessage = $"el rol con el id= {Rol.id} no fue encontrado";
+                    return View("Error");
+                }
+                else
+                {
+                    Role roleToDelete = new Role()
+                    {
+                        id = role.Id,
+                        Name = role.Name
+                    };
+
+
+                    role.Id = roleToDelete.id;
+                    role.Name = roleToDelete.Name;
+
+                    var elResultado = await roleManager.DeleteAsync(role);
+
+                    if (elResultado.Succeeded)
+                    {
+                        return RedirectToAction("RolesList", "Administrador");
+                    }
+                    foreach (var elError in elResultado.Errors)
+                    {
+                        ModelState.AddModelError("", elError.Description);
+                    }
+                }
+                return View(Rol);
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }
