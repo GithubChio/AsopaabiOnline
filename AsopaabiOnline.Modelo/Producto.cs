@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -38,6 +39,9 @@ namespace AsopaabiOnline.Modelo
     
         public int Precio { get; set; }
 
+        [NotMapped]
+        [BindProperty]
+        public int Cantidad { get; set; }
 
         public CategoriaDeProducto Categoria { get; set; }
 

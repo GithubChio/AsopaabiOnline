@@ -13,8 +13,10 @@ namespace AsopaabiOnline.LogicaDeNegocio
         {
           
             GestorDePedidos elGestor = new GestorDePedidos();
+            var FechaActual = DateTime.Now;
+
             elPedido.Estado = Modelo.EstadoDePedido.Reciente;
-            elPedido.FechaPedido = DateTime.Now;
+            elPedido.FechaPedido = FechaActual;
             elGestor.Agregar(elPedido);
         }
 
@@ -37,7 +39,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
             var elPedidoAActualizar = elGestor.ObtenerPedidoPorId(elPedido.Id);
 
             elPedidoAActualizar.Id = elPedido.Id;
-            elPedidoAActualizar.FechaPedido = elPedido.FechaPedido;
+           
             elPedidoAActualizar.FechaEntrega = elPedido.FechaEntrega;
             elPedidoAActualizar.Notas = elPedido.Notas;
             elPedidoAActualizar.Estado = elPedido.Estado;

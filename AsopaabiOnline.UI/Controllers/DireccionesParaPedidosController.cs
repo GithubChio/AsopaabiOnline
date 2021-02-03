@@ -12,31 +12,35 @@ namespace AsopaabiOnline.UI.Controllers
     public class DireccionesParaPedidosController : Controller
     {
         [HttpGet]
-        [Route("DireccionesParaPedidos/Agregar")]
+    
         public IActionResult Agregar()
         {
 
             Modelo.DireccionPedido laDireccionDelPedido = new Modelo.DireccionPedido();
-            
+
             CoordinadorDeProvincias elCoordinadorDeProvincias = new CoordinadorDeProvincias();
 
 
             laDireccionDelPedido.LaListaDeProvincias = elCoordinadorDeProvincias.ListarProvincias();
-          
-         
+
+
             return View(laDireccionDelPedido);
         }
 
         [HttpPost]
-        [Route("DireccionesParaPedidos/Agregar")]
-        public IActionResult Agregar(Modelo.DireccionPedido laDireccion)
+       
+        public  IActionResult Agregar(Modelo.DireccionPedido laDireccion)
         {
             try
             {
-               
+              
                     CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
+
+               
                     elCoordinador.Agregar(laDireccion);
                     return RedirectToAction("Mostrar");
+               
+                   
                
 
             }

@@ -10,9 +10,8 @@ namespace AsopaabiOnline.AccesoADatos
 
         public void Agregar(Modelo.DireccionPedido laDireccionDelPedido)
         {
-            GestorDeProvincias elGestorDeProvincias = new GestorDeProvincias();
-
-            Modelo.Contexto laBaseDeDatos = new Contexto();
+            
+              Modelo.Contexto laBaseDeDatos = new Contexto();
             
             laBaseDeDatos.DireccionPedido.Add(laDireccionDelPedido); 
             laBaseDeDatos.Entry(laDireccionDelPedido).State = Microsoft.EntityFrameworkCore.EntityState.Added;
@@ -27,6 +26,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select laDireccion;
             return elResultado.ToList();
         }
+      
 
         public DireccionPedido ObtenerDireccionesPorId(int id)
         {
@@ -34,6 +34,9 @@ namespace AsopaabiOnline.AccesoADatos
             var elResultado = laBaseDeDatos.DireccionPedido.Find(id);
             return elResultado;
         }
+
+        
+
 
         public void Actualizar(DireccionPedido laDireccionAActualizar)
         {
@@ -59,5 +62,7 @@ namespace AsopaabiOnline.AccesoADatos
             laBaseDeDatos.Remove(laDireccionEnlaBD).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             laBaseDeDatos.SaveChanges();
         }
+
+
     }
 }

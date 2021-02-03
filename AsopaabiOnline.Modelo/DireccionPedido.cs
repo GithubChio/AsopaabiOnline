@@ -9,25 +9,29 @@ namespace AsopaabiOnline.Modelo
     {
         public DireccionPedido()
         {
-            Pedido = new HashSet<Pedido>();
+            //Pedido = new HashSet<Pedido>();
         }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
 
         [Required(ErrorMessage ="Este campo es requerido")]
             
         [Display(Name ="Provincia")]
-       
-
         public int IdProvincia { get; set; }
+
 
         [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Cantón")]
         public int IdCanton { get; set; }
 
+
         [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Distrito")]
         public int IdDistrito { get; set; }
+
 
         [Required(ErrorMessage = "Este campo es requerido")]
         public string Detalles { get; set; }
@@ -39,18 +43,16 @@ namespace AsopaabiOnline.Modelo
         public List<Modelo.Provincia>LaListaDeProvincias { get; set; }
 
         [NotMapped]
-        public List<Modelo.Canton> LaListaDeCantones { get; set; }
-
-        [NotMapped]
-        public List<Modelo.Distrito> LaListaDeDistritos { get; set; }
 
         [ForeignKey("IdCanton")]
         public virtual Canton IdCantonNavigation { get; set; }
 
+        [NotMapped]
         [ForeignKey("IdDistrito")]
         public virtual Distrito IdDistritoNavigation { get; set; }
 
-       
+        [NotMapped]
+
         [ForeignKey("IdProvincia")]
         public virtual Provincia IdProvinciaNavigation { get; set; }
 

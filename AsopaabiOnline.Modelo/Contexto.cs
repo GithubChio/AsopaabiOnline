@@ -195,9 +195,7 @@ namespace AsopaabiOnline.Modelo
             {
                 entity.ToTable("DETALLE_PEDIDO");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Cantidad).HasColumnName("cantidad");
 
@@ -222,9 +220,7 @@ namespace AsopaabiOnline.Modelo
             {
                 entity.ToTable("DIRECCION_PEDIDO");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Detalles)
                     .IsRequired()
@@ -345,9 +341,8 @@ namespace AsopaabiOnline.Modelo
             {
                 entity.ToTable("PEDIDO");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
+
 
                 entity.Property(e => e.Estado).HasColumnName("estado");
 

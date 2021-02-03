@@ -19,7 +19,7 @@ namespace AsopaabiOnline.Modelo
         public int Id { get; set; }
 
        
-        [DataType(DataType.Date)]
+       
         [Display(Name ="Fecha de Pedido")]
         public DateTime FechaPedido { get; set; }
 

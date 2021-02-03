@@ -39,7 +39,7 @@ namespace AsopaabiOnline.AccesoADatos
             var elPedidoEnLaBD = ObtenerPedidoPorId(elPedidoAActualizar.Id);
 
             elPedidoEnLaBD.Id = elPedidoAActualizar.Id;
-            elPedidoEnLaBD.FechaPedido = elPedidoAActualizar.FechaPedido;
+           
             elPedidoEnLaBD.FechaEntrega = elPedidoAActualizar.FechaEntrega;
             elPedidoEnLaBD.Notas = elPedidoAActualizar.Notas;
             elPedidoEnLaBD.Estado = elPedidoAActualizar.Estado;

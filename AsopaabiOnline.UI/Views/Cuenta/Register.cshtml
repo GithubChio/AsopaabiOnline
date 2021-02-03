@@ -11,7 +11,7 @@
         <form method="post">
             <h4>Crear cuenta nueva</h4>
             <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
+            
             <div class="form-group">
                 <label asp-for="DniType" class="control-label">Selecionar el tipo de Identificación: </label>
                 <select id="tipoDeDni" asp-for="DniType" asp-items="Html.GetEnumSelectList<AsopaabiOnline.UI.Models.DNIType>()">
@@ -31,32 +31,32 @@
             <div class="form-group">
                 <label asp-for="FirstName"></label>
                 <input asp-for="FirstName" class="form-control" />
-
+                <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SecondName"></label>
                 <input asp-for="SecondName" class="form-control" />
-
+                <span asp-validation-for="SecondName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FirstLastName"></label>
                 <input asp-for="FirstLastName" class="form-control" />
-
+                <span asp-validation-for="FirstLastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SecondLastName"></label>
                 <input asp-for="SecondLastName" class="form-control" />
-
+                <span asp-validation-for="SecondLastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DateOfBirth"></label>
-                <input asp-for="DateOfBirth" class="form-control" />
-
+                <input asp-for="DateOfBirth" class="form-control" required/>
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email"></label>
                 <input asp-for="Email" class="form-control" />
-
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
             <div class="form-group">
@@ -69,6 +69,7 @@
                     </div>
 
                 </div>
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ConfirmPassword"></label>
@@ -80,20 +81,21 @@
                         <button id="showcontraseña" class="btn btn-primary" type="button" onclick="mostrarContraseña()"> <span class="fa fa-eye-slash icon"></span> </button>
                     </div>
                 </div>
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PhoneNumber"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-
+                <input asp-for="PhoneNumber" class="form-control"  required/>
+              
             </div>
             <div class="form-group">
                 <label asp-for="PhoneNumber2"></label>
                 <input asp-for="PhoneNumber2" class="form-control" />
-
+                <span asp-validation-for="PhoneNumber2" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ActivityType" class="control-label">Selecionar el tipo de Actividad : </label>
-                <select asp-for="ActivityType" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.TipoDeActividad>()">
+                <select asp-for="ActivityType" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.TipoDeActividad>()" required>
                     <option selected="selected" value="">Por favor seleccionar</option>
                 </select>
             </div>
@@ -104,7 +106,7 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+   
 
 
 

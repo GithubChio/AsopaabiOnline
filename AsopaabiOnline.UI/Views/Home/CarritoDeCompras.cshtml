@@ -1,0 +1,74 @@
+﻿@model AsopaabiOnline.Modelo.Producto
+
+@{ 
+    ViewBag.title = "Carrito de Compras";
+}
+
+<h4>@ViewBag.title</h4>
+
+<hr />
+
+
+<table class="table-responsive ">
+    <thead>
+    <tr>
+        <th>
+          Producto
+        </th>
+        <th >
+
+            @Html.DisplayNameFor(model => model.Precio)
+        
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cantidad)
+
+        </th>
+        <th>
+           Opciones
+        </th>
+
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var producto in @ViewBag.cart)
+        {
+        <tr>
+
+            <td>
+                <div class="col-2" >
+                   <label style="margin-right:1px;">
+
+                  <img class="card-img-bottom" src="~/imagenes/@producto.Imagen" asp-append-version="true" />
+                   </label>
+                </div>
+              
+            </td>
+
+            <td >
+                    @producto.Precio
+              
+            </td>
+
+            <td>
+                @producto.Cantidad
+            </td>
+
+            <td>
+                <a  asp-action="QuitarDelCarrito" asp-controller="Home" asp-route-id="@producto.Id">
+                    <img src="~/imagenes/Iconos/quitar.png" width="80" height="80" class="d-inline-block align-top" alt="">
+                 </a>
+            </td>
+        </tr>
+    
+
+    }
+        </tbody>
+
+
+    </table>
+
+<hr />
+<h5>Total :   @ViewBag.total</h5>
+<br />
+<hr />

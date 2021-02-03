@@ -50,17 +50,15 @@
                             </select>
                             <span asp-validation-for="IdDireccion" class="text-danger"></span>
                         </td>
-                       
+                        
 
 
-                        @*<td>
-                            <select asp-for="IdCliente" asp-items=@(new SelectList(Model.ListaDeClientes,"Id","PrimerNombre")) class="form-control" style="width:210px;" required>
-                                <option selected="selected" disabled value="">Seleccione una opción</option>
-                            </select>
+                        <td>
+                            <input asp-for="IdCliente" asp-route-id="@User.Identity.Name" class="form-control" style="width:210px;" required />
+                             
+                           
 
-                            <span asp-validation-for="IdCliente" class="text-danger"></span>
-
-                        </td>*@
+                        </td>
 
 
 

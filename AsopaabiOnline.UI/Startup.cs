@@ -46,21 +46,23 @@ namespace AsopaabiOnline.UI
             services.AddRazorPages();
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
+            services.AddSession();
 
-          /*  services.Configure<DataProtectionTokenProviderOptions>(o => o.TokenLifespan = TimeSpan.FromMinutes(1))*/;
-            services.ConfigureApplicationCookie(options => 
-            {
+            /*  services.Configure<DataProtectionTokenProviderOptions>(o => o.TokenLifespan = TimeSpan.FromMinutes(1))*/
+            ;
+            //services.ConfigureApplicationCookie(options => 
+            //{
                 
                
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromSeconds(60);
-                options.LoginPath = "/Cuenta/Login";
-                options.LogoutPath = "/Cuenta/Logout";
+            //    options.Cookie.HttpOnly = true;
+            //    options.ExpireTimeSpan = TimeSpan.FromSeconds(60);
+            //    options.LoginPath = "/Cuenta/Login";
+            //    options.LogoutPath = "/Cuenta/Logout";
                
-                options.SlidingExpiration = true;
+            //    options.SlidingExpiration = true;
 
 
-            });
+            //});
 
         }
 
@@ -79,7 +81,7 @@ namespace AsopaabiOnline.UI
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
