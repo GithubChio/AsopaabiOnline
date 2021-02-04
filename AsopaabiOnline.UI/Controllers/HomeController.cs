@@ -8,6 +8,7 @@ using AsopaabiOnline.LogicaDeNegocio;
 using AsopaabiOnline.Modelo;
 using AsopaabiOnline.UI.Helpers;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AsopaabiOnline.UI.Controllers
 {
@@ -29,6 +30,9 @@ namespace AsopaabiOnline.UI.Controllers
             return View(list);
         }
 
+
+
+
         [HttpPost]
         public IActionResult AñadirAlCarrito (int id,int cantidad)
         {
@@ -43,26 +47,32 @@ namespace AsopaabiOnline.UI.Controllers
             {
                 producto.Cantidad = cantidad;
 
-               
-                if (SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList") == null)
+               if(producto.Cantidad == 0)
                 {
+                    ViewBag.mensaje = "Agregue una cantidad";
 
-                    List<Producto> lista = new List<Producto>();
-
-                    lista.Add(producto);
-                    SessionHelper.SetObjectAsJson(HttpContext.Session, "cartList", lista);
-                  
                 }
-                else
-                {
-                     
-                    var listaActual = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");
+                else {
 
-                    var indice = siExiste(producto.Id);
-                     if ( indice != -1)
+                    if (SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList") == null)
+                    {
+
+                        List<Producto> lista = new List<Producto>();
+
+                        lista.Add(producto);
+                        SessionHelper.SetObjectAsJson(HttpContext.Session, "cartList", lista);
+
+                    }
+                    else
+                    {
+
+                        var listaActual = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");
+
+                        var indice = siExiste(producto.Id);
+                        if (indice != -1)
                         {
                             listaActual[indice].Cantidad += producto.Cantidad;
-                            listaActual.Insert(indice,producto);
+                            listaActual.Insert(indice, producto);
                             listaActual.RemoveAt(indice);
 
                         }
@@ -71,8 +81,12 @@ namespace AsopaabiOnline.UI.Controllers
                             listaActual.Add(producto);
                         }
                         SessionHelper.SetObjectAsJson(HttpContext.Session, "cartList", listaActual);
-                    
+
+                    }
+
                 }
+
+                
 
 
             }
@@ -85,6 +99,8 @@ namespace AsopaabiOnline.UI.Controllers
         [HttpGet]
         public IActionResult CarritoDeCompras()
         {
+
+    
             if (SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList") == null)
             {
 
@@ -103,15 +119,21 @@ namespace AsopaabiOnline.UI.Controllers
 
                 return View();
             }
+   
+        }
 
+        
 
-
-              
+        public JsonResult CargarDirecciones()
+        {
+            CoordinadorDeDireccionesParaPedidos coordinadorDeDirecciones = new CoordinadorDeDireccionesParaPedidos();
+          var direcciones= coordinadorDeDirecciones.ListarDirecciones();
+            return Json(new SelectList(direcciones));
         }
 
 
 
-       
+
         public IActionResult QuitarDelCarrito(int id)
         {
             List<Producto> carritoDeCompras = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");

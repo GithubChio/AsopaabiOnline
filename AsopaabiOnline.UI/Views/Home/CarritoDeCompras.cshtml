@@ -1,74 +1,127 @@
-﻿@model AsopaabiOnline.Modelo.Producto
+﻿
+@model AsopaabiOnline.Modelo.Producto
 
-@{ 
+@{
     ViewBag.title = "Carrito de Compras";
 }
 
 <h4>@ViewBag.title</h4>
 
-<hr />
 
 
-<table class="table-responsive ">
-    <thead>
-    <tr>
-        <th>
-          Producto
-        </th>
-        <th >
+<div class="table-responsive-sm">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Cantidad
 
-            @Html.DisplayNameFor(model => model.Precio)
-        
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cantidad)
+                </th>
+                <th>
+                    Producto
+                </th>
+                <th>
 
-        </th>
-        <th>
-           Opciones
-        </th>
+                    Precio
 
-    </tr>
-    </thead>
-    <tbody>
-        @foreach (var producto in @ViewBag.cart)
-        {
-        <tr>
+                </th>
 
-            <td>
-                <div class="col-2" >
-                   <label style="margin-right:1px;">
+                <th>
+                    Opciones
+                </th>
 
-                  <img class="card-img-bottom" src="~/imagenes/@producto.Imagen" asp-append-version="true" />
-                   </label>
-                </div>
-              
-            </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var producto in @ViewBag.cart)
+            {
+                <tr>
+                    <td>
+                        @producto.Cantidad
+                    </td>
 
-            <td >
-                    @producto.Precio
-              
-            </td>
 
-            <td>
-                @producto.Cantidad
-            </td>
+                    <td>
+                        <div class="col-2">
+                            <label>
 
-            <td>
-                <a  asp-action="QuitarDelCarrito" asp-controller="Home" asp-route-id="@producto.Id">
-                    <img src="~/imagenes/Iconos/quitar.png" width="80" height="80" class="d-inline-block align-top" alt="">
-                 </a>
-            </td>
-        </tr>
-    
+                                <img src="~/imagenes/@producto.Imagen" height="100" width="100" asp-append-version="true" />
+                            </label>
+                        </div>
 
-    }
+                    </td>
+
+                    <td>
+
+                        @producto.Precio
+
+
+
+                    </td>
+
+
+
+                    <td>
+                        <a asp-action="QuitarDelCarrito" asp-controller="Home" asp-route-id="@producto.Id">
+                            <img src="~/imagenes/Iconos/quitar.png" width="80" height="80" class="d-inline-block align-top" alt="">
+                        </a>
+                    </td>
+                </tr>
+
+
+            }
         </tbody>
 
 
     </table>
 
+</div>
 <hr />
 <h5>Total :   @ViewBag.total</h5>
 <br />
-<hr />
+
+
+<div class="m-4">
+    <label> Dirección</label>
+    <select id="direcciones" class="form-control" style="width:230px;" required></select>
+</div>
+
+<div class="m-4">
+    <label> Método de Pago </label>
+    <select  class="form-control" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.OpcionesDePago>()" style="width:230px;" required>
+        <option selected="selected"  disabled value="">Por favor seleccionar</option>
+    </select>
+</div>
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+
+
+    $(document).ready(function () {
+
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("CargarDirecciones")',
+
+                    dataType: 'json',
+
+                    success: function (direcciones) {
+                        $("#direcciones").append('<option value="' + -1 + '">' + "Seleccione una opción" +'</option>');
+
+                        $.each(direcciones, function (recorrer, direccion) {
+                            $("#direcciones").append('<option value="' + direccion.value + '">' + direccion.text + '</option>');
+                        });
+                    }
+
+
+                });
+
+
+
+        })
+    </script>
+
+}

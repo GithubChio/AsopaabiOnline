@@ -48,11 +48,16 @@ namespace AsopaabiOnline.Modelo
 
         [NotMapped]
         public List<Modelo.DireccionPedido> ListaDeDirecciones { get; set; }
+        [NotMapped]
 
         public virtual AspNetUsers IdClienteNavigation { get; set; }
+        [NotMapped]
         public virtual DireccionPedido IdDireccionNavigation { get; set; }
+        [NotMapped]
         public virtual ICollection<DetallePedido> DetallePedido { get; set; }
+        [NotMapped]
         public virtual ICollection<HistorialPedido> HistorialPedido { get; set; }
+        [NotMapped]
         public virtual ICollection<Pago> Pago { get; set; }
     }
 }
