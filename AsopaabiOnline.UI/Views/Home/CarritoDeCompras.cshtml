@@ -80,12 +80,12 @@
         <br />
         <hr />
         <partial model="Model.pedido" name="~/Views/Shared/_PedidoPartial.cshtml" />
-        <button id="btn_generar_pedido"  class="btn btn-info">Generar pedido></button>
+        <button id="btn_generar_pedido" type="submit" class="btn btn-info">Generar pedido></button>
 
     </form>
     <script type="text/javascript">
         $(function () {
-            $("#btn_generar_pedido").click(function () {
+            $("formCarrito").submit(function () {
               
                 $.ajax({
                     type: "POST",
