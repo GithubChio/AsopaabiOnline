@@ -8,16 +8,19 @@ using AsopaabiOnline.LogicaDeNegocio;
 using AsopaabiOnline.Modelo;
 using AsopaabiOnline.UI.Helpers;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace AsopaabiOnline.UI.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly UserManager<User> _userManager;
+        public HomeController(ILogger<HomeController> logger,UserManager<User> userManager)
         {
             _logger = logger;
+            _userManager = userManager;
         }
 
 
@@ -98,10 +101,13 @@ namespace AsopaabiOnline.UI.Controllers
                 ViewBag.cart = carritoDeCompras;
                 ViewBag.total = carritoDeCompras.Sum(producto => producto.Precio * producto.Cantidad);
 
+                CoordinadorDeDireccionesParaPedidos coordinador =new  CoordinadorDeDireccionesParaPedidos();
+                CoordinadorDeDireccionesParaPedidos coordinadorDeDireccionesParaPedidos = new CoordinadorDeDireccionesParaPedidos();
 
-
-
-                return View();
+                CartViewModel viewModel = new CartViewModel();
+                viewModel.pedido = new Pedido();
+                viewModel.pedido.ListaDeDirecciones = coordinadorDeDireccionesParaPedidos.ListarDirecciones();
+                return View(viewModel);
             }
 
 
@@ -160,10 +166,57 @@ namespace AsopaabiOnline.UI.Controllers
             return -1;
         }
 
+        [HttpPost]
+        public async Task<JsonResult> GenerarPedido(Pedido pedido)
+        {
+            List<Producto> carritoDeCompras = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            using (var db = new Contexto())
+            {
+                using (var dbContextTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        pedido.Estado = EstadoDePedido.Reciente;
+                        pedido.FechaPedido = DateTime.Now;
+                        pedido.IdCliente = user.Id;
+                        db.Pedido.Add(pedido);
+                        db.Entry(pedido).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                        db.SaveChanges();
+                        dbContextTransaction.Commit();
+                        int id = pedido.Id;
+                    }
+                    catch (Exception)
+                    {
+                        dbContextTransaction.Rollback();
+                    }
+                }
+            }
 
 
+            /*using (var db = new Contexto())
+            {
+                int i = 0;
+                List<DetallePedido> detallePedido = new List<DetallePedido>();
+                foreach (var product in carritoDeCompras)
+                {
+                     i++;
+                    var detalle = new DetallePedido();
+                    detalle.Id = i;
+                    detalle.Cantidad = product.Cantidad;
+                    detalle.IdPedido = 1;
+                    detalle.IdProducto = product.Id;
+                    detallePedido.Add(detalle);
+                    
+                    
 
+                }
+                 db.DetallePedido.AddRange(detallePedido);
+                 db.SaveChanges();
+            }*/
+            return null;
 
-
+        }
     }
 }

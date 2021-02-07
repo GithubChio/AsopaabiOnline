@@ -40,7 +40,7 @@ namespace AsopaabiOnline.Modelo
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseLazyLoadingProxies(useLazyLoadingProxies: true).UseSqlServer("Server=DESKTOP-GID5PN2;Database=ASOPAABI_ONLINE;User ID=sa;Password=1234");
+                optionsBuilder.UseLazyLoadingProxies(useLazyLoadingProxies: true).UseSqlServer("Server=DESKTOP-GID5PN2;Database=ASOPAABI_ONLINE;User ID=sa;Password=1234;");
             }
         }
 
@@ -294,7 +294,7 @@ namespace AsopaabiOnline.Modelo
             {
                 entity.ToTable("HISTORIAL_PEDIDO");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.IdCliente)
                     .IsRequired()
@@ -320,9 +320,7 @@ namespace AsopaabiOnline.Modelo
             {
                 entity.ToTable("PAGO");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.IdPedido).HasColumnName("id_Pedido");
 
@@ -342,7 +340,6 @@ namespace AsopaabiOnline.Modelo
                 entity.ToTable("PEDIDO");
 
                 entity.Property(e => e.Id).HasColumnName("id");
-
 
                 entity.Property(e => e.Estado).HasColumnName("estado");
 

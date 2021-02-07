@@ -6,38 +6,39 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Bienvenidos a Asopaabi Online </h1>
+    <h4 class="display-4">Bienvenidos a Asopaabi Online </h4>
 </div>
 
 <div class="container">
+   
     <div class="row">
-        @using (Html.BeginForm())
-        {
-            @for (int product = 0; product < Model.Count; product++)
-            {
-                <div class="col-4">
-                    <div class="card">
-                        <img class="card-img-top" height="200" src="~/imagenes/@Model[product].Imagen" asp-append-version="true" />
-                        <div class="card-body">
-                           <h5 name="@Model[product].Nombre" class="card-title">@Model[product].Nombre  </h5>
-                             @Model[product].Precio
-                            <p class="card-text">@Model[product].UnidadDeMedida</p>
-                            
-                            <input name="cantidad"   min="0" style="width:50px;float:right; right:0;" type="number" />
-                          
-                            <div>
 
-                                <button type="submit" style="border-radius:25px;" asp-controller="home" asp-action="AñadirAlCarrito" asp-route-id="@Model[product].Id" class="btn btn-primary@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible ? "disabled" : "")">Agregar</button>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Estado: @Model[product].Estado.ToString()</small>
+        @for (int product = 0; product < Model.Count; product++)
+        {
+        <form class="col-4" action="AñadirAlCarrito" method="post" >
+            <div class="">
+                <div class="card">
+                    <img class="card-img-top" height="200" src="~/imagenes/@Model[product].Imagen" asp-append-version="true" />
+                    <div class="card-body">
+                        <h5 name="@Model[product].Nombre" class="card-title">@Model[product].Nombre  </h5>
+                        @Model[product].Precio
+                        <p class="card-text">@Model[product].UnidadDeMedida</p>
+
+                        <input id="@product" name="cantidad" min="0" style="width:50px;float:right; right:0;" type="number" />
+
+                        <div>
+
+                            <button type="submit" style="border-radius:25px;" asp-controller="home" asp-action="AñadirAlCarrito" asp-route-id="@Model[product].Id" class="btn btn-primary@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible ? "disabled" : "")">Agregar</button>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Estado: @Model[product].Estado.ToString()</small>
+                    </div>
                 </div>
-            }
+            </div>
+        </form>
         }
-        </div>
+    </div>
 </div>
 
 

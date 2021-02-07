@@ -16,6 +16,7 @@ namespace AsopaabiOnline.Modelo
         }
 
         [Key]
+
         public int Id { get; set; }
 
        

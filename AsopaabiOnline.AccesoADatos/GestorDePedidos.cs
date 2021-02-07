@@ -88,6 +88,5 @@ namespace AsopaabiOnline.AccesoADatos
             laBaseDeDatos.Remove(elPedidoEnLaBD).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             laBaseDeDatos.SaveChanges();
         }
-    
     }
 }

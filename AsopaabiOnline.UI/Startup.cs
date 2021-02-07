@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using AsopaabiOnline.UI.Services;
 using AsopaabiOnline.UI.Models;
 using System;
+using Newtonsoft.Json;
 
 namespace AsopaabiOnline.UI
 {
@@ -29,8 +30,13 @@ namespace AsopaabiOnline.UI
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson(options => {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
             services.AddMvc();
+
+
+
 
             //services.AddDbContext<Contexto>(options =>
             //       options.UseSqlServer(
@@ -39,7 +45,7 @@ namespace AsopaabiOnline.UI
             services.AddDbContext<Data.ApplicationDbContext>(options =>
                    options.UseSqlServer(
                        Configuration.GetConnectionString("DefaultConnection")));
-
+           
             services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
                .AddEntityFrameworkStores<Data.ApplicationDbContext>().AddDefaultTokenProviders();
             

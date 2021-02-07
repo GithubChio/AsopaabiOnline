@@ -20,7 +20,7 @@ namespace AsopaabiOnline.UI.Controllers
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IEmailSender emailSender;
-        private readonly string DefaultRoleName = "Cliente";
+        private readonly string DefaultRoleName = "Administrador";
 
         public CuentaController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager, IEmailSender emailSender)
         {
