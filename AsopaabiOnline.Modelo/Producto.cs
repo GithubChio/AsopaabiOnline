@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace AsopaabiOnline.Modelo
 {
@@ -51,6 +52,7 @@ namespace AsopaabiOnline.Modelo
 
 
         [NotMapped]
+        [JsonIgnore]
         public virtual ICollection<DetallePedido> DetallePedido { get; set; }
     }
 }

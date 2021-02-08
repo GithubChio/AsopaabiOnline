@@ -1,5 +1,4 @@
-﻿
-@model AsopaabiOnline.Modelo.Producto
+﻿@model AsopaabiOnline.UI.Models.CartViewModel
 
 @{
     ViewBag.title = "Carrito de Compras";
@@ -7,121 +6,104 @@
 
 <h4>@ViewBag.title</h4>
 
-
-
-<div class="table-responsive-sm">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Cantidad
-
-                </th>
-                <th>
-                    Producto
-                </th>
-                <th>
-
-                    Precio
-
-                </th>
-
-                <th>
-                    Opciones
-                </th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var producto in @ViewBag.cart)
-            {
-                <tr>
-                    <td>
-                        @producto.Cantidad
-                    </td>
-
-
-                    <td>
-                        <div class="col-2">
-                            <label>
-
-                                <img src="~/imagenes/@producto.Imagen" height="100" width="100" asp-append-version="true" />
-                            </label>
-                        </div>
-
-                    </td>
-
-                    <td>
-
-                        @producto.Precio
-
-
-
-                    </td>
-
-
-
-                    <td>
-                        <a asp-action="QuitarDelCarrito" asp-controller="Home" asp-route-id="@producto.Id">
-                            <img src="~/imagenes/Iconos/quitar.png" width="80" height="80" class="d-inline-block align-top" alt="">
-                        </a>
-                    </td>
-                </tr>
-
-
-            }
-        </tbody>
-
-
-    </table>
-
-</div>
 <hr />
-<h5>Total :   @ViewBag.total</h5>
-<br />
+<div>
+    <form action="/Home/GenerarPedido" method="post" id="formCarrito">
+
+        <table class="table-responsive " style="table-layout: fixed;">
+            <thead>
+                <tr>
+                    <th>
+                        Producto
+                    </th>
+                    <th>
+
+                        @Html.DisplayNameFor(model => model.producto.Precio)
+
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.producto.Cantidad)
+
+                    </th>
+                    <th>
+                        Opciones
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var producto in @ViewBag.cart)
+                {
+                    <tr>
+
+                        <td>
+                            <div class="col-2">
+                                <label style="margin-right:1px;">
+
+                                    <img class="card-img-bottom" src="~/imagenes/@producto.Imagen" asp-append-version="true" />
+                                </label>
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <div class="col-2">
+                                @producto.Precio
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <div class="col-2">
+                                @producto.Cantidad
+                            </div>
+                        </td>
+
+                        <td>
+
+                            <a asp-action="QuitarDelCarrito" asp-controller="Home" asp-route-id="@producto.Id">
+                                <img src="~/imagenes/Iconos/quitar.png" width="50" height="50" class="d-inline-block align-top" alt="">
+                            </a>
+
+                        </td>
+                    </tr>
 
 
-<div class="m-4">
-    <label> Dirección</label>
-    <select id="direcciones" class="form-control" style="width:230px;" required></select>
-</div>
-
-<div class="m-4">
-    <label> Método de Pago </label>
-    <select  class="form-control" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.OpcionesDePago>()" style="width:230px;" required>
-        <option selected="selected"  disabled value="">Por favor seleccionar</option>
-    </select>
-</div>
+                }
+            </tbody>
 
 
+        </table>
 
-@section Scripts{
+        <hr />
+        <input hidden value="@ViewBag.total" name="total"  class="form-control"/>
+        <h5>Total :   @ViewBag.total</h5>
+        <br />
+        <hr />
+        <partial model="Model.pedido" name="~/Views/Shared/_PedidoPartial.cshtml" />
+        <button id="btn_generar_pedido" type="submit" class="btn btn-info">Generar pedido></button>
+
+    </form>
     <script type="text/javascript">
-
-
-
-    $(document).ready(function () {
-
+        $(function () {
+            $("formCarrito").submit(function () {
+              
                 $.ajax({
-                    type: 'GET',
-                    url: '@Url.Action("CargarDirecciones")',
-
-                    dataType: 'json',
-
-                    success: function (direcciones) {
-                        $("#direcciones").append('<option value="' + -1 + '">' + "Seleccione una opción" +'</option>');
-
-                        $.each(direcciones, function (recorrer, direccion) {
-                            $("#direcciones").append('<option value="' + direccion.value + '">' + direccion.text + '</option>');
-                        });
-                    }
-
-
+                    type: "POST",
+                    url: "/Home/GenerarPedido",
+                    data: $('#formCarrito').serialize(),
+                    success: function (response) {
+                        alert("Hello: " + response.Name + " .\nCurrent Date and Time: " + response.DateTime);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                   }
                 });
-
-
-
-        })
+            });
+        });
     </script>
+</div>
 
-}

@@ -45,7 +45,7 @@
                             <span asp-validation-for="Notas" class="text-danger"></span>
                         </td>
                         <td>
-                            <select asp-for="IdDireccion" asp-items=@(new SelectList(Model.ListaDeDirecciones,"Id","Id")) class="form-control" style="width:230px;" required>
+                            <select asp-for="IdDireccion" asp-items=@(new SelectList(Model.ListaDeDirecciones,"Id","Detalles")) class="form-control" style="width:230px;" required>
                                 <option selected="selected" disabled value="">Seleccione una opción</option>
                             </select>
                             <span asp-validation-for="IdDireccion" class="text-danger"></span>

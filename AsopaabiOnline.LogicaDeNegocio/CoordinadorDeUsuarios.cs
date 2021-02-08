@@ -13,7 +13,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
             GestorDeUsuarios elGestor = new GestorDeUsuarios();
             return elGestor.ObtenerListaDeUsuarios();
         }
-        public Modelo.AspNetUsers ObtenerUsuarioPorId(int id)
+        public Modelo.AspNetUsers ObtenerUsuarioPorId(string id)
         {
             GestorDeUsuarios elGestor = new GestorDeUsuarios();
             return elGestor.ObtenerUsuarioPorId(id);

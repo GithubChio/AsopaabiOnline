@@ -1,0 +1,45 @@
+﻿@model AsopaabiOnline.Modelo.Pedido
+
+<h3> Detalles del pedido </h3>
+<hr />
+<br />
+<div class="row">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-3">
+        <label asp-for="FechaEntrega" class="control-label"></label>
+        <input asp-for="FechaEntrega" class="form-control" required />
+        <span asp-validation-for="FechaEntrega" class="text-danger"></span>
+    </div>
+    <div class="col-3">
+        <label asp-for="Notas" class="control-label"></label>
+        <textarea asp-for="Notas" class="form-control" required></textarea>
+        <span asp-validation-for="Notas" class="text-danger"></span>
+    </div>
+    <div class="col-3">
+        <label asp-for="IdDireccion" class="control-label">Direcciones</label>
+        <select asp-for="IdDireccion" asp-items=@(new SelectList(Model.ListaDeDirecciones,"Id","Detalles")) class="form-control" required>
+            <option selected="selected" disabled value="">Seleccione una opción</option>
+        </select>
+        <span asp-validation-for="IdDireccion" class="text-danger"></span>
+    </div>
+    <div class="col-3">
+        <label asp-for="TipoPago" class="control-label">Metodos de pago</label>
+        <select asp-for="TipoPago" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.OpcionesDePago>()" class="form-control" required>
+            <option selected="selected" disabled>Seleccione una opción</option>
+        </select>
+        <span asp-validation-for="TipoPago" class="text-danger"></span>
+
+    </div>
+  
+
+    <hr />
+
+    <br />
+
+</div>
+   
+
+       
+  
+
+   

@@ -42,22 +42,22 @@ namespace AsopaabiOnline.Modelo
         [NotMapped]
         public List<Modelo.Provincia>LaListaDeProvincias { get; set; }
 
-        [NotMapped]
+       
 
         [ForeignKey("IdCanton")]
         public virtual Canton IdCantonNavigation { get; set; }
 
-        [NotMapped]
+       
         [ForeignKey("IdDistrito")]
         public virtual Distrito IdDistritoNavigation { get; set; }
 
-        [NotMapped]
+      
 
         [ForeignKey("IdProvincia")]
         public virtual Provincia IdProvinciaNavigation { get; set; }
 
 
-        [NotMapped]
+       
         public virtual ICollection<Pedido> Pedido { get; set; }
 
        

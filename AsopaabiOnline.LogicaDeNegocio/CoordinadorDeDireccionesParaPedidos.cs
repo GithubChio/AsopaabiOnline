@@ -23,21 +23,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
            return  elGestor.ListarDirecciones();
         }
         
-       //public bool SiVacio()
-       // {
-       //     GestorDeDireccionesParaPedidos gestorDeDirecciones = new GestorDeDireccionesParaPedidos();
-       //     var listaDeDirecciones = gestorDeDirecciones.ListarDirecciones();
-
-       //     if (listaDeDirecciones.Count == 0)
-       //     {
-       //         return true;
-       //     }
-       //     else
-       //     {
-       //         return false;
-       //     }
-
-       // }
+      
 
         public void Actualizar(Modelo.DireccionPedido laDireccion)
         {
