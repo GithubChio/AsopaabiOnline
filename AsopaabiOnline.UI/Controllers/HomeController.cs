@@ -167,38 +167,34 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GenerarPedido(Pedido pedido)
+        public async Task<IActionResult> GenerarPedido(Pedido pedido,float total)
         {
             List<Producto> carritoDeCompras = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var db = new Contexto();
-            int idPedido = await InsertPedido(pedido, db, user);
-
-
+            int idPedido = await InsertPedidoAsync(pedido, db, user);
             if(idPedido != 0)
             {
-             
-                List<DetallePedido> detallePedido = new List<DetallePedido>();
-                foreach (var product in carritoDeCompras)
-                {
-         
-                    var detalle = new DetallePedido();
-                    detalle.Cantidad = product.Cantidad;
-                    detalle.IdPedido = idPedido;
-                    detalle.IdProducto = product.Id;
-                    detallePedido.Add(detalle);
-
-                }
-                await db.DetallePedido.AddRangeAsync(detallePedido);
-                await db.SaveChangesAsync();
+              bool seGuardoPago = await InsertPago(db, idPedido, pedido,total);
+                var d = seGuardoPago;
             }
+            bool seGuardoDetalle = idPedido == 0 ? false :  await InsertDetallePedidoAsync(carritoDeCompras, idPedido, db);
 
-     
-            
+            if (seGuardoDetalle)
+            {
+                HistorialPedido historialPedido = new HistorialPedido();
+                Pedido existePedido = db.Pedido.Find(idPedido);
+                historialPedido.IdCliente = existePedido.IdCliente;
+                historialPedido.IdPedido = existePedido.Id;
+                db.HistorialPedido.Add(historialPedido);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Tienda");
+
+            }
             return RedirectToAction("CarritoDeCompras");
 
         }
-        private async Task<int> InsertPedido(Pedido pedido, Contexto db, User user)
+        private async Task<int> InsertPedidoAsync(Pedido pedido, Contexto db, User user)
         {
             using (var dbContextTransaction = db.Database.BeginTransaction())
             {
@@ -220,6 +216,62 @@ namespace AsopaabiOnline.UI.Controllers
                 }
             }
             return 0;
+        }
+        private async Task<bool> InsertDetallePedidoAsync(List<Producto> carritoDeCompras,int idPedido,Contexto db)
+        {
+            using (var dbContextTransaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    List<DetallePedido> detallePedido = new List<DetallePedido>();
+                    foreach (var product in carritoDeCompras)
+                    {
+
+                        var detalle = new DetallePedido();
+                        detalle.Cantidad = product.Cantidad;
+                        detalle.IdPedido = idPedido;
+                        detalle.IdProducto = product.Id;
+                        detallePedido.Add(detalle);
+
+                    }
+                    await db.DetallePedido.AddRangeAsync(detallePedido);
+                    await db.SaveChangesAsync();
+                    await dbContextTransaction.CommitAsync();
+                    SessionHelper.SetObjectAsJson(HttpContext.Session, "cartList", null);
+                    return true;
+                }
+                catch (Exception)
+                {
+                    dbContextTransaction.Rollback();
+
+                }
+            }
+            return false;
+        }
+        private async Task<bool> InsertPago(Contexto db,int idPedido,Pedido pedido,float total)
+        {
+            using (var dbContextTransaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    Pago pago = new Pago();
+                    pago.IdPedido = idPedido;
+                    pago.Monto = total;
+                    pago.OpcionesDePago = pedido.TipoPago;
+                    db.Pago.Add(pago);
+                    await db.SaveChangesAsync();
+                    await dbContextTransaction.CommitAsync();
+
+                    return true;
+
+                }
+                catch (Exception)
+                {
+                    dbContextTransaction.Rollback();
+
+                }
+            }
+            return false;
         }
     }
 }

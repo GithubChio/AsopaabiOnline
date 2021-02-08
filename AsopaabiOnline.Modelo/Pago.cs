@@ -8,7 +8,7 @@ namespace AsopaabiOnline.Modelo
         public int Id { get; set; }
         public int IdPedido { get; set; }
         public int OpcionesDePago { get; set; }
-        public int Monto { get; set; }
+        public float Monto { get; set; }
 
         public virtual Pedido IdPedidoNavigation { get; set; }
     }

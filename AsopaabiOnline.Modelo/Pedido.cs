@@ -36,8 +36,8 @@ namespace AsopaabiOnline.Modelo
 
         [Required(ErrorMessage = "El estado es requerido")]
         public EstadoDePedido Estado { get; set; }
-
-       
+        [NotMapped]
+        public int TipoPago { get; set; }
      
         [Display(Name ="Id de Direccion")]
         public int IdDireccion { get; set; }

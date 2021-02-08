@@ -52,6 +52,7 @@ namespace AsopaabiOnline.Modelo
 
 
         [NotMapped]
+        [JsonIgnore]
         public virtual ICollection<DetallePedido> DetallePedido { get; set; }
     }
 }

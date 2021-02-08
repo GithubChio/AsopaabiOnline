@@ -23,13 +23,14 @@
         <span asp-validation-for="IdDireccion" class="text-danger"></span>
     </div>
     <div class="col-3">
-        <label asp-for="Pago" class="control-label">Metodos de pago</label>
-        <select asp-for="Pago" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.OpcionesDePago>()" class="form-control" required>
+        <label asp-for="TipoPago" class="control-label">Metodos de pago</label>
+        <select asp-for="TipoPago" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.OpcionesDePago>()" class="form-control" required>
             <option selected="selected" disabled>Seleccione una opción</option>
         </select>
-        <span asp-validation-for="Pago" class="text-danger"></span>
+        <span asp-validation-for="TipoPago" class="text-danger"></span>
 
     </div>
+  
 
     <hr />
 
