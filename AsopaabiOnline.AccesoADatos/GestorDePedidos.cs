@@ -79,6 +79,8 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+       
+
         public void Eliminar(Pedido elPedidoAEliminar)
         {
             var laBaseDeDatos = new Contexto();

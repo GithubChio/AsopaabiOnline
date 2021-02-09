@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace AsopaabiOnline.Modelo
 {
     public partial class Pedido
@@ -22,6 +23,7 @@ namespace AsopaabiOnline.Modelo
        
        
         [Display(Name ="Fecha de Pedido")]
+        [DataType(DataType.Date)]
         public DateTime FechaPedido { get; set; }
 
        
@@ -39,11 +41,11 @@ namespace AsopaabiOnline.Modelo
         [NotMapped]
         public int TipoPago { get; set; }
      
-        [Display(Name ="Id de Direccion")]
+        [Display(Name ="Direccion")]
         public int IdDireccion { get; set; }
 
        
-        [Display(Name = "Id de Cliente")]
+        [Display(Name = " Cliente")]
         public string IdCliente { get; set; }
 
 

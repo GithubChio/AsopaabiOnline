@@ -230,6 +230,11 @@ namespace AsopaabiOnline.Modelo
 
                 entity.Property(e => e.IdCanton).HasColumnName("id_Canton");
 
+                entity.Property(e => e.IdCliente)
+                    .IsRequired()
+                    .HasColumnName("id_Cliente")
+                    .HasMaxLength(450);
+
                 entity.Property(e => e.IdDistrito).HasColumnName("id_Distrito");
 
                 entity.Property(e => e.IdProvincia).HasColumnName("id_Provincia");
@@ -239,6 +244,12 @@ namespace AsopaabiOnline.Modelo
                     .HasForeignKey(d => d.IdCanton)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DIRECCION_PEDIDO_CANTON");
+
+                entity.HasOne(d => d.IdClienteNavigation)
+                    .WithMany(p => p.DireccionPedido)
+                    .HasForeignKey(d => d.IdCliente)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_DIRECCION_PEDIDO_AspNetUsers");
 
                 entity.HasOne(d => d.IdDistritoNavigation)
                     .WithMany(p => p.DireccionPedido)

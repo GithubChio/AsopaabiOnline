@@ -14,59 +14,35 @@
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            <div class="form-group">
+                <label asp-for="IdProvincia" class="control-label"></label>
+                <select id="provincias" asp-for="IdProvincia" asp-items=@(new SelectList(Model.LaListaDeProvincias,"Id","Nombre")) class="form-control" style="width:230px;" required>
+                    <option selected="selected" disabled value="">Seleccione una opción</option>
+                </select>
 
+                <span asp-validation-for="IdProvincia" class="text-danger"></span>
+            </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            <label asp-for="IdProvincia" class="control-label"></label>
-                        </th>
-                        <th>
-                            <label asp-for="IdCanton" class="control-label" style="width:210px;"></label>
-                        </th>
-                        <th>
-                            <label asp-for="IdDistrito" class="control-label" style="width:210px;"></label>
-                        </th>
-                        <th>
-                            <label asp-for="Detalles" class="control-label"></label>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <select id="provincias" asp-for="IdProvincia" asp-items=@(new SelectList(Model.LaListaDeProvincias,"Id","Nombre")) class="form-control" style="width:230px;" required>
-                                <option selected="selected" disabled value="">Seleccione una opción</option>
-                            </select>
-                            
-                            <span asp-validation-for="IdProvincia" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="IdCanton" class="control-label" style="width:210px;"></label>
+                <select id="cantones" asp-for="IdCanton" class="form-control" required>
+                </select>
+                <span asp-validation-for="IdCanton" class="text-danger"></span>
+            </div>
 
-                        </td>
-                        <td>
+            <div class="form-group">
+                <label asp-for="IdDistrito" class="control-label" style="width:210px;"></label>
+                <select id="distritos" asp-for="IdDistrito" class="form-control" required>
+                </select>
+                <span asp-validation-for="IdDistrito" class="text-danger"></span>
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="Detalles" class="control-label"></label>
+                <textarea asp-for="Detalles" class="form-control" style="width:210px; height:80px;" required></textarea>
+                <span asp-validation-for="Detalles" class="text-danger"></span>
+            </div>
 
-                            <select id="cantones" asp-for="IdCanton" class="form-control" required>
-                              
-                            </select>
-                            <span asp-validation-for="IdCanton" class="text-danger"></span>
-                        </td>
-                        <td>
-                            <select id="distritos"  asp-for="IdDistrito" class="form-control" required>
-                            
-                            </select>
-                            <span asp-validation-for="IdDistrito" class="text-danger"></span>
-                        </td>
-
-                        <td>
-                            <textarea asp-for="Detalles" class="form-control" style="width:210px; height:80px;" required></textarea>
-                            <span asp-validation-for="Detalles" class="text-danger"></span>
-                        </td>
-
-                    </tr>
-                </tbody>
-            </table>
-            <hr />
-            <br />
             <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-outline-success" />
                 <a class="btn btn-outline-secondary" asp-action="Mostrar">Volver</a>

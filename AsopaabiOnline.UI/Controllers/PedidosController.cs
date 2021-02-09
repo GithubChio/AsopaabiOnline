@@ -4,40 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AsopaabiOnline.LogicaDeNegocio;
+using Microsoft.AspNetCore.Identity;
+using AsopaabiOnline.UI.Models;
 
 namespace AsopaabiOnline.UI.Controllers
 {
     public class PedidosController : Controller
     {
-        [HttpGet]
-        [Route("Pedidos/Agregar")]
-        public IActionResult Agregar()
+        private readonly UserManager<User> userManager;
+        public PedidosController(UserManager<User> userManager)
         {
-            Modelo.Pedido elPedido = new Modelo.Pedido();
-            CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
-            elPedido.ListaDeDirecciones = elCoordinador.ListarDirecciones();
-
-           
-            
-            //elPedido.ListaDeClientes = coordinadorDeClientes.ListarClientes();
-            return View(elPedido);
-        }
-
-        [HttpPost]
-        [Route("Pedidos/Agregar")]
-        public IActionResult Agregar(Modelo.Pedido elPedido)
-        {
-            try
-            {
-                CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
-                elCoordinador.Agregar(elPedido);
-                return RedirectToAction("Mostrar");
-
-            }
-            catch
-            {
-                return View();
-            }
+            this.userManager= userManager;
         }
 
 

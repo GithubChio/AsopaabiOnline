@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AsopaabiOnline.Modelo
 {
     public partial class HistorialPedido
     {
         public int Id { get; set; }
+
+
+        [Display(Name = "Pedidos")]
         public int IdPedido { get; set; }
         public string IdCliente { get; set; }
 

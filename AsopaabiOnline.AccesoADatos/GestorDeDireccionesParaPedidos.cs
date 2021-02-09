@@ -18,12 +18,14 @@ namespace AsopaabiOnline.AccesoADatos
             laBaseDeDatos.SaveChanges();
         }
 
-        public List<DireccionPedido> ListarDirecciones()
+        public List<DireccionPedido> ListarDirecciones(string idCliente)
         {
             Contexto laBaseDeDatos = new Contexto();
             var elResultado = from laDireccion in laBaseDeDatos.DireccionPedido
-
+                              where laDireccion.IdCliente == idCliente
+              
                               select laDireccion;
+
             return elResultado.ToList();
         }
       

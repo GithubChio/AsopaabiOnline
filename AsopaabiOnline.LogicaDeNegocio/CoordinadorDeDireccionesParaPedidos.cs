@@ -16,11 +16,11 @@ namespace AsopaabiOnline.LogicaDeNegocio
         }
 
      
-        public List<Modelo.DireccionPedido> ListarDirecciones()
+        public List<Modelo.DireccionPedido> ListarDirecciones(string idCliente)
         {
             GestorDeDireccionesParaPedidos elGestor = new GestorDeDireccionesParaPedidos();
-
-           return  elGestor.ListarDirecciones();
+          
+            return  elGestor.ListarDirecciones(idCliente);
         }
         
       

@@ -36,7 +36,7 @@ namespace AsopaabiOnline.Modelo
         [Required(ErrorMessage = "Este campo es requerido")]
         public string Detalles { get; set; }
 
-
+        public string IdCliente { get; set; }
 
 
         [NotMapped]
@@ -47,7 +47,10 @@ namespace AsopaabiOnline.Modelo
         [ForeignKey("IdCanton")]
         public virtual Canton IdCantonNavigation { get; set; }
 
-       
+        [ForeignKey("IdCliente")]
+        public virtual AspNetUsers IdClienteNavigation { get; set; }
+        
+
         [ForeignKey("IdDistrito")]
         public virtual Distrito IdDistritoNavigation { get; set; }
 

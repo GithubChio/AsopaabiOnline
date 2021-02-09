@@ -6,11 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 using AsopaabiOnline.LogicaDeNegocio;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
+using AsopaabiOnline.UI.Models;
 
 namespace AsopaabiOnline.UI.Controllers
 {
     public class DireccionesParaPedidosController : Controller
     {
+        private readonly UserManager<User> userManager;
+        public DireccionesParaPedidosController(UserManager<User> userManager)
+        {
+            this.userManager = userManager;
+
+        }
+
+
+
         [HttpGet]
     
         public IActionResult Agregar()
@@ -29,14 +39,14 @@ namespace AsopaabiOnline.UI.Controllers
 
         [HttpPost]
        
-        public  IActionResult Agregar(Modelo.DireccionPedido laDireccion)
+        public async Task<IActionResult> Agregar(Modelo.DireccionPedido laDireccion)
         {
             try
             {
-              
-                    CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
 
-               
+                   var user = await userManager.GetUserAsync(HttpContext.User);
+                   CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
+                    laDireccion.IdCliente = user.Id;
                     elCoordinador.Agregar(laDireccion);
                     return RedirectToAction("Mostrar");
                
@@ -72,12 +82,13 @@ namespace AsopaabiOnline.UI.Controllers
 
         [HttpGet]
         [Route("DireccionesParaPedidos/Mostrar")]
-        public IActionResult Mostrar()
+        public async Task<IActionResult> Mostrar()
         {
             CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
-          
-            
-            return  View(elCoordinador.ListarDirecciones());
+            var user = await userManager.GetUserAsync(HttpContext.User);
+
+
+            return  View(elCoordinador.ListarDirecciones(user.Id));
         }
 
 

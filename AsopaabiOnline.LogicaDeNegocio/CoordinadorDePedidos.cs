@@ -71,6 +71,8 @@ namespace AsopaabiOnline.LogicaDeNegocio
             elGestor.Actualizar(elPedidoACambiar);
         }
 
+      
+
         public List<Pedido> ListarPedidosRecientes()
         {
             GestorDePedidos elGestor = new GestorDePedidos();

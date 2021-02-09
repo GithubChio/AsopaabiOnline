@@ -86,8 +86,9 @@ namespace AsopaabiOnline.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult CarritoDeCompras()
+        public async Task<IActionResult> CarritoDeComprasAsync()
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
             if (SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList") == null)
             {
 
@@ -106,7 +107,7 @@ namespace AsopaabiOnline.UI.Controllers
 
                 CartViewModel viewModel = new CartViewModel();
                 viewModel.pedido = new Pedido();
-                viewModel.pedido.ListaDeDirecciones = coordinadorDeDireccionesParaPedidos.ListarDirecciones();
+                viewModel.pedido.ListaDeDirecciones = coordinadorDeDireccionesParaPedidos.ListarDirecciones(user.Id);
                 return View(viewModel);
             }
 

@@ -60,8 +60,8 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="~/imagenes/Iconos/online-shopping.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                            Tienda
+                         
+                           Pedidos
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
@@ -70,6 +70,7 @@
                             </a>
 
                             <div class="dropdown-divider"></div>
+                           
                             <a class="dropdown-item" asp-action="Mostrar" asp-controller="HistorialPedidos">Historial</a>
                         </div>
 
@@ -97,8 +98,13 @@
                             <img src="~/imagenes/Iconos/alimentos-saludables.png" width="30" height="30" class="d-inline-block align-top" alt="">
                             Productos
                         </a>
+                            <a class="dropdown-item" asp-controller="Pedidos" asp-action="Mostrar">
+                                <img src="~/imagenes/Iconos/anadir-al-carrito.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                Pedidos
+                            </a>
+                           
                        
-                        <a class="dropdown-item" asp-action="Mostrar" asp-controller="HistorialPedidos">Historial</a>
+                      
                     </div>
                         </li>
 
