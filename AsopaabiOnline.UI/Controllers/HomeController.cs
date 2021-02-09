@@ -186,12 +186,10 @@ namespace AsopaabiOnline.UI.Controllers
             {
                 try
                 {
-                    pedido.Estado = EstadoDePedido.Reciente;
-                    pedido.FechaPedido = DateTime.Now;
+                    CoordinadorDePedidos coordinadorDePedidos = new CoordinadorDePedidos();
+
                     pedido.IdCliente = user.Id;
-                    await db.AddAsync(pedido);
-                    db.Entry(pedido).State = Microsoft.EntityFrameworkCore.EntityState.Added;
-                    await db.SaveChangesAsync();
+                    coordinadorDePedidos.Agregar(pedido);
                     await dbContextTransaction.CommitAsync();
                     return pedido.Id;
                 }

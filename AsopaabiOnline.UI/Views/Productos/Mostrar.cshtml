@@ -6,30 +6,9 @@
 
 
 <h3>@ViewBag.Title</h3>
+<hr />
+<p> <a class="btn btn-outline-warning" asp-controller="Productos" asp-action="Agregar">Agregar</a></p>
 
-
-
-@*@if (Model.Any())
-    {
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="card mb-3 m-2" style="max-width: 490px;">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src="~/imagenes/@item.Imagen" class="card-img" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Informacion</h5>
-                            <p class="card-text">Nombre: @item.Nombre</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            <button class="btn btn-primary">Agregar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }  </div>*@
 @if (Model.Any())
 {
 

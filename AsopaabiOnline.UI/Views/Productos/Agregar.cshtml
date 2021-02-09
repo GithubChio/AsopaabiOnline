@@ -15,105 +15,44 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <br />
 
+
+            <div class="form-group">
+                
+                <input asp-for="ImageFile" type="file" class="form-control custom-file-input" accept="image/png, image/jpeg" id="laImagen" style="width:150px;" required />
+                <label asp-for="ImageFile" class="custom-file-label" for="laImagen">selecciona una imagen</label>
+
+                <span asp-validation-for="Imagen" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control"  placeholder="Ejemplo:Fresas" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnidadDeMedida" class="control-label"></label>
+                <select asp-for="UnidadDeMedida" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.UnidadesDeMedida>()" class="form-control" required>
+                    <option selected="selected" disabled value="">Seleccione una opción</option>
+                </select>
+                <span asp-validation-for="UnidadDeMedida" class="text-danger" style="width:220px;"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" placeholder="Ejemplo:Fresas" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Categoria" class="control-label"></label>
+                <select asp-for="Categoria" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.CategoriaDeProducto>()" class="form-control"  required>
+                    <option selected="selected" disabled value="">Seleccione una opción</option>
+                </select>
+                <span asp-validation-for="Categoria" class="text-danger" style="width:220px;"></span>
+            </div>
            
-
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            <label asp-for="Imagen" class="control-label" style="width:350px; margin-left:1rem"></label>
-                        </th>
-                        
-                        <th>
-                            <label asp-for="Nombre" class="control-label" style="margin-left:0rem;" ></label>
-                        </th>
-                        
-                        
-
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="col-sm-12"  >
-                                <div class="custom-file text-center">
-                                    <input asp-for="ImageFile" type="file" class="form-control custom-file-input"    accept="image/png, image/jpeg" id="laImagen" style="width:150px;"  required/>
-                                    <label asp-for="ImageFile" class="custom-file-label" for="laImagen">selecciona una imagen</label>
-
-
-                                </div>
-                            </div>
-                        </td>
-
-                        <td>
-                                <input asp-for="Nombre" class="form-control"  style="width:220px;" placeholder="Ejemplo:Fresas"/>
-                                <span asp-validation-for="Nombre" class="text-danger"></span>
-                           
-                        </td>
-                        
-                       
-
-                    </tr>
-                </tbody>
-
-            </table>
-            <br />
-            <hr />
-            <br />
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            <label asp-for="UnidadDeMedida" class="control-label" style="width:150px;margin-left:1rem"></label>
-                        </th>
-                        <th>
-                            <label asp-for="Precio" class="control-label" style="width:150px;margin-left:1rem;"></label>
-                        </th>
-
-
-
-                        <th>
-                            <label asp-for="Categoria" class="control-label" style="width:150px;margin-left:1rem"></label>
-                        </th>
-                    </tr>
-                </thead>
-
-
-                <tbody>
-                    <tr>
-                        <td>
-                            <select asp-for="UnidadDeMedida" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.UnidadesDeMedida>()" class="form-control" style="width:250px;margin-left:1rem " required>
-                                <option selected="selected" disabled value="">Seleccione una opción</option>
-                            </select>
-                            <span asp-validation-for="UnidadDeMedida" class="text-danger" style="width:220px;"></span>
-                        </td>
-                        <td>
-
-                            <input asp-for="Precio" class="form-control" style="width:200px;margin-left:1rem " placeholder="Ejemplo:₡700" />
-                            <span asp-validation-for="Precio" class="text-danger"></span>
-                        </td>
-
-                        <td>
-                            <select asp-for="Categoria" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.CategoriaDeProducto>()" class="form-control" style="width:250px;margin-left:1rem " required>
-                                <option selected="selected" disabled value="">Seleccione una opción</option>
-                            </select>
-                            <span asp-validation-for="Categoria" class="text-danger" style="width:220px;"></span>
-                        </td>
-
-
-                    </tr>
-
-                </tbody>
-            </table>
-            <br />
-            <hr />
-            <br />
             <div class="form-group col-md-9 " style="margin-left:20%; ">
 
-
-                <input type="submit" id="guardar" value="Guardar"  />
+                <input class="btn  btn-outline-info" type="submit" id="guardar" value="Guardar" />
                 <a class="btn btn-outline-secondary" asp-action="Mostrar"> Volver </a>
             </div>
 

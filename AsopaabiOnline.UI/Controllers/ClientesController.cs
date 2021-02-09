@@ -137,76 +137,7 @@ namespace AsopaabiOnline.UI.Controllers
 
         }
 
-        [HttpGet]
-
-        public async Task<IActionResult> EliminarCuenta()
-        {
-
-            var user = await userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                ViewBag.ErrorMessage = $"el usuario con el id= {User} no fue encontrado";
-                return View("Error");
-            }
-            else
-            {
-                User userToEdit = new Models.User()
-                {
-                    Id = user.Id,
-                    FirstName = user.FirstName,
-                    SecondName = user.SecondName,
-                    FirstLastName = user.FirstLastName,
-                    SecondLastName = user.SecondLastName,
-
-                    PhoneNumber = user.PhoneNumber,
-                    PhoneNumber2 = user.PhoneNumber2,
-                    ActivityType = user.ActivityType
-
-                };
-
-                return View(userToEdit);
-            }
-
-        }
-
-        [HttpPost]
-
-        public async Task<IActionResult> EliminarCuenta(User input)
-        {
-            try
-            {
-                var user = await userManager.GetUserAsync(User);
-                if (user == null)
-                {
-                   
-                    return View("Error");
-                }
-                else
-                {
-                    
-                   
-
-
-                    var elResultado = await userManager.DeleteAsync(user);
-
-                    if (elResultado.Succeeded)
-                    {
-                        await signInManager.SignOutAsync();
-                        return RedirectToAction("Register", "Cuenta");
-                    }
-                    foreach (var elError in elResultado.Errors)
-                    {
-                        ModelState.AddModelError("", elError.Description);
-                    }
-                }
-                return View(input);
-            }
-            catch
-            {
-                return View();
-            }
-
-        }
+       
 
         [HttpGet]
         public async Task<IActionResult> VerDetalles()
