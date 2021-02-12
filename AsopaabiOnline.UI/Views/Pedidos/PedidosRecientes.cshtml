@@ -65,10 +65,18 @@
                         @Html.DisplayFor(modelItem => item.Estado)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdDireccion)
+                        <label>Provincia: @item.IdDireccionNavigation.IdProvinciaNavigation.Nombre  </label>
+                        <br />
+                        <label>Cantón: @item.IdDireccionNavigation.IdCantonNavigation.Nombre  </label>
+                        <br />
+                        <label>Distrito: @item.IdDireccionNavigation.IdDistritoNavigation.Nombre  </label>
+                        <br />
+                        <label>Detalles: @item.IdDireccionNavigation.Detalles  </label>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdCliente)
+                        <label>Cliente: @item.IdDireccionNavigation.IdClienteNavigation.FullName  </label>
+                        <br />
+                        <label>Cédula: @item.IdDireccionNavigation.IdClienteNavigation.Dni  </label>
                     </td>
 
                     <td>

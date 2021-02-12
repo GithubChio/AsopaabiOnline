@@ -89,6 +89,7 @@ namespace AsopaabiOnline.UI.Controllers
         {
             if (ModelState.IsValid)
             {
+               
                 var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
@@ -100,6 +101,8 @@ namespace AsopaabiOnline.UI.Controllers
 
                     return RedirectToPage("./Lockout");
                 }
+               
+
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Intento de inicio de sesión no válido.");
@@ -111,6 +114,9 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
      
+       
+
+
         public async Task<IActionResult> LogoutAsync()
         {
             await signInManager.SignOutAsync();

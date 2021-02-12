@@ -1,0 +1,67 @@
+﻿@model IEnumerable<AsopaabiOnline.Modelo.Pago>
+
+@{
+    ViewBag.title = "Pago";
+}
+
+<h3>@ViewBag.title </h3>
+
+
+
+@if (Model.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdPedido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OpcionesDePago)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Monto)
+                </th>
+               
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var historial in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => historial.Id)
+                </td>
+                <td>
+                    <label>Id:@historial.IdPedidoNavigation.Id </label>
+                    <br />
+                    <label>Cliente: @historial.IdPedidoNavigation.IdClienteNavigation.FullName </label>
+
+                </td>
+
+                <th>
+                    @Html.DisplayFor(modelItem => historial.OpcionesDePago)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => historial.Monto)
+                </th>
+            </tr>
+            }
+
+
+
+        </tbody>
+
+
+    </table>
+
+
+}
+else
+{
+    <h3> Aún no hay pagos agregados</h3>
+}

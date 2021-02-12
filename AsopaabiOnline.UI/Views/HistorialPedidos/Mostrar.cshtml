@@ -1,6 +1,6 @@
-﻿@model   IEnumerable< AsopaabiOnline.Modelo.HistorialPedido>
+﻿@model IEnumerable<AsopaabiOnline.Modelo.HistorialPedido>
 
-@{ 
+@{
     ViewBag.title = "Historial de Pedidos";
 }
 
@@ -10,37 +10,59 @@
 
 @if (Model.Any())
 {
-<table>
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdPedido)
-            </th>
-
-
-        </tr>
-    </thead>
-    <tbody>
-
-        @foreach (var historial in Model)
-        {
+    <table>
+        <thead>
             <tr>
-                <td>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdPedido)
+                </th>
 
-                    @Html.DisplayFor(modelItem => historial.IdPedidoNavigation)
-                </td>
+                <th>
+                    Opciones
+                </th>
             </tr>
-        }
+        </thead>
+        <tbody>
+
+            @foreach (var historial in Model)
+            {
+                <tr>
+                    <td>
+
+
+                        <label>Fecha de Pedido : @historial.IdPedidoNavigation.FechaPedido </label>
+                        <br />
+                        <label>Fecha de Entrega : @historial.IdPedidoNavigation.FechaEntrega </label>
+                        <br />
+                        <label>Estado : @historial.IdPedidoNavigation.Estado </label>
+                        <br />
+                        <label>Cliente </label>
+                        <br />
+                        <label>Nombre: @historial.IdPedidoNavigation.IdClienteNavigation.FullName</label>
+                        <br />
+                        <label>Cédula: @historial.IdPedidoNavigation.IdClienteNavigation.Dni</label>
+                        <br />
+                        <label>Teléfono: @historial.IdPedidoNavigation.IdClienteNavigation.PhoneNumber</label>
+                    </td>
+
+                    <th>
+                        <a asp-action="Mostrar" asp-controller="Pagos" asp-route-id="@historial.IdPedido">Ver comprobante de pago</a>
+
+                    </th>
+
+                </tr>
+            }
 
 
 
-    </tbody>
+        </tbody>
 
 
     </table>
 
 
-
-
-
+}
+else
+{
+    <h3> Aún no hay pedidos agregados</h3>
 }

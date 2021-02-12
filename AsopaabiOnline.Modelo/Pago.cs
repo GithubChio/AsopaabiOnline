@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AsopaabiOnline.Modelo
 {
     public partial class Pago
     {
         public int Id { get; set; }
+        [Display(Name = "Pedido")]
         public int IdPedido { get; set; }
-        public int OpcionesDePago { get; set; }
+
+
+        [Display(Name = "Opciones de Pago")]
+        public OpcionesDePago OpcionesDePago { get; set; }
         public double Monto { get; set; }
 
         public virtual Pedido IdPedidoNavigation { get; set; }
