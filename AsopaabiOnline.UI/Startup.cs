@@ -54,21 +54,7 @@ namespace AsopaabiOnline.UI
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddSession();
 
-            /*  services.Configure<DataProtectionTokenProviderOptions>(o => o.TokenLifespan = TimeSpan.FromMinutes(1))*/
-            ;
-            //services.ConfigureApplicationCookie(options => 
-            //{
-                
-               
-            //    options.Cookie.HttpOnly = true;
-            //    options.ExpireTimeSpan = TimeSpan.FromSeconds(60);
-            //    options.LoginPath = "/Cuenta/Login";
-            //    options.LogoutPath = "/Cuenta/Logout";
-               
-            //    options.SlidingExpiration = true;
-
-
-            //});
+            
 
         }
 

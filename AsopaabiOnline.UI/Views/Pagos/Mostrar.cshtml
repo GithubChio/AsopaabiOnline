@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<AsopaabiOnline.Modelo.Pago>
-
+@using AsopaabiOnline.Modelo
 @{
     ViewBag.title = "Pago";
 }
@@ -10,56 +10,24 @@
 
 @if (Model.Any())
 {
-    <table>
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IdPedido)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OpcionesDePago)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Monto)
-                </th>
-               
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var historial in Model)
-            {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => historial.Id)
-                </td>
-                <td>
-                    <label>Id:@historial.IdPedidoNavigation.Id </label>
-                    <br />
-                    <label>Cliente: @historial.IdPedidoNavigation.IdClienteNavigation.FullName </label>
-
-                </td>
-
-                <th>
-                    @Html.DisplayFor(modelItem => historial.OpcionesDePago)
-                </th>
-                <th>
-                    @Html.DisplayFor(modelItem => historial.Monto)
-                </th>
-            </tr>
-            }
-
-
-
-        </tbody>
-
-
-    </table>
-
-
+    @foreach (var historial in Model)
+    {
+        <div class="card text-center">
+            <div class="card-header">
+                Comprobante de pago #@historial.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Detalles del Pago</h5>
+                <label>Cliente: @historial.IdPedidoNavigation.IdClienteNavigation.FullName </label>
+                <p class="card-text">
+                    @Html.DisplayFor(modelItem => historial.OpcionesDePago)&nbsp;&nbsp;<i class="@(historial.OpcionesDePago == OpcionesDePago.Efectivo ? "fas fa-money-bill-alt text-success":"fas fa-university text-primary")"></i>
+                </p>
+            </div>
+            <div class="card-footer text-muted">
+               Total: @Html.DisplayFor(modelItem => historial.Monto)
+            </div>
+        </div>
+    }
 }
 else
 {

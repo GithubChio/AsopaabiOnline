@@ -8,67 +8,68 @@
 <h1>@ViewBag.Title</h1>
 <hr />
 <br />
+<div class="card">
+    <dl class="row" style="margin:15px;">
 
-<dl class="row">
 
 
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DNI)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DNI)
+        </dd>
 
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.DNI) 
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.DNI)
-    </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Age)
+        </dd>
 
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.Name)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.Name)
-    </dd>
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.LastName)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.LastName)
-    </dd>
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.Age)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.Age)
-    </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
 
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.Email)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.Email)
-    </dd>
+        <dt class="col-sm-2">
+            <label>Número de teléfono principal</label>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneNumber2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber2)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ActivityType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ActivityType)
+        </dd>
 
-    <dt class="col-sm-2">
-        <label>Número de teléfono principal</label>
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.PhoneNumber)
-    </dd>
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.PhoneNumber2)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.PhoneNumber2)
-    </dd>
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.ActivityType)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.ActivityType)
-    </dd>
+    </dl>
+    <hr />
 
-</dl>
-<hr />
-
-<a asp-action="EditarPerfil" asp-controller="Clientes" asp-route-id="@User.Identity.Name">Editar </a>
+    <a style="margin:15px;" asp-action="EditarPerfil" asp-controller="Clientes" asp-route-id="@User.Identity.Name">Editar </a>
+</div>
 
 
 

@@ -124,7 +124,7 @@ namespace AsopaabiOnline.UI.Controllers
             int index = siExiste(id);
             carritoDeCompras.RemoveAt(index);
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cartList", carritoDeCompras);
-            return RedirectToAction("Tienda");
+            return RedirectToAction("CarritoDeCompras");
         }
 
 

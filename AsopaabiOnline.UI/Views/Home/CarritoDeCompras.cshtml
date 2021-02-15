@@ -6,84 +6,76 @@
 
 <h4>@ViewBag.title</h4>
 
-<hr />
-<div>
-    <form action="/Home/GenerarPedido" method="post" id="formCarrito">
 
-        <table class="table-responsive " style="table-layout: fixed;">
-            <thead>
-                <tr>
-                    <th>
-                        Producto
-                    </th>
-                    <th>
-
-                        @Html.DisplayNameFor(model => model.producto.Precio)
-
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.producto.Cantidad)
-
-                    </th>
-                    <th>
-                        Opciones
-                    </th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var producto in @ViewBag.cart)
-                {
+<div class="card">
+    <div style="margin:15px;">
+        <form action="/Home/GenerarPedido" method="post" id="formCarrito">
+            <table class="table table-stripedd">
+                <thead>
                     <tr>
-
-                        <td>
-                            <div class="col-2">
-                                <label style="margin-right:1px;">
-
-                                    <img class="card-img-bottom" src="~/imagenes/@producto.Imagen" asp-append-version="true" />
-                                </label>
-                            </div>
-
-                        </td>
-
-                        <td>
-                            <div class="col-2">
-                                @producto.Precio
-                            </div>
-
-                        </td>
-
-                        <td>
-                            <div class="col-2">
-                                @producto.Cantidad
-                            </div>
-                        </td>
-
-                        <td>
-
-                            <a asp-action="QuitarDelCarrito" asp-controller="Home" asp-route-id="@producto.Id">
-                                <img src="~/imagenes/Iconos/quitar.png" width="50" height="50" class="d-inline-block align-top" alt="">
-                            </a>
-
-                        </td>
+                        <th scope="col" width="200px">
+                            Producto
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.producto.Precio)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.producto.Cantidad)
+                        </th>
+                        <th scope="col">
+                            Opciones
+                        </th>
                     </tr>
+                </thead>
+                <tbody>
+                    @foreach (var producto in @ViewBag.cart)
+                    {
+                        <tr>
+                            <td>
+                                <div>
+                                    <label style="margin-right:1px;">
+                                        <img class="card-img-bottom" src="~/imagenes/@producto.Imagen" asp-append-version="true" />
+
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                @producto.Precio
+                            </td>
+                            <td>
+                                @producto.Cantidad
+                            </td>
+
+                            <td>
+
+                                <a  asp-action="QuitarDelCarrito" asp-controller="Home" asp-route-id="@producto.Id"><i class="fas fa-trash text-danger"></i>
+                                </a>
+
+                            </td>
 
 
-                }
-            </tbody>
+                        </tr>
+                    }
 
+                </tbody>
 
-        </table>
+            </table>
+            @if (Enumerable.Count(@ViewBag.cart) < 1)
+            {
+                <h4 style="text-align:center;">No hay productos en el carrito</h4>
 
-        <hr />
-        <input hidden value="@ViewBag.total" name="total"  class="form-control"/>
-        <h5>Total :   @ViewBag.total</h5>
-        <br />
-        <hr />
-        <partial model="Model.pedido" name="~/Views/Shared/_PedidoPartial.cshtml" />
-        <button id="btn_generar_pedido" type="submit" class="btn btn-info">Generar pedido</button>
+            }
+            <hr />
+            <input hidden value="@ViewBag.total" name="total" class="form-control" />
+            <h5>Total :   @ViewBag.total</h5>
+            <br />
+            <hr />
+            <partial model="Model.pedido" name="~/Views/Shared/_PedidoPartial.cshtml" />
+            <button style="margin-top:5%;" id="btn_generar_pedido" type="submit" class="btn btn-info  btn-block">Generar pedido</button>
 
-    </form>
+        </form>
+    </div>
+    </div>
     <script type="text/javascript">
         $(function () {
             $("formCarrito").submit(function () {
@@ -105,5 +97,5 @@
             });
         });
     </script>
-</div>
+
 

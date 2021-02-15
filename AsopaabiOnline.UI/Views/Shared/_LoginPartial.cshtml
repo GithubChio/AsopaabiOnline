@@ -6,11 +6,12 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Clientes" asp-action="Perfil"  asp-route-id="@User.Identity.Name">Hola @User.Identity.Name!</a>
+            <a class="nav-link text-dark" asp-controller="Clientes" asp-action="Perfil"  asp-route-id="@User.Identity.Name">
+                <i class="far fa-user-circle text-black"></i> Perfil</a>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-controller="Cuenta" asp-action="Logout" asp-route-returnUrl="@Url.Action("Tienda", "Home", new { usuario = "" })">
-                <button type="submit" class="nav-link btn btn-link text-dark">Cerrar Sesión</button>
+                <button type="submit" class="nav-link btn btn-link text-dark"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
             </form>
         </li>
     }
@@ -20,7 +21,7 @@
             <a class="nav-link text-dark" asp-controller="Cuenta" asp-action="Register">Registro</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Cuenta" asp-action="Login">Inicio Sesión </a>
+            <a class="nav-link text-dark" asp-controller="Cuenta" asp-action="Login"><i class="fas fa-sign-in-alt"></i> Inicio Sesión </a>
         </li>
     }
 </ul>

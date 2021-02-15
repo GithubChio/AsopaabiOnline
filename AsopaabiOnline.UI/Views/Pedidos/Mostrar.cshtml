@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AsopaabiOnline.Modelo.Pedido>
+@using AsopaabiOnline.Modelo
 
 @{
     ViewBag.Title = "Pedidos";
@@ -8,102 +9,119 @@
 
 <h3>@ViewBag.Title</h3>
 <hr />
+<a class="btn btn-success" asp-controller="Pedidos" asp-action="PedidosRecientes">Pedidos Recientes</a>
+<a class="btn btn-warning " asp-controller="Pedidos" asp-action="PedidosEnProceso">Pedidos En Proceso</a>
+<a class="btn btn-secondary" asp-controller="Pedidos" asp-action="PedidosFinalizados">Pedidos Finalizados</a><br /><br />
+<div class="card">
 
-<a class="btn btn-outline-success" asp-controller="Pedidos" asp-action="PedidosRecientes">Pedidos Recientes</a>
-<a class="btn btn-outline-info " asp-controller="Pedidos" asp-action="PedidosEnProceso">Pedidos En Proceso</a>
-<a class="btn btn-outline-dark" asp-controller="Pedidos" asp-action="PedidosFinalizados">Pedidos Finalizados</a>
 
-@if (Model.Any())
-{
-    <table class="table table-responsive">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaPedido)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaEntrega)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Notas)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Estado)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IdDireccion)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.IdCliente)
-                </th>
-                <th>
-                    <label>Opciones</label>
-                </th>
-
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    @if (Model.Any())
+    {
+        <table class="table table-responsive">
+            <thead>
                 <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaPedido)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaEntrega)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Notas)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdDireccion)
+                    </th>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaPedido)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaEntrega)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Notas)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Estado)
-                    </td>
-                    <td>
-                        <label>Provincia: @item.IdDireccionNavigation.IdProvinciaNavigation.Nombre  </label>
-                        <br />
-                        <label>Cantón: @item.IdDireccionNavigation.IdCantonNavigation.Nombre  </label>
-                        <br />
-                        <label>Distrito: @item.IdDireccionNavigation.IdDistritoNavigation.Nombre  </label>
-                        <br />
-                        <label>Detalles: @item.IdDireccionNavigation.Detalles  </label>
-                       
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdClienteNavigation.FullName)
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdCliente)
+                    </th>
+                    <th>
+                        <label>Opciones</label>
+                    </th>
 
-                    <td>
-
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a></li>
-                            <li class="list-group-item"><a asp-action="CambiarEstadoDePedido" asp-route-id="@item.Id">Cambiar estado </a></li>
-                            
-                        </ul>
-
-
-                    </td>
+                    <th></th>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var estadoPedidoClass = "";
+                    if(item.Estado == EstadoDePedido.Reciente)
+                    {
+                        estadoPedidoClass = "badge badge-pill badge-success";
+                    }
+                    if(item.Estado == EstadoDePedido.Finalizado)
+                    {
+                        estadoPedidoClass = "badge badge-pill badge-secondary";
+                    }
+                    if (item.Estado == EstadoDePedido.EnProceso)
+                    {
+                        estadoPedidoClass = "badge badge-pill badge-warning";
+                    }
+                    <tr>
 
-        </tbody>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaPedido)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaEntrega)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Notas)
+                        </td>
+                        <td >
+                            <span class="@estadoPedidoClass">
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </span>
+                        </td>
+                        <td>
+                            <label>Provincia: @item.IdDireccionNavigation.IdProvinciaNavigation.Nombre  </label>
+                            <br />
+                            <label>Cantón: @item.IdDireccionNavigation.IdCantonNavigation.Nombre  </label>
+                            <br />
+                            <label>Distrito: @item.IdDireccionNavigation.IdDistritoNavigation.Nombre  </label>
+                            <br />
+                            <label>Detalles: @item.IdDireccionNavigation.Detalles  </label>
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdClienteNavigation.FullName)
+                        </td>
+
+                        <td>
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a></li>
+                                <li class="list-group-item"><a asp-action="CambiarEstadoDePedido" asp-route-id="@item.Id">Cambiar estado </a></li>
+
+                            </ul>
 
 
-    </table>
-    <hr />
-}
-else
-{
-    <br />
-    <h3> No hay pedidos agregados</h3>
+                        </td>
+                    </tr>
+                }
 
-}
+            </tbody>
+
+
+        </table>
+        <hr />
+    }
+    else
+    {
+        <br />
+        <h3> No hay pedidos agregados</h3>
+
+    }
+</div>
 

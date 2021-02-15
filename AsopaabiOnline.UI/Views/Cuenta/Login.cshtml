@@ -5,47 +5,52 @@
 
 <h1>Iniciar Sesión</h1>
 
-<div class="row">
-    <div class="col-6 offset-3">
+
+<div class=" card text-center ">
+
+      <div class="col-5 offset-4 ">
         <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
 
 
             <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" style="width:250px" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password"></label>
-
-              
-                <input asp-for="Password" class="form-control" style="width:250px" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label asp-for="RememberMe">
-                        <input asp-for="RememberMe" />
-                        Recordarme?
-                    </label>
+               
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" aria-describedby="inputGroup-sizing-default" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-outline-success" >Entrar</button>
+              
+                <div class="form-group">
+                    <label asp-for="Password"></label>
 
-            </div>
-            <div class="form-group">
-                <p>
-                    <a asp-controller="Cuenta" asp-action="ForgotPassword">¿Olvidaste tu contraseña?</a>
-                </p>
-                <p>
-                    <a asp-controller="Cuenta" asp-action="Register" class="btn btn-outline-info" >Crear cuenta nueva</a>
-                </p>
-            </div>
 
-        </form>
-    </div>
+                    <input asp-for="Password" class="form-control" aria-describedby="inputGroup-sizing-default"  />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="RememberMe">
+                            <input asp-for="RememberMe" />
+                            Recordarme?
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-lg btn-block" style="background-color:#008fa0; ">   Entrar   </button>
+
+                </div>
+                <div class="form-group">
+                    <p>
+                        <a asp-controller="Cuenta" asp-action="ForgotPassword">¿Olvidaste tu contraseña?</a>
+                    </p>
+                    <p>
+                        <a asp-controller="Cuenta" asp-action="Register" class="btn btn-lg btn-block" style="background-color:#bc4a03">Crear cuenta nueva</a>
+                    </p>
+                </div>
+
+         </form>
+       
+   </div>
 
 </div>
 

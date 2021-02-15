@@ -7,94 +7,95 @@
 
 <h3>@ViewBag.Title</h3>
 <hr />
-<p> <a class="btn btn-outline-warning" asp-controller="Productos" asp-action="Agregar">Agregar</a></p>
+<p> <a class="btn btn-warning" asp-controller="Productos" asp-action="Agregar">Agregar</a></p>
+<div class="card">
+    @if (Model.Any())
+    {
 
-@if (Model.Any())
-{
-
-    <table class="table table-responsive">
-        <thead>
-            <tr>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.Imagen)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nombre)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.Precio)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UnidadDeMedida)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Categoria)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Estado)
-                </th>
-                <th>
-                   <label>Opciones</label>
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+        <table class="table table-responsive">
+            <thead>
                 <tr>
 
-                    <td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Imagen)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
 
-                        <label>
-                            <img src="~/imagenes/@item.Imagen" height="100" width="100" asp-append-version="true" />
-                        </label>
-
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nombre)
-                    </td>
-
-                    <td>
-
-                        @Html.DisplayFor(modelItem => item.Precio)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UnidadDeMedida)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Categoria)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Estado)
-                    </td>
-
-
-                    <td>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a></li>
-                            <li class="list-group-item"> <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a></li>
-                            <li class="list-group-item"><a asp-action="CambiarCategoria" asp-route-id="@item.Id">Cambiar Categoría</a> </li>
-                            <li class="list-group-item"><a asp-action="CambiarEstado" asp-route-id="@item.Id">Cambiar Estado</a> </li>
-
-                        </ul>
-
-
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Precio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnidadDeMedida)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Categoria)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </th>
+                    <th>
+                        <label>Opciones</label>
+                    </th>
+                    <th></th>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
 
-        </tbody>
+                        <td>
+
+                            <label>
+                                <img src="~/imagenes/@item.Imagen" height="100" width="100" asp-append-version="true" />
+                            </label>
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+
+                        <td>
+
+                            @Html.DisplayFor(modelItem => item.Precio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnidadDeMedida)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Categoria)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Estado)
+                        </td>
 
 
-    </table>
-    <hr />
-}
-else
-{
-    <br />
-    <h3> No hay productos agregados</h3>
+                        <td>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a></li>
+                                <li class="list-group-item"> <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a></li>
+                                <li class="list-group-item"><a asp-action="CambiarCategoria" asp-route-id="@item.Id">Cambiar Categoría</a> </li>
+                                <li class="list-group-item"><a asp-action="CambiarEstado" asp-route-id="@item.Id">Cambiar Estado</a> </li>
 
-}
+                            </ul>
+
+
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+
+        </table>
+        <hr />
+    }
+    else
+    {
+        <br />
+        <h3> No hay productos agregados</h3>
+
+    }
+</div>

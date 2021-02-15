@@ -15,7 +15,7 @@
         <link href="assets/vendor/aos/aos.css" rel="stylesheet">*@
 
     <!-- Template Main CSS File -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
@@ -26,10 +26,10 @@
     <link rel="stylesheet" href="~/css/site.css" />
 
 </head>
-<body>
+<body   style="background-color: #CFD8DC">
     <header>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light badge-pill border-top box-shadow mb-3" >
+        <nav class="navbar navbar-expand-lg navbar-light bg-light box-shadow mb-3" >
             <div class="container">
                 <div style="margin-right:60px ">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Tienda" >
@@ -52,8 +52,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link text-dark " asp-controller="Home" asp-action="CarritoDeCompras">
-                            <img src="~/imagenes/Iconos/carrito.png" width="30" height="30" class="d-inline-block align-top" alt="">
-
+                            <i class="fas fa-shopping-cart"></i>
                         </a>
                     </li>
 
@@ -61,17 +60,15 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                          
-                           Pedidos
+                            <i class="fas fa-cart-arrow-down"></i> Pedidos
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
-                                <img src="~/imagenes/Iconos/direccion.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                                Direccion
+                            <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar"> <i class="fas fa-map-marked-alt"></i> Dirección
                             </a>
 
                             <div class="dropdown-divider"></div>
                            
-                            <a class="dropdown-item" asp-action="Mostrar" asp-controller="HistorialPedidos">Historial</a>
+                            <a class="dropdown-item" asp-action="Mostrar" asp-controller="HistorialPedidos"><i class="fas fa-book"></i> Historial</a>
                         </div>
 
 
@@ -84,23 +81,19 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                        Configuración
+                        <i class="fas fa-cogs"></i> Configuración
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                        <a class="dropdown-item" asp-controller="Administrador" asp-action="UserList">Usuarios</a>
-                        <a class="dropdown-item" asp-controller="Administrador" asp-action="CustomerList">Clientes</a>
-                        <a class="dropdown-item" asp-controller="Administrador" asp-action="EmployeeList">Empleados</a>
-                        <a class="dropdown-item" asp-controller="Administrador" asp-action="RolesList">Roles </a>
+                        <a class="dropdown-item" asp-controller="Administrador" asp-action="UserList"><i class="fas fa-users"></i> Usuarios</a>
+                        <a class="dropdown-item" asp-controller="Administrador" asp-action="CustomerList"><i class="far fa-address-book"></i> Clientes </a>
+                        <a class="dropdown-item" asp-controller="Administrador" asp-action="EmployeeList"><i class="fas fa-user-tie"></i> Empleados</a>
+                        <a class="dropdown-item" asp-controller="Administrador" asp-action="RolesList"><i class="fas fa-user-tag"></i> Roles </a>
                         <div class="dropdown-divider"></div>
                         
-                        <a class="dropdown-item" asp-controller="Productos" asp-action="Mostrar">
-                            <img src="~/imagenes/Iconos/alimentos-saludables.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                            Productos
+                        <a class="dropdown-item" asp-controller="Productos" asp-action="Mostrar"><i class="fas fa-seedling"></i> Productos
                         </a>
-                            <a class="dropdown-item" asp-controller="Pedidos" asp-action="Mostrar">
-                                <img src="~/imagenes/Iconos/anadir-al-carrito.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                                Pedidos
+                            <a class="dropdown-item" asp-controller="Pedidos" asp-action="Mostrar"><i class="fas fa-cart-arrow-down"></i> Pedidos
                             </a>
                            
                        
@@ -126,16 +119,18 @@
 
     </header>
 
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
     <br />
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="        background-color: #f8f9fa;">
    
-        <div class="container">
-            &copy; 2020 - AsopaabiOnline- <a asp-area="" asp-controller="Home" asp-action="Privacidad">Privacy</a>
+        <div class="container ">
+            <span>&copy; 2020 - AsopaabiOnline Hola
+                <a style="padding-left:70%;">@User.Identity.Name!</a>
+            </span>
         </div>
 
 

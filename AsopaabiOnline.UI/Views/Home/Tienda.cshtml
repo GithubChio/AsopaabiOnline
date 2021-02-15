@@ -1,13 +1,9 @@
 ﻿@model List<AsopaabiOnline.Modelo.Producto>
-
+@using AsopaabiOnline.Modelo
 @{
     ViewData["Title"] = "Inicio";
  
 }
-
-<div class="text-center">
-    <h4 class="display-4">Bienvenidos a Asopaabi Online </h4>
-</div>
 
 <div class="container">
    
@@ -15,8 +11,21 @@
 
         @for (int product = 0; product < Model.Count; product++)
         {
+            var estadoProductoClass = "";
+            if (Model[product].Estado == EstadoDeProducto.Disponible)
+            {
+                estadoProductoClass = "badge badge-pill badge-success";
+            }
+            if (Model[product].Estado == EstadoDeProducto.NoDisponible)
+            {
+                estadoProductoClass = "badge badge-pill badge-danger";
+            }
+            if (Model[product].Estado == EstadoDeProducto.EnOferta)
+            {
+                estadoProductoClass = "badge badge-pill badge-info";
+            }
         <form class="col-4" action="AñadirAlCarrito" method="post" >
-            <div class="">
+            <div style="margin:5px;">
                 <div class="card">
                     <img class="card-img-top" height="200" src="~/imagenes/@Model[product].Imagen" asp-append-version="true" />
                     <div class="card-body">
@@ -24,15 +33,17 @@
                         @Model[product].Precio
                         <p class="card-text">@Model[product].UnidadDeMedida</p>
 
-                        <input id="@product" name="cantidad" min="0" style="width:50px;float:right; right:0;" type="number" />
+                        <input required disabled="@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible)" id="@product" name="cantidad" min="0" style="width:50px;float:right; right:0;" type="number" />
 
                         <div>
 
-                            <button type="submit" style="border-radius:25px;" asp-controller="home" asp-action="AñadirAlCarrito" asp-route-id="@Model[product].Id" class="btn btn-primary@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible ? "disabled" : "")">Agregar</button>
+                            <button disabled="@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible)" type="submit" style="border-radius:25px;" asp-controller="home" asp-action="AñadirAlCarrito" asp-route-id="@Model[product].Id" class="btn btn-primary"> Agregar</button>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">Estado: @Model[product].Estado.ToString()</small>
+                        <span >
+                            Estado:<span class="@estadoProductoClass"> @Model[product].Estado.ToString()</span>
+                        </span><small class="text-muted"></small>
                     </div>
                 </div>
             </div>
