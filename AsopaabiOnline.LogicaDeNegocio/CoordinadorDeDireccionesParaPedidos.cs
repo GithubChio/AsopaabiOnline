@@ -25,20 +25,6 @@ namespace AsopaabiOnline.LogicaDeNegocio
         
       
 
-        public void Actualizar(Modelo.DireccionPedido laDireccion)
-        {
-            GestorDeDireccionesParaPedidos elGestor = new GestorDeDireccionesParaPedidos();
-            Modelo.DireccionPedido laDireccionAActualizar = elGestor.ObtenerDireccionesPorId(laDireccion.Id);
-
-            laDireccionAActualizar.Id = laDireccion.Id;
-            laDireccionAActualizar.IdProvincia = laDireccion.IdProvincia;
-            laDireccionAActualizar.IdCanton = laDireccion.IdCanton;
-            laDireccionAActualizar.IdDistrito = laDireccion.IdDistrito;
-            laDireccionAActualizar.Detalles = laDireccion.Detalles;
-            elGestor.Actualizar(laDireccionAActualizar);
-        }
-       
-
 
 
         public Modelo.DireccionPedido ObtenerDireccionesPorId(int id)
@@ -50,7 +36,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
         
 
 
-        public void Eliminar(Modelo.DireccionPedido laDireccionAEliminar)
+        public void Eliminar(DireccionPedido laDireccionAEliminar)
         {
             GestorDeDireccionesParaPedidos elGestor = new GestorDeDireccionesParaPedidos();
             Modelo.DireccionPedido laDireccion = elGestor.ObtenerDireccionesPorId(laDireccionAEliminar.Id);
@@ -58,8 +44,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
         }
     }
 
-       
 
 
-    
+
 }

@@ -40,20 +40,6 @@ namespace AsopaabiOnline.AccesoADatos
         
 
 
-        public void Actualizar(DireccionPedido laDireccionAActualizar)
-        {
-            var laBaseDeDatos = new Contexto();
-            var laDireccionEnLaBD = ObtenerDireccionesPorId(laDireccionAActualizar.Id);
-
-            laDireccionEnLaBD.Id = laDireccionAActualizar.Id;
-            laDireccionEnLaBD.IdProvincia = laDireccionAActualizar.IdProvincia;
-            laDireccionEnLaBD.IdCanton = laDireccionAActualizar.IdCanton;
-            laDireccionEnLaBD.IdDistrito = laDireccionAActualizar.IdDistrito;
-            laDireccionEnLaBD.Detalles = laDireccionAActualizar.Detalles;
-
-            laBaseDeDatos.Entry(laDireccionEnLaBD).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            laBaseDeDatos.SaveChanges();
-        }
 
         public void Eliminar(DireccionPedido laDireccionAEliminar)
         {

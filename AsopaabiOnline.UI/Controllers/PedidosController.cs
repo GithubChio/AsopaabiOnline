@@ -11,11 +11,8 @@ namespace AsopaabiOnline.UI.Controllers
 {
     public class PedidosController : Controller
     {
-        private readonly UserManager<User> userManager;
-        public PedidosController(UserManager<User> userManager)
-        {
-            this.userManager= userManager;
-        }
+       
+        
 
 
         [HttpGet]
@@ -51,6 +48,43 @@ namespace AsopaabiOnline.UI.Controllers
             }
         }
 
+
+      
+        
+        [HttpGet]
+        [Route("Pedidos/Eliminar")]
+        public IActionResult Eliminar(int id)
+        {
+            CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
+            var elPedidoEncontrado = elCoordinador.ObtenerPedidoPorId(id);
+
+            return View(elPedidoEncontrado);
+        }
+        [HttpPost]
+        [Route("Pedidos/Eliminar")]
+        public IActionResult Eliminar(Modelo.Pedido elPedido)
+        {
+            try
+            {
+                CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
+                elCoordinador.Eliminar(elPedido);
+                return RedirectToAction("Mostrar");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        [Route("Pedidos/CambiarEstadoDePedido")]
+        public IActionResult CambiarEstadoDePedido(int id)
+        {
+            CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
+            var elPedidoEncontrado = elCoordinador.ObtenerPedidoPorId(id);
+            ViewBag.IdDelPedido = elPedidoEncontrado.Id;
+            return View();
+        }
 
         [HttpGet]
         [Route("Pedidos/CambiarAPedidoEnProceso")]
@@ -102,41 +136,13 @@ namespace AsopaabiOnline.UI.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("Pedidos/Eliminar")]
-        public IActionResult Eliminar(int id)
-        {
-            CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
-            var elPedidoEncontrado = elCoordinador.ObtenerPedidoPorId(id);
-
-            return View(elPedidoEncontrado);
-        }
-        [HttpPost]
-        [Route("Pedidos/Eliminar")]
-        public IActionResult Eliminar(Modelo.Pedido elPedido)
-        {
-            try
-            {
-                CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
-                elCoordinador.Eliminar(elPedido);
-                return RedirectToAction("Mostrar");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
 
-        [HttpGet]
-        [Route("Pedidos/CambiarEstadoDePedido")]
-        public IActionResult CambiarEstadoDePedido(int id)
-        {
-            CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
-            var elPedidoEncontrado = elCoordinador.ObtenerPedidoPorId(id);
-            ViewBag.IdDelPedido = elPedidoEncontrado.Id;
-            return View();
-        }
+
+
+
+
+
 
         [HttpGet]
         [Route("Pedidos/PedidosRecientes")]

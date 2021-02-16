@@ -9,11 +9,11 @@ namespace AsopaabiOnline.Modelo
     {
         public DireccionPedido()
         {
-            //Pedido = new HashSet<Pedido>();
+            Pedido = new HashSet<Pedido>();
         }
 
         [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+      
         public int Id { get; set; }
 
 

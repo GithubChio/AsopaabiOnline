@@ -14,6 +14,7 @@ using AsopaabiOnline.UI.Services;
 using AsopaabiOnline.UI.Models;
 using System;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace AsopaabiOnline.UI
 {
@@ -52,9 +53,12 @@ namespace AsopaabiOnline.UI
             services.AddRazorPages();
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
-            services.AddSession();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(1);
+               });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
-            
+
 
         }
 

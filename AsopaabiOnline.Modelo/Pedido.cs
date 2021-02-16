@@ -39,9 +39,11 @@ namespace AsopaabiOnline.Modelo
         [Required(ErrorMessage = "El estado es requerido")]
         public EstadoDePedido Estado { get; set; }
         [NotMapped]
+       
+       [Display(Name = " Métodos de pago")]
         public OpcionesDePago TipoPago { get; set; }
      
-        [Display(Name ="Direccion")]
+        [Display(Name ="Dirección")]
         public int IdDireccion { get; set; }
 
        
@@ -51,8 +53,8 @@ namespace AsopaabiOnline.Modelo
 
         [NotMapped]
         public List<Modelo.DireccionPedido> ListaDeDirecciones { get; set; }
-        [NotMapped]
 
+        [NotMapped]
         public virtual AspNetUsers IdClienteNavigation { get; set; }
         [NotMapped]
         public virtual DireccionPedido IdDireccionNavigation { get; set; }

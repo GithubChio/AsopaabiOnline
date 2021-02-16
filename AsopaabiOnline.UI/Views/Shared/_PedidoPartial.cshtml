@@ -7,19 +7,19 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     
     <div class="col-4">
-        <label asp-for="Notas" class="control-label">Detalles adicionales</label>
+        <label class="control-label">Detalles adicionales</label>
         <textarea asp-for="Notas" class="form-control" required></textarea>
         <span asp-validation-for="Notas" class="text-danger"></span>
     </div>
     <div class="col-4">
-        <label asp-for="IdDireccion" class="control-label">Direcciones</label>
+        <label asp-for="IdDireccion" class="control-label"></label>
         <select asp-for="IdDireccion" asp-items=@(new SelectList(Model.ListaDeDirecciones,"Id","Detalles")) class="form-control" required>
             <option selected="selected" disabled value="">Seleccione una opción</option>
         </select>
         <span asp-validation-for="IdDireccion" class="text-danger"></span>
     </div>
     <div class="col-4">
-        <label asp-for="TipoPago" class="control-label">Metodos de pago</label>
+        <label asp-for="TipoPago" class="control-label"></label>
         <select asp-for="TipoPago" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.OpcionesDePago>()" class="form-control" required>
             <option selected="selected" disabled value="">Seleccione una opción</option>
         </select>

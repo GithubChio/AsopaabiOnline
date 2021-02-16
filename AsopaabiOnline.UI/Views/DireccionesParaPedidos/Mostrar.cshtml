@@ -6,79 +6,87 @@
 
 
 <h3>@ViewBag.Title</h3>
-<hr />
-<p> <a class="btn btn-outline-warning" asp-controller="DireccionesParaPedidos" asp-action="Agregar">Agregar</a></p>
+
 
 
 @if (Model.Any())
 {
-    <table class="table table-responsive">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IdProvincia)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IdCanton)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IdDistrito)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Detalles)
-                </th>
-                <th>
-                    <label>Opciones</label>
-                </th>
 
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
+    <div class="card">
+        <div style="margin:15px;">
 
-                     @Html.DisplayFor(modelItem => item.IdProvinciaNavigation.Nombre)
-                        
-
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdCantonNavigation.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdDistritoNavigation.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Detalles)
-                    </td>
+            <div class="card-header">
+                <a class="btn btn-warning" asp-controller="DireccionesParaPedidos" asp-action="Agregar">Agregar</a>
+            </div>
 
 
-                    <td>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a></li>
-                            <li class="list-group-item">  <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a></li>
-                            
-                        </ul>
-                      
-                    </td>
-                </tr>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IdProvincia)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IdCanton)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IdDistrito)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Detalles)
+                        </th>
+                        <th>
+                            <label>Opciones</label>
+                        </th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+
+                                @Html.DisplayFor(modelItem => item.IdProvinciaNavigation.Nombre)
+
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdCantonNavigation.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdDistritoNavigation.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Detalles)
+                            </td>
+
+
+                            <td>
+                              
+                                    <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a>
+
+                             
+
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+
+
+            </table>
+           </div>
+        </div>
             }
-
-        </tbody>
-
-
-    </table>
-    <hr />
-}
-else
-{
-    <h3> Aún no hay Direcciones agregadas</h3>
-}
+            else
+            {
+            <h3> Aún no hay Direcciones agregadas</h3>
+            }

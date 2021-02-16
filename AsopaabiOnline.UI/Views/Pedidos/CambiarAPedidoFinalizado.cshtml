@@ -1,18 +1,21 @@
 ﻿@model AsopaabiOnline.Modelo.Pedido
 
 
+
 @{
-    ViewData["Title"] = "CambiarAPedidoFinalizado";
+    ViewBag.title = "Cambiar a estado en finalizado";
 }
 
-<h1>Estado</h1>
-<hr />
-<h3 style="text-align:center;">¿Desea cambiar este pedido a estado finalizado?</h3>
+<h1>@ViewBag.title </h1>
 
-<div>
 
-    <hr />
-    <dl class="row">
+<div class="card text-center"   style="margin-top:18px;" > 
+
+    <div class="card-header">
+        <h3 style="text-align:center;">¿Desea cambiar este pedido a estado finalizado?</h3>
+    </div>
+
+    <dl class="row m-4">
 
 
         <dt class="col-sm-2">
@@ -48,12 +51,13 @@
 
 
     </dl>
-    <hr />
-    <form asp-action="CambiarAPedidoFinalizado" asp-controller="Pedidos">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Sí" class="btn btn-outline-danger" style="width:50px;" />
+    <div class="card-footer">
+        <form asp-action="CambiarAPedidoFinalizado" asp-controller="Pedidos">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Sí" class="btn btn-danger" style="width:50px;" />
 
-        <a class="btn btn-outline-secondary" asp-action="Mostrar">No</a>
+            <a class="btn btn-secondary" asp-action="Mostrar">No</a>
 
-    </form>
+        </form>
+    </div>
 </div>

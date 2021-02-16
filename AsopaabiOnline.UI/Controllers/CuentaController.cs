@@ -12,8 +12,10 @@ using System.Text;
 using System.Text.Encodings.Web;
 using AsopaabiOnline.Modelo;
 
+
 namespace AsopaabiOnline.UI.Controllers
 {
+   
     public class CuentaController : Controller
     {
         private readonly SignInManager<User> signInManager;
@@ -39,6 +41,7 @@ namespace AsopaabiOnline.UI.Controllers
             return View();
         }
         [HttpPost]
+     
         public async Task<IActionResult> Register(Register model)
         {
             
@@ -85,6 +88,7 @@ namespace AsopaabiOnline.UI.Controllers
             return View();
         }
         [HttpPost]
+   
         public async Task<IActionResult> Login(Login model)
         {
             if (ModelState.IsValid)
@@ -135,6 +139,7 @@ namespace AsopaabiOnline.UI.Controllers
             return View();
         }
 
+       [HttpPost]
 
         public async Task<IActionResult> ForgotPassword(ForgotPassword input)
         {
@@ -218,6 +223,9 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
+
+
+     
 
     }
 

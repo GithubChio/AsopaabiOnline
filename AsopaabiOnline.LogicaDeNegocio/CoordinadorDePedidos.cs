@@ -42,7 +42,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
            
             elPedidoAActualizar.FechaEntrega = elPedido.FechaEntrega;
             elPedidoAActualizar.Notas = elPedido.Notas;
-            elPedidoAActualizar.Estado = elPedido.Estado;
+           
            
 
             elGestor.Actualizar(elPedidoAActualizar);
@@ -71,7 +71,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
             elGestor.Actualizar(elPedidoACambiar);
         }
 
-      
+
 
         public List<Pedido> ListarPedidosRecientes()
         {

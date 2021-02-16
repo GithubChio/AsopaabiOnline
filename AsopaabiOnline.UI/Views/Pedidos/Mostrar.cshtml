@@ -8,18 +8,24 @@
 
 
 <h3>@ViewBag.Title</h3>
-<hr />
-<a class="btn btn-success" asp-controller="Pedidos" asp-action="PedidosRecientes">Pedidos Recientes</a>
-<a class="btn btn-warning " asp-controller="Pedidos" asp-action="PedidosEnProceso">Pedidos En Proceso</a>
-<a class="btn btn-secondary" asp-controller="Pedidos" asp-action="PedidosFinalizados">Pedidos Finalizados</a><br /><br />
-<div class="card">
 
 
     @if (Model.Any())
     {
-        <table class="table table-responsive">
+<div class="card">
+    <div style="margin:15px;">
+        <div class="card-header">
+            <a class="btn btn-success" asp-controller="Pedidos" asp-action="PedidosRecientes">Pedidos Recientes</a>
+            <a class="btn btn-warning " asp-controller="Pedidos" asp-action="PedidosEnProceso">Pedidos En Proceso</a>
+            <a class="btn btn-secondary" asp-controller="Pedidos" asp-action="PedidosFinalizados">Pedidos Finalizados</a>
+        </div>
+
+        <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>
+                        #
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Id)
                     </th>
@@ -50,14 +56,16 @@
                 </tr>
             </thead>
             <tbody>
+
+                @{ int rowNumber = 0; }
                 @foreach (var item in Model)
                 {
                     var estadoPedidoClass = "";
-                    if(item.Estado == EstadoDePedido.Reciente)
+                    if (item.Estado == EstadoDePedido.Reciente)
                     {
                         estadoPedidoClass = "badge badge-pill badge-success";
                     }
-                    if(item.Estado == EstadoDePedido.Finalizado)
+                    if (item.Estado == EstadoDePedido.Finalizado)
                     {
                         estadoPedidoClass = "badge badge-pill badge-secondary";
                     }
@@ -66,7 +74,9 @@
                         estadoPedidoClass = "badge badge-pill badge-warning";
                     }
                     <tr>
-
+                        <td>
+                            @(rowNumber += 1)
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Id)
                         </td>
@@ -79,7 +89,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Notas)
                         </td>
-                        <td >
+                        <td>
                             <span class="@estadoPedidoClass">
                                 @Html.DisplayFor(modelItem => item.Estado)
                             </span>
@@ -100,11 +110,9 @@
 
                         <td>
 
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a></li>
-                                <li class="list-group-item"><a asp-action="CambiarEstadoDePedido" asp-route-id="@item.Id">Cambiar estado </a></li>
 
-                            </ul>
+                            <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a> |
+                            <a asp-action="CambiarEstadoDePedido" asp-route-id="@item.Id">Cambiar estado </a>
 
 
                         </td>
@@ -115,13 +123,15 @@
 
 
         </table>
-        <hr />
+
+        </div>
+    </div>
     }
     else
     {
-        <br />
-        <h3> No hay pedidos agregados</h3>
+    <br />
+    <h3> No hay pedidos agregados</h3>
 
     }
-</div>
+
 

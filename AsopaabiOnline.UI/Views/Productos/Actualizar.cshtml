@@ -15,38 +15,46 @@
             <input type="hidden" asp-for="Id" />
 
 
-            @*<div class="form-group">
-                <label asp-for="Imagen" class="control-label" style="width:350px;"></label>
-                <label>
-                    <img src="" asp-for="Imagen"   height="100" width="100" asp-append-version="true" />
-                </label>
-                <span asp-validation-for="Imagen" class="text-danger"></span>
-            </div>*@
 
-                <div class="form-group">
-                    <label asp-for="Nombre" class="control-label" style="width:350px;"></label>
-                    <input asp-for="Nombre" class="form-control" />
-                    <span asp-validation-for="Nombre" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="UnidadDeMedida" class="control-label"></label>
-                    <select asp-for="UnidadDeMedida" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.UnidadesDeMedida>()" class="form-control" style="width:350px;">
-                        <option selected="selected" disabled value="">Seleccione una opción</option>
-                    </select>
-                    <span asp-validation-for="UnidadDeMedida" class="text-danger" style="width:220px;"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Precio" class="control-label"></label>
-                    <input asp-for="Precio" class="form-control" />
-                    <span asp-validation-for="Precio" class="text-danger"></span>
-                </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label" style="width:350px;"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnidadDeMedida" class="control-label"></label>
+                <select asp-for="UnidadDeMedida" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.UnidadesDeMedida>()" class="form-control" style="width:350px;">
+                    <option selected="selected" disabled value="">Seleccione una opción</option>
+                </select>
+                <span asp-validation-for="UnidadDeMedida" class="text-danger" style="width:220px;"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
 
-                <hr />
-                <div class="form-group">
+            <div class="form-group">
+                <label asp-for="Categoria" class="control-label"></label>
+                <select asp-for="Categoria" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.CategoriaDeProducto>()" class="form-control" required>
+                    <option selected="selected" disabled value="">Seleccione una opción</option>
+                </select>
+                <span asp-validation-for="Categoria" class="text-danger" style="width:220px;"></span>
+            </div>
 
-                    <input type="submit" value="Guardar" class="btn btn-outline-info" />
-                    <a class="btn btn-outline-secondary" asp-action="Mostrar">Volver</a>
-                </div>
+            <div class="form-group">
+                <label asp-for="Estado" class="control-label"></label>
+                <select asp-for="Estado" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.EstadoDeProducto>()" class="form-control" required>
+                    <option selected="selected" disabled value="">Seleccione una opción</option>
+                </select>
+                <span asp-validation-for="Estado" class="text-danger" style="width:220px;"></span>
+            </div>
+            <hr />
+            <div class="card-footer">
+
+                <input type="submit" value="Guardar" class="btn btn-info" />
+                <a class="btn btn-secondary" asp-action="Mostrar"> Volver</a>
+            </div>
         </form>
     </div>
 </div>

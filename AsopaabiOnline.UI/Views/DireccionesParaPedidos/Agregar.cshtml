@@ -1,14 +1,14 @@
 ﻿@model AsopaabiOnline.Modelo.DireccionPedido
 
 @{
-     ViewBag.Title = "Agregar Direccion";
+     ViewBag.Title = "Agregar dirección";
 
 }
-<h3>Dirección de los pedidos</h3>
-<hr />
+<h3>@ViewBag.Title </h3>
+<br />
+<div class="card text-center w-25">
 
-<div class="row">
-    <div class="col-md-4">
+    <div class="col-md-10" >
 
         <form asp-controller="DireccionesParaPedidos" asp-action="Agregar" method="post">
 
@@ -16,8 +16,10 @@
 
             <div class="form-group">
                 <label asp-for="IdProvincia" class="control-label"></label>
-                <select id="provincias" asp-for="IdProvincia" asp-items=@(new SelectList(Model.LaListaDeProvincias,"Id","Nombre")) class="form-control" style="width:230px;" required>
+                <select id="provincias" asp-for="IdProvincia" asp-items=@(new SelectList(Model.LaListaDeProvincias,"Id","Nombre")) class="form-control"  required>
                     <option selected="selected" disabled value="">Seleccione una opción</option>
+                  
+
                 </select>
 
                 <span asp-validation-for="IdProvincia" class="text-danger"></span>
@@ -39,13 +41,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Detalles" class="control-label"></label>
-                <textarea asp-for="Detalles" class="form-control" style="width:210px; height:80px;" required></textarea>
+                <textarea asp-for="Detalles" class="form-control" required></textarea>
                 <span asp-validation-for="Detalles" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-outline-success" />
-                <a class="btn btn-outline-secondary" asp-action="Mostrar">Volver</a>
+                <input type="submit" value="Guardar" class="btn btn-success" />
+                <a class="btn btn-secondary" asp-action="Mostrar">Volver</a>
             </div>
 
         </form>

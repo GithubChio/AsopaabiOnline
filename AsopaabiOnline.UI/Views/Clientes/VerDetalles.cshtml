@@ -1,7 +1,7 @@
 ﻿@model AsopaabiOnline.UI.Models.User
 
 @{
-    ViewBag.Title = "Perfil";
+    ViewBag.Title = " Detalles del perfil";
 
 }
 
@@ -67,8 +67,11 @@
 
     </dl>
     <hr />
-
-    <a style="margin:15px;" asp-action="EditarPerfil" asp-controller="Clientes" asp-route-id="@User.Identity.Name">Editar </a>
+    <div class="card-footer">
+        <a asp-action="Perfil"><i class="fas fa-arrow-alt-circle-left"></i> Volver</a>
+    </div>
+   
+   
 </div>
 
 

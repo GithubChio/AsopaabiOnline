@@ -30,8 +30,8 @@ namespace AsopaabiOnline.LogicaDeNegocio
             elProductoAActualizar.Nombre = elProducto.Nombre;
             elProductoAActualizar.UnidadDeMedida = elProducto.UnidadDeMedida;
             elProductoAActualizar.Precio = elProducto.Precio;
-           
-
+            elProductoAActualizar.Estado = elProducto.Estado;
+            elProductoAActualizar.Categoria = elProducto.Categoria;
             elGestor.Actualizar(elProductoAActualizar);
             
         }
@@ -50,76 +50,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
             return elGestor.ObtenerProductoPorId(id);
         }
 
-        public void CambiarACategoriaFrutas(Modelo.Producto elProducto)
-        {
-            GestorDeProductos elGestor = new GestorDeProductos();
-            var elProductoACambiar = elGestor.ObtenerProductoPorId(elProducto.Id);
-
-            elProductoACambiar.Categoria = Modelo.CategoriaDeProducto.Frutas;
-            elGestor.Actualizar(elProductoACambiar);
-
-        }
-        public void CambiarACategoriaHortalizas(Modelo.Producto elProducto)
-        {
-            GestorDeProductos elGestor = new GestorDeProductos();
-            var elProductoACambiar = elGestor.ObtenerProductoPorId(elProducto.Id);
-
-            elProductoACambiar.Categoria = Modelo.CategoriaDeProducto.Hortalizas;
-            elGestor.Actualizar(elProductoACambiar);
-        }
-        public void CambiarACategoriaRaicesYTuberculos(Modelo.Producto elProducto)
-        {
-            GestorDeProductos elGestor = new GestorDeProductos();
-            var elProductoACambiar = elGestor.ObtenerProductoPorId(elProducto.Id);
-
-            elProductoACambiar.Categoria = Modelo.CategoriaDeProducto.Raices_y_Tuberculos;
-            elGestor.Actualizar(elProductoACambiar);
-        }
-        public void CambiarACategoriaFloresAromaticas(Modelo.Producto elProducto)
-        {
-            GestorDeProductos elGestor = new GestorDeProductos();
-            var elProductoACambiar = elGestor.ObtenerProductoPorId(elProducto.Id);
-
-            elProductoACambiar.Categoria = Modelo.CategoriaDeProducto.FloresAromaticas;
-            elGestor.Actualizar(elProductoACambiar);
-        }
-        public void CambiarACategoriaOtro(Modelo.Producto elProducto)
-        {
-            GestorDeProductos elGestor = new GestorDeProductos();
-            var elProductoACambiar = elGestor.ObtenerProductoPorId(elProducto.Id);
-
-            elProductoACambiar.Categoria = Modelo.CategoriaDeProducto.Otro;
-            elGestor.Actualizar(elProductoACambiar);
-        }
-
-        public void CambiarAEstadoDisponible(Modelo.Producto elProducto)
-        {
-            GestorDeProductos elGestor = new GestorDeProductos();
-            var elProductoACambiar = elGestor.ObtenerProductoPorId(elProducto.Id);
-
-            elProductoACambiar.Estado = Modelo.EstadoDeProducto.Disponible;
-            elGestor.Actualizar(elProductoACambiar);
-
-        }
-        public void CambiarAEstadoEnOferta(Modelo.Producto elProducto)
-        {
-            GestorDeProductos elGestor = new GestorDeProductos();
-            var elProductoACambiar = elGestor.ObtenerProductoPorId(elProducto.Id);
-
-            elProductoACambiar.Estado = Modelo.EstadoDeProducto.EnOferta;
-            elGestor.Actualizar(elProductoACambiar);
-
-        }
-        public void CambiarAEstadoNoDisponible(Modelo.Producto elProducto)
-        {
-            GestorDeProductos elGestor = new GestorDeProductos();
-            var elProductoACambiar = elGestor.ObtenerProductoPorId(elProducto.Id);
-
-            elProductoACambiar.Estado = Modelo.EstadoDeProducto.NoDisponible;
-            elGestor.Actualizar(elProductoACambiar);
-
-        }
-
+     
 
         public List<Modelo.Producto> ListaDeFrutas()
         {

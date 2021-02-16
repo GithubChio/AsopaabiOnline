@@ -54,9 +54,11 @@ namespace AsopaabiOnline.UI.Controllers
                
 
             }
-            catch (Exception excepcion)
+            catch
             {
-                Console.WriteLine(excepcion);
+                
+
+               
                 return View();
             }
            
@@ -92,33 +94,7 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
-        [HttpGet]
-        [Route("DireccionesParaPedidos/Actualizar")]
-        public IActionResult Actualizar(int id)
-        {
-            CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
-            var laDireccionEncontrada = elCoordinador.ObtenerDireccionesPorId(id);
-
-
-            return View(laDireccionEncontrada);
-        }
-
-        [HttpPost]
-        [Route("DireccionesParaPedidos/Actualizar")]
-        public IActionResult Actualizar(Modelo.DireccionPedido laDireccion)
-        {
-            try
-            {
-                CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
-                elCoordinador.Actualizar(laDireccion);
-                return RedirectToAction("Mostrar");
-            }
-            catch
-            {
-                return View();
-            }
-
-        }
+       
 
         [HttpGet]
         [Route("DireccionesParaPedidos/Eliminar")]
@@ -138,17 +114,28 @@ namespace AsopaabiOnline.UI.Controllers
             try
             {
                 CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
-                elCoordinador.Eliminar(laDireccion);
-                return RedirectToAction("Mostrar");
+               
+                if (elCoordinador.ObtenerDireccionesPorId(laDireccion.Id) != null)
+                {
+                    ViewBag.mensaje = "Esta dirección ya existe";
+                }
+                   elCoordinador.Eliminar(laDireccion);
+
+                    return RedirectToAction("Mostrar");
+
+               
+
             }
             catch
             {
 
-                ViewBag.mensaje = "No se puede eliminar porque esta direccion tiene un pedido";
+               
                return  View();
                
             }
 
         }
+
+       
     }
 }

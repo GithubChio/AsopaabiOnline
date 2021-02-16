@@ -15,12 +15,12 @@ namespace AsopaabiOnline.UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly UserManager<User> _userManager;
-        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager)
+       
+        private readonly UserManager<User> userManager;
+        public HomeController( UserManager<User> userManager)
         {
-            _logger = logger;
-            _userManager = userManager;
+           
+            this.userManager = userManager;
         }
 
 
@@ -88,7 +88,7 @@ namespace AsopaabiOnline.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> CarritoDeComprasAsync()
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = await userManager.GetUserAsync(HttpContext.User);
             if (SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList") == null)
             {
 
@@ -156,7 +156,7 @@ namespace AsopaabiOnline.UI.Controllers
         public async Task<IActionResult> GenerarPedido(Pedido pedido,float total)
         {
             List<Producto> carritoDeCompras = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = await userManager.GetUserAsync(HttpContext.User);
             var db = new Contexto();
             int idPedido = await InsertPedidoAsync(pedido, db, user);
             if(idPedido != 0)

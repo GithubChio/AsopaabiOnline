@@ -8,98 +8,107 @@
 
 <h3>@ViewBag.Title</h3>
 
-@if (!Model.Any())
-{
-<hr />
-<br />
-}
+
 
 
 @if (Model.Any())
 {
-    <table class="table table-responsive">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaPedido)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaEntrega)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Notas)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Estado)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IdDireccion)
-                </th>
+<div class="card">
+    <div style="margin:15px;">
+        <table class="table table-stripedd">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaPedido)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaEntrega)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Notas)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdDireccion)
+                    </th>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.IdCliente)
-                </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdCliente)
+                    </th>
+                    <th>
+                        Opciones
+                    </th>
 
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-            <tr>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="col-12">
+                @{ int rowNumber = 0; }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @(rowNumber += 1)
+                        </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaPedido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaEntrega)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Notas)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estado)
-                </td>
-                <td>
-                    <label>Provincia: @item.IdDireccionNavigation.IdProvinciaNavigation.Nombre  </label>
-                    <br />
-                    <label>Cantón: @item.IdDireccionNavigation.IdCantonNavigation.Nombre  </label>
-                    <br />
-                    <label>Distrito: @item.IdDireccionNavigation.IdDistritoNavigation.Nombre  </label>
-                    <br />
-                    <label>Detalles: @item.IdDireccionNavigation.Detalles  </label>
-                </td>
-                <td>
-                    <label>Cliente: @item.IdDireccionNavigation.IdClienteNavigation.FullName  </label>
-                    <br />
-                    <label>Cédula: @item.IdDireccionNavigation.IdClienteNavigation.Dni  </label>
-                </td>
-                <td>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a></li>
-                  
-                </ul>
-                </td>
-            </tr>
-            }
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaPedido)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaEntrega)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Notas)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Estado)
+                        </td>
+                        <td>
+                            <label>Provincia: @item.IdDireccionNavigation.IdProvinciaNavigation.Nombre  </label>
+                            <br />
+                            <label>Cantón: @item.IdDireccionNavigation.IdCantonNavigation.Nombre  </label>
+                            <br />
+                            <label>Distrito: @item.IdDireccionNavigation.IdDistritoNavigation.Nombre  </label>
+                            <br />
+                            <label>Detalles: @item.IdDireccionNavigation.Detalles  </label>
+                        </td>
+                        <td>
+                            <label>Nombre: @item.IdDireccionNavigation.IdClienteNavigation.FullName  </label>
+                            <br />
+                            <label>Cédula: @item.IdDireccionNavigation.IdClienteNavigation.Dni  </label>
+                        </td>
+                        <td>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a></li>
 
-        </tbody>
+                            </ul>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
 
 
-    </table>
-    <hr />
-    <br />
-    <a class="btn btn-outline-secondary" asp-action="Mostrar">Volver</a>
-}
-else
-{
-    <h3>No hay pedidos finalizados</h3>
-    <br />
-    <a class="btn btn-outline-secondary" asp-action="Mostrar">Volver</a>
-}
+        </table>
+     </div>
+  </div>
+        <br />
+        <a class="btn btn-secondary" asp-action="Mostrar"><i class="fas fa-arrow-alt-circle-left"></i>  Volver</a>
+        }
+        else
+        {
+        <h3>No hay pedidos finalizados</h3>
+        <br />
+        <a class="btn btn-outline-secondary" asp-action="Mostrar">Volver</a>
+        }
