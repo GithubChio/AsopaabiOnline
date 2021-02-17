@@ -174,7 +174,111 @@ namespace AsopaabiOnline.UI.Controllers
 
         }
 
-        
+
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> SetPassword()
+        {
+            var user = await userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
+            }
+
+            var hasPassword = await userManager.HasPasswordAsync(user);
+
+            if (hasPassword)
+            {
+                return RedirectToAction("ChangePassword");
+            }
+
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> SetPassword(SetPassword Input)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var user = await userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
+            }
+
+            var addPasswordResult = await userManager.AddPasswordAsync(user, Input.NewPassword);
+            if (!addPasswordResult.Succeeded)
+            {
+                foreach (var error in addPasswordResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View();
+            }
+
+            await signInManager.RefreshSignInAsync(user);
+          
+            return RedirectToAction("Perfil");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> ChangePassword()
+        {
+            var user = await userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
+            }
+
+            var hasPassword = await userManager.HasPasswordAsync(user);
+
+            if (!hasPassword)
+            {
+                return RedirectToAction("SetPassword");
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePassword Input)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var user = await userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
+            }
+
+            var changePasswordResult = await userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
+            if (!changePasswordResult.Succeeded)
+            {
+                foreach (var error in changePasswordResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View();
+            }
+
+            await signInManager.RefreshSignInAsync(user);
+
+           
+            return RedirectToAction("Perfil");
+
+        }
+
 
 
 

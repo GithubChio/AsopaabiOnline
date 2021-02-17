@@ -46,9 +46,22 @@ namespace AsopaabiOnline.UI
             services.AddDbContext<Data.ApplicationDbContext>(options =>
                    options.UseSqlServer(
                        Configuration.GetConnectionString("DefaultConnection")));
-           
-            services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
-               .AddEntityFrameworkStores<Data.ApplicationDbContext>().AddDefaultTokenProviders();
+
+            services.AddIdentity<User, IdentityRole>(options => {
+                options.SignIn.RequireConfirmedAccount = false;
+
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 2;
+                options.Password.RequireDigit = true;
+
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+
+                options.User.RequireUniqueEmail = true;
+               
+               
+
+            }).AddEntityFrameworkStores<Data.ApplicationDbContext>().AddDefaultTokenProviders();
             
             services.AddRazorPages();
             services.AddTransient<IEmailSender, EmailSender>();

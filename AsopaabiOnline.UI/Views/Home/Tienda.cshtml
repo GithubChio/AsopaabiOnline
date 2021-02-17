@@ -37,7 +37,7 @@
 
                         <div>
 
-                            <button disabled="@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible)" type="submit" style="border-radius:25px;" asp-controller="home" asp-action="AñadirAlCarrito" asp-route-id="@Model[product].Id" class="btn btn-primary"> Agregar</button>
+                            <button disabled="@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible)" type="submit"   asp-controller="home" asp-action="AñadirAlCarrito" asp-route-id="@Model[product].Id" class="btn btn-primary rounded-circle"><i class="fas fa-plus"></i></button>
                         </div>
                     </div>
                     <div class="card-footer">

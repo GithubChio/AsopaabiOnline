@@ -1,25 +1,21 @@
 ﻿@model AsopaabiOnline.UI.Models.User
 
 @{
-    ViewBag.Title = "EditarPerfil";
+    ViewBag.Title = "Editar perfil";
 }
 
-<h3>Editar</h3>
+<h3>@ViewBag.Title</h3>
 <hr />
-<div class="row" style="margin:15px;">
-    <div class="card col-md-6">
+<div class="card" style="margin:15px;">
+    <div class=" col-md-6">
 
         <form asp-controller="Clientes"  asp-action="EditarPerfil"  asp-route-id="@User.Identity.Name"  method="post">
-
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <br />
-
 
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label" ></label>
                <input asp-for="FirstName"class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
-                <div id="mostrar"> </div>
+               
             </div>
 
 
@@ -59,7 +55,7 @@
 
             <div class="form-group">
                 <label asp-for="ActivityType" class="control-label"></label>
-                <select asp-for="ActivityType" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.TipoDeActividad>()" class="form-control" style="width:250px;">
+                <select asp-for="ActivityType" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.TipoDeActividad>()" class="form-control" >
                     <option selected="selected" disabled value="">Seleccione una opción</option>
                 </select>
                 <span asp-validation-for="ActivityType" class="text-danger" s></span>
@@ -73,7 +69,7 @@
 
 
                 <input  type="submit" id="guardar" value="Guardar" class="btn btn-success" />
-                <a class="btn btn-secondary" asp-action="Perfil" asp-route-id="@User.Identity.Name">Volver </a>
+                <a class="btn btn-secondary" asp-action="Perfil" asp-route-id="@User.Identity.Name"><i class="fas fa-arrow-alt-circle-left"></i> Volver </a>
             </div>
 
 

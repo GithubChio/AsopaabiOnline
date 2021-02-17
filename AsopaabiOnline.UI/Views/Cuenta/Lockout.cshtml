@@ -1,0 +1,19 @@
+﻿
+
+@{ 
+    ViewBag.title = "Bloqueo";
+}
+
+<h2>Bloqueo</h2>
+
+<div class="card text-center w-100"  >
+
+    <h4><i class="fas fa-exclamation-triangle text-warning"></i> Esta cuenta ha sido bloqueda por seguridad, por favor inténtalo más tarde 
+            
+    </h4> 
+    <p> o puedes resetear tu contraseña haciendo <a asp-action="ForgotPassword"><i class="fas fa-mouse-pointer"></i> click aqui</a></p>
+
+    <div class="card-footer">
+        <a asp-action="Login"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+    </div>
+</div>

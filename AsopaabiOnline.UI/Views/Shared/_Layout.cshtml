@@ -51,24 +51,25 @@
                 <ul class="navbar-nav flex-grow-1">
 
                     <li class="nav-item">
-                        <a class="nav-link text-dark " asp-controller="Home" asp-action="CarritoDeCompras">
-                            <i class="fas fa-shopping-cart"></i>
+                        <a class="nav-link "  asp-controller="Home" asp-action="CarritoDeCompras">
+                            <i class="fas fa-shopping-cart text-info m"></i>
                         </a>
                     </li>
 
 
                     <li class="nav-item dropdown">
                         <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         
-                            <i class="fas fa-cart-arrow-down"></i> Pedidos
+
+                            <i class="fas fa-store-alt"></i> Información
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar"> <i class="fas fa-map-marked-alt"></i> Dirección
+                            <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
+                                <i class="fas fa-map-marked-alt"></i> Dirección
                             </a>
 
                             <div class="dropdown-divider"></div>
-                           
-                            <a class="dropdown-item" asp-action="Mostrar" asp-controller="HistorialPedidos"><i class="fas fa-book"></i> Historial</a>
+
+                            <a class="dropdown-item" asp-action="Mostrar" asp-controller="HistorialPedidos"><i class="fas fa-history"></i> Historial</a>
                         </div>
 
 
@@ -78,27 +79,29 @@
                     {
 
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                        <i class="fas fa-cogs"></i> Configuración
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                        <a class="dropdown-item" asp-controller="Administrador" asp-action="UserList"><i class="fas fa-users"></i> Usuarios</a>
-                        <a class="dropdown-item" asp-controller="Administrador" asp-action="CustomerList"><i class="far fa-address-book"></i> Clientes </a>
-                        <a class="dropdown-item" asp-controller="Administrador" asp-action="EmployeeList"><i class="fas fa-user-tie"></i> Empleados</a>
-                        <a class="dropdown-item" asp-controller="Administrador" asp-action="RolesList"><i class="fas fa-user-tag"></i> Roles </a>
-                        <div class="dropdown-divider"></div>
-                        
-                        <a class="dropdown-item" asp-controller="Productos" asp-action="Mostrar"><i class="fas fa-seedling"></i> Productos
-                        </a>
-                            <a class="dropdown-item" asp-controller="Pedidos" asp-action="Mostrar"><i class="fas fa-cart-arrow-down"></i> Pedidos
+                                <i class="fas fa-cogs"></i> Configuración
                             </a>
-                           
-                       
-                      
-                    </div>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                <a class="dropdown-item" asp-controller="Administrador" asp-action="UserList"><i class="fas fa-users"></i> Usuarios</a>
+                                <a class="dropdown-item" asp-controller="Administrador" asp-action="CustomerList"><i class="far fa-address-book"></i> Clientes </a>
+                                <a class="dropdown-item" asp-controller="Administrador" asp-action="EmployeeList"><i class="fas fa-user-tie"></i> Empleados</a>
+                                <a class="dropdown-item" asp-controller="Administrador" asp-action="RolesList"><i class="fas fa-user-tag"></i> Roles </a>
+                                <div class="dropdown-divider"></div>
+
+                                <a class="dropdown-item" asp-controller="Productos" asp-action="Mostrar">
+                                    <i class="fas fa-seedling"></i> Productos
+                                </a>
+                                <a class="dropdown-item" asp-controller="Pedidos" asp-action="Mostrar">
+                                    <i class="fas fa-cart-arrow-down"></i> Pedidos
+                                </a>
+
+
+
+                            </div>
                         </li>
 
                     }
@@ -106,7 +109,7 @@
 
 
 
-                </ul>
+                    </ul>
             </div>
                 }
                
@@ -128,9 +131,13 @@
     <footer class="border-top footer text-muted" style="        background-color: #f8f9fa;">
    
         <div class="container ">
-            <span>&copy; 2020 - AsopaabiOnline Hola
-                <a style="padding-left:70%;">@User.Identity.Name!</a>
-            </span>
+            <span>
+                &copy; 2020 -Asopaabi Online
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a style="padding-left:70%;"> Hola @User.Identity.Name!</a>
+                }
+                </span>
         </div>
 
 

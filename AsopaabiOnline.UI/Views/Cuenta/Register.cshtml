@@ -6,100 +6,105 @@
 
 <h1>Registrarse</h1>
 
-<div class="row">
+
+
+<div class="card">
     <div class="col-6 offset-3">
         <form method="post">
-            <h4>Crear cuenta nueva</h4>
-            <hr />
-            
-            <div class="form-group">
-                <label asp-for="DniType" class="control-label">Selecionar el tipo de Identificación: </label>
-                <select id="tipoDeDni" asp-for="DniType" asp-items="Html.GetEnumSelectList<AsopaabiOnline.UI.Models.DNIType>()">
-                    <option selected="selected" value="">Por favor seleccionar</option>
-                </select>
-                <br />
-            </div>
+            <div asp-validation-summary="ModelOnly" ></div>
+            <h5 class="card-header text-center"><i class="fas fa-user-plus"></i> Crear una cuenta nueva</h5>
 
-            <div class="form-group">
-                <label asp-for="DNI"></label>
-                <input id="Dni" asp-for="DNI"  class="form-control" />
-                <div id="elResultado" class="text-danger" />
-            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label asp-for="DniType" class="control-label">Selecionar el tipo de Identificación: </label>
+                    <select id="tipoDeDni" asp-for="DniType" class="form-control" asp-items="Html.GetEnumSelectList<AsopaabiOnline.UI.Models.DNIType>()" required>
+                        <option selected="selected" value="">Por favor seleccionar</option>
+                    </select>
+                    <br />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="DNI"></label>
+                    <input asp-for="DNI" class="form-control" />
+                    <div id="elResultado" class="text-danger" />
+                    <span asp-validation-for="DNI" class="text-danger"></span>
+                </div>
 
 
+                <div class="form-group">
+                    <label asp-for="FirstName"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SecondName"></label>
+                    <input asp-for="SecondName" class="form-control" />
+                    <span asp-validation-for="SecondName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FirstLastName"></label>
+                    <input asp-for="FirstLastName" class="form-control" />
+                    <span asp-validation-for="FirstLastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SecondLastName"></label>
+                    <input asp-for="SecondLastName" class="form-control" />
+                    <span asp-validation-for="SecondLastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateOfBirth"></label>
+                    <input asp-for="DateOfBirth" class="form-control" required />
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="FirstName"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SecondName"></label>
-                <input asp-for="SecondName" class="form-control" />
-                <span asp-validation-for="SecondName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FirstLastName"></label>
-                <input asp-for="FirstLastName" class="form-control" />
-                <span asp-validation-for="FirstLastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SecondLastName"></label>
-                <input asp-for="SecondLastName" class="form-control" />
-                <span asp-validation-for="SecondLastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateOfBirth"></label>
-                <input asp-for="DateOfBirth" class="form-control" required/>
-                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <div class="input-group">
+                        <input id="txtPassword" asp-for="Password" class="form-control" />
 
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <div class="input-group">
-                    <input id="txtPassword" asp-for="Password" class="form-control" />
+                        <div class="input-group-append">
+                            <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>
+                        </div>
 
-                    <div class="input-group-append">
-                        <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>
                     </div>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword"></label>
+
+                    <div class="input-group">
+                        <input id="txtPasswordConfirm" asp-for="ConfirmPassword" class="form-control" style="width:250px" />
+
+                        <div class="input-group-append">
+                            <button id="showcontraseña" class="btn btn-primary" type="button" onclick="mostrarContraseña()"> <span class="fa fa-eye-slash icon"></span> </button>
+                        </div>
+                    </div>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PhoneNumber"></label>
+                    <input asp-for="PhoneNumber" class="form-control" required />
 
                 </div>
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword"></label>
-
-                <div class="input-group">
-                    <input id="txtPasswordConfirm" asp-for="ConfirmPassword" class="form-control" style="width:250px" />
-
-                    <div class="input-group-append">
-                        <button id="showcontraseña" class="btn btn-primary" type="button" onclick="mostrarContraseña()"> <span class="fa fa-eye-slash icon"></span> </button>
-                    </div>
+                <div class="form-group">
+                    <label asp-for="PhoneNumber2"></label>
+                    <input asp-for="PhoneNumber2" class="form-control" />
+                    <span asp-validation-for="PhoneNumber2" class="text-danger"></span>
                 </div>
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="ActivityType" class="control-label">Selecionar el tipo de Actividad : </label>
+                    <select asp-for="ActivityType" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.TipoDeActividad>()" class="form-control" required>
+                        <option selected="selected" value="">Por favor seleccionar</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
             </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber"></label>
-                <input asp-for="PhoneNumber" class="form-control"  required/>
-              
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber2"></label>
-                <input asp-for="PhoneNumber2" class="form-control" />
-                <span asp-validation-for="PhoneNumber2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ActivityType" class="control-label">Selecionar el tipo de Actividad : </label>
-                <select asp-for="ActivityType" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.TipoDeActividad>()" required>
-                    <option selected="selected" value="">Por favor seleccionar</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Registrarse</button>
+
         </form>
     </div>
 
@@ -167,28 +172,7 @@
                 }
             });;
 
-            $("#Dni").on('keypress', function (e) {
-                if (dniType == 1) {
-                    var pressed = String.fromCharCode(e.which);
-                    var final = this.value + pressed;
-                    if (!final.match (^\d{ 1, 10 }(\.|\.\d{ 1, 10 }) ? $ / i) ) {
-                        e.preventDefault(); // or return false;
-                    }
-                    console.log("one")
-                    //test regex
-                    ///^\d{ 1, 10 } (\.|\.\d{ 1, 10 }) ? $ / i
-                    // $(this).val().match(/^[1-9]-\d{3}-\d{3}$/,)
-                } else {
-                    console.log("two")
-                    var pressed = String.fromCharCode(e.which);
-                    var final = this.value + pressed;
-                    if (!final.match(/^[1-9]-\d{3}-\d{6}$/)) {
-                        e.preventDefault(); // or return false;
-                    }
-                    // $(this).val().match(/^[1-9]-\d{3}-\d{6}$/)
-                }
-            });
-
+          
         });
 
 

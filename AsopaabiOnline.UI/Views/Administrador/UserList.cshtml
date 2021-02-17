@@ -71,8 +71,8 @@
                         </td>
                         <td>
                             <a asp-action="EditUser" asp-controller="Administrador" asp-route-id="@user.Id">Editar </a> |
-                                <a asp-action="UserDetails" asp-controller="Administrador" asp-route-id="@user.Id">Detalles </a>
-                           
+                            <a asp-action="UserDetails" asp-controller="Administrador" asp-route-id="@user.Id">Detalles </a> |
+                            <a asp-action="Disable" asp-controller="Administrador" asp-route-id="@user.Id">Deshabilitar </a>
 
                         </td>
                     </tr>
@@ -81,6 +81,9 @@
 
             </tbody>
         </table>
+
+
+
     </div>
     </div>
     }

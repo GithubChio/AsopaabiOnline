@@ -44,6 +44,16 @@ namespace AsopaabiOnline.UI.Controllers
             }
         }
 
+        public void EliminarImagen(string urlDelaImagen)
+        {
+            FileInfo file = new FileInfo(urlDelaImagen);
+            if (file.Exists)
+            {
+                file.Delete();
+            }
+        }
+
+
 
         public string SubirImagen(Modelo.Producto elProducto)
         {
@@ -91,10 +101,14 @@ namespace AsopaabiOnline.UI.Controllers
     [Route("Productos/Actualizar")]
     public IActionResult Actualizar(Modelo.Producto elProducto)
     {
-        try
+          
+           
+            try
         {
-            CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
-            elCoordinador.Actualizar(elProducto);
+                CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
+
+                elProducto.Imagen = SubirImagen(elProducto);
+                elCoordinador.Actualizar(elProducto);
             return RedirectToAction("Mostrar");
         }
         catch

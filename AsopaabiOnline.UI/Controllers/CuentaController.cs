@@ -32,8 +32,7 @@ namespace AsopaabiOnline.UI.Controllers
             this.emailSender = emailSender;
         }
 
-        public string ReturnUrl { get; set; }
-
+    
         [HttpGet]
         public IActionResult Register()
         {
@@ -47,7 +46,7 @@ namespace AsopaabiOnline.UI.Controllers
             
             if (ModelState.IsValid)
             {
-                var user = new  User{
+                var user = new User {
                     UserName = model.Email,
                     Email = model.Email,
                     FirstName = model.FirstName,
@@ -60,7 +59,10 @@ namespace AsopaabiOnline.UI.Controllers
                     PhoneNumber2 = model.PhoneNumber2,
                     ActivityType = model.ActivityType,
                     CustomerType = TipoDeCliente.Nuevo,
-                    UserType  = Models.Enums.UserType.Cliente
+                    UserType = Models.Enums.UserType.Cliente,
+                    IsDisable = false
+                    
+
                 };
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -94,7 +96,7 @@ namespace AsopaabiOnline.UI.Controllers
             if (ModelState.IsValid)
             {
                
-                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Tienda", "Home");
@@ -103,7 +105,7 @@ namespace AsopaabiOnline.UI.Controllers
                 if (result.IsLockedOut)
                 {
 
-                    return RedirectToPage("./Lockout");
+                    return RedirectToAction("Lockout");
                 }
                
 
@@ -117,22 +119,31 @@ namespace AsopaabiOnline.UI.Controllers
             return View(model);
         }
 
-     
-       
 
 
-        public async Task<IActionResult> LogoutAsync()
+ 
+        public async Task<IActionResult> Logout()
         {
+
             await signInManager.SignOutAsync();
 
-            return RedirectToAction("Login", "Cuenta");
+            return RedirectToAction("Login");
 
-            
+
 
         }
 
+       
+        
 
-     
+        [HttpGet]
+        public IActionResult Lockout()
+        {
+            return View();
+        }
+
+
+
         [HttpGet]
         public IActionResult ForgotPassword()
         {
@@ -222,11 +233,7 @@ namespace AsopaabiOnline.UI.Controllers
             return View();
         }
 
-
-
-
-     
-
+        
     }
 
 

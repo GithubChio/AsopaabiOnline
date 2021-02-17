@@ -21,6 +21,8 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
+     
+
         [HttpGet]
         public IActionResult UserList()
         {
@@ -179,6 +181,70 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
+
+        [HttpGet]
+        public async Task<IActionResult>Disable(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+           
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"el usuario con el id= {id} no fue encontrado";
+                return View("Error");
+            }
+            else
+            {
+                User userDetails = new Models.User()
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    SecondName = user.SecondName,
+                    FirstLastName = user.FirstLastName,
+                    SecondLastName = user.SecondLastName,
+                    DateOfBirth = user.DateOfBirth,
+                    PhoneNumber = user.PhoneNumber,
+                    PhoneNumber2 = user.PhoneNumber2,
+                    ActivityType = user.ActivityType,
+                    UserType = user.UserType,
+                    CustomerType = user.CustomerType,
+                    IsDisable =  user.IsDisable
+
+
+                };
+
+                return View(user);
+            }
+
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DisableAsync(User input, bool disable)
+        {
+            try
+            {
+                var user = await userManager.FindByIdAsync(input.Id);
+                if (user != null && user.IsDisable == true)
+                {
+                    await userManager.SetLockoutEnabledAsync(user, disable);
+
+         
+                    return RedirectToAction("UserList");
+                }
+               
+            }
+            catch
+            {
+                ViewBag.ErrorMessage = $"el usuario con el id = {input.Id} no fue encontrado";
+                return View("Error");
+            }
+            
+            return View();
+        }
+        
+
+
         [HttpGet]
         public IActionResult CustomerList()
         {
@@ -223,8 +289,6 @@ namespace AsopaabiOnline.UI.Controllers
             }
 
         }
-
-
 
 
 
@@ -332,5 +396,12 @@ namespace AsopaabiOnline.UI.Controllers
                 return View();
             }
         }
+
+
+
+
+
+
+
     }
 }

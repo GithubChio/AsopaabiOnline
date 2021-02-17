@@ -18,10 +18,13 @@ namespace AsopaabiOnline.UI.Models
 
         }
 
+      
+        
+      
 
-        [Required(ErrorMessage = "Por favor ingrese su Cedula")]
+        [Required(ErrorMessage = "Por favor ingrese su identificación")]
         [DataType(DataType.Text)]
-        [Display(Name = "DNI")]
+        [Display(Name = "Número de identificación")]
         public string DNI { get; set; }
 
         [Required(ErrorMessage = "El nombre es requerido")]
@@ -77,8 +80,8 @@ namespace AsopaabiOnline.UI.Models
         public int Age { get { return (DateTime.Now - DateOfBirth).Days / 365; } }
 
         [NotMapped]
-
-        public bool IsEnable { get; set; }
+        [Display(Name ="Deshabilitado")]
+        public bool IsDisable { get; set; }
 
 
     }

@@ -14,7 +14,7 @@ namespace AsopaabiOnline.UI.Models
     {
 
         [Required(ErrorMessage = "El correo es requerido")]
-        [EmailAddress]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Debe agregar un correo electrónico válido")]
         [Display(Name = "Correo Electrónico")]
 
         public string Email { get; set; }
@@ -30,7 +30,7 @@ namespace AsopaabiOnline.UI.Models
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "La cédula es requerida")]
+        [Required(ErrorMessage = "El número de identificación es requerido")]
         [DataType(DataType.Text)]
         [Display(Name = "Número de identificación")]
         public string DNI { get; set; }
@@ -62,17 +62,17 @@ namespace AsopaabiOnline.UI.Models
 
         [DataType(DataType.Text)]
         [RegularExpression(@"^(\d{8})$", ErrorMessage = "el número de celular debe tener 8 digitos númericos")]
-        [Display(Name = "Numero de telefono principal")]
+        [Display(Name = "Numero de teléfono principal")]
         public string PhoneNumber { get; set; }
 
         [DataType(DataType.Text)]
         [RegularExpression(@"^(\d{8})$", ErrorMessage = "el número de celular debe tener 8 digitos númericos")]
-        [Display(Name = "Numero de telefono secundario")]
+        [Display(Name = "Numero de teléfono secundario")]
         public string PhoneNumber2 { get; set; }
 
         [Required(ErrorMessage = "Su fecha de nacimiento es requerida")]
         [Display(Name = "Fecha de Nacimiento")]
-        //[Range(typeof(DateTime), "31-12-1925", "31-12-2003", ErrorMessage = "No se aceptan menores de edad")]
+       
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 

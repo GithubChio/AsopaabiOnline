@@ -6,27 +6,32 @@
 }
 
 <h1>@ViewBag.Title</h1>
-<hr />
+
 <br />
-<div class="card">
-    <h5 class="card-header">Información del perfil</h5>
-    <div class="card-body">
-        <p class="card-text">Cedula: @Html.DisplayFor(model => model.DNI)</p>
-        <p class="card-text">
-            Nombre: @Html.DisplayFor(model => model.Name)
-        </p>
-        <p class="card-text">
-            Apellidos: @Html.DisplayFor(model => model.LastName)
-        </p>
+<div class="card w-100">
+    
+        <h5 class="card-header ">Información del perfil</h5>
+        <div class="card-body">
+            <p class="card-text">Cedula: @Html.DisplayFor(model => model.DNI)</p>
+            <p class="card-text">
+                Nombre: @Html.DisplayFor(model => model.Name)
+            </p>
+            <p class="card-text">
+                Apellidos: @Html.DisplayFor(model => model.LastName)
+            </p>
 
-        <div class="flex-row">
-            <a asp-action="VerDetalles" asp-controller="Clientes"  asp-route-id="@User.Identity.Name">Detalles </a> |
-            <a asp-action="EditarPerfil" asp-controller="Clientes" asp-route-id="@User.Identity.Name">Editar </a>
+            <div class="flex-row">
+                <a asp-action="VerDetalles" asp-controller="Clientes" asp-route-id="@User.Identity.Name">Detalles </a> |
+                <a asp-action="EditarPerfil" asp-controller="Clientes" asp-route-id="@User.Identity.Name">Editar </a>
 
 
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <a asp-action="ChangePassword" asp-controller="Clientes" class="btn btn-warning">Cambiar contraseña </a>
         </div>
     </div>
-</div>
 
 
 
