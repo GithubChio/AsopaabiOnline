@@ -396,6 +396,12 @@ namespace AsopaabiOnline.Modelo
 
                 entity.Property(e => e.Categoria).HasColumnName("categoria");
 
+                entity.Property(e => e.Codigo)
+                    .IsRequired()
+                    .HasColumnName("codigo")
+                    .HasMaxLength(100)
+                    .IsUnicode(true);
+
                 entity.Property(e => e.Estado).HasColumnName("estado");
 
                 entity.Property(e => e.Imagen)

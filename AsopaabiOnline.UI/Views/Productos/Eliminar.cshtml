@@ -62,11 +62,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        ¿Estas seguro que desea eliminar el producto con el código @Model.Id ?
+                        ¿Estas seguro que desea eliminar el producto  #@Model.Id ?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
-                        <form asp-action="Eliminar" asp-controller="Empleados">
+                        <form asp-action="Eliminar" asp-controller="Productos">
                             <input type="hidden" asp-for="Id" />
                             <button type="submit" class="btn btn-primary">SI</button>
                         </form>

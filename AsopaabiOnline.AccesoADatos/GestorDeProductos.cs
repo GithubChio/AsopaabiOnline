@@ -39,6 +39,7 @@ namespace AsopaabiOnline.AccesoADatos
             var elProductoEnLaBD = ObtenerProductoPorId(elProductoAActualizar.Id);
 
             elProductoEnLaBD.Id = elProductoAActualizar.Id;
+            elProductoEnLaBD.Codigo = elProductoAActualizar.Codigo;
             elProductoEnLaBD.Imagen = elProductoAActualizar.Imagen;
             elProductoEnLaBD.Nombre = elProductoAActualizar.Nombre;
             elProductoEnLaBD.UnidadDeMedida = elProductoAActualizar.UnidadDeMedida;

@@ -107,11 +107,16 @@ namespace AsopaabiOnline.UI.Controllers
         {
                 CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
 
-                elProducto.Imagen = SubirImagen(elProducto);
+                if (elProducto.ImageFile != null)
+                {
+                    elProducto.Imagen = SubirImagen(elProducto);
+                }
+              
+
                 elCoordinador.Actualizar(elProducto);
             return RedirectToAction("Mostrar");
         }
-        catch
+        catch 
         {
             return View();
         }

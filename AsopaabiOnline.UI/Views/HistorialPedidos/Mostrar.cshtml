@@ -4,8 +4,8 @@
     ViewBag.title = "Historial de Pedidos";
 }
 
-<h3>@ViewBag.title </h3>
 
+<h3 class="card-header text-center">@ViewBag.title</h3>
 
 
 @if (Model.Any())
@@ -34,12 +34,24 @@
                 <a asp-action="Mostrar" asp-controller="Pagos" asp-route-id="@historial.IdPedido">Ver comprobante de pago</a>
 
             </div>
-        </div><br /><br />
+        </div>
+        <br />
+        <br />
     }
-  
 
-    }
+
+}
 else
 {
-    <h3> Aún no hay pedidos agregados</h3>
+
+    <div class="card  col-md-11 m-5 w-100" >
+
+        <div class="card-body text-center">
+
+            <p class="card-title text-uppercase">No hay pedidos agregados</p>
+            <a  asp-action="CarritoDeCompras" asp-controller="Home" class="btn btn-primary">Comprar</a>
+        </div>
+    </div>
+
+   
 }

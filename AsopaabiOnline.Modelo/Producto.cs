@@ -17,8 +17,11 @@ namespace AsopaabiOnline.Modelo
 
         [Key]
       
-        [Display(Name = "Código")]
+        
         public int Id { get; set; }
+
+        [Display(Name = "Código")]
+        public string Codigo { get; set; }
 
         public string Imagen { get; set; }
 
