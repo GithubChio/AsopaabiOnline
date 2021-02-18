@@ -79,9 +79,7 @@ namespace AsopaabiOnline.UI.Models
         [Display(Name = "Edad")]
         public int Age { get { return (DateTime.Now - DateOfBirth).Days / 365; } }
 
-        [NotMapped]
-        [Display(Name ="Deshabilitado")]
-        public bool IsDisable { get; set; }
+        
 
 
     }

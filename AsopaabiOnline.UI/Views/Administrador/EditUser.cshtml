@@ -1,55 +1,83 @@
 ﻿@model AsopaabiOnline.UI.Models.User
 
 @{
-    ViewBag.Title = "Editar Usuario";
+    ViewBag.Title = "Editar usuario";
 }
 
-<h3>Editar este usuario</h3>
-<hr />
-
-<dl class="row">
- 
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.DNI)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.DNI)
-    </dd>
-
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.Name)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.Name)
-    </dd>
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.LastName)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.LastName)
-    </dd>
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.UserType)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.UserType)
-    </dd>
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.CustomerType)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.CustomerType)
-    </dd>
-
-</dl>
 
 
-<hr />
+
+<div class="card w-75 text-center">
+    <div class="card-body">
+
+       <h5 class="card-title"> Usuario</h5>
+
+       <dl class="row">
+
+           <dt class="col-sm-2">
+               @Html.DisplayNameFor(model => model.DNI)
+           </dt>
+           <dd class="col-sm-10">
+               @Html.DisplayFor(model => model.DNI)
+           </dd>
+
+           <dt class="col-sm-2">
+               @Html.DisplayNameFor(model => model.Name)
+           </dt>
+           <dd class="col-sm-10">
+               @Html.DisplayFor(model => model.Name)
+           </dd>
+           <dt class="col-sm-2">
+               @Html.DisplayNameFor(model => model.LastName)
+           </dt>
+           <dd class="col-sm-10">
+               @Html.DisplayFor(model => model.LastName)
+           </dd>
+           <dt class="col-sm-2">
+               @Html.DisplayNameFor(model => model.UserType)
+           </dt>
+           <dd class="col-sm-10">
+               @Html.DisplayFor(model => model.UserType)
+           </dd>
+           <dt class="col-sm-2">
+               @Html.DisplayNameFor(model => model.CustomerType)
+           </dt>
+           <dd class="col-sm-10">
+               @Html.DisplayFor(model => model.CustomerType)
+           </dd>
+
+           <dt class="col-sm-2">
+               <label>Rol </label>
+
+           </dt>
+           <dd class="col-sm-10">
+
+               @foreach (var roles in @ViewBag.Roles)
+               {
+
+                   <h6>@roles</h6>
 
 
-<div class="row">
-    <div class="col-md-4">
+               }
+           </dd>
 
+
+       </dl>
+
+     
+    </div>
+</div>
+
+<br />
+
+
+
+<div class="card  w-75">
+    <div class="card-header text-center">
+          <h5> Editar</h5>
+    </div>
+
+    <div class="card-body">
         <form asp-controller="Administrador" asp-action="EditUser" method="post">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -57,7 +85,7 @@
 
             <div class="form-group">
                 <label asp-for="CustomerType" class="control-label"></label>
-                <select asp-for="CustomerType" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.TipoDeCliente>()" class="form-control" style="width:250px;" required>
+                <select asp-for="CustomerType" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.TipoDeCliente>()" class="form-control">
                     <option selected="selected" disabled value="">Seleccione una opción</option>
                 </select>
                 <span asp-validation-for="CustomerType" class="text-danger" s></span>
@@ -65,28 +93,90 @@
             </div>
             <div class="form-group">
                 <label asp-for="UserType" class="control-label"></label>
-                <select asp-for="UserType" asp-items="Html.GetEnumSelectList<AsopaabiOnline.UI.Models.Enums.UserType>()" class="form-control" style="width:250px;" required>
+                <select asp-for="UserType" asp-items="Html.GetEnumSelectList<AsopaabiOnline.UI.Models.Enums.UserType>()" class="form-control">
                     <option selected="selected" disabled value="">Seleccione una opción</option>
                 </select>
-                <span asp-validation-for="UserType" class="text-danger" s></span>
+                <span asp-validation-for="UserType" class="text-danger"></span>
 
             </div>
 
-            <br />
-            <hr />
-            <br />
-            <div class="form-group col-md-9 ">
-
-
-                <input type="submit" id="guardar" value="Guardar" class="btn btn-outline-success" />
-                <a class="btn btn-outline-secondary" asp-action="UserList"> Volver </a>
+            <div class="form-group">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio1" data-toggle="modal" data-target="#enable"  name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio1">Habilitar</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio2" data-toggle="modal" data-target="#disable" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">Deshabilitar</label>
+                </div>
             </div>
+
+
+            <input type="submit" id="guardar" value="Guardar" class="btn btn-success btn-block" />
+
 
 
         </form>
 
 
+        
+
+        <div class="modal" id="disable" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Deshabilitar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿ Esta seguro que desea deshabilitar al usuario @Model.Name ? </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                        <form method="post" asp-action="Disable">
+                            <input asp-for="Id" hidden />
+                            <button type="submit" class="btn btn-primary">SI</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal" id="enable" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Habilitar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿ Esta seguro que desea habilitar al usuario @Model.Name ? </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                        <form method="post" asp-action="Enable">
+                            <input asp-for="Id" hidden />
+                            <button type="submit"  class="btn btn-primary">SI</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <div class="card-footer">
+        <a class="btn btn-secondary" asp-action="UserList"> Volver </a>
     </div>
 </div>
+
 
 

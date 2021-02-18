@@ -28,7 +28,10 @@
             <thead>
                 <tr>
                     <th>
-                        <label>DNI</label>
+                          #
+                    </th>
+                    <th>
+                        <label>Cédula</label>
                     </th>
                     <th>
                         <label>Nombre</label>
@@ -37,7 +40,7 @@
                         <label>Apellido</label>
                     </th>
                     <th>
-                        <label>Email</label>
+                        <label>Correo Electrónico</label>
                     </th>
                     <th>
                         <label>Tipo de usuario</label>
@@ -49,9 +52,13 @@
                 </tr>
             </thead>
             <tbody>
+                @{ int rowNumber = 0; }
                 @foreach (var user in Model)
                 {
                     <tr>
+                        <td>
+                            @(rowNumber += 1)
+                        </td>
                         <td>
                             <h5 class="card-title">@user.DNI</h5>
                         </td>
@@ -69,10 +76,13 @@
                         <td>
                             <h5 class="card-title">@user.UserType</h5>
                         </td>
+                      
+                       
+
                         <td>
                             <a asp-action="EditUser" asp-controller="Administrador" asp-route-id="@user.Id">Editar </a> |
-                            <a asp-action="UserDetails" asp-controller="Administrador" asp-route-id="@user.Id">Detalles </a> |
-                            <a asp-action="Disable" asp-controller="Administrador" asp-route-id="@user.Id">Deshabilitar </a>
+                            <a asp-action="UserDetails" asp-controller="Administrador" asp-route-id="@user.Id">Detalles </a>
+
 
                         </td>
                     </tr>

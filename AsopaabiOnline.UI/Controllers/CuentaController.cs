@@ -60,7 +60,6 @@ namespace AsopaabiOnline.UI.Controllers
                     ActivityType = model.ActivityType,
                     CustomerType = TipoDeCliente.Nuevo,
                     UserType = Models.Enums.UserType.Cliente,
-                    IsDisable = false
                     
 
                 };

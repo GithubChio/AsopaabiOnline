@@ -34,22 +34,27 @@
                 <dd class="col-sm-10">
                     @Html.DisplayFor(model => model.LastName)
                 </dd>
-               
+                <dt class="col-sm-2">
+                    <label>Rol </label>
+
+                </dt>
+                <dd class="col-sm-10">
+
+                    @foreach (var roles in @ViewBag.Roles)
+                    {
+
+                        <h6>@roles</h6>
+
+
+                    }
+                </dd>
             </dl>
         </div>
     
     <div class="card-footer">
        
 
-            <div class="form-group">
-                <div class="checkbox">
-                    <label asp-for="IsDisable">
-                        <input  asp-for="IsDisable" class="form-check" />
-                        Deshabilitar
-                    </label>
-                    
-                </div>
-            </div>
+          
                 
             <p>
 

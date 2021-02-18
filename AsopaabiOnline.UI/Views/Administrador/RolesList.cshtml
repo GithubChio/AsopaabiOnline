@@ -24,6 +24,9 @@
                 <thead>
                     <tr>
                         <th>
+                            #
+                        </th>
+                        <th>
                             <label>Nombre</label>
                         </th>
 
@@ -33,22 +36,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var role in Model)
-                    {
-                        <tr>
-                            <td>
-                                <h5 class="card-title">@role.Name</h5>
-                            </td>
+                         @{ int rowNumber = 0; }
+                 @foreach (var role in Model)
+                   {
+                    <tr>
+                        <td>
+                            @(rowNumber += 1)
+                        </td>
+                        <td>
+                            <h5 class="card-title">@role.Name</h5>
+                        </td>
 
 
-                            <td>
-                                 <a asp-action="DeleteRole" asp-controller="Administrador" class="btn btn-danger" asp-route-id="@role.Id">Eliminar</a>
-                               
+                        <td>
+                            <a asp-action="DeleteRole" asp-controller="Administrador" class="btn btn-danger" asp-route-id="@role.Id">Eliminar</a>
 
-                            </td>
-                        </tr>
 
-                    }
+                        </td>
+                    </tr>
+
+                  }   
 
                 </tbody>
             </table>

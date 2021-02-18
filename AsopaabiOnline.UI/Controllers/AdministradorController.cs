@@ -27,6 +27,17 @@ namespace AsopaabiOnline.UI.Controllers
         public IActionResult UserList()
         {
             var list = userManager.Users;
+
+
+            return View(list);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DisableUsersList()
+        {
+            var list = await userManager.GetUsersInRoleAsync("Deshabilitado");
+
+
             return View(list);
         }
 
@@ -36,9 +47,11 @@ namespace AsopaabiOnline.UI.Controllers
         public async Task<IActionResult> EditUser(string id)
         {
             var user = await userManager.FindByIdAsync(id);
+            var userRole = await userManager.GetRolesAsync(user);
+            ViewBag.Roles = userRole.ToList();
             if (user == null)
             {
-                ViewBag.ErrorMessage = $"el usuario con el id= {id} no fue encontrado";
+                ViewBag.Message = $"el usuario con el id= {id} no fue encontrado";
                 return View("Error");
             }
             else
@@ -78,7 +91,7 @@ namespace AsopaabiOnline.UI.Controllers
 
                 if (user == null)
                 {
-                    ViewBag.ErrorMessage = $"el rol con el id= {input.Id} no fue encontrado";
+                    ViewBag.Message = $"el rol con el id= {input.Id} no fue encontrado";
                     return View("Error");
                 }
                 else
@@ -124,14 +137,18 @@ namespace AsopaabiOnline.UI.Controllers
                         await userManager.AddToRoleAsync(user, roleName);
 
                     }
+
+
                     var elResultado = await userManager.UpdateAsync(user);
 
                     if (elResultado.Succeeded)
                     {
+                        ViewBag.Message = "Cambios guardados.";
                         return RedirectToAction("UserList", "Administrador");
                     }
                     foreach (var elError in elResultado.Errors)
                     {
+                        ViewBag.Message = "Algo ha salido mal.!";
                         ModelState.AddModelError("", elError.Description);
                     }
                 }
@@ -148,8 +165,8 @@ namespace AsopaabiOnline.UI.Controllers
         public async Task<IActionResult> UserDetails(string id)
         {
             var user = await userManager.FindByIdAsync(id);
-            var roles = await userManager.GetRolesAsync(user);
-            ViewBag.Roles = roles.ToList();
+            var userRole = await userManager.GetRolesAsync(user);
+            ViewBag.Roles = userRole.ToList();
             if (user == null)
             {
                 ViewBag.ErrorMessage = $"el usuario con el id= {id} no fue encontrado";
@@ -180,69 +197,134 @@ namespace AsopaabiOnline.UI.Controllers
 
         }
 
-
-
-        [HttpGet]
-        public async Task<IActionResult>Disable(string id)
-        {
-            var user = await userManager.FindByIdAsync(id);
-           
-            if (user == null)
-            {
-                ViewBag.ErrorMessage = $"el usuario con el id= {id} no fue encontrado";
-                return View("Error");
-            }
-            else
-            {
-                User userDetails = new Models.User()
-                {
-                    Id = user.Id,
-                    FirstName = user.FirstName,
-                    SecondName = user.SecondName,
-                    FirstLastName = user.FirstLastName,
-                    SecondLastName = user.SecondLastName,
-                    DateOfBirth = user.DateOfBirth,
-                    PhoneNumber = user.PhoneNumber,
-                    PhoneNumber2 = user.PhoneNumber2,
-                    ActivityType = user.ActivityType,
-                    UserType = user.UserType,
-                    CustomerType = user.CustomerType,
-                    IsDisable =  user.IsDisable
-
-
-                };
-
-                return View(user);
-            }
-
-
-        }
 
 
         [HttpPost]
-        public async Task<IActionResult> DisableAsync(User input, bool disable)
+        public async Task<IActionResult> Enable(User input)
         {
             try
             {
-                var user = await userManager.FindByIdAsync(input.Id);
-                if (user != null && user.IsDisable == true)
-                {
-                    await userManager.SetLockoutEnabledAsync(user, disable);
+                string roleName = "Cliente";
 
-         
-                    return RedirectToAction("UserList");
+                var user = await userManager.FindByIdAsync(input.Id);
+
+                var oldRoleList = await userManager.GetRolesAsync(user);
+
+                if (user == null)
+                {
+                    ViewBag.Message = $"El usuario con el id = {input.Id} no fue encontrado";
+                    return View("Error");
                 }
-               
+                else
+                {
+                    user.Id = input.Id;
+
+
+
+
+                    foreach (var oldRoleName in oldRoleList.ToList())
+                    {
+                        if (oldRoleName.Equals("Deshabilitado"))
+                        {
+                            await userManager.RemoveFromRoleAsync(user, oldRoleName);
+                            await userManager.AddToRoleAsync(user, roleName);
+                            ViewBag.Message = "Se ha habilitado  al rol de cliente de nuevo";
+                        }
+                        else
+                        {
+                            ViewBag.mensaje = "Este cliente ya esta habilitado";
+                            RedirectToAction("UserList");
+                        }
+
+                    }
+
+                   
+
+                    var elResultado = await userManager.UpdateAsync(user);
+
+                    if (elResultado.Succeeded)
+                    {
+                        return RedirectToAction("UserList");
+                    }
+                    foreach (var elError in elResultado.Errors)
+                    {
+                        ModelState.AddModelError("", elError.Description);
+                    }
+
+                }
+                return View(input);
             }
             catch
             {
-                ViewBag.ErrorMessage = $"el usuario con el id = {input.Id} no fue encontrado";
-                return View("Error");
+                return View();
             }
-            
-            return View();
+
+
         }
-        
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> Disable(User input)
+        {
+            try
+            {
+                string roleName = "Deshabilitado";
+
+                var user = await userManager.FindByIdAsync(input.Id);
+
+                var oldRoleList = await userManager.GetRolesAsync(user);
+
+                if (user == null)
+                {
+                    ViewBag.ErrorMessage = $"El usuario con el id = {input.Id} no fue encontrado";
+                    return View("Error");
+                }
+                else
+                {
+                    user.Id = input.Id;
+
+                    foreach (var oldRoleName in oldRoleList.ToList())
+                    {
+                        if (oldRoleName.Equals("Deshabilitado"))
+                        {
+                            ViewBag.mensaje = "Este usuario ya esta deshabilitado";
+                            RedirectToAction("UserList");
+                        }
+                        else
+                        {
+                            await userManager.RemoveFromRoleAsync(user, oldRoleName);
+                            await userManager.AddToRoleAsync(user, roleName);
+                        }
+
+                    }
+
+                   
+                    var elResultado = await userManager.UpdateAsync(user);
+
+                    if (elResultado.Succeeded)
+                    {
+                        return RedirectToAction("UserList");
+                    }
+                    foreach (var elError in elResultado.Errors)
+                    {
+                        ModelState.AddModelError("", elError.Description);
+                    }
+
+                }
+                return View(input);
+            }
+            catch
+            {
+                return View();
+            }
+
+
+        }
+
+
+
+
 
 
         [HttpGet]
@@ -254,6 +336,9 @@ namespace AsopaabiOnline.UI.Controllers
 
                 var Customer = userManager.Users.Where(user => user.UserType == Models.Enums.UserType.Cliente);
                 ViewBag.Customer = Customer;
+
+              
+
                 if (Customer == null)
                 {
                     return View("Error");
