@@ -54,7 +54,7 @@ namespace AsopaabiOnline.UI
                 options.Password.RequiredUniqueChars = 2;
                 options.Password.RequireDigit = true;
 
-                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.MaxFailedAccessAttempts = 3;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
 
                 options.User.RequireUniqueEmail = true;

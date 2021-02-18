@@ -22,7 +22,6 @@ namespace AsopaabiOnline.UI.Controllers
 
 
 
-
         [HttpGet]
         public IActionResult UserList()
         {
@@ -32,15 +31,7 @@ namespace AsopaabiOnline.UI.Controllers
             return View(list);
         }
 
-        [HttpGet]
-
-        public async Task<IActionResult> DisableUsersList()
-        {
-            var list = await userManager.GetUsersInRoleAsync("Deshabilitado");
-
-
-            return View(list);
-        }
+        
 
         [HttpGet]
 
@@ -161,6 +152,9 @@ namespace AsopaabiOnline.UI.Controllers
 
         }
 
+
+
+
         [HttpGet]
         public async Task<IActionResult> UserDetails(string id)
         {
@@ -196,6 +190,8 @@ namespace AsopaabiOnline.UI.Controllers
 
 
         }
+
+
 
 
 
@@ -322,8 +318,15 @@ namespace AsopaabiOnline.UI.Controllers
 
         }
 
+        [HttpGet]
+
+        public async Task<IActionResult> DisableUsersList()
+        {
+            var list = await userManager.GetUsersInRoleAsync("Deshabilitado");
 
 
+            return View(list);
+        }
 
 
 
