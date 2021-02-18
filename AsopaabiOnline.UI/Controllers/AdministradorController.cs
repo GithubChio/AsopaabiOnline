@@ -98,7 +98,7 @@ namespace AsopaabiOnline.UI.Controllers
                 {
                     user.Id = input.Id;
                     user.UserType = input.UserType;
-
+                    user.CustomerType = input.CustomerType;
 
 
                     if (input.UserType.Equals(AsopaabiOnline.UI.Models.Enums.UserType.Administrador))
