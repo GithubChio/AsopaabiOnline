@@ -86,24 +86,33 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                                <a class="dropdown-item" asp-controller="Administrador" asp-action="UserList"><i class="fas fa-users"></i> Usuarios</a>
-                                <a class="dropdown-item" asp-controller="Administrador" asp-action="DisableUsersList"><i class="fas fa-users"></i> Usuarios deshabilitados</a>
-                                <a class="dropdown-item" asp-controller="Administrador" asp-action="CustomerList"><i class="far fa-address-book"></i> Clientes </a>
-                                <a class="dropdown-item" asp-controller="Administrador" asp-action="EmployeeList"><i class="fas fa-user-tie"></i> Empleados</a>
-                                <a class="dropdown-item" asp-controller="Administrador" asp-action="RolesList"><i class="fas fa-user-tag"></i> Roles </a>
-                                <div class="dropdown-divider"></div>
-
                                 <a class="dropdown-item" asp-controller="Productos" asp-action="Mostrar">
-                                    <i class="fas fa-seedling"></i> Productos
+                                    <i class="fas fa-leaf"></i> Productos
                                 </a>
                                 <a class="dropdown-item" asp-controller="Pedidos" asp-action="Mostrar">
                                     <i class="fas fa-cart-arrow-down"></i> Pedidos
                                 </a>
 
+                                @if (User.IsInRole("Administrador"))
+                                {
 
+                                    <div class="dropdown-divider"></div>
+
+
+                                    <a class="dropdown-item" asp-controller="Administrador" asp-action="RolesList"><i class="fas fa-user-tag"></i> Roles </a>
+                                    <button class="btn  dropdown-toggle" type="button" aria-labelledby="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-cog"></i> Usuarios</button>
+                                    <div class="dropdown-menu">
+                                        <a class=" dropdown-item" asp-controller="Administrador" asp-action="UserList"><i class="fas fa-users"></i>  Usuarios</a>
+                                        <a class="dropdown-item" asp-controller="Administrador" asp-action="DisableUsersList"><i class="fas fa-users-slash"></i>Deshabilitados</a>
+                                        <a class="dropdown-item" asp-controller="Administrador" asp-action="CustomerList"><i class="far fa-address-book"></i> Clientes </a>
+                                        <a class="dropdown-item" asp-controller="Administrador" asp-action="EmployeeList"><i class="fas fa-user-tie"></i> Empleados</a>
+
+                                    </div>
+
+                                }
 
                             </div>
-                        </li>
+</li>
 
                     }
 

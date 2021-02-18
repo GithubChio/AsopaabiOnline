@@ -78,7 +78,7 @@
     </div>
 
     <div class="card-body">
-        <form asp-controller="Administrador" asp-action="EditUser" method="post">
+        <form asp-controller="Administrador" asp-action="EditUser" method="post" enctype="multipart/form-data">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <br />
@@ -102,7 +102,7 @@
 
             <div class="form-group">
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio1" data-toggle="modal" data-target="#enable"  name="customRadio" class="custom-control-input">
+                    <input type="radio" id="customRadio1" data-toggle="modal" data-target="#enable" name="customRadio" class="custom-control-input">
                     <label class="custom-control-label" for="customRadio1">Habilitar</label>
                 </div>
                 <div class="custom-control custom-radio">
@@ -112,11 +112,10 @@
             </div>
 
 
-            <input type="submit" id="guardar" value="Guardar" class="btn btn-success btn-block" />
+            <input type="submit" value="Guardar" class="btn btn-success btn-block" />
 
-
-
-        </form>
+          
+         </form>
 
 
         

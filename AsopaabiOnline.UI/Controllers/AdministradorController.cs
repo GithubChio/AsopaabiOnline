@@ -13,7 +13,7 @@ namespace AsopaabiOnline.UI.Controllers
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
-        public  AdministradorController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
+        public AdministradorController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -21,7 +21,7 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
-     
+
 
         [HttpGet]
         public IActionResult UserList()
@@ -33,6 +33,7 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
         [HttpGet]
+
         public async Task<IActionResult> DisableUsersList()
         {
             var list = await userManager.GetUsersInRoleAsync("Deshabilitado");
@@ -40,7 +41,6 @@ namespace AsopaabiOnline.UI.Controllers
 
             return View(list);
         }
-
 
         [HttpGet]
 
@@ -143,7 +143,7 @@ namespace AsopaabiOnline.UI.Controllers
 
                     if (elResultado.Succeeded)
                     {
-                        ViewBag.Message = "Cambios guardados.";
+                        
                         return RedirectToAction("UserList", "Administrador");
                     }
                     foreach (var elError in elResultado.Errors)

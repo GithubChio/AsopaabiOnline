@@ -7,7 +7,7 @@
     {
         <li class="nav-item">
             <a class="nav-link text-dark" asp-controller="Clientes" asp-action="Perfil"  asp-route-id="@User.Identity.Name">
-                <i class="far fa-user-circle text-black"></i> Perfil</a>
+                <i class="fas fa-user-circle"></i> Perfil</a>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-controller="Cuenta" asp-action="Logout" asp-route-returnUrl="@Url.Action("Tienda", "Home", new { usuario = "" })">
