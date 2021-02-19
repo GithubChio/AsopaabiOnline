@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using AsopaabiOnline.LogicaDeNegocio;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using AsopaabiOnline.Modelo;
 
 namespace AsopaabiOnline.UI.Controllers
 {
@@ -44,12 +45,24 @@ namespace AsopaabiOnline.UI.Controllers
             }
         }
 
-        public void EliminarImagen(string urlDelaImagen)
+        public void EliminarRutaDeImagen(Producto producto)
         {
-            FileInfo file = new FileInfo(urlDelaImagen);
-            if (file.Exists)
+            try
             {
-                file.Delete();
+                CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
+                var elProductoEncontrado = elCoordinador.ObtenerProductoPorId(producto.Id);
+                string nombreDelaImagen = elProductoEncontrado.Imagen;
+                string folder = Path.Combine(hostEnvironment.WebRootPath, "imagenes");
+
+                string filePath = Path.Combine(folder, nombreDelaImagen);
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+            }
+            catch
+            {
+
             }
         }
 
@@ -144,6 +157,7 @@ namespace AsopaabiOnline.UI.Controllers
             try
             {
                 CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
+                EliminarRutaDeImagen(elProducto);
                 elCoordinador.Eliminar(elProducto);
                 return RedirectToAction("Mostrar");
             }
