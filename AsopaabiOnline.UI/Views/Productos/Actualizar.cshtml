@@ -17,12 +17,12 @@
         <div class=" m-3">
 
 
-            @*<div class="card w-50 mr-2">
+            <div class="card w-50 mr-2">
 
-                <img class="img-thumbnail" src="~/imagenes/@Model.Imagen" />
+                <img class="img-thumbnail" src="~/imagenes/@Model.Imagen" asp-append-version="true" />
 
 
-            </div><br />*@
+            </div><br />
 
             <form asp-controller="Productos" asp-action="Actualizar" method="post" enctype="multipart/form-data">
 
