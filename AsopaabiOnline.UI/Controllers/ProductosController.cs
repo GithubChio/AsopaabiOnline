@@ -33,6 +33,7 @@ namespace AsopaabiOnline.UI.Controllers
         {
             try
             {
+
                 CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
                 elProducto.Imagen = SubirImagen(elProducto);
                 elCoordinador.Agregar(elProducto);
@@ -118,20 +119,32 @@ namespace AsopaabiOnline.UI.Controllers
            
             try
         {
-                CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
-
-                if (elProducto.ImageFile != null)
+                if (elProducto != null)
                 {
-                    elProducto.Imagen = SubirImagen(elProducto);
+                    CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
+
+                    if (elProducto.ImageFile != null)
+                    {
+                        elProducto.Imagen = SubirImagen(elProducto);
+                    }
+                    elCoordinador.Actualizar(elProducto);
+                    TempData["AlertMessage"] = "Se ha actualizado correctamente";
                 }
+                else
+                {
+                    TempData["AlertMessage"] = "No hay nada que actualizar";
+                 
+                }
+               
               
 
-                elCoordinador.Actualizar(elProducto);
-            return RedirectToAction("Mostrar");
+               
+            return View(elProducto);
         }
         catch 
         {
-            return View();
+                TempData["AlertMessage"] = "Ha ocurrido un error!";
+                return View();
         }
 
         
