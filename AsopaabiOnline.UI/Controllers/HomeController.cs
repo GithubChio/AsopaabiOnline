@@ -54,6 +54,7 @@ namespace AsopaabiOnline.UI.Controllers
 
                     lista.Add(producto);
                     SessionHelper.SetObjectAsJson(HttpContext.Session, "cartList", lista);
+                   
 
                 }
                 else
@@ -89,6 +90,7 @@ namespace AsopaabiOnline.UI.Controllers
         public async Task<IActionResult> CarritoDeComprasAsync()
         {
             var user = await userManager.GetUserAsync(HttpContext.User);
+            ViewBag.simboloDeColon = "₡";
             if (SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList") == null)
             {
 
@@ -101,8 +103,8 @@ namespace AsopaabiOnline.UI.Controllers
                 var carritoDeCompras = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");
                 ViewBag.cart = carritoDeCompras;
                 ViewBag.total = carritoDeCompras.Sum(producto => producto.Precio * producto.Cantidad);
-
-                CoordinadorDeDireccionesParaPedidos coordinador = new CoordinadorDeDireccionesParaPedidos();
+               
+                
                 CoordinadorDeDireccionesParaPedidos coordinadorDeDireccionesParaPedidos = new CoordinadorDeDireccionesParaPedidos();
 
                 CartViewModel viewModel = new CartViewModel();

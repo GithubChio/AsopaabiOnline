@@ -17,8 +17,8 @@
         <div style="margin:15px;">
 
             <div class="card-header">
-                <a class="btn btn-success mb-3" style="width:auto" asp-action="AddRole" asp-controller="Administrador"> <i class="fas fa-plus-circle"></i> Agregar</a>
-
+                
+                <a class="btn " asp-action="AddRole" asp-controller="Administrador" style="border-radius:25px; background-color:#96c401"><i class="fas fa-plus text-white"></i>  </a>
             </div>
             <table class="table table-striped">
                 <thead>
@@ -49,7 +49,7 @@
 
 
                         <td>
-                            <a asp-action="DeleteRole" asp-controller="Administrador" class="btn btn-danger" asp-route-id="@role.Id">Eliminar</a>
+                            <a asp-action="DeleteRole" asp-controller="Administrador" class="btn btn-lg" asp-route-id="@role.Id"  data-toggle="tooltip" data-placement="top" title="Eliminar"> <i class="fas fa-trash text-danger"></i></a>
 
 
                         </td>

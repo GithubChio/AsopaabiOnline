@@ -53,6 +53,10 @@ namespace AsopaabiOnline.Modelo
         [Display(Name = "Estado")]
         public EstadoDeProducto Estado { get; set; }
 
+        [NotMapped]
+
+        public int Subtotal { get { return ( Cantidad * Precio ); } } 
+
 
         [NotMapped]
         [JsonIgnore]

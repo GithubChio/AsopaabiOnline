@@ -4,15 +4,20 @@
     ViewBag.title = "Carrito de Compras";
 }
 
-<h4>@ViewBag.title</h4>
+
 
 
 <div class="card">
-    <div style="margin:15px;">
+    <div class="card-header text-center"> <h4 class="card-title ">@ViewBag.title</h4></div>
+   
+    <div class="m-4">
         <form action="/Home/GenerarPedido" method="post" id="formCarrito">
             <table class="table table-stripedd">
                 <thead>
                     <tr>
+                        <th>
+                            #
+                        </th>
                         <th scope="col" width="200px">
                             Producto
                         </th>
@@ -23,32 +28,49 @@
                             @Html.DisplayNameFor(model => model.producto.Cantidad)
                         </th>
                         <th scope="col">
+                            Subtotal
+                        </th>
+                        <th scope="col">
                             Opciones
                         </th>
                     </tr>
                 </thead>
+
                 <tbody>
+                    @{ int rowNumber = 0; }
                     @foreach (var producto in @ViewBag.cart)
                     {
                         <tr>
                             <td>
+                                @(rowNumber += 1)
+                            </td>
+                            <td>
+                                <span class=" badge-pill badge-secondary mt-5"> Nombre:@producto.Nombre</span>
                                 <div>
                                     <label style="margin-right:1px;">
-                                        <img class="card-img-bottom" src="~/imagenes/@producto.Imagen" asp-append-version="true" />
+                                        <img class="card-img-bottom " src="~/imagenes/@producto.Imagen" asp-append-version="true" />
 
                                     </label>
                                 </div>
                             </td>
                             <td>
-                                @producto.Precio
+                                @ViewBag.simboloDeColon  @producto.Precio
                             </td>
                             <td>
+
                                 @producto.Cantidad
                             </td>
+                            <td>
+                                <span class="badge badge-pill badge-info">
+                                    @ViewBag.simboloDeColon  @producto.Subtotal
+                                </span>
+
+                            </td>
 
                             <td>
 
-                                <a  asp-action="QuitarDelCarrito" asp-controller="Home" asp-route-id="@producto.Id"><i class="fas fa-trash text-danger"></i>
+                                <a asp-action="QuitarDelCarrito" asp-controller="Home" asp-route-id="@producto.Id" class="btn btn-lg">
+                                    <i class="fas fa-minus-circle text-danger"></i>
                                 </a>
 
                             </td>
@@ -67,7 +89,7 @@
             }
             <hr />
             <input hidden value="@ViewBag.total" name="total" class="form-control" />
-            <h5>Total :   @ViewBag.total</h5>
+            <h5 class="text-right">Total:    @ViewBag.simboloDeColon  @ViewBag.total</h5>
             <br />
             <hr />
             <partial model="Model.pedido" name="~/Views/Shared/_PedidoPartial.cshtml" />
@@ -92,6 +114,7 @@
                     },
                     error: function (response) {
                         alert(response.responseText);
+
                    }
                 });
             });

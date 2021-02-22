@@ -6,13 +6,18 @@
     ViewBag.Title = "Lista de empleados";
 }
 
-<h2> @ViewBag.Title</h2>
-<br />
+
 
 @if (Model.Any())
 
 {<div class="card">
-    <div style="margin:15px;">
+
+    <div class="card-header text-center">
+        <h3 class="card-title">@ViewBag.Title</h3>
+
+    </div>
+
+    <div class="card-body m-5">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -41,31 +46,33 @@
                 @{ int rowNumber = 0; }
                 @foreach (var user in Model)
                 {
-                <tr>
-                    <td>
-                        @(rowNumber += 1)
-                    </td>
+                    <tr>
+                        <td>
+                            @(rowNumber += 1)
+                        </td>
 
-                    <td>
-                        <h5 class="card-title">@user.DNI</h5>
-                    </td>
+                        <td>
+                            <h5 class="card-title">@user.DNI</h5>
+                        </td>
 
-                    <td>
-                        <h5 class="card-title">@user.Name</h5>
-                    </td>
+                        <td>
+                            <h5 class="card-title">@user.Name</h5>
+                        </td>
 
-                    <td>
-                        <h5 class="card-title">@user.LastName</h5>
-                    </td>
-                    <td>
-                        <h5 class="card-title">@user.Email</h5>
-                    </td>
+                        <td>
+                            <h5 class="card-title">@user.LastName</h5>
+                        </td>
+                        <td>
+                            <h5 class="card-title">@user.Email</h5>
+                        </td>
 
-                    <td>
-                        <a asp-action="UserDetails" asp-controller="Administrador" class="btn btn-success" asp-route-id="@user.Id">Detalles </a>
+                        <td>
+                            <a asp-action="UserDetails" asp-controller="Administrador" class="btn btn-lg " asp-route-id="@user.Id"
+                                data-toggle="tooltip" data-placement="top" title="ver detalles"><i class="fas fa-search-plus text-info"></i> </a>
 
-                    </td>
-                </tr>
+
+                        </td>
+                    </tr>
 
                 }
 

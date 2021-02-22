@@ -1,16 +1,14 @@
 ﻿@model AsopaabiOnline.Modelo.Pedido
 
-<h3> Detalles del pedido </h3>
+
+
+<h4 class="text-center"> Detalles del pedido </h4>
 <hr />
 <br />
 <div class="row">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    
-    <div class="col-4">
-        <label class="control-label">Detalles adicionales</label>
-        <textarea asp-for="Notas" class="form-control" required></textarea>
-        <span asp-validation-for="Notas" class="text-danger"></span>
-    </div>
+
+
     <div class="col-4">
         <label asp-for="IdDireccion" class="control-label"></label>
         <select asp-for="IdDireccion" asp-items=@(new SelectList(Model.ListaDeDirecciones,"Id","Detalles")) class="form-control" required>
@@ -18,6 +16,14 @@
         </select>
         <span asp-validation-for="IdDireccion" class="text-danger"></span>
     </div>
+
+
+    <div class="col-4">
+        <label class="control-label">Detalles adicionales</label>
+        <textarea asp-for="Notas" class="form-control" required></textarea>
+        <span asp-validation-for="Notas" class="text-danger"></span>
+    </div>
+
     <div class="col-4">
         <label asp-for="TipoPago" class="control-label"></label>
         <select asp-for="TipoPago" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.OpcionesDePago>()" class="form-control" required>
@@ -26,7 +32,7 @@
         <span asp-validation-for="TipoPago" class="text-danger"></span>
 
     </div>
-  
+
 
     <hr />
 

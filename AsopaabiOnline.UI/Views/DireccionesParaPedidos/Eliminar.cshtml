@@ -5,62 +5,73 @@
     ViewBag.Title = "Eliminar dirección";
 }
 
-<h1>@ViewBag.Title</h1>
 
 
-<div class=" card text-center w-50" >
-
-    <div class="card-header">
-        <h3 style="text-align:center;">¿Está seguro que desea eliminar esta dirección?</h3>
-
-    </div>
-
-    <div class="card-body">
-        <dl class="row">
-
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Id)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Id)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.IdProvincia)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.IdProvinciaNavigation.Nombre)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.IdCanton)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.IdCantonNavigation.Nombre)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.IdDistrito)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.IdDistritoNavigation.Nombre)
-            </dd>
-          
-           
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Detalles)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Detalles)
-            </dd>
 
 
-        </dl>
-    </div>
+<div class="row justify-content-md-center">
+   
 
-    <div class="card-footer">
+    <div class=" card  w-75">
 
-               
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminar">Si</button>
-                <a class="btn btn-secondary" asp-action="Mostrar">No</a>
+        <div class="card-header">
+            <h3 class="card-title "> @ViewBag.Title</h3>
+
+        </div>
+
         
+       
+        <div class="card-body text-center">
+
+            <br />
+            <h4 class="card-subtitle text-center"> ¿Está seguro que desea eliminar esta dirección?</h4>
+            <br />
+            <br />
+            <dl class="row">
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Id)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Id)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.IdProvincia)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.IdProvinciaNavigation.Nombre)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.IdCanton)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.IdCantonNavigation.Nombre)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.IdDistrito)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.IdDistritoNavigation.Nombre)
+                </dd>
+
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Detalles)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Detalles)
+                </dd>
+
+
+            </dl>
+        </div>
+
+        <div class="card-footer text-center">
+
+
+            <button type="button" class="btn btn-danger btn-lg " data-toggle="modal" data-target="#eliminar">Si</button>
+            <a class="btn btn-secondary btn-lg  " asp-action="Mostrar">No</a>
+
 
             <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -72,23 +83,24 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                           La dirección #@Model.Id se va a eliminar, ¿estas deacuerdo?
+                            La dirección #@Model.Id se va a eliminar, ¿estas deacuerdo?
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <form asp-action="Eliminar">
                                 <input type="hidden" asp-for="Id" />
-                                <button type="submit" class="btn btn-primary"  >Eliminar</button>
-                                
+                                <button type="submit" class="btn btn-primary">Eliminar</button>
+
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
 
-          
-      
+
+
+
+        </div>
 
     </div>
-   
-</div>
+   </div>

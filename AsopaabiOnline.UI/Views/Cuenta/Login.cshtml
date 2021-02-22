@@ -3,36 +3,39 @@
     ViewData["Title"] = "Inicio de Sesión";
 }
 
-<h1>Iniciar Sesión</h1>
 
 
-<div class=" card ">
 
-      <div class="col-5 offset-4  text-center" >
-        <form method="post">
-            
-            <div class="form-group">
-               
+<div class="row justify-content-md-center">
+
+    <div class="card w-50">
+        <h3 class="card-header text-center">Iniciar Sesión</h3>
+
+        <div class="card-body">
+            <form method="post">
+
+                <div class="form-group">
+
                     <label asp-for="Email"></label>
                     <input asp-for="Email" class="form-control" aria-describedby="inputGroup-sizing-default" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
-              
+
                 <div class="form-group">
                     <label asp-for="Password"></label>
 
 
-                    <input asp-for="Password" class="form-control" aria-describedby="inputGroup-sizing-default"  />
+                    <input asp-for="Password" class="form-control" aria-describedby="inputGroup-sizing-default" />
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
-                <div class="form-group" >
-                    <div class="checkbox">
-                        <label asp-for="RememberMe">
-                            <input asp-for="RememberMe" class="form-check" />
-                            Recordarme?
-                        </label>
-                    </div>
+                
+                <div class="form-check">
+                    <input asp-for="RememberMe" class="form-check-input" id="defaultCheck1" />
+                    <label asp-for="RememberMe" class="form-check-label"  for="defaultCheck1" >Recordarme?</label>
                 </div>
+             
+
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-lg btn-block" style="background-color:#008fa0; ">   Entrar   </button>
 
@@ -46,9 +49,9 @@
                     </p>
                 </div>
 
-         </form>
-       
-   </div>
+            </form>
+        </div>
+    </div>
 
 </div>
 

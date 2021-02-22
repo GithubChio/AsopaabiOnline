@@ -2,109 +2,132 @@
 
 
 @{
-    ViewBag.Title = "Pedidos En Proceso";
+    ViewBag.Title = "Pedidos en proceso";
 }
 
 
 
-<h3>@ViewBag.Title</h3>
+
 
 @if (Model.Any())
 {
-<div class="card">
-    <div style="margin:15px;">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>
-                        #
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Id)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.FechaPedido)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.FechaEntrega)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Notas)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Estado)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IdDireccion)
-                    </th>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.IdCliente)
-                    </th>
-                    <th>
-                        Opciones
-                    </th>
-
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @{ int rowNumber = 0; }
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @(rowNumber += 1)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FechaPedido)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FechaEntrega)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Notas)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Estado)
-                        </td>
-                        <td>
-                            <label>Provincia: @item.IdDireccionNavigation.IdProvinciaNavigation.Nombre  </label>
-                            <br />
-                            <label>Cantón: @item.IdDireccionNavigation.IdCantonNavigation.Nombre  </label>
-                            <br />
-                            <label>Distrito: @item.IdDireccionNavigation.IdDistritoNavigation.Nombre  </label>
-                            <br />
-                            <label>Detalles: @item.IdDireccionNavigation.Detalles  </label>
-                        </td>
-                        <td>
-                            <label>Nombre: @item.IdDireccionNavigation.IdClienteNavigation.FullName  </label>
-                            <br />
-                            <label>Cédula: @item.IdDireccionNavigation.IdClienteNavigation.Dni  </label>
-                        </td>
-                        <td>
-                            <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a>
+    <div class="card">
 
 
-                        </td>
-                    </tr>
-                }
+        <div class="m-5">
 
-            </tbody>
+            <div class="card-header text-center">
+                <h3 class="card-title">@ViewBag.Title</h3>
+
+            </div>
 
 
-        </table>
+
+            <div class="card-body">
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Id)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FechaPedido)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FechaEntrega)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Notas)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Estado)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdDireccion)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdCliente)
+                            </th>
+                            <th>
+                                Opciones
+                            </th>
+
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int rowNumber = 0; }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @(rowNumber += 1)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FechaPedido)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FechaEntrega)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Notas)
+                                </td>
+                                <td>
+                                    <span class="badge badge-pill badge-warning">
+                                        @Html.DisplayFor(modelItem => item.Estado)
+                                    </span>
+                                </td>
+                                <td>
+                                    <label>Provincia: @item.IdDireccionNavigation.IdProvinciaNavigation.Nombre  </label>
+                                    <br />
+                                    <label>Cantón: @item.IdDireccionNavigation.IdCantonNavigation.Nombre  </label>
+                                    <br />
+                                    <label>Distrito: @item.IdDireccionNavigation.IdDistritoNavigation.Nombre  </label>
+                                    <br />
+                                    <label>Detalles: @item.IdDireccionNavigation.Detalles  </label>
+                                </td>
+                                <td>
+                                    <label>Nombre: @item.IdDireccionNavigation.IdClienteNavigation.FullName  </label>
+                                    <br />
+                                    <label>Cédula: @item.IdDireccionNavigation.IdClienteNavigation.Dni  </label>
+                                </td>
+                                <td>
+
+                                    <a asp-action="Actualizar" asp-route-id="@item.Id" class="bn btn-lg" data-toggle="tooltip" data-placement="top" title="Actualizar pedido"><i class="fas fa-edit text-success"></i></a>
+
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+
+                </table>
+            </div>
+
+        </div>
+
+
+
     </div>
-</div>
     <br />
-    <a class="btn btn-secondary" asp-action="Mostrar"><i class="fas fa-arrow-alt-circle-left"></i>  Volver</a>
+    <a class="btn btn-secondary btn-lg" asp-action="Mostrar"> Volver</a>
 }
 else
 {
-    <h3> No hay pedidos en proceso</h3>
-    <br />
-    <a class="btn btn-outline-secondary" asp-action="Mostrar">Volver</a>
+    <div class="card text-center m-5">
+        <div class="card-body">
+            <h3>No hay pedidos en proceso</h3>
+        </div>
+    </div>
+
+    <a class="btn btn-secondary btn-lg" asp-action="Mostrar">Volver</a>
 }

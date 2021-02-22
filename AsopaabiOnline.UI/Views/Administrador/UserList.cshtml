@@ -6,7 +6,7 @@
     ViewBag.Title = "Lista de usuarios";
 }
 
-<h2> @ViewBag.Title</h2>
+
 
 
 
@@ -17,80 +17,91 @@
 {
 
 <div class="card">
-    <div style="margin:15px;">
+    <div class="m-5">
 
-        <div class="card-header">
-            <a class="btn btn-success mb-3" style="width:auto" asp-action="Register" asp-controller="Cuenta"> <i class="fas fa-user-plus"></i> Registrar un usuario nuevo</a>
+        <div class="card-header text-center">
+            <h3 class="card-title">@ViewBag.Title</h3>   
 
         </div>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>
-                          #
-                    </th>
-                    <th>
-                        <label>Cédula</label>
-                    </th>
-                    <th>
-                        <label>Nombre</label>
-                    </th>
-                    <th>
-                        <label>Apellido</label>
-                    </th>
-                    <th>
-                        <label>Correo Electrónico</label>
-                    </th>
-                    <th>
-                        <label>Tipo de usuario</label>
-                    </th>
+       <br />
+        <a class="btn" style="border-radius: 25px; background-color: #96c401 " asp-action="Register" asp-controller="Cuenta"
+             data-toggle="tooltip" data-placement="top" title="Registrar una cuenta nueva"><i class="fas fa-user-plus text-white"></i></a>
+        <br />
 
-                    <th>
-                        <label> Opciones</label>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @{ int rowNumber = 0; }
-                @foreach (var user in Model)
-                {
+        <div class="card-body">
+
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>
-                            @(rowNumber += 1)
-                        </td>
-                        <td>
-                            <h5 class="card-title">@user.DNI</h5>
-                        </td>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            <label>Cédula</label>
+                        </th>
+                        <th>
+                            <label>Nombre</label>
+                        </th>
+                        <th>
+                            <label>Apellido</label>
+                        </th>
+                        <th>
+                            <label>Correo Electrónico</label>
+                        </th>
+                        <th>
+                            <label>Tipo de usuario</label>
+                        </th>
 
-                        <td>
-                            <h5 class="card-title">@user.Name</h5>
-                        </td>
-
-                        <td>
-                            <h5 class="card-title">@user.LastName</h5>
-                        </td>
-                        <td>
-                            <h5 class="card-title">@user.Email</h5>
-                        </td>
-                        <td>
-                            <h5 class="card-title">@user.UserType</h5>
-                        </td>
-                      
-                       
-
-                        <td>
-                            <a asp-action="EditUser" asp-controller="Administrador" asp-route-id="@user.Id">Editar </a> |
-                            <a asp-action="UserDetails" asp-controller="Administrador" asp-route-id="@user.Id">Detalles </a>
-
-
-                        </td>
+                        <th>
+                            <label> Opciones</label>
+                        </th>
                     </tr>
+                </thead>
+                <tbody>
+                    @{ int rowNumber = 0; }
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>
+                                @(rowNumber += 1)
+                            </td>
+                            <td>
+                                <h5 class="card-title">@user.DNI</h5>
+                            </td>
 
-                }
+                            <td>
+                                <h5 class="card-title">@user.Name</h5>
+                            </td>
 
-            </tbody>
-        </table>
+                            <td>
+                                <h5 class="card-title">@user.LastName</h5>
+                            </td>
+                            <td>
+                                <h5 class="card-title">@user.Email</h5>
+                            </td>
+                            <td>
+                                <h5 class="card-title">@user.UserType</h5>
+                            </td>
+
+
+
+                            <td>
+                                <a asp-action="UserDetails" asp-controller="Administrador" asp-route-id="@user.Id" class="btn btn-lg"
+                                     data-toggle="tooltip" data-placement="top" title="ver detalles"> <i class="fas fa-search-plus text-info"></i></a> |
+                                <a asp-action="EditUser" asp-controller="Administrador" asp-route-id="@user.Id" class="btn btn-lg" 
+                                    data-toggle="tooltip" data-placement="top" title="Actualizar"><i class="fas fa-user-edit text-success"></i></a> 
+
+
+
+                            </td>
+                        </tr>
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
 
 
 

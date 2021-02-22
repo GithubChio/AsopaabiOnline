@@ -1,108 +1,127 @@
 ﻿@model IEnumerable<AsopaabiOnline.Modelo.Producto>
-
+@using AsopaabiOnline.Modelo;
 @{
     ViewBag.Title = "Productos";
 }
 
 
-<h3 class="card-header text-center">@ViewBag.Title</h3>
-
-
-
-
 
 @if (Model.Any())
 {
-    <div class="card">
+<div class="card">
 
 
-        <div class="card-header">
-            <a class="btn btn-success" asp-controller="Productos" asp-action="Agregar" style="border-radius:25px;"><i class="fas fa-plus "></i>  </a>
-        </div>
+    <div class="card-header">
 
+        <h3 class="card-title text-center">@ViewBag.Title</h3>
 
-        <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-
-                        <th>
-                            @Html.DisplayNameFor(model => model.Imagen)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Nombre)
-                        </th>
-
-                        <th>
-                            @Html.DisplayNameFor(model => model.Precio)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.UnidadDeMedida)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Categoria)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Estado)
-                        </th>
-                        <th>
-                            <label>Opciones</label>
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-
-
-                            <td>
-
-                                <label>
-                                    <img class="rounded" src="~/imagenes/@item.Imagen" height="150" width="150" asp-append-version="true" />
-                                </label>
-
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Nombre)
-                            </td>
-
-                            <td>
-
-                                @Html.DisplayFor(modelItem => item.Precio)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.UnidadDeMedida)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Categoria)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Estado)
-                            </td>
-
-
-                            <td>
-
-                                <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a> |
-                                <a asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a>
-
-
-
-
-
-                            </td>
-                        </tr>
-                    }
-
-                </tbody>
-
-
-            </table>
-        </div>
 
     </div>
+    <br />
+    <div class="m-3"><a class="btn" asp-controller="Productos" asp-action="Agregar" style="border-radius:25px; background-color:#96c401"  
+                        data-toggle="tooltip" data-placement="top" title="Agregar"><i class="fas fa-plus text-white"></i>  </a></div>
+
+    
+    <br />
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Imagen)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Precio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnidadDeMedida)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Categoria)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </th>
+                    <th>
+                        <label>Opciones</label>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    var estadoProducto = "";
+                    if (item.Estado == EstadoDeProducto.Disponible)
+                    {
+                        estadoProducto = "badge badge-pill badge-success";
+                    }
+                    if (item.Estado == EstadoDeProducto.NoDisponible)
+                    {
+                        estadoProducto = "badge badge-pill badge-danger";
+                    }
+                    if (item.Estado == EstadoDeProducto.EnOferta)
+                    {
+                        estadoProducto = "badge badge-pill badge-info";
+                    }
+                    <tr>
+
+
+                        <td>
+
+                            <label>
+                                <img class="rounded" src="~/imagenes/@item.Imagen" height="150" width="150" asp-append-version="true" />
+                            </label>
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+
+                        <td>
+
+                            @Html.DisplayFor(modelItem => item.Precio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnidadDeMedida)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Categoria)
+                        </td>
+                        <td>
+                            <span class="@estadoProducto">
+                                @Html.DisplayFor(modelItem => item.Estado)
+                                </span>
+                        </td>
+
+
+                        <td>
+                            <a asp-action="Actualizar" asp-route-id="@item.Id" class="bn btn-lg" data-toggle="tooltip" data-placement="top" title="Actualizar "><i class="fas fa-edit text-success"></i></a> |
+                          
+                            <a asp-action="Eliminar"  class="btn btn-lg" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Eliminar"> <i class="fas fa-trash text-danger"></i></a>
+                            
+
+
+
+
+
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+
+        </table>
+    </div>
+
+</div>
 }
 
 else

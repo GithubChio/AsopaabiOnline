@@ -7,18 +7,42 @@
 
 
 
-<h3>@ViewBag.Title</h3>
+
 
 
     @if (Model.Any())
     {
 <div class="card">
-    <div style="margin:15px;">
-        <div class="card-header">
-            <a class="btn btn-success" asp-controller="Pedidos" asp-action="PedidosRecientes">Pedidos Recientes</a>
-            <a class="btn btn-warning " asp-controller="Pedidos" asp-action="PedidosEnProceso">Pedidos En Proceso</a>
-            <a class="btn btn-secondary" asp-controller="Pedidos" asp-action="PedidosFinalizados">Pedidos Finalizados</a>
+    <div class="m-5">
+        <div class="card-header text-center">
+           
+            <h3 class="card-title">@ViewBag.Title</h3>
+           
         </div>
+
+        <div>
+
+            <ul class="navbar navbar-expand-lg navbar-light justify-content-center"  >
+                <ul class="navbar-nav ">
+                    <li class="nav-item ">
+
+                        <a class="nav-link  badge badge-success" asp-controller="Pedidos" asp-action="PedidosRecientes"
+                           data-toggle="tooltip" data-placement="top" title="ir a la lista de pedidos recientes">Pedidos Recientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  badge badge-warning" asp-controller="Pedidos" asp-action="PedidosEnProceso"
+                            data-toggle="tooltip" data-placement="top" title="ir a la lista de pedidos en proceso">Pedidos En Proceso</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  badge badge-secondary" asp-controller="Pedidos" asp-action="PedidosFinalizados"
+                            data-toggle="tooltip" data-placement="top" title="ir a la lista de pedidos finalizados">Pedidos Finalizados</a>
+                    </li>
+
+                </ul>
+                </ul>
+        </div>
+
+        <div class=" card-body">
 
         <table class="table table-striped">
             <thead>
@@ -111,8 +135,8 @@
                         <td>
 
 
-                            <a asp-action="Actualizar" asp-route-id="@item.Id">Actualizar</a> |
-                            <a asp-action="CambiarEstadoDePedido" asp-route-id="@item.Id">Cambiar estado </a>
+                            <a asp-action="Actualizar" asp-route-id="@item.Id" class="bn btn-lg" data-toggle="tooltip" data-placement="top" title="Actualizar "><i class="fas fa-edit text-success"></i></a> |
+                            <a asp-action="CambiarEstadoDePedido" asp-route-id="@item.Id"  class="bn btn-lg" data-toggle="tooltip" data-placement="top" title="Cambiar estado de pedido"><i class="fas fa-exchange-alt"></i> </a>
 
 
                         </td>
@@ -123,6 +147,14 @@
 
 
         </table>
+
+        </div>
+
+
+
+
+
+
 
         </div>
     </div>

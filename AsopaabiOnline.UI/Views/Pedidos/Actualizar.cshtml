@@ -4,42 +4,45 @@
     ViewBag.title = "Actualizar";
 }
 
-<h1>@ViewBag.title</h1>
+
+
+<div class="row justify-content-md-center">
+    <div class="card w-50">
+        <h1 class="card-header text-center">@ViewBag.title</h1>
+
+        <div class="card-body">
+            <form asp-controller="Pedidos" asp-action="Actualizar">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
 
 
 
-<div class="card  w-50">
-    <div class="col-sm-6">
-        <form asp-controller="Pedidos" asp-action="Actualizar">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="FechaEntrega" class="control-label"></label>
+                    <input asp-for="FechaEntrega" class="form-control" />
+                    <span asp-validation-for="FechaEntrega" class="text-danger"></span>
+                </div>
 
 
 
-            <div class="form-group">
-                <label asp-for="FechaEntrega" class="control-label"></label>
-                <input asp-for="FechaEntrega" class="form-control" />
-                <span asp-validation-for="FechaEntrega" class="text-danger"></span>
-            </div>
-           
+                <hr />
+                <div class="form-group">
 
-            
-            <hr />
-            <div class="form-group">
-
-                <input type="submit" value="Guardar" class="btn btn-info" />
-                <a class="btn btn-secondary" asp-action="Mostrar"><i class="fas fa-arrow-alt-circle-left"></i> Volver</a>
-            </div>
-        </form>
+                    <input type="submit" value="Guardar" class="btn btn-info btn-block" />
+                    <a class="btn btn-secondary btn-block" asp-action="Mostrar"><i class="fas fa-arrow-alt-circle-left"></i> Volver</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+ 
 
 
 
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
 
 
-}
+    }

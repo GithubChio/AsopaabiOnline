@@ -5,37 +5,46 @@
     ViewBag.Title = "Eliminar";
 }
 
-<h1>@ViewBag.Title</h1>
+
+<div class="row justify-content-md-center">
 
 
-<div class="card text-center w-50">
-    <div class="card-header">
-        <h3 style="text-align:center;">¿Está seguro que desea eliminar este rol?</h3>
-
-    </div>
-  <div class="card-body">
-   
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+    <div class=" card  w-75">
 
 
+        <div class="card-header">
+            <h3 class="card-title "> @ViewBag.Title</h3>
 
-    </dl>
-    </div>
+        </div>
 
-    <div class="card-footer  ">
-    <form asp-action="DeleteRole" asp-controller="Administrador" method="post">
        
-        <input type="hidden" asp-for="id" />
-        <input type="submit" value="Sí" class="btn btn-danger" style="width:50px;" />
+        <div class="card-body text-center">
+            <br />
+            <h4 class="card-subtitle text-center">¿Está seguro que desea eliminar este rol?</h4>
+            <br />
+            <br />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
 
-        <a class="btn btn-secondary" asp-action="RolesList">No</a>
 
-    </form>
+
+            </dl>
+        </div>
+
+        <div class="card-footer text-center ">
+            <form asp-action="DeleteRole" asp-controller="Administrador" method="post">
+
+                <input type="hidden" asp-for="id" />
+                <input type="submit" value="Sí" class="btn btn-danger btn-lg" style="width:50px;" />
+
+                <a class="btn btn-secondary btn-lg" asp-action="RolesList">No</a>
+
+            </form>
+        </div>
     </div>
-</div>
+    </div>
