@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 
 using AsopaabiOnline.AccesoADatos;
+using AsopaabiOnline.Modelo;
 using Microsoft.AspNetCore.Hosting;
 
 namespace AsopaabiOnline.LogicaDeNegocio
@@ -35,7 +36,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
             elProductoAActualizar.Estado = elProducto.Estado;
             elProductoAActualizar.Categoria = elProducto.Categoria;
             elGestor.Actualizar(elProductoAActualizar);
-            
+
         }
 
         public void Eliminar(Modelo.Producto elProducto)
@@ -45,7 +46,24 @@ namespace AsopaabiOnline.LogicaDeNegocio
             elGestor.Eliminar(elProductoAEliminar);
 
         }
-        
+
+
+        public bool SiExiste(Modelo.Producto producto)
+        {
+            GestorDeProductos elGestor = new GestorDeProductos();
+            var elProducto = elGestor.ObtenerProductoPorId(producto.Id);
+
+            if(elProducto != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
         public Modelo.Producto ObtenerProductoPorId(int id)
         {
             GestorDeProductos elGestor = new GestorDeProductos();
@@ -54,31 +72,31 @@ namespace AsopaabiOnline.LogicaDeNegocio
 
      
 
-        public List<Modelo.Producto> ListaDeFrutas()
-        {
-            GestorDeProductos elGestor = new GestorDeProductos();
-            return elGestor.ObtenerListaDeProductosConCategoriaDeFruta();
-        }
-        public List<Modelo.Producto> ListaDeHortalizas()
-        {
-            GestorDeProductos elGestor = new GestorDeProductos();
-            return elGestor.ObtenerListaDeProductosConCategoriaHortalizas();
-        }
-        public List<Modelo.Producto> ListaDeRaicesYTuberculos()
-        {
-            GestorDeProductos elGestor = new GestorDeProductos();
-            return elGestor.ObtenerListaDeProductosConCategoriaRaicesYTuberculos();
-        }
-        public List<Modelo.Producto> ListaDeFloresAromaticas()
-        {
-            GestorDeProductos elGestor = new GestorDeProductos();
-            return elGestor.ObtenerListaDeProductosConCategoriaFloresAromaticas();
-        }
+        //public List<Modelo.Producto> ListaDeFrutas()
+        //{
+        //    GestorDeProductos elGestor = new GestorDeProductos();
+        //    return elGestor.ObtenerListaDeProductosConCategoriaDeFruta();
+        //}
+        //public List<Modelo.Producto> ListaDeHortalizas()
+        //{
+        //    GestorDeProductos elGestor = new GestorDeProductos();
+        //    return elGestor.ObtenerListaDeProductosConCategoriaHortalizas();
+        //}
+        //public List<Modelo.Producto> ListaDeRaicesYTuberculos()
+        //{
+        //    GestorDeProductos elGestor = new GestorDeProductos();
+        //    return elGestor.ObtenerListaDeProductosConCategoriaRaicesYTuberculos();
+        //}
+        //public List<Modelo.Producto> ListaDeFloresAromaticas()
+        //{
+        //    GestorDeProductos elGestor = new GestorDeProductos();
+        //    return elGestor.ObtenerListaDeProductosConCategoriaFloresAromaticas();
+        //}
 
-        public List<Modelo.Producto> ListaDeOtrosProductos()
-        {
-            GestorDeProductos elGestor = new GestorDeProductos();
-            return elGestor.ObtenerListaDeProductosConCategoriaOtros();
-        }
+        //public List<Modelo.Producto> ListaDeOtrosProductos()
+        //{
+        //    GestorDeProductos elGestor = new GestorDeProductos();
+        //    return elGestor.ObtenerListaDeProductosConCategoriaOtros();
+        //}
     }
 }

@@ -12,8 +12,6 @@ namespace AsopaabiOnline.UI.Controllers
     public class PedidosController : Controller
     {
        
-        
-
 
         [HttpGet]
         [Route("Pedidos/Mostrar")]

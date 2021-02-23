@@ -29,16 +29,12 @@ namespace AsopaabiOnline.UI.Controllers
         {
             CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
             var list = elCoordinador.ListarProductos();
-           
+            ViewBag.simboloDeColon = "₡";
+
             return View(list);
         }
 
-        public IActionResult Index()
-        {
-            Alert("This is a success message", NotificationType.success);
-            return View();
-        }
-
+       
         [HttpPost]
         public IActionResult AñadirAlCarrito(int id, int cantidad)
         {
@@ -173,6 +169,7 @@ namespace AsopaabiOnline.UI.Controllers
             {
               bool seGuardoPago = await InsertPago(db, idPedido, pedido,total);
                 var d = seGuardoPago;
+
             }
             bool seGuardoDetalle = idPedido == 0 ? false :  await InsertDetallePedidoAsync(carritoDeCompras, idPedido, db);
 
@@ -184,7 +181,8 @@ namespace AsopaabiOnline.UI.Controllers
                 historialPedido.IdPedido = existePedido.Id;
                 db.HistorialPedido.Add(historialPedido);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Tienda");
+                Alert("Su pedido ha sido enviado.", NotificationType.success);
+                return RedirectToAction("Mostrar","HistorialPedidos");
 
             }
             return RedirectToAction("CarritoDeCompras");

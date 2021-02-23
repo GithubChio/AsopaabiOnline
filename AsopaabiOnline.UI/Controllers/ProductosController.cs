@@ -7,10 +7,11 @@ using AsopaabiOnline.LogicaDeNegocio;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using AsopaabiOnline.Modelo;
+using AsopaabiOnline.UI.Models.Enums;
 
 namespace AsopaabiOnline.UI.Controllers
 {
-    public class ProductosController : Controller
+    public class ProductosController : BaseController
     {
        private readonly IWebHostEnvironment hostEnvironment;
 
@@ -33,15 +34,30 @@ namespace AsopaabiOnline.UI.Controllers
         {
             try
             {
-
                 CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
-                elProducto.Imagen = SubirImagen(elProducto);
-                elCoordinador.Agregar(elProducto);
+                if (!elCoordinador.SiExiste(elProducto) || elProducto != null)
+                {
+                   
+                   
+                    elProducto.Imagen = SubirImagen(elProducto);
+                    elCoordinador.Agregar(elProducto);
+                    Alert("Producto guardado.", NotificationType.success);
+
+                    
+                }
+                else
+                {
+                    Alert("Parece que este producto ya existe. Inténtalo de nuevo agregando otro!", NotificationType.warning);
+
+                }
+
                 return RedirectToAction("Mostrar");
 
             }
             catch
             {
+                Alert("Se deben completar los campos para agregar el producto.", NotificationType.error);
+
                 return View();
             }
         }
@@ -118,22 +134,22 @@ namespace AsopaabiOnline.UI.Controllers
           
            
             try
-        {
-                if (elProducto != null)
+            {
+                CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
+                if (elCoordinador.SiExiste(elProducto))
                 {
-                    CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
+                  
 
                     if (elProducto.ImageFile != null)
                     {
                         elProducto.Imagen = SubirImagen(elProducto);
                     }
                     elCoordinador.Actualizar(elProducto);
-                    TempData["AlertMessage"] = "Se ha actualizado correctamente";
+                    Alert("Producto actualizado.", NotificationType.success);
                 }
                 else
                 {
-                    TempData["AlertMessage"] = "No hay nada que actualizar";
-                 
+                    Alert("Parece que este producto NO existe.", NotificationType.warning);
                 }
                
               
@@ -143,7 +159,7 @@ namespace AsopaabiOnline.UI.Controllers
         }
         catch 
         {
-                TempData["AlertMessage"] = "Ha ocurrido un error!";
+                Alert("Algo ha salido mal, inténtalo de nuevo!", NotificationType.error);
                 return View();
         }
 
@@ -170,12 +186,25 @@ namespace AsopaabiOnline.UI.Controllers
             try
             {
                 CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
-                EliminarRutaDeImagen(elProducto);
-                elCoordinador.Eliminar(elProducto);
+                if (elCoordinador.SiExiste(elProducto))
+                {
+                    EliminarRutaDeImagen(elProducto);
+                    elCoordinador.Eliminar(elProducto);
+                    Alert("Producto eliminado.", NotificationType.success);
+
+                }
+                else
+                {
+                    Alert("El producto que intentas eliminar, NO existe!", NotificationType.warning);
+                }
+               
+              
                 return RedirectToAction("Mostrar");
+
             }
             catch
             {
+                Alert("Algo ha salido mal, inténtalo de nuevo!", NotificationType.error);
                 return View();
             }
 

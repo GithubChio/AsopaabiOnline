@@ -4,9 +4,13 @@ namespace AsopaabiOnline.Modelo
 {
     public enum UnidadesDeMedida
     {
-       kilogramos = 1,
-       gramos = 2,
-       unidad = 3,
+        [Display(Name ="Empaque Kg")]
+        Empaque_kg = 1,
+         Gramos = 2,
+         Unidad = 3,
+         Rollo = 4,
+         Bandeja = 5,
+
 
     }
 }

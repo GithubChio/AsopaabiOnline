@@ -17,6 +17,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
             var FechaActual = DateTime.Now;
             elPedido.Estado = Modelo.EstadoDePedido.Reciente;
             elPedido.FechaPedido = FechaActual;
+            elPedido.FechaEntrega = FechaActual.AddDays(8);
             elGestor.Agregar(elPedido);
         }
 

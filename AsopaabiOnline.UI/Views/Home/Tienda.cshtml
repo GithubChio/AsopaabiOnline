@@ -30,14 +30,20 @@
                     <img class="card-img-top" height="200" src="~/imagenes/@Model[product].Imagen" asp-append-version="true" />
                     <div class="card-body">
                         <h5 name="@Model[product].Nombre" class="card-title">@Model[product].Nombre  </h5>
-                        @Model[product].Precio
+                        @ViewBag.simboloDeColon  @Model[product].Precio
                         <p class="card-text">@Model[product].UnidadDeMedida</p>
 
-                        <input required disabled="@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible)" id="@product" name="cantidad" min="0" style="width:50px;float:right; right:0;" type="number" />
+                       
+
+                        <input required disabled="@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible)" id="@product" name="cantidad" min="0" style="width:50px;float:right; right:0;" type="number"
+                               data-toggle="tooltip" data-placement="top" title="cantidad a comprar" />
 
                         <div>
 
-                            <button disabled="@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible)" type="submit"   asp-controller="home" asp-action="AñadirAlCarrito" asp-route-id="@Model[product].Id" class="btn btn-primary rounded-circle"><i class="fas fa-plus"></i></button>
+                            <button disabled="@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible)" style="float:right; right:0; margin-right:5px;" type="submit" asp-controller="home" asp-action="AñadirAlCarrito" asp-route-id="@Model[product].Id" class="btn btn-primary rounded-circle"
+                                    data-toggle="tooltip" data-placement="top" title="Añadir al carrito">
+                                <i class="fas fa-plus"></i>
+                            </button>
                         </div>
                     </div>
                     <div class="card-footer">

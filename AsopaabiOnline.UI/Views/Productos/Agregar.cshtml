@@ -26,7 +26,7 @@
                 </div>
                 <div class="custom-file  ">
 
-                    <input asp-for="ImageFile" type="file" class=" custom-file-input" accept="image/png, image/jpeg" id="laImagen" required lang="es" />
+                    <input asp-for="ImageFile" type="file" class=" custom-file-input" accept="image/png, image/jpeg" id="laImagen" required lang="es-es" />
                     <label asp-for="ImageFile" class=" custom-file-label" for="laImagen">selecciona una imagen</label>
 
                     <span asp-validation-for="Imagen" class="text-danger"></span>
@@ -41,6 +41,7 @@
                     <select asp-for="UnidadDeMedida" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.UnidadesDeMedida>()" class="form-control" required>
                         <option selected="selected" disabled value="">Seleccione una opción</option>
                     </select>
+                   
                     <span asp-validation-for="UnidadDeMedida" class="text-danger"></span>
                 </div>
 

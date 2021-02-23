@@ -33,6 +33,8 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado;
         }
 
+
+       
         public void Actualizar(Producto elProductoAActualizar)
         {
             var laBaseDeDatos = new Contexto();
@@ -62,6 +64,8 @@ namespace AsopaabiOnline.AccesoADatos
             laBaseDeDatos.Remove(elProductoEnLaBD).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             laBaseDeDatos.SaveChanges();
         }
+
+     
 
         public List<Producto> ObtenerListaDeProductosConCategoriaDeFruta()
         {
