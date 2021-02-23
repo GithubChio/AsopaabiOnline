@@ -33,7 +33,7 @@ namespace AsopaabiOnline.UI.Models
         [Required(ErrorMessage = "El número de identificación es requerido")]
         [DataType(DataType.Text)]
         [Display(Name = "Número de identificación")]
-        [CustomValidation(typeof(DNITypeValidation), "Validate")]
+        [DNITypeValidation]
         public string DNI { get; set; }
         
         [NotMapped]
@@ -73,7 +73,7 @@ namespace AsopaabiOnline.UI.Models
 
         [Required(ErrorMessage = "Su fecha de nacimiento es requerida")]
         [Display(Name = "Fecha de Nacimiento")]
-        [CustomValidation(typeof(DateOfBirthValidation), "Validate")]
+        [DateOfBirthValidation(MinAge =18, MaxAge =100,ErrorMessage ="No se permiten menores de edad")]
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
