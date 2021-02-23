@@ -15,17 +15,15 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
 
-
-
                 <div class="form-group">
                     <label asp-for="FechaEntrega" class="control-label"></label>
-                    <input asp-for="FechaEntrega" class="form-control" />
+                    <input asp-for="FechaEntrega"  asp-format="{0:dd-MM-yyyy}" class="form-control" />
                     <span asp-validation-for="FechaEntrega" class="text-danger"></span>
                 </div>
 
 
 
-                <hr />
+               
                 <div class="form-group">
 
                     <input type="submit" value="Guardar" class="btn btn-info" />

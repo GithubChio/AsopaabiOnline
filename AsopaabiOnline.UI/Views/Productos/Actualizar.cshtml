@@ -18,7 +18,8 @@
 
 
             <form asp-controller="Productos" asp-action="Actualizar" method="post" enctype="multipart/form-data">
-
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+               
                 <input asp-for="Id" hidden />
 
                 <div class="card ">
@@ -80,9 +81,7 @@
                 </div>
 
             </form>
-            @*@{
-                var message = TempData["AlertMessage"] ?? string.Empty;
-            }*@
+           
         </div>
 
      </div>

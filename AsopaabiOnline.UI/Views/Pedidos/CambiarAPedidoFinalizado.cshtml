@@ -6,58 +6,86 @@
     ViewBag.title = "Cambiar a estado en finalizado";
 }
 
-<h1>@ViewBag.title </h1>
+<div class="row justify-content-md-center">
+
+    <div class="card w-75">
+
+        <div class="card-header">
+            <h3 class="card-title "> @ViewBag.Title</h3>
+
+        </div>
+
+        <div class="card-body text-center">
+            <br />
+            <h4 class="card-subtitle text-center"> ¿Desea cambiar este pedido a estado finalizado?</h4>
+            <br />
+            <br />
+            <dl class="row m-4">
 
 
-<div class="card text-center"   style="margin-top:18px;" > 
-
-    <div class="card-header">
-        <h3 style="text-align:center;">¿Desea cambiar este pedido a estado finalizado?</h3>
-    </div>
-
-    <dl class="row m-4">
-
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaPedido)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FechaPedido)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaEntrega)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FechaEntrega)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Notas)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Notas)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Id)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Id)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.FechaPedido)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.FechaPedido)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.FechaEntrega)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.FechaEntrega)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Notas)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Notas)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Estado)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Estado)
+                </dd>
 
 
-    </dl>
-    <div class="card-footer">
-        <form asp-action="CambiarAPedidoFinalizado" asp-controller="Pedidos">
-            <input type="hidden" asp-for="Id" />
-            <input type="submit" value="Sí" class="btn btn-danger" style="width:50px;" />
+            </dl>
+        </div>
+        <div class="card-footer text-center">
+            <button type="button" class="btn btn-danger btn-lg " data-toggle="modal" data-target="#cambiarEstado">Si</button>
+            <a class="btn btn-secondary btn-lg  " asp-action="Mostrar">No</a>
 
-            <a class="btn btn-secondary" asp-action="Mostrar">No</a>
 
-        </form>
+            <div class="modal fade" id="cambiarEstado" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Cambiar Estado</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            El pedido #@Model.Id cambiará a estado finalizado, ¿estas deacuerdo?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <form asp-action="CambiarAPedidoFinalizado" asp-controller="Pedidos">
+                                <input type="hidden" asp-for="Id" />
+                                <button type="submit" class="btn btn-primary">Cambiar</button>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using AsopaabiOnline.LogicaDeNegocio;
 using Microsoft.AspNetCore.Identity;
 using AsopaabiOnline.UI.Models;
+using AsopaabiOnline.UI.Models.Enums;
 
 namespace AsopaabiOnline.UI.Controllers
 {
-    public class PedidosController : Controller
+    public class PedidosController : BaseController
     {
        
 
@@ -36,43 +37,30 @@ namespace AsopaabiOnline.UI.Controllers
         {
             try
             {
+                
                 CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
-                elCoordinador.Actualizar(elPedido);
-                return RedirectToAction("Mostrar");
+                
+                if (elCoordinador.siExite(elPedido))
+                {
+                    elCoordinador.Actualizar(elPedido);
+                    Alert("Pedido actualizado.", NotificationType.success);
+                }
+                else
+                {
+                    Alert("Parece que este pedido NO existe.", NotificationType.warning);
+                }
+                return View();
             }
             catch
             {
-                return View();
+                Alert("Algo ha salido mal, inténtalo de nuevo!", NotificationType.error);
+                return RedirectToAction("Mostrar");
             }
         }
 
 
       
-        
-        [HttpGet]
-        [Route("Pedidos/Eliminar")]
-        public IActionResult Eliminar(int id)
-        {
-            CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
-            var elPedidoEncontrado = elCoordinador.ObtenerPedidoPorId(id);
-
-            return View(elPedidoEncontrado);
-        }
-        [HttpPost]
-        [Route("Pedidos/Eliminar")]
-        public IActionResult Eliminar(Modelo.Pedido elPedido)
-        {
-            try
-            {
-                CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
-                elCoordinador.Eliminar(elPedido);
-                return RedirectToAction("Mostrar");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
 
         [HttpGet]
         [Route("Pedidos/CambiarEstadoDePedido")]
@@ -88,6 +76,7 @@ namespace AsopaabiOnline.UI.Controllers
         [Route("Pedidos/CambiarAPedidoEnProceso")]
         public IActionResult CambiarAPedidoEnProceso(int id)
         {
+
             CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
             var elPedidoEncontrado = elCoordinador.ObtenerPedidoPorId(id);
 
@@ -100,12 +89,29 @@ namespace AsopaabiOnline.UI.Controllers
             try
             {
                 CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
-                elCoordinador.CambiarAPedidoEnProceso(elPedido);
+                if (elCoordinador.SiEstadoEsEnProceso(elPedido))
+                {
+                    Alert("Parece que este pedido ya esta en proceso.", NotificationType.warning);
+                }
+                else if (elCoordinador.SiEstadoEsFinalizado(elPedido))
+                {
+                    Alert("No se puede cambiar por que este pedido ya esta finalizado.", NotificationType.warning);
+                    return RedirectToAction("Mostrar");
+                }
+                    
+                else
+                {
+                    elCoordinador.CambiarAPedidoEnProceso(elPedido);
+                    Alert("Se ha actualizado el estado de este pedido.", NotificationType.success);
+                }
+               
+
                 return RedirectToAction("PedidosEnProceso");
             }
             catch
             {
-                return View();
+                Alert("Algo ha salido mal, inténtalo de nuevo!", NotificationType.error);
+                return RedirectToAction("Mostrar");
             }
         }
 
@@ -125,12 +131,28 @@ namespace AsopaabiOnline.UI.Controllers
             try
             {
                 CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
-                elCoordinador.CambiarAPedidoFinalizado(elPedido);
+                if (elCoordinador.SiEstadoEsFinalizado(elPedido))
+                {
+                    Alert("Parece que este pedido ya esta finalizado.", NotificationType.warning);
+                }
+                else if (elCoordinador.SiEstadoEsReciente(elPedido))
+                {
+                    Alert("Primero se debe cambiar a estado en proceso para que el cliente le de seguimiento", NotificationType.warning);
+                    return RedirectToAction("Mostrar");
+                }
+                else
+                {
+                    elCoordinador.CambiarAPedidoFinalizado(elPedido);
+                    Alert("Se ha actualizado el estado de este pedido.", NotificationType.success);
+                }
+
+
                 return RedirectToAction("PedidosFinalizados");
             }
             catch
             {
-                return View();
+                Alert("Algo ha salido mal, inténtalo de nuevo!", NotificationType.error);
+                return RedirectToAction("Mostrar");
             }
         }
 

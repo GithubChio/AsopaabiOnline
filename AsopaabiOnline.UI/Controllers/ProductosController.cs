@@ -136,7 +136,7 @@ namespace AsopaabiOnline.UI.Controllers
             try
             {
                 CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
-                if (elCoordinador.SiExiste(elProducto))
+                if (elCoordinador.SiExiste(elProducto) )
                 {
                   
 
@@ -160,8 +160,8 @@ namespace AsopaabiOnline.UI.Controllers
         catch 
         {
                 Alert("Algo ha salido mal, inténtalo de nuevo!", NotificationType.error);
-                return View();
-        }
+                return RedirectToAction("Mostrar");
+            }
 
         
       

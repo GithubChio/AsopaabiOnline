@@ -81,14 +81,6 @@ namespace AsopaabiOnline.AccesoADatos
 
        
 
-        public void Eliminar(Pedido elPedidoAEliminar)
-        {
-            var laBaseDeDatos = new Contexto();
-            var elPedidoEnLaBD = ObtenerPedidoPorId(elPedidoAEliminar.Id);
-
-            laBaseDeDatos.Pedido.Remove(elPedidoEnLaBD);
-            laBaseDeDatos.Remove(elPedidoEnLaBD).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
-            laBaseDeDatos.SaveChanges();
-        }
+       
     }
 }

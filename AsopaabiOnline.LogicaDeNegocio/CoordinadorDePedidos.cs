@@ -42,7 +42,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
             elPedidoAActualizar.Id = elPedido.Id;
            
             elPedidoAActualizar.FechaEntrega = elPedido.FechaEntrega;
-            elPedidoAActualizar.Notas = elPedido.Notas;
+       
            
            
 
@@ -50,19 +50,57 @@ namespace AsopaabiOnline.LogicaDeNegocio
 
         }
 
-        public void Eliminar (Modelo.Pedido elPedido)
-        {
-            GestorDePedidos elGestor = new GestorDePedidos();
-            var elPedidoAEliminar = elGestor.ObtenerPedidoPorId(elPedido.Id);
-            elGestor.Eliminar(elPedidoAEliminar);
-        }
-
+       
         public void CambiarAPedidoEnProceso(Modelo.Pedido elPedido)
         {
             GestorDePedidos elGestor = new GestorDePedidos();
             var elPedidoACambiar = ObtenerPedidoPorId(elPedido.Id);
             elPedidoACambiar.Estado = Modelo.EstadoDePedido.EnProceso;
             elGestor.Actualizar(elPedidoACambiar);
+        }
+
+        public bool SiEstadoEsEnProceso(Modelo.Pedido pedido)
+        {
+            GestorDePedidos elGestor = new GestorDePedidos();
+            var elPedido = elGestor.ObtenerPedidoPorId(pedido.Id);
+            if (elPedido.Estado == EstadoDePedido.EnProceso)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        
+        public bool SiEstadoEsFinalizado(Modelo.Pedido pedido)
+        {
+            GestorDePedidos elGestor = new GestorDePedidos();
+            var elPedido = elGestor.ObtenerPedidoPorId(pedido.Id);
+            if (elPedido.Estado == EstadoDePedido.Finalizado)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        public bool SiEstadoEsReciente(Modelo.Pedido pedido)
+        {
+            GestorDePedidos elGestor = new GestorDePedidos();
+            var elPedido = elGestor.ObtenerPedidoPorId(pedido.Id);
+            if (elPedido.Estado == EstadoDePedido.Reciente)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
         public void CambiarAPedidoFinalizado(Modelo.Pedido elPedido)
         {
@@ -71,9 +109,6 @@ namespace AsopaabiOnline.LogicaDeNegocio
             elPedidoACambiar.Estado = Modelo.EstadoDePedido.Finalizado;
             elGestor.Actualizar(elPedidoACambiar);
         }
-
-
-
         public List<Pedido> ListarPedidosRecientes()
         {
             GestorDePedidos elGestor = new GestorDePedidos();
@@ -90,5 +125,21 @@ namespace AsopaabiOnline.LogicaDeNegocio
             return elGestor.ObtenerLaListaDePedidosFinalizados();
         }
 
+
+
+        public bool siExite(Pedido pedido)
+        {
+            GestorDePedidos elGestor = new GestorDePedidos();
+            var elPedido = elGestor.ObtenerPedidoPorId(pedido.Id);
+            if (elPedido != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
     }
 }
