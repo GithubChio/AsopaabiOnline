@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using AsopaabiOnline.UI.Models;
 using AsopaabiOnline.LogicaDeNegocio;
 using AsopaabiOnline.Modelo;
@@ -10,10 +9,12 @@ using AsopaabiOnline.UI.Helpers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using AsopaabiOnline.UI.Models.Enums;
+
 
 namespace AsopaabiOnline.UI.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
        
         private readonly UserManager<User> userManager;
@@ -28,8 +29,14 @@ namespace AsopaabiOnline.UI.Controllers
         {
             CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
             var list = elCoordinador.ListarProductos();
-
+           
             return View(list);
+        }
+
+        public IActionResult Index()
+        {
+            Alert("This is a success message", NotificationType.success);
+            return View();
         }
 
         [HttpPost]
@@ -38,12 +45,13 @@ namespace AsopaabiOnline.UI.Controllers
 
             CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
             var producto = elCoordinador.ObtenerProductoPorId(id);
-            if (producto == null)
+            if (producto == null || cantidad == 0)
             {
-                ViewBag.mensaje = "no hay productos";
+                Alert("Primero debe agregar la cantidad de producto al carrito. ¡Inténtelo de nuevo!", NotificationType.warning);
             }
             else
             {
+
                 producto.Cantidad = cantidad;
 
 
@@ -54,7 +62,7 @@ namespace AsopaabiOnline.UI.Controllers
 
                     lista.Add(producto);
                     SessionHelper.SetObjectAsJson(HttpContext.Session, "cartList", lista);
-                   
+                    Alert("Agregado al carrito.", NotificationType.success);
 
                 }
                 else
@@ -75,7 +83,7 @@ namespace AsopaabiOnline.UI.Controllers
                         listaActual.Add(producto);
                     }
                     SessionHelper.SetObjectAsJson(HttpContext.Session, "cartList", listaActual);
-
+                    Alert("Agregado al carrito.", NotificationType.success);
                 }
 
 
@@ -87,15 +95,15 @@ namespace AsopaabiOnline.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> CarritoDeComprasAsync()
+        public async Task<IActionResult> CarritoDeCompras()
         {
             var user = await userManager.GetUserAsync(HttpContext.User);
             ViewBag.simboloDeColon = "₡";
-            if (SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList") == null)
+            if (SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList") == null )
             {
 
-                return RedirectToAction("Tienda", "Home");
-
+                Alert("No hay productos en el carrito", NotificationType.info);
+                return RedirectToAction("Tienda");
             }
             else
             {

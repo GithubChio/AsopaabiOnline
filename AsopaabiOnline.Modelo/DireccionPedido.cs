@@ -17,18 +17,17 @@ namespace AsopaabiOnline.Modelo
         public int Id { get; set; }
 
 
-        [Required(ErrorMessage ="Este campo es requerido")]
+        
             
         [Display(Name ="Provincia")]
         public int IdProvincia { get; set; }
 
 
-        [Required(ErrorMessage = "Este campo es requerido")]
+       
         [Display(Name = "Cantón")]
         public int IdCanton { get; set; }
 
 
-        [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Distrito")]
         public int IdDistrito { get; set; }
 

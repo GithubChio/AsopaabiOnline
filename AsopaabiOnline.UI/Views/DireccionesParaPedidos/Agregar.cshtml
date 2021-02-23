@@ -4,7 +4,7 @@
      ViewBag.Title = "Agregar dirección";
 
 }
-<br />
+
 <div class="row justify-content-md-center">
     <div class="card w-50">
         <h3 class="card-header  text-center">@ViewBag.Title </h3>
@@ -13,31 +13,24 @@
 
             <form asp-controller="DireccionesParaPedidos" asp-action="Agregar" method="post">
 
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
                 <div class="form-group">
                     <label asp-for="IdProvincia" class="control-label"></label>
                     <select id="provincias" asp-for="IdProvincia" asp-items=@(new SelectList(Model.LaListaDeProvincias,"Id","Nombre")) class="form-control" required>
-                        <option selected="selected" disabled value="">Seleccione una opción</option>
+                        <option selected="selected" disabled value="">Seleccione una opción</option></select>
 
-
-                    </select>
-
-                    <span asp-validation-for="IdProvincia" class="text-danger"></span>
+                   
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="IdCanton" class="control-label" style="width:210px;"></label>
-                    <select id="cantones" asp-for="IdCanton" class="form-control" required>
-                    </select>
-                    <span asp-validation-for="IdCanton" class="text-danger"></span>
+                    <label asp-for="IdCanton" class="control-label" ></label>
+                    <select id="cantones" asp-for="IdCanton" class="form-control" required></select>
+                   
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="IdDistrito" class="control-label" style="width:210px;"></label>
-                    <select id="distritos" asp-for="IdDistrito" class="form-control" required>
-                    </select>
-                    <span asp-validation-for="IdDistrito" class="text-danger"></span>
+                    <label asp-for="IdDistrito" class="control-label" ></label>
+                    <select id="distritos" asp-for="IdDistrito" class="form-control"required ></select>
+                   
 
                 </div>
                 <div class="form-group">
@@ -47,7 +40,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Guardar" class="btn btn-success btn-lg btn-block" />
+                    <input type="submit" value="Guardar" class="btn btn-success btn-lg btn-block"  />
                     <a class="btn btn-secondary btn-lg btn-block" asp-action="Mostrar">Volver</a>
                 </div>
 
@@ -82,6 +75,9 @@
                         $.each(direcciones, function (recorrer, cantones) {
                             $("#cantones").append('<option value="' + cantones.value + '">' + cantones.text + '</option>');
                         });
+
+
+
                     }
 
 
@@ -91,11 +87,9 @@
 
 
 
-        })
 
 
-        $(document).ready(function () {
-            $("#cantones").change(function () {
+             $("#cantones").change(function () {
                 $("#distritos").empty();
 
                 $.ajax({
@@ -119,9 +113,9 @@
                 return false;
             })
 
-
-
         })
 
+
+        
         </script>
     }

@@ -12,88 +12,94 @@
 @if (Model.Any())
 {
 
-<div class="card">
+    <div class="card">
 
-    <div class="card-header text-center">
-        <h3>@ViewBag.Title</h3>
-    </div>
-    <div class="m-5">
+        <div class="card-header text-center">
+            <h3>@ViewBag.Title</h3>
+        </div>
+        <div class="m-5">
 
 
-        <a class="btn" asp-controller="DireccionesParaPedidos" asp-action="Agregar" style="border-radius:25px; background-color:#96c401"
-            data-toggle="tooltip" data-placement="top" title="Agregar una dirección nueva"><i class="fas fa-plus text-white "></i>  </a>
-       
-        <br />
-        <br />
+            <a class="btn" asp-controller="DireccionesParaPedidos" asp-action="Agregar" style="border-radius:25px; background-color:#96c401"
+               data-toggle="tooltip" data-placement="top" title="Agregar una dirección nueva"><i class="fas fa-plus text-white "></i>  </a>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Id)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IdProvincia)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IdCanton)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IdDistrito)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Detalles)
-                    </th>
-                    <th>
-                        <label>Opciones</label>
-                    </th>
+            <br />
+            <br />
 
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Id)
-                        </td>
-                        <td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IdProvincia)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IdCanton)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IdDistrito)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Detalles)
+                        </th>
+                        <th>
+                            <label>Opciones</label>
+                        </th>
 
-                            @Html.DisplayFor(modelItem => item.IdProvinciaNavigation.Nombre)
-
-
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IdCantonNavigation.Nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IdDistritoNavigation.Nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Detalles)
-                        </td>
-
-
-                        <td>
-                          
-
-                            <a  asp-action="Eliminar" asp-route-id="@item.Id" class="btn btn-lg"
-                                data-toggle="tooltip" data-placement="top" title="Eliminar"> <i class="fas fa-trash text-danger"></i></a>
-
-
-                        </td>
+                        <th></th>
                     </tr>
-                }
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
 
-            </tbody>
+                                @Html.DisplayFor(modelItem => item.IdProvinciaNavigation.Nombre)
 
 
-        </table>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdCantonNavigation.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdDistritoNavigation.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Detalles)
+                            </td>
+
+
+                            <td>
+
+
+                                <a asp-action="Eliminar" asp-route-id="@item.Id" class="btn btn-lg"
+                                   data-toggle="tooltip" data-placement="top" title="Eliminar"> <i class="fas fa-trash text-danger"></i></a>
+
+
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+
+
+            </table>
+        </div>
     </div>
-</div>
-            }
-            else
-            {
-            <h3> Aún no hay Direcciones agregadas</h3>
-            }
+}
+else
+{
+
+
+    <div class="card text-center m-5">
+        <div class="card-body">
+            <h3>No hay direcciones</h3>
+        </div>
+    </div>
+}

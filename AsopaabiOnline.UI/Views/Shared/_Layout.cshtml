@@ -15,7 +15,7 @@
         <link href="assets/vendor/aos/aos.css" rel="stylesheet">*@
 
     <!-- Template Main CSS File -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -24,6 +24,9 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
+    <link href="~/sweetAlert/sweetalert.css" rel="stylesheet" />
+    <script src="~/sweetAlert/sweetalert.min.js"></script>
 
 </head>
 <body   style="background-color: #CFD8DC">
@@ -134,7 +137,9 @@
 
     <div class="container-fluid">
         <main role="main" class="pb-3">
+            @Html.Partial("_NotificationPanel")
             @RenderBody()
+
         </main>
     </div>
     <br />
@@ -153,6 +158,9 @@
 
 
     </footer>
+
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

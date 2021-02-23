@@ -10,145 +10,145 @@
 
 
 
-    @if (Model.Any())
-    {
-<div class="card">
-    <div class="m-5">
-        <div class="card-header text-center">
-           
-            <h3 class="card-title">@ViewBag.Title</h3>
-           
-        </div>
+@if (Model.Any())
+{
+    <div class="card">
+        <div class="m-5">
+            <div class="card-header text-center">
 
-        <div>
+                <h3 class="card-title">@ViewBag.Title</h3>
 
-            <ul class="navbar navbar-expand-lg navbar-light justify-content-center"  >
-                <ul class="navbar-nav ">
-                    <li class="nav-item ">
+            </div>
 
-                        <a class="nav-link  badge badge-success" asp-controller="Pedidos" asp-action="PedidosRecientes"
-                           data-toggle="tooltip" data-placement="top" title="ir a la lista de pedidos recientes">Pedidos Recientes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link  badge badge-warning" asp-controller="Pedidos" asp-action="PedidosEnProceso"
-                            data-toggle="tooltip" data-placement="top" title="ir a la lista de pedidos en proceso">Pedidos En Proceso</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link  badge badge-secondary" asp-controller="Pedidos" asp-action="PedidosFinalizados"
-                            data-toggle="tooltip" data-placement="top" title="ir a la lista de pedidos finalizados">Pedidos Finalizados</a>
-                    </li>
+            <div>
 
+                <ul class="navbar navbar-expand-lg navbar-light justify-content-center">
+                    <ul class="navbar-nav ">
+                        <li class="nav-item ">
+
+                            <a class="nav-link  badge badge-success" asp-controller="Pedidos" asp-action="PedidosRecientes"
+                               data-toggle="tooltip" data-placement="top" title="ir a la lista de pedidos recientes">Pedidos Recientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  badge badge-warning" asp-controller="Pedidos" asp-action="PedidosEnProceso"
+                               data-toggle="tooltip" data-placement="top" title="ir a la lista de pedidos en proceso">Pedidos En Proceso</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  badge badge-secondary" asp-controller="Pedidos" asp-action="PedidosFinalizados"
+                               data-toggle="tooltip" data-placement="top" title="ir a la lista de pedidos finalizados">Pedidos Finalizados</a>
+                        </li>
+
+                    </ul>
                 </ul>
-                </ul>
-        </div>
+            </div>
 
-        <div class=" card-body">
+            <div class=" card-body">
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>
-                        #
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Id)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.FechaPedido)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.FechaEntrega)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Notas)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Estado)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IdDireccion)
-                    </th>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Id)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FechaPedido)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FechaEntrega)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Notas)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Estado)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdDireccion)
+                            </th>
 
-                    <th>
-                        @Html.DisplayNameFor(model => model.IdCliente)
-                    </th>
-                    <th>
-                        <label>Opciones</label>
-                    </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdCliente)
+                            </th>
+                            <th>
+                                <label>Opciones</label>
+                            </th>
 
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                @{ int rowNumber = 0; }
-                @foreach (var item in Model)
-                {
-                    var estadoPedidoClass = "";
-                    if (item.Estado == EstadoDePedido.Reciente)
-                    {
-                        estadoPedidoClass = "badge badge-pill badge-success";
-                    }
-                    if (item.Estado == EstadoDePedido.Finalizado)
-                    {
-                        estadoPedidoClass = "badge badge-pill badge-secondary";
-                    }
-                    if (item.Estado == EstadoDePedido.EnProceso)
-                    {
-                        estadoPedidoClass = "badge badge-pill badge-warning";
-                    }
-                    <tr>
-                        <td>
-                            @(rowNumber += 1)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FechaPedido)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FechaEntrega)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Notas)
-                        </td>
-                        <td>
-                            <span class="@estadoPedidoClass">
-                                @Html.DisplayFor(modelItem => item.Estado)
-                            </span>
-                        </td>
-                        <td>
-                            <label>Provincia: @item.IdDireccionNavigation.IdProvinciaNavigation.Nombre  </label>
-                            <br />
-                            <label>Cantón: @item.IdDireccionNavigation.IdCantonNavigation.Nombre  </label>
-                            <br />
-                            <label>Distrito: @item.IdDireccionNavigation.IdDistritoNavigation.Nombre  </label>
-                            <br />
-                            <label>Detalles: @item.IdDireccionNavigation.Detalles  </label>
+                        @{ int rowNumber = 0; }
+                        @foreach (var item in Model)
+                        {
+                            var estadoPedidoClass = "";
+                            if (item.Estado == EstadoDePedido.Reciente)
+                            {
+                                estadoPedidoClass = "badge badge-pill badge-success";
+                            }
+                            if (item.Estado == EstadoDePedido.Finalizado)
+                            {
+                                estadoPedidoClass = "badge badge-pill badge-secondary";
+                            }
+                            if (item.Estado == EstadoDePedido.EnProceso)
+                            {
+                                estadoPedidoClass = "badge badge-pill badge-warning";
+                            }
+                            <tr>
+                                <td>
+                                    @(rowNumber += 1)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FechaPedido)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FechaEntrega)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Notas)
+                                </td>
+                                <td>
+                                    <span class="@estadoPedidoClass">
+                                        @Html.DisplayFor(modelItem => item.Estado)
+                                    </span>
+                                </td>
+                                <td>
+                                    <label>Provincia: @item.IdDireccionNavigation.IdProvinciaNavigation.Nombre  </label>
+                                    <br />
+                                    <label>Cantón: @item.IdDireccionNavigation.IdCantonNavigation.Nombre  </label>
+                                    <br />
+                                    <label>Distrito: @item.IdDireccionNavigation.IdDistritoNavigation.Nombre  </label>
+                                    <br />
+                                    <label>Detalles: @item.IdDireccionNavigation.Detalles  </label>
 
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IdClienteNavigation.FullName)
-                        </td>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdClienteNavigation.FullName)
+                                </td>
 
-                        <td>
-
-
-                            <a asp-action="Actualizar" asp-route-id="@item.Id" class="bn btn-lg" data-toggle="tooltip" data-placement="top" title="Actualizar "><i class="fas fa-edit text-success"></i></a> |
-                            <a asp-action="CambiarEstadoDePedido" asp-route-id="@item.Id"  class="bn btn-lg" data-toggle="tooltip" data-placement="top" title="Cambiar estado de pedido"><i class="fas fa-exchange-alt"></i> </a>
+                                <td>
 
 
-                        </td>
-                    </tr>
-                }
-
-            </tbody>
+                                    <a asp-action="Actualizar" asp-route-id="@item.Id" class="bn btn-lg" data-toggle="tooltip" data-placement="top" title="Actualizar "><i class="fas fa-edit text-success"></i></a> |
+                                    <a asp-action="CambiarEstadoDePedido" asp-route-id="@item.Id" class="bn btn-lg" data-toggle="tooltip" data-placement="top" title="Cambiar estado de pedido"><i class="fas fa-exchange-alt"></i> </a>
 
 
-        </table>
+                                </td>
+                            </tr>
+                        }
 
-        </div>
+                    </tbody>
+
+
+                </table>
+
+            </div>
 
 
 
@@ -158,12 +158,15 @@
 
         </div>
     </div>
-    }
-    else
-    {
-    <br />
-    <h3> No hay pedidos agregados</h3>
+}
+else
+{
+    <div class="card text-center m-5">
+        <div class="card-body">
+            <h3>No hay pedidos</h3>
+        </div>
+    </div>
 
-    }
+}
 
 

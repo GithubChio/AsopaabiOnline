@@ -7,10 +7,11 @@ using AsopaabiOnline.LogicaDeNegocio;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
 using AsopaabiOnline.UI.Models;
+using AsopaabiOnline.UI.Models.Enums;
 
 namespace AsopaabiOnline.UI.Controllers
 {
-    public class DireccionesParaPedidosController : Controller
+    public class DireccionesParaPedidosController : BaseController
     {
         private readonly UserManager<User> userManager;
         public DireccionesParaPedidosController(UserManager<User> userManager)
@@ -43,22 +44,35 @@ namespace AsopaabiOnline.UI.Controllers
         {
             try
             {
-
-                   var user = await userManager.GetUserAsync(HttpContext.User);
-                   CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
+                if (laDireccion != null)
+                {
+                    var user = await userManager.GetUserAsync(HttpContext.User);
+                    CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
                     laDireccion.IdCliente = user.Id;
                     elCoordinador.Agregar(laDireccion);
-                    return RedirectToAction("Mostrar");
-               
+
+                    Alert("Dirección guardada.", NotificationType.success);
                    
-               
+
+
+                }
+                else
+                {
+                    Alert("Complete todos los campos.", NotificationType.warning);
+                    return View();
+                }
+
+
+                return RedirectToAction("Mostrar");
+
+
 
             }
             catch
             {
-                
 
-               
+
+                Alert("Complete todos los campos.", NotificationType.error);
                 return View();
             }
            
@@ -86,6 +100,7 @@ namespace AsopaabiOnline.UI.Controllers
         [Route("DireccionesParaPedidos/Mostrar")]
         public async Task<IActionResult> Mostrar()
         {
+
             CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
             var user = await userManager.GetUserAsync(HttpContext.User);
 
@@ -114,12 +129,18 @@ namespace AsopaabiOnline.UI.Controllers
             try
             {
                 CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
-               
-                if (elCoordinador.ObtenerDireccionesPorId(laDireccion.Id) != null)
+
+                if (laDireccion != null )
                 {
-                    ViewBag.mensaje = "Esta dirección ya existe";
+                    elCoordinador.Eliminar(laDireccion);
+                    Alert("Dirección eliminada.", NotificationType.success);
                 }
-                   elCoordinador.Eliminar(laDireccion);
+                else
+                {
+                    Alert("Dirección eliminada.", NotificationType.error);
+                }
+               
+                   
 
                     return RedirectToAction("Mostrar");
 
