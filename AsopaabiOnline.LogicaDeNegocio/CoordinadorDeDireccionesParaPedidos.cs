@@ -33,7 +33,21 @@ namespace AsopaabiOnline.LogicaDeNegocio
             return elGestor.ObtenerDireccionesPorId(id);
         }
        
-        
+        public bool SiExiste(DireccionPedido direccionPedido)
+        {
+            GestorDeDireccionesParaPedidos elGestor = new GestorDeDireccionesParaPedidos();
+            Modelo.DireccionPedido laDireccion = elGestor.ObtenerDireccionesPorId(direccionPedido.Id);
+            if (laDireccion != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+       
 
 
         public void Eliminar(DireccionPedido laDireccionAEliminar)

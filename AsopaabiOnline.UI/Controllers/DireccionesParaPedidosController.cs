@@ -130,14 +130,14 @@ namespace AsopaabiOnline.UI.Controllers
             {
                 CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
 
-                if (laDireccion != null )
+                if (elCoordinador.SiExiste(laDireccion))
                 {
                     elCoordinador.Eliminar(laDireccion);
-                    Alert("Dirección eliminada.", NotificationType.success);
+                    Alert( $"la dirección #{laDireccion.Id} ha sido eliminada.", NotificationType.success);
                 }
                 else
                 {
-                    Alert("Dirección eliminada.", NotificationType.error);
+                    Alert($"La dirección {laDireccion.Id} no existe", NotificationType.warning);
                 }
                
                    
@@ -149,9 +149,9 @@ namespace AsopaabiOnline.UI.Controllers
             }
             catch
             {
+                Alert($"No se puede eliminar por que hay un pedido con la dirección #{laDireccion.Id}. ", NotificationType.error);
 
-               
-               return  View();
+                return  RedirectToAction("Mostrar");
                
             }
 

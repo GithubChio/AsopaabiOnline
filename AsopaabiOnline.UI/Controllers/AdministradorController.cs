@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AsopaabiOnline.UI.Models;
+using AsopaabiOnline.UI.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsopaabiOnline.UI.Controllers
 {
-    public class AdministradorController : Controller
+    public class AdministradorController : BaseController
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<User> userManager;
@@ -208,15 +209,12 @@ namespace AsopaabiOnline.UI.Controllers
 
                 if (user == null)
                 {
-                    ViewBag.Message = $"El usuario con el id = {input.Id} no fue encontrado";
-                    return View("Error");
+                    Alert("El usuario  no fue encontrado.", NotificationType.error);
+                    return View("UserList");
                 }
                 else
                 {
                     user.Id = input.Id;
-
-
-
 
                     foreach (var oldRoleName in oldRoleList.ToList())
                     {
@@ -224,22 +222,23 @@ namespace AsopaabiOnline.UI.Controllers
                         {
                             await userManager.RemoveFromRoleAsync(user, oldRoleName);
                             await userManager.AddToRoleAsync(user, roleName);
-                            ViewBag.Message = "Se ha habilitado  al rol de cliente de nuevo";
+                           
+                           
                         }
                         else
                         {
-                            ViewBag.mensaje = "Este cliente ya esta habilitado";
+                            Alert("Este usuario ya esta habilitado.", NotificationType.warning);
+                           
                             RedirectToAction("UserList");
                         }
 
                     }
 
-                   
-
                     var elResultado = await userManager.UpdateAsync(user);
 
                     if (elResultado.Succeeded)
                     {
+                        Alert($"Se ha habilitado a su rol de cliente. ", NotificationType.success);
                         return RedirectToAction("UserList");
                     }
                     foreach (var elError in elResultado.Errors)
@@ -273,8 +272,9 @@ namespace AsopaabiOnline.UI.Controllers
 
                 if (user == null)
                 {
-                    ViewBag.ErrorMessage = $"El usuario con el id = {input.Id} no fue encontrado";
-                    return View("Error");
+                    Alert("El usuario no fue encontrado.", NotificationType.error);
+
+                    return View("UserList");
                 }
                 else
                 {
@@ -282,10 +282,11 @@ namespace AsopaabiOnline.UI.Controllers
 
                     foreach (var oldRoleName in oldRoleList.ToList())
                     {
-                        if (oldRoleName.Equals("Deshabilitado"))
+                        if (oldRoleName == "Deshabilitado")
                         {
-                            ViewBag.mensaje = "Este usuario ya esta deshabilitado";
-                            RedirectToAction("UserList");
+                            Alert($"Este usuario ya esta deshabilitado.", NotificationType.warning);
+                          
+                          return  RedirectToAction("DisableUsersList");
                         }
                         else
                         {
@@ -300,6 +301,7 @@ namespace AsopaabiOnline.UI.Controllers
 
                     if (elResultado.Succeeded)
                     {
+                        Alert($"Usuario deshabilitado", NotificationType.success);
                         return RedirectToAction("UserList");
                     }
                     foreach (var elError in elResultado.Errors)
@@ -399,6 +401,7 @@ namespace AsopaabiOnline.UI.Controllers
 
                 if (result.Succeeded)
                 {
+                    Alert($"Rol agregado.", NotificationType.success);
                     return RedirectToAction("RolesList", "Administrador");
                 }
                 foreach (IdentityError elError in result.Errors)
@@ -425,7 +428,7 @@ namespace AsopaabiOnline.UI.Controllers
             var role = await roleManager.FindByIdAsync(id);
             if (role == null)
             {
-                ViewBag.ErrorMessage = $"el rol con el id= {id} no fue encontrado";
+                Alert($"Parece que no se encontro el rol que deseas.", NotificationType.warning);
                 return View("Error");
             }
             else
@@ -451,8 +454,8 @@ namespace AsopaabiOnline.UI.Controllers
                 var role = await roleManager.FindByIdAsync(Rol.id);
                 if (role == null)
                 {
-                    ViewBag.ErrorMessage = $"el rol con el id= {Rol.id} no fue encontrado";
-                    return View("Error");
+                    Alert($"Parece que el rol {Rol.Name} no existe.", NotificationType.warning);
+                    return View();
                 }
                 else
                 {
@@ -466,10 +469,16 @@ namespace AsopaabiOnline.UI.Controllers
                     role.Id = roleToDelete.id;
                     role.Name = roleToDelete.Name;
 
+                    if (role.Name == "Deshabilitado")
+                    {
+                        Alert($"El rol {role.Name} no se puede eliminar por seguridad del sistema.", NotificationType.warning);
+                        return RedirectToAction("RolesList", "Administrador");
+                    }
                     var elResultado = await roleManager.DeleteAsync(role);
 
                     if (elResultado.Succeeded)
                     {
+                        Alert($"El rol {Rol.Name} ha sido eliminado.", NotificationType.success);
                         return RedirectToAction("RolesList", "Administrador");
                     }
                     foreach (var elError in elResultado.Errors)

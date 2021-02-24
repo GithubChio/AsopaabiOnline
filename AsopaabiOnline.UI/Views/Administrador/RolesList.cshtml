@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
 
 @{
-    ViewBag.Title = "Listado de Roles ";
+    ViewBag.Title = "Listado de roles ";
 }
 
-<h1>Roles</h1>
+
 
 
 
@@ -12,20 +12,27 @@
 @if (Model.Any())
 
 {
+
     <div class="card">
+        <div class="m-5">
 
-        <div style="margin:15px;">
+            <div class="card-header text-center">
+                <h3 class="card-title">@ViewBag.Title</h3>
 
-            <div class="card-header">
-                
-                <a class="btn " asp-action="AddRole" asp-controller="Administrador" style="border-radius:25px; background-color:#96c401"><i class="fas fa-plus text-white"></i>  </a>
             </div>
+
+            <br />
+
+            <a class="btn " asp-action="AddRole" asp-controller="Administrador" style="border-radius:25px; background-color:#96c401"
+               data-toggle="tooltip" data-placement="top" title="Agregar un rol nuevo"><i class="fas fa-plus text-white"></i>  </a>
+            <br />    <br />
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>
                             #
                         </th>
+
                         <th>
                             <label>Nombre</label>
                         </th>
@@ -36,43 +43,44 @@
                     </tr>
                 </thead>
                 <tbody>
-                         @{ int rowNumber = 0; }
-                 @foreach (var role in Model)
-                   {
-                    <tr>
-                        <td>
-                            @(rowNumber += 1)
-                        </td>
-                        <td>
-                            <h5 class="card-title">@role.Name</h5>
-                        </td>
+                    @{ int rowNumber = 0; }
+                    @foreach (var role in Model)
+                    {
+                        <tr>
+                            <td>
+                                @(rowNumber += 1)
+                            </td>
+
+                            <td>
+                                <h5 class="card-title">@role.Name</h5>
+                            </td>
 
 
-                        <td>
-                            <a asp-action="DeleteRole" asp-controller="Administrador" class="btn btn-lg" asp-route-id="@role.Id"  data-toggle="tooltip" data-placement="top" title="Eliminar"> <i class="fas fa-trash text-danger"></i></a>
+                            <td>
+                                <a asp-action="DeleteRole" asp-controller="Administrador" class="btn btn-lg" asp-route-id="@role.Id" data-toggle="tooltip" data-placement="top" title="Eliminar"> <i class="fas fa-trash text-danger"></i></a>
 
 
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
 
-                  }   
+                    }
 
                 </tbody>
             </table>
 
         </div>
     </div>
-            }
-            else
-            {
-            <div class="card">
-                <div class="card-header">
-                    Aún no hay roles creados
-                </div>
-            </div>
-            <div class="card-body">
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            Aún no hay roles creados
+        </div>
+    </div>
+    <div class="card-body">
 
-                <a class="btn btn-success" style="width:auto"
-                   asp-controller="Administrador" asp-action="AddRole"><i class="fas fa-plus-circle"></i> Crear un rol nuevo</a>
-            </div>
-            }
+        <a class="btn btn-success" style="width:auto"
+           asp-controller="Administrador" asp-action="AddRole"><i class="fas fa-plus-circle"></i> Crear un rol nuevo</a>
+    </div>
+}

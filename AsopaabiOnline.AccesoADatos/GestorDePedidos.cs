@@ -8,7 +8,6 @@ namespace AsopaabiOnline.AccesoADatos
 {
     public class GestorDePedidos
     {
-
         public void Agregar(Modelo.Pedido elPedido)
         {
             Modelo.Contexto laBaseDeDatos = new Contexto();
