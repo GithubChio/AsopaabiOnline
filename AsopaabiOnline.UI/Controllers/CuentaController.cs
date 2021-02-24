@@ -11,12 +11,12 @@ using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using System.Text.Encodings.Web;
 using AsopaabiOnline.Modelo;
-
+using AsopaabiOnline.UI.Models.Enums;
 
 namespace AsopaabiOnline.UI.Controllers
 {
    
-    public class CuentaController : Controller
+    public class CuentaController : BaseController
     {
         private readonly SignInManager<User> signInManager;
         private readonly UserManager<User> userManager;
@@ -69,8 +69,9 @@ namespace AsopaabiOnline.UI.Controllers
 
                     //await signInManager.SignInAsync(user, isPersistent: false);
                     await userManager.AddToRoleAsync(user, DefaultRoleName);
+                    Alert("Usuario registrado.", NotificationType.success);
                     return RedirectToAction("Login");
-
+                   
                 }
                 foreach (var error in result.Errors)
                 {
@@ -98,19 +99,20 @@ namespace AsopaabiOnline.UI.Controllers
                 var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
+
                     return RedirectToAction("Tienda", "Home");
                 }
 
                 if (result.IsLockedOut)
                 {
-
+                    Alert("Usuario bloqueado.", NotificationType.info);
                     return RedirectToAction("Lockout");
                 }
                
 
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Intento de inicio de sesión no válido.");
+                    Alert("Intento de inicio de sesión no válido.", NotificationType.error);
                     return View();
                 }
             }
@@ -187,7 +189,8 @@ namespace AsopaabiOnline.UI.Controllers
         {
             if (code == null)
             {
-                return BadRequest("Se debe proporcionar un código para restablecer la contraseña.");
+                Alert("Se debe proporcionar un código para restablecer la contraseña.", NotificationType.error);
+                return View();
             }
             else
             {
