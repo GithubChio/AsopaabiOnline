@@ -11,7 +11,7 @@
     <div class="card-header text-center"> <h4 class="card-title ">@ViewBag.title</h4></div>
    
     <div class="m-4">
-        <form action="/Home/GenerarPedido" method="post" id="formCarrito">
+        <form action="/CarritoDeCompras/GenerarPedido" method="post" id="formCarrito">
             <table class="table table-stripedd">
                 <thead>
                     <tr>
@@ -104,7 +104,7 @@
               
                 $.ajax({
                     type: "POST",
-                    url: "/Home/GenerarPedido",
+                    url: "/CarritoDeCompras/GenerarPedido",
                     data: $('#formCarrito').serialize(),
                     success: function (response) {
                         alert("Hello: " + response.Name + " .\nCurrent Date and Time: " + response.DateTime);

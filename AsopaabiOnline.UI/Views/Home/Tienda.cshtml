@@ -40,7 +40,7 @@
 
                         <div>
 
-                            <button disabled="@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible)" style="float:right; right:0; margin-right:5px;" type="submit" asp-controller="home" asp-action="AñadirAlCarrito" asp-route-id="@Model[product].Id" class="btn btn-primary rounded-circle"
+                            <button disabled="@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible)" style="float:right; right:0; margin-right:5px;" type="submit" asp-controller="CarritoDeCompras" asp-action="AñadirAlCarrito" asp-route-id="@Model[product].Id" class="btn btn-primary rounded-circle"
                                     data-toggle="tooltip" data-placement="top" title="Añadir al carrito">
                                 <i class="fas fa-plus"></i>
                             </button>
