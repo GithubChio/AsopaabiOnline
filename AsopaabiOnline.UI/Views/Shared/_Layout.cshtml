@@ -50,35 +50,49 @@
 
                 <partial name="_LoginPartial" />
 
-               
+
+                   
                 <ul class="navbar-nav flex-grow-1">
 
-                    <li class="nav-item">
-                        <a class="nav-link "  asp-controller="CarritoDeCompras" asp-action="CarritoDeCompras">
-                            <i class="fas fa-shopping-cart text-info m"></i>
-                        </a>
-                    </li>
-
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                            <i class="fas fa-store-alt"></i> Información
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
-                                <i class="fas fa-map-marked-alt"></i> Dirección
+                    @if (User.IsInRole("Deshabilitado"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link " asp-controller="Cuenta" asp-action="DisableView">
+                                <i class="fas fa-users-slash"></i> Cuenta deshabilitada
                             </a>
-
-                            <div class="dropdown-divider"></div>
-
-                            <a class="dropdown-item" asp-action="Mostrar" asp-controller="HistorialPedidos"><i class="fas fa-history"></i> Historial</a>
-                        </div>
+                        </li>
+                    }
 
 
-                    </li>
+                    @if (User.IsInRole("Cliente") || User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link " asp-controller="CarritoDeCompras" asp-action="CarritoDeCompras">
+                                <i class="fas fa-shopping-cart text-info m"></i>
+                            </a>
+                        </li>
 
-                    @if (User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                <i class="fas fa-store-alt"></i> Información
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
+                                    <i class="fas fa-map-marked-alt"></i> Dirección
+                                </a>
+
+                                <div class="dropdown-divider"></div>
+
+                                <a class="dropdown-item" asp-action="Mostrar" asp-controller="HistorialPedidos"><i class="fas fa-history"></i> Historial</a>
+                            </div>
+
+
+                        </li>
+                    }
+                     @if (User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
                     {
 
 
@@ -115,15 +129,15 @@
                                 }
 
                             </div>
-</li>
+                        </li>
 
                     }
 
 
 
 
-                    </ul>
-            </div>
+                </ul>
+                </div>
                 }
                
 
@@ -143,7 +157,7 @@
         </main>
     </div>
     <br />
-    <footer class="border-top footer text-muted" style="        background-color: #f8f9fa;">
+    <footer class="border-top footer text-muted" style="  background-color: #f8f9fa;">
    
         <div class="container ">
             <span>

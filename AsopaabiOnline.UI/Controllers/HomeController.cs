@@ -34,9 +34,15 @@ namespace AsopaabiOnline.UI.Controllers
             return View(list);
         }
 
-       
 
 
+
+        [HttpGet]
+        public IActionResult AcercaDeNosotros()
+        {
+
+            return View();
+        }
 
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         //public IActionResult Error()
@@ -45,7 +51,7 @@ namespace AsopaabiOnline.UI.Controllers
         //}
 
 
-        
+
     }
 }
 
