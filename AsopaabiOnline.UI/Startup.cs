@@ -36,13 +36,6 @@ namespace AsopaabiOnline.UI
             });
             services.AddMvc();
 
-
-
-
-            //services.AddDbContext<Contexto>(options =>
-            //       options.UseSqlServer(
-            //           Configuration.GetConnectionString("DefaultConnection")));
-
             services.AddDbContext<Data.ApplicationDbContext>(options =>
                    options.UseSqlServer(
                        Configuration.GetConnectionString("DefaultConnection")));
@@ -50,14 +43,12 @@ namespace AsopaabiOnline.UI
             services.AddIdentity<User, IdentityRole>(options => {
                 options.SignIn.RequireConfirmedAccount = false;
 
-                options.Password.RequiredLength = 6;
-                options.Password.RequiredUniqueChars = 2;
-                options.Password.RequireDigit = true;
-
+               
                 options.Lockout.MaxFailedAccessAttempts = 3;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
 
                 options.User.RequireUniqueEmail = true;
+              
                
                
 
@@ -66,10 +57,12 @@ namespace AsopaabiOnline.UI
             services.AddRazorPages();
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
+          
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromHours(3);
                });
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
 
 
@@ -104,4 +97,6 @@ namespace AsopaabiOnline.UI
             });
         }
     }
+
+    
 }

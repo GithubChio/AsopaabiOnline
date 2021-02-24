@@ -1,5 +1,9 @@
 ﻿
 
+
+
+
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -81,3 +85,4 @@ form.div {
     display: flex;
     flex-wrap: wrap;
 }
+

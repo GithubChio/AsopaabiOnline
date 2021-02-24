@@ -8,181 +8,185 @@
 
 <div class="row justify-content-md-center">
     <div class="card w-50">
-        <h3 class="card-header text-center">Registrarse</h3>
+        <h3 class="card-header text-center">Registrarte</h3>
 
-        
-            <form method="post">
-                <div asp-validation-summary="ModelOnly"></div>
-
-
-                <div class="card-body">
-
-                    <div class="form-group">
-                        <label asp-for="DniType" class="control-label">Selecionar el tipo de Identificación: </label>
-                        <select id="tipoDeDni" asp-for="DniType" class="form-control" asp-items="Html.GetEnumSelectList<AsopaabiOnline.UI.Models.DNIType>()" required>
-                            <option selected="selected" value="">Por favor seleccionar</option>
-                        </select>
-                        <br />
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="DNI"></label>
-                        <input asp-for="DNI" class="form-control" />
-                        <div id="elResultado" class="text-danger" />
-                        <span asp-validation-for="DNI" class="text-danger"></span>
-                    </div>
+        <br />
+        <h6 class="card-subtitle mb-2 text-muted text-center">Todos los campos marcados con  un asterisco (*) son requeridos.</h6>
+        <br />
+        <hr />
+        <form method="post">
 
 
-                    <div class="form-group">
-                        <label asp-for="FirstName"></label>
-                        <input asp-for="FirstName" class="form-control" />
-                        <span asp-validation-for="FirstName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="SecondName"></label>
-                        <input asp-for="SecondName" class="form-control" />
-                        <span asp-validation-for="SecondName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="FirstLastName"></label>
-                        <input asp-for="FirstLastName" class="form-control" />
-                        <span asp-validation-for="FirstLastName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="SecondLastName"></label>
-                        <input asp-for="SecondLastName" class="form-control" />
-                        <span asp-validation-for="SecondLastName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="DateOfBirth"></label>
-                        <input asp-for="DateOfBirth" class="form-control" required />
-                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Email"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
 
-                    <div class="form-group">
-                        <label asp-for="Password"></label>
-                        <div class="input-group">
-                            <input id="txtPassword" asp-for="Password" class="form-control" />
+            <div class="card-body">
 
-                            <div class="input-group-append">
-                                <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>
-                            </div>
-
-                        </div>
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ConfirmPassword"></label>
-
-                        <div class="input-group">
-                            <input id="txtPasswordConfirm" asp-for="ConfirmPassword" class="form-control" style="width:250px" />
-
-                            <div class="input-group-append">
-                                <button id="showcontraseña" class="btn btn-primary" type="button" onclick="mostrarContraseña()"> <span class="fa fa-eye-slash icon"></span> </button>
-                            </div>
-                        </div>
-                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="PhoneNumber"></label>
-                        <input asp-for="PhoneNumber" class="form-control" required />
-
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="PhoneNumber2"></label>
-                        <input asp-for="PhoneNumber2" class="form-control" />
-                        <span asp-validation-for="PhoneNumber2" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ActivityType" class="control-label">Selecionar el tipo de Actividad : </label>
-                        <select asp-for="ActivityType" asp-items="Html.GetEnumSelectList<AsopaabiOnline.Modelo.TipoDeActividad>()" class="form-control" required>
-                            <option selected="selected" value="">Por favor seleccionar</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+                <div class="form-group">
+                    <label asp-for="DniType" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <select id="tipoDeDni" asp-for="DniType" class="form-control" asp-items="Html.GetEnumSelectList<AsopaabiOnline.UI.Models.DNIType>()" required>
+                        <option selected="selected" value="">Seleccione una opción</option>
+                    </select>
+                    <br />
                 </div>
 
-            </form>
+                <div class="form-group">
+                    <label asp-for="DNI" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <input asp-for="DNI" class="form-control" />
+                    <div id="elResultado" class="text-danger" />
+                    <span asp-validation-for="DNI" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SecondName" class="control-label"></label>
+                    <input asp-for="SecondName" class="form-control" />
+                    <span asp-validation-for="SecondName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FirstLastName" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <input asp-for="FirstLastName" class="form-control" />
+                    <span asp-validation-for="FirstLastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SecondLastName" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <input asp-for="SecondLastName" class="form-control" />
+                    <span asp-validation-for="SecondLastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateOfBirth" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <input asp-for="DateOfBirth" class="form-control" required />
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <div class="input-group">
+                        <input id="txtPassword" asp-for="Password" class="form-control" aria-describedby="passwordHelpBlock" />
+
+                        <div class="input-group-append">
+                            <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>
+                        </div>
+
+                    </div>
+                    <small id="passwordHelpBlock" class="form-text text-muted">
+                        Su contraseña debe tener entre 8 y 20 carácteres, contener letras (mayúsculas y minúsculas) y números, y no debe contener espacios, caracteres especiales ni emoji.
+                    </small>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword"></label><i class="fas fa-asterisk text-danger"></i>
+
+                    <div class="input-group">
+                        <input id="txtPasswordConfirm" asp-for="ConfirmPassword" class="form-control" style="width:250px" />
+
+                        <div class="input-group-append">
+                            <button id="showcontraseña" class="btn btn-primary" type="button" onclick="mostrarContraseña()"> <span class="fa fa-eye-slash icon"></span> </button>
+                        </div>
+                    </div>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PhoneNumber2" class="control-label"></label>
+                    <input asp-for="PhoneNumber2" class="form-control" />
+                    <span asp-validation-for="PhoneNumber2" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+            </div>
+
+        </form>
 
     </div>
 </div>
-  
-
-    @section Scripts {
 
 
+@section Scripts {
+
+   
 
 
-        <script type="text/javascript">
-            var dniType = 0;
+    <script type="text/javascript">
+        var dniType = 0;
 
-            function mostrarPassword() {
-                var cambio = document.getElementById("txtPassword");
-
-
-                if (cambio.type == "password") {
-                    cambio.type = "text";
-                    $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-                } else {
-                    cambio.type = "password";
-                    $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-                }
+        function mostrarPassword() {
+            var cambio = document.getElementById("txtPassword");
 
 
+            if (cambio.type == "password") {
+                cambio.type = "text";
+                $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+            } else {
+                cambio.type = "password";
+                $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
             }
 
-            $(document).ready(function () {
-                //CheckBox mostrar contraseña
-                $('#ShowPassword').click(function () {
-                    $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
-                });
 
+        }
+
+        $(document).ready(function () {
+            //CheckBox mostrar contraseña
+            $('#ShowPassword').click(function () {
+                $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
             });
 
-            function mostrarContraseña() {
-                var cambio = document.getElementById("txtPasswordConfirm");
+        });
+
+        function mostrarContraseña() {
+            var cambio = document.getElementById("txtPasswordConfirm");
 
 
-                if (cambio.type == "password") {
-                    cambio.type = "text";
-                    $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-                } else {
-                    cambio.type = "password";
-                    $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-                }
-
-
+            if (cambio.type == "password") {
+                cambio.type = "text";
+                $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+            } else {
+                cambio.type = "password";
+                $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
             }
 
-            $(document).ready(function () {
-                //CheckBox mostrar contraseña
-                $('#showcontraseña').click(function () {
-                    $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
-                });
 
-                $("#tipoDeDni").change(function () {
-                    let DNITYPE = $("#tipoDeDni").val();
-                    console.log(DNITYPE)
-                    if (DNITYPE == 1) {
-                        dniType = 1
-                    } else {
-                        dniType = 2
-                    }
-                });;
+        }
 
-
+        $(document).ready(function () {
+            //CheckBox mostrar contraseña
+            $('#showcontraseña').click(function () {
+                $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
             });
 
+            $("#tipoDeDni").change(function () {
+                let DNITYPE = $("#tipoDeDni").val();
+                console.log(DNITYPE)
+                if (DNITYPE == 1) {
+                    dniType = 1
+                } else {
+                    dniType = 2
+                }
+            });;
 
 
-        </script>
+        });
 
 
 
-    }
+    </script>
+
+
+
+}
 

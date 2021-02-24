@@ -43,43 +43,54 @@ namespace AsopaabiOnline.UI.Controllers
      
         public async Task<IActionResult> Register(Register model)
         {
-            
-            if (ModelState.IsValid)
+            try
             {
-                var user = new User {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    FirstName = model.FirstName,
-                    SecondName = model.SecondName,
-                    FirstLastName = model.FirstLastName,
-                    SecondLastName = model.SecondLastName,
-                    DateOfBirth = model.DateOfBirth,
-                    DNI = model.DNI,
-                    PhoneNumber = model.PhoneNumber,
-                    PhoneNumber2 = model.PhoneNumber2,
-                    ActivityType = model.ActivityType,
-                    CustomerType = TipoDeCliente.Nuevo,
-                    UserType = Models.Enums.UserType.Cliente,
-                    
-
-                };
-                var result = await userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (ModelState.IsValid)
                 {
+                    var user = new User
+                    {
+                        UserName = model.Email,
+                        Email = model.Email,
+                        FirstName = model.FirstName,
+                        SecondName = model.SecondName,
+                        FirstLastName = model.FirstLastName,
+                        SecondLastName = model.SecondLastName,
+                        DateOfBirth = model.DateOfBirth,
+                        DNI = model.DNI,
+                        PhoneNumber = model.PhoneNumber,
+                        PhoneNumber2 = model.PhoneNumber2,
+                        ActivityType = TipoDeActividad.AutoConsumo,
+                        CustomerType = TipoDeCliente.Nuevo,
+                        UserType = Models.Enums.UserType.Cliente,
 
-                    //await signInManager.SignInAsync(user, isPersistent: false);
-                    await userManager.AddToRoleAsync(user, DefaultRoleName);
-                    Alert("Usuario registrado.", NotificationType.success);
-                    return RedirectToAction("Login");
-                   
+
+                    };
+
+
+                    var result = await userManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+
+                        //await signInManager.SignInAsync(user, isPersistent: false);
+                        await userManager.AddToRoleAsync(user, DefaultRoleName);
+                        Alert("Usuario registrado.", NotificationType.success);
+                        return RedirectToAction("Login");
+
+                    }
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
                 }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
+
+                return View(model);
+            }
+            catch
+            {
+                Alert("Algo ha salido mal. Llena los campos obligatorios", NotificationType.success);
+                return View();
             }
 
-            return View(model);
         }
 
 
