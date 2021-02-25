@@ -66,7 +66,7 @@ namespace AsopaabiOnline.AccesoADatos
         }
 
 
-        public List<Producto> ObtenerProductoPorCodigo(string codigo)
+        public List<Producto> ObtenerProductosPorCodigo(string codigo)
         {
             var laBaseDeDatos = new Contexto();
             var elResultado = from elProducto in laBaseDeDatos.Producto

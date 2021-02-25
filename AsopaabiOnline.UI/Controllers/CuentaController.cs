@@ -35,7 +35,9 @@ namespace AsopaabiOnline.UI.Controllers
 
 
 
-     
+
+       
+
         [HttpGet]
         public IActionResult Register()
         {
@@ -69,8 +71,17 @@ namespace AsopaabiOnline.UI.Controllers
 
 
                     };
+                    if (isExistEmail(user))
+                    {
+                        Alert("Parece que ya existe un usuario con este correo electrónico.", NotificationType.warning);
+                        return View();
+                    }
 
-                   
+                    if (isExistDNI(user))
+                    {
+                        Alert("Parece que ya existe un usuario con esta cédula.", NotificationType.warning);
+                        return View();
+                    }
                     
                     var result = await userManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
@@ -92,19 +103,63 @@ namespace AsopaabiOnline.UI.Controllers
             }
             catch
             {
-                Alert("Algo ha salido mal. Llena los campos obligatorios", NotificationType.success);
+                Alert("Algo ha salido mal. Llena los campos obligatorios.", NotificationType.success);
                 return View();
             }
 
         }
 
 
+        public List<User> UsersListByEmail(User user)
+        {
+
+            var Database = HttpContext.User;
+            var result = from User in userManager.Users
+                         where User.Email == user.Email
+                         select User;
 
 
+            return result.ToList();
+        }
 
 
+        public List<User> UsersListByDNI(User user)
+        {
+
+            var Database = HttpContext.User;
+            var result = from User in userManager.Users
+                       where User.DNI == user.DNI
+                       select User;
 
 
+            return result.ToList();
+        }
+
+        public bool isExistDNI(User user)
+        {
+            var result = UsersListByDNI(user);
+            if (result.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool isExistEmail(User user)
+        {
+            var result = UsersListByEmail(user);
+            if (result.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         [HttpGet]
         public IActionResult Login()

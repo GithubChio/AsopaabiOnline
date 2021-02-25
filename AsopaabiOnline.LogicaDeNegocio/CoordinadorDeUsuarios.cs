@@ -19,21 +19,9 @@ namespace AsopaabiOnline.LogicaDeNegocio
             return elGestor.ObtenerUsuarioPorId(id);
         }
 
-        public bool SiExiteDNI(AspNetUsers user)
-        {
-            GestorDeUsuarios elGestor = new GestorDeUsuarios();
-            var elResultado = elGestor.ObtenerUsuarioPorDNI(user.Dni);
-            if(elResultado != null)
-            {
-                return true;
+        
 
-            }
-            else
-            {
-                return false;
-            }
-
-        }
+        
 
     }
 

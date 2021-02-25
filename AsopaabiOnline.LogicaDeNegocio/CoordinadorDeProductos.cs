@@ -73,7 +73,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
         public bool SiExiteCodigo(Producto producto)
         {
             GestorDeProductos elGestor = new GestorDeProductos();
-            var elResultado = elGestor.ObtenerProductoPorCodigo(producto.Codigo);
+            var elResultado = elGestor.ObtenerProductosPorCodigo(producto.Codigo);
             if (elResultado.Count > 0 )
             {
                 return true;
