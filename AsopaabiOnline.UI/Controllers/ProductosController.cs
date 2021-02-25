@@ -35,15 +35,19 @@ namespace AsopaabiOnline.UI.Controllers
             try
             {
                 CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
-                if (!elCoordinador.SiExiste(elProducto) || elProducto != null)
+                if ( !elCoordinador.SiExiste(elProducto) || elProducto != null)
                 {
-                   
-                   
+                    if (elCoordinador.SiExiteCodigo(elProducto))
+                    {
+                        Alert("Parece que ya existe un producto con ese código,Inténtalo de nuevo agregando otro código diferente! ", NotificationType.warning);
+                        return View(elProducto);
+                    }
                     elProducto.Imagen = SubirImagen(elProducto);
                     elCoordinador.Agregar(elProducto);
                     Alert("Producto guardado.", NotificationType.success);
 
-                    
+
+
                 }
                 else
                 {
@@ -138,12 +142,18 @@ namespace AsopaabiOnline.UI.Controllers
                 CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
                 if (elCoordinador.SiExiste(elProducto) )
                 {
-                  
+
+                    if (elCoordinador.SiExiteCodigo(elProducto))
+                    {
+                        Alert("Parece que ya existe un producto con ese código, Inténtalo de nuevo agregando otro código diferente! ", NotificationType.warning);
+                        return View(elProducto);
+                    }
 
                     if (elProducto.ImageFile != null)
                     {
                         elProducto.Imagen = SubirImagen(elProducto);
                     }
+
                     elCoordinador.Actualizar(elProducto);
                     Alert("Producto actualizado.", NotificationType.success);
                 }

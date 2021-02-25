@@ -65,8 +65,17 @@ namespace AsopaabiOnline.AccesoADatos
             laBaseDeDatos.SaveChanges();
         }
 
-     
 
+        public List<Producto> ObtenerProductoPorCodigo(string codigo)
+        {
+            var laBaseDeDatos = new Contexto();
+            var elResultado = from elProducto in laBaseDeDatos.Producto
+                              where elProducto.Codigo == codigo
+                              select elProducto;
+
+            return elResultado.ToList();
+
+        }
         public List<Producto> ObtenerListaDeProductosConCategoriaDeFruta()
         {
             var laBaseDeDatos = new Contexto();

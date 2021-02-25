@@ -12,6 +12,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using AsopaabiOnline.Modelo;
 using AsopaabiOnline.UI.Models.Enums;
+using AsopaabiOnline.LogicaDeNegocio;
 
 namespace AsopaabiOnline.UI.Controllers
 {
@@ -32,7 +33,9 @@ namespace AsopaabiOnline.UI.Controllers
             this.emailSender = emailSender;
         }
 
-    
+
+
+     
         [HttpGet]
         public IActionResult Register()
         {
@@ -47,6 +50,7 @@ namespace AsopaabiOnline.UI.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                   
                     var user = new User
                     {
                         UserName = model.Email,
@@ -66,7 +70,8 @@ namespace AsopaabiOnline.UI.Controllers
 
                     };
 
-
+                   
+                    
                     var result = await userManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
@@ -92,6 +97,13 @@ namespace AsopaabiOnline.UI.Controllers
             }
 
         }
+
+
+
+
+
+
+
 
 
         [HttpGet]

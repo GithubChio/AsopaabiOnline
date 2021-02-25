@@ -70,7 +70,21 @@ namespace AsopaabiOnline.LogicaDeNegocio
             return elGestor.ObtenerProductoPorId(id);
         }
 
-     
+        public bool SiExiteCodigo(Producto producto)
+        {
+            GestorDeProductos elGestor = new GestorDeProductos();
+            var elResultado = elGestor.ObtenerProductoPorCodigo(producto.Codigo);
+            if (elResultado.Count > 0 )
+            {
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+
+        }
 
         //public List<Modelo.Producto> ListaDeFrutas()
         //{

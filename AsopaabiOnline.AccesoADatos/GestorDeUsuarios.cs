@@ -23,5 +23,15 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado;
 
         }
+        public List< AspNetUsers> ObtenerUsuarioPorDNI(string dni)
+        {
+            var laBaseDeDatos = new Contexto();
+            var elResultado = from elUsuario in laBaseDeDatos.AspNetUsers
+                              where elUsuario.Dni == dni
+                              select elUsuario;
+
+            return elResultado.ToList();
+
+        }
     }
 }
