@@ -11,7 +11,7 @@
         <h3 class="card-header text-center">Registrarte</h3>
 
         <br />
-        <h6 class="card-subtitle mb-2 text-muted text-center">Todos los campos marcados con  un asterisco (*) son requeridos.</h6>
+        <h6 class="card-subtitle mb-2  text-muted text-center">Todos los campos marcados con  un asterisco (*) son requeridos.</h6>
         <br />
         <hr />
         <form method="post">
@@ -21,7 +21,7 @@
             <div class="card-body">
 
                 <div class="form-group">
-                    <label asp-for="DniType" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <label asp-for="DniType" class="control-label"></label><small> <i class="fas fa-asterisk text-danger"></i></small>
                     <select id="tipoDeDni" asp-for="DniType" class="form-control" asp-items="Html.GetEnumSelectList<AsopaabiOnline.UI.Models.DNIType>()" required>
                         <option selected="selected" value="">Seleccione una opción</option>
                     </select>
@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="DNI" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <label asp-for="DNI" class="control-label"></label><small> <i class="fas fa-asterisk text-danger"></i></small>
                     <input asp-for="DNI" class="form-control" />
                     <div id="elResultado" class="text-danger" />
                     <span asp-validation-for="DNI" class="text-danger"></span>
@@ -37,7 +37,7 @@
 
 
                 <div class="form-group">
-                    <label asp-for="FirstName" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <label asp-for="FirstName" class="control-label"></label><small> <i class="fas fa-asterisk text-danger"></i></small>
                     <input asp-for="FirstName" class="form-control" />
                     <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
@@ -47,28 +47,28 @@
                     <span asp-validation-for="SecondName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="FirstLastName" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <label asp-for="FirstLastName" class="control-label"></label><small> <i class="fas fa-asterisk text-danger"></i></small>
                     <input asp-for="FirstLastName" class="form-control" />
                     <span asp-validation-for="FirstLastName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="SecondLastName" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <label asp-for="SecondLastName" class="control-label"></label><small> <i class="fas fa-asterisk text-danger"></i></small>
                     <input asp-for="SecondLastName" class="form-control" />
                     <span asp-validation-for="SecondLastName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="DateOfBirth" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <label asp-for="DateOfBirth" class="control-label"></label><small> <i class="fas fa-asterisk text-danger"></i></small>
                     <input asp-for="DateOfBirth" class="form-control" required />
                     <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <label asp-for="Email" class="control-label"></label><small> <i class="fas fa-asterisk text-danger"></i></small>
                     <input asp-for="Email" class="form-control" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <label asp-for="Password" class="control-label"></label><small> <i class="fas fa-asterisk text-danger"></i></small>
                     <div class="input-group">
                         <input id="txtPassword" asp-for="Password" class="form-control" aria-describedby="passwordHelpBlock" />
 
@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="ConfirmPassword"></label><i class="fas fa-asterisk text-danger"></i>
+                    <label asp-for="ConfirmPassword"></label><small> <i class="fas fa-asterisk text-danger"></i></small>
 
                     <div class="input-group">
                         <input id="txtPasswordConfirm" asp-for="ConfirmPassword" class="form-control" style="width:250px" />
@@ -98,7 +98,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="PhoneNumber" class="control-label"></label><i class="fas fa-asterisk text-danger"></i>
+                    <label asp-for="PhoneNumber" class="control-label"></label><small> <i class="fas fa-asterisk text-danger"></i></small>
                     <input asp-for="PhoneNumber" class="form-control" />
                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
@@ -118,8 +118,6 @@
 
 
 @section Scripts {
-
-   
 
 
     <script type="text/javascript">

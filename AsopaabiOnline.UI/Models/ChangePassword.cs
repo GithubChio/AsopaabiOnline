@@ -16,11 +16,12 @@ namespace AsopaabiOnline.UI.Models
         public string OldPassword { get; set; }
 
         [Required(ErrorMessage = "La contraseña es requerida")]
-        [StringLength(100, ErrorMessage = "El {0} debe tener al menos {2} y un máximo de {1} caracteres.", MinimumLength = 6)]
+        [StringLength(20, ErrorMessage = "La contraseña  debe tener al menos {2} y un máximo de {1} caracteres.", MinimumLength = 8)]
         [DataType(DataType.Password)]
         [Display(Name = "Nueva contraseña")]
         public string NewPassword { get; set; }
 
+        [Required(ErrorMessage = "La confirmación de contraseña es requerida")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirmar nueva contraseña")]
         [Compare("NewPassword", ErrorMessage = " La nueva contraseña y la contraseña de confirmación no coinciden.")]

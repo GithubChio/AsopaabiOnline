@@ -22,22 +22,32 @@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="Password"></label>
+                    <label asp-for="Password" class="control-label"></label>
+                    <div class="input-group">
+                        <input id="txtPassword" asp-for="Password" class="form-control" aria-describedby="passwordHelpBlock" />
 
+                        <div class="input-group-append">
+                            <button id="showPassword" class="btn btn-primary" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>
+                        </div>
 
-                    <input asp-for="Password" class="form-control" aria-describedby="inputGroup-sizing-default" />
+                    </div>
+                    <small id="passwordHelpBlock" class="form-text text-muted">
+                       Después de 3 intentos fallidos su cuenta será bloqueada por seguridad.
+                    </small>
                     <span asp-validation-for="Password" class="text-danger"></span>
+
                 </div>
-                
+
                 <div class="form-check">
                     <input asp-for="RememberMe" class="form-check-input" id="defaultCheck1" />
-                    <label asp-for="RememberMe" class="form-check-label"  for="defaultCheck1" >Recordarme?</label>
+
+                    <label asp-for="RememberMe" class="form-check-label" for="defaultCheck1">Recordarme?</label>
                 </div>
-             
+
 
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-lg btn-block" style="background-color:#008fa0; ">   Entrar   </button>
+                    <button type="submit" class="btn btn-lg btn-block" style="background-color:#008fa0; ">Iniciar   </button>
 
                 </div>
                 <div class="form-group">
@@ -56,6 +66,41 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    
+
+
+
+    <script type="text/javascript">
+        var dniType = 0;
+
+        function mostrarPassword() {
+            var cambio = document.getElementById("txtPassword");
+
+
+            if (cambio.type == "password") {
+                cambio.type = "text";
+                $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+            } else {
+                cambio.type = "password";
+                $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+            }
+
+
+        }
+
+        $(document).ready(function () {
+            //CheckBox mostrar contraseña
+            $('#ShowPassword').click(function () {
+                $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
+            });
+
+        });
+
+        
+
+
+
+    </script>
+
 }
 

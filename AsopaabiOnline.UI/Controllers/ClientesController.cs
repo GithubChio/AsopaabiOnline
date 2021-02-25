@@ -6,13 +6,14 @@ using AsopaabiOnline.AccesoADatos;
 using AsopaabiOnline.LogicaDeNegocio;
 using AsopaabiOnline.Modelo;
 using AsopaabiOnline.UI.Models;
+using AsopaabiOnline.UI.Models.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsopaabiOnline.UI.Controllers
 {
-    public class ClientesController : Controller
+    public class ClientesController : BaseController
     {
         private readonly SignInManager<User> signInManager;
        
@@ -24,36 +25,41 @@ namespace AsopaabiOnline.UI.Controllers
             this.signInManager = signInManager;
         }
 
-        [TempData]
-        public string StatusMessage { get; set; }
-
-
+    
         [HttpGet]
         public async Task<IActionResult> Perfil()
         {
+            try
+            {
 
-            var user = await userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                ViewBag.ErrorMessage = $"el perfil con el nombre= {User} no fue encontrado";
-                return View("Error");
-            }
-            else
-            {
-                User model = new Models.User()
+                var user = await userManager.GetUserAsync(User);
+                if (user == null)
                 {
-                    Id = user.Id,
-                    DNI = user.DNI,
-                    FirstName = user.FirstName,
-                    SecondName = user.SecondName,
-                    FirstLastName = user.FirstLastName,
-                    SecondLastName = user.SecondLastName,
+                    Alert("El perfil no fue encontrado", NotificationType.error);
+
+                    return View("Error");
+                }
+                else
+                {
+                    User model = new Models.User()
+                    {
+                        Id = user.Id,
+                        DNI = user.DNI,
+                        FirstName = user.FirstName,
+                        SecondName = user.SecondName,
+                        FirstLastName = user.FirstLastName,
+                        SecondLastName = user.SecondLastName,
 
 
-                };
+                    };
 
-                return View(model);
-
+                    return View(model);
+                }
+            }
+            catch
+            {
+                Alert("Algo ha salido mal, inténtalo de nuevo.", NotificationType.error);
+                return RedirectToAction("Perfil");
             }
         }
 
@@ -67,7 +73,7 @@ namespace AsopaabiOnline.UI.Controllers
             var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
-                ViewBag.ErrorMessage = $"el usuario con el id= {User} no fue encontrado";
+                Alert("El perfil no fue encontrado", NotificationType.warning);
                 return View("Error");
             }
             else
@@ -100,7 +106,7 @@ namespace AsopaabiOnline.UI.Controllers
                 var user = await userManager.GetUserAsync(User);
                 if (user == null)
                 {
-                    ViewBag.ErrorMessage = $"el usuario con el id= {input} no fue encontrado";
+                    Alert("El usuario no fue encontrado", NotificationType.warning);
                     return View("Error");
                 }
                 else
@@ -120,8 +126,9 @@ namespace AsopaabiOnline.UI.Controllers
                     if (elResultado.Succeeded)
                     {
                         await signInManager.RefreshSignInAsync(user);
-                        StatusMessage = "Su perfil ha sido actualizado";
-                        return RedirectToAction("Perfil", "Clientes");
+                        Alert("Su perfil ha sido actualizado", NotificationType.success);
+                        
+                        return RedirectToAction("Perfil");
                     }
                     foreach (var elError in elResultado.Errors)
                     {
@@ -132,7 +139,8 @@ namespace AsopaabiOnline.UI.Controllers
             }
             catch
             {
-                return View();
+                Alert("Algo ha salido mal, inténtalo de nuevo.", NotificationType.error);
+                return RedirectToAction("Perfil");
             }
 
         }
@@ -142,36 +150,42 @@ namespace AsopaabiOnline.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> VerDetalles()
         {
-            var user = await userManager.GetUserAsync(User);
+            try
+            {
+                var user = await userManager.GetUserAsync(User);
 
-            if (user == null)
-            {
-                ViewBag.ErrorMessage = $"el usuario con el id= {User} no fue encontrado";
-                return View("Error");
-            }
-            else
-            {
-                User userDetails = new Models.User()
+                if (user == null)
                 {
-                    Id = user.Id,
-                    DNI= user.DNI,
-                    FirstName = user.FirstName,
-                    SecondName = user.SecondName,
-                    FirstLastName = user.FirstLastName,
-                    SecondLastName = user.SecondLastName,
-                    DateOfBirth = user.DateOfBirth,
-                    Email = user.Email,
-                    PhoneNumber = user.PhoneNumber,
-                    PhoneNumber2 = user.PhoneNumber2,
-                    ActivityType = user.ActivityType,
-                    
+                    Alert("El usuario no fue encontrado", NotificationType.warning);
+                    return View("Error");
+                }
+                else
+                {
+                    User userDetails = new Models.User()
+                    {
+                        Id = user.Id,
+                        DNI = user.DNI,
+                        FirstName = user.FirstName,
+                        SecondName = user.SecondName,
+                        FirstLastName = user.FirstLastName,
+                        SecondLastName = user.SecondLastName,
+                        DateOfBirth = user.DateOfBirth,
+                        Email = user.Email,
+                        PhoneNumber = user.PhoneNumber,
+                        PhoneNumber2 = user.PhoneNumber2,
+                        ActivityType = user.ActivityType,
 
-                };
 
-                return View(userDetails);
+                    };
+
+                    return View(userDetails);
+                }
             }
-
-
+            catch
+            {
+                Alert("Algo ha salido mal, inténtalo de nuevo.", NotificationType.error);
+                return RedirectToAction("Perfil");
+            }
         }
 
 
@@ -184,7 +198,8 @@ namespace AsopaabiOnline.UI.Controllers
             var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
+                
+                return NotFound($"No se pudo cargar el usuario con ID'{userManager.GetUserId(User)}'.");
             }
 
             var hasPassword = await userManager.HasPasswordAsync(user);
@@ -210,7 +225,7 @@ namespace AsopaabiOnline.UI.Controllers
             var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
+                return NotFound($"No se pudo cargar el usuario con ID'{userManager.GetUserId(User)}'.");
             }
 
             var addPasswordResult = await userManager.AddPasswordAsync(user, Input.NewPassword);
@@ -235,7 +250,8 @@ namespace AsopaabiOnline.UI.Controllers
             var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
+                Alert("Usuario inválido.", NotificationType.warning);
+                return View();
             }
 
             var hasPassword = await userManager.HasPasswordAsync(user);
@@ -251,31 +267,40 @@ namespace AsopaabiOnline.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePassword Input)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View();
-            }
-
-            var user = await userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
-            }
-
-            var changePasswordResult = await userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
-            if (!changePasswordResult.Succeeded)
-            {
-                foreach (var error in changePasswordResult.Errors)
+                if (ModelState.IsValid)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    var user = await userManager.GetUserAsync(User);
+                    if (user == null)
+                    {
+                        Alert("Usuario inválido.", NotificationType.warning);
+                        return View();
+                    }
+
+                    var changePasswordResult = await userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
+                    if (changePasswordResult.Succeeded)
+                    {
+
+                        await signInManager.RefreshSignInAsync(user);
+
+                        Alert("Contraseña cambiada.", NotificationType.success);
+                        return RedirectToAction("Perfil");
+                    }
+                    Alert("Debe completar los campos correctamente o su contraseña actual es inválida.", NotificationType.warning);
+                    return View();
                 }
-                return View();
+                else
+                {
+                    Alert("Debe completar los campos correctamente o su contraseña actual es inválida.", NotificationType.warning);
+                    return View();
+                }
             }
-
-            await signInManager.RefreshSignInAsync(user);
-
-           
-            return RedirectToAction("Perfil");
+            catch
+            {
+                Alert("Algo ha salido mal, inténtalo de nuevo.", NotificationType.error);
+                return RedirectToAction("Perfil");
+            }
 
         }
 
