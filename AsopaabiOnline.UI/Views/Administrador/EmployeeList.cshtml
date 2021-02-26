@@ -36,6 +36,9 @@
                     <th>
                         <label>Correo Electrónico</label>
                     </th>
+                    <th>
+                        <label>Tipo de Usuario</label>
+                    </th>
 
                     <th>
                         <label> Opciones</label>
@@ -46,33 +49,36 @@
                 @{ int rowNumber = 0; }
                 @foreach (var user in Model)
                 {
-                    <tr>
-                        <td>
-                            @(rowNumber += 1)
-                        </td>
+                <tr>
+                    <td>
+                        @(rowNumber += 1)
+                    </td>
 
-                        <td>
-                            <h5 class="card-title">@user.DNI</h5>
-                        </td>
+                    <td>
+                        <h5 class="card-title">@user.DNI</h5>
+                    </td>
 
-                        <td>
-                            <h5 class="card-title">@user.Name</h5>
-                        </td>
+                    <td>
+                        <h5 class="card-title">@user.Name</h5>
+                    </td>
 
-                        <td>
-                            <h5 class="card-title">@user.LastName</h5>
-                        </td>
-                        <td>
-                            <h5 class="card-title">@user.Email</h5>
-                        </td>
+                    <td>
+                        <h5 class="card-title">@user.LastName</h5>
+                    </td>
+                    <td>
+                        <h5 class="card-title">@user.Email</h5>
+                    </td>
+                    <td>
+                        <h5 class="card-title">@user.UserType</h5>
+                    </td>
 
-                        <td>
-                            <a asp-action="UserDetails" asp-controller="Administrador" class="btn btn-lg " asp-route-id="@user.Id"
-                                data-toggle="tooltip" data-placement="top" title="ver detalles"><i class="fas fa-search-plus text-info"></i> </a>
+                    <td>
+                        <a asp-action="UserDetails" asp-controller="Administrador" class="btn btn-lg " asp-route-id="@user.Id"
+                           data-toggle="tooltip" data-placement="top" title="ver detalles"><i class="fas fa-search-plus text-info"></i> </a>
 
 
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
 
                 }
 

@@ -100,6 +100,12 @@ namespace AsopaabiOnline.UI.Controllers
 
                         foreach (var oldRoleName in oldRoleList.ToList())
                         {
+                            if (oldRoleName =="Administrador")
+                            {
+                                Alert($"Parece que este usuario ya tiene el rol administrador", NotificationType.warning);
+                                return RedirectToAction("UserList");
+                            }
+
                             await userManager.RemoveFromRoleAsync(user, oldRoleName);
                         }
 
@@ -124,6 +130,11 @@ namespace AsopaabiOnline.UI.Controllers
                     {
                         foreach (var oldRoleName in oldRoleList.ToList())
                         {
+                            if (oldRoleName == "Administrador")
+                            {
+                                Alert($"No se puede cambiar de rol por que es un usuario administrador.", NotificationType.warning);
+                                return RedirectToAction("UserList");
+                            }
                             await userManager.RemoveFromRoleAsync(user, oldRoleName);
                         }
                         roleName = "Cliente";
@@ -479,7 +490,22 @@ namespace AsopaabiOnline.UI.Controllers
 
                     if (role.Name == "Deshabilitado")
                     {
-                        Alert($"El rol {role.Name} no se puede eliminar por seguridad del sistema.", NotificationType.warning);
+                        Alert($"El rol deshabilitado no se puede eliminar por seguridad del sistema.", NotificationType.warning);
+                        return RedirectToAction("RolesList", "Administrador");
+                    }
+                    if (role.Name == "Cliente")
+                    {
+                        Alert($"El rol cliente no se puede eliminar por seguridad del sistema.", NotificationType.warning);
+                        return RedirectToAction("RolesList", "Administrador");
+                    }
+                    if (role.Name == "Administrador")
+                    {
+                        Alert($"El rol administrador no se puede eliminar por seguridad del sistema.", NotificationType.warning);
+                        return RedirectToAction("RolesList", "Administrador");
+                    }
+                    if (role.Name == "AsistenteAdministrativo")
+                    {
+                        Alert($"El rol asistente administrativo no se puede eliminar por seguridad del sistema.", NotificationType.warning);
                         return RedirectToAction("RolesList", "Administrador");
                     }
                     var elResultado = await roleManager.DeleteAsync(role);
@@ -498,6 +524,7 @@ namespace AsopaabiOnline.UI.Controllers
             }
             catch
             {
+                Alert($"Algo ha salido mal,inténtalo de nuevo", NotificationType.error);
                 return View();
             }
         }

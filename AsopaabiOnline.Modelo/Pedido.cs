@@ -24,6 +24,7 @@ namespace AsopaabiOnline.Modelo
        
         [Display(Name ="Fecha de Pedido")]
         [DataType(DataType.Date)]
+        
         public DateTime FechaPedido { get; set; }
 
         [Required(ErrorMessage = "La fecha de entrega requerida")]

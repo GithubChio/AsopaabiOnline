@@ -79,7 +79,7 @@ namespace AsopaabiOnline.UI.Models
 
         [Required(ErrorMessage = "Su fecha de nacimiento es requerida")]
         [Display(Name = "Fecha de Nacimiento")]
-        [DateOfBirthValidation(MinAge =18, MaxAge =100,ErrorMessage ="No se permiten menores de edad")]
+        [DateOfBirthValidation(MinAge =18, MaxAge =100,ErrorMessage ="Solo se permiten edades entre 18 - 100 años.")]
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 

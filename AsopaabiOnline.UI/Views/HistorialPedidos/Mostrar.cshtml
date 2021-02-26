@@ -1,4 +1,5 @@
-﻿@model IEnumerable<AsopaabiOnline.Modelo.HistorialPedido>
+﻿
+@model IEnumerable<AsopaabiOnline.Modelo.HistorialPedido>
 
 @{
     ViewBag.title = "Historial de Pedidos";
@@ -18,9 +19,9 @@
                 <p>Pedido  # @historial.IdPedidoNavigation.Id</p>
             </div>
             <div class="card-body">
-                <label>Fecha de Pedido : @historial.IdPedidoNavigation.FechaPedido </label>
+                <label> Fecha de Pedido: @historial.IdPedidoNavigation.FechaPedido.ToShortDateString() </label>
                 <br />
-                <label>Fecha de Entrega : @historial.IdPedidoNavigation.FechaEntrega</label>
+                <label>Fecha de Entrega : @historial.IdPedidoNavigation.FechaEntrega.Date.ToShortDateString()</label>
                 <br />
                 <label>Estado : @historial.IdPedidoNavigation.Estado </label>
                 <br />
