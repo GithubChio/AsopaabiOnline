@@ -74,25 +74,12 @@
                                 {
 
 
-
-
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                                            <i class="fas fa-store-alt"></i> Información
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
-                                                <i class="fas fa-map-marked-alt"></i> Dirección
-                                            </a>
-
-                                            <div class="dropdown-divider"></div>
-
-                                            <a class="dropdown-item" asp-action="Mostrar" asp-controller="HistorialPedidos"><i class="fas fa-history"></i> Historial</a>
-                                        </div>
-
-
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-action="Mostrar" asp-controller="HistorialPedidos"><i class="fas fa-history"></i> Historial</a>
+                                       
                                     </li>
+
+                                    
 
 
                                 }

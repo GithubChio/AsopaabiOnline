@@ -20,8 +20,7 @@
         <div class="m-5">
 
 
-            <a class="btn" asp-controller="DireccionesParaPedidos" asp-action="Agregar" style="border-radius:25px; background-color:#96c401"
-               data-toggle="tooltip" data-placement="top" title="Agregar una dirección nueva"><i class="fas fa-plus text-white "></i>  </a>
+            c
 
             <br />
             <br />
@@ -99,7 +98,10 @@ else
 
     <div class="card text-center m-5">
         <div class="card-body">
-            <h3>No hay direcciones</h3>
+
+            <h3 class="card-title">No hay direcciones</h3>
+            <a class="btn" asp-controller="DireccionesParaPedidos" asp-action="Agregar" style="border-radius:25px; background-color:#96c401"
+               data-toggle="tooltip" data-placement="top" title="Agregar una dirección nueva">Agregar </a>
         </div>
     </div>
 }

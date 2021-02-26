@@ -32,12 +32,15 @@
                    data-toggle="tooltip" data-placement="top" title="ver detalles"> <i class="fas fa-search-plus text-info"></i></a> |
                 <a asp-action="EditarPerfil" asp-controller="Clientes" asp-route-id="@User.Identity.Name" class="btn btn-lg"
                    data-toggle="tooltip" data-placement="top" title="Actualizar"><i class="fas fa-user-edit text-success"></i></a>
-
+               
             </div>
         </div>
 
         <div class="card-footer text-center">
             <a asp-action="ChangePassword" asp-controller="Clientes" class="btn btn-warning btn-lg">Cambiar contraseña </a>
+            <a class="btn btn-info btn-lg" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
+                <i class="fas fa-map-marked-alt"></i> Dirección
+            </a>
         </div>
     </div>
 
