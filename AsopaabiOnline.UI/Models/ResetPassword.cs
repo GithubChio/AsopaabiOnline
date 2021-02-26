@@ -14,7 +14,7 @@ namespace AsopaabiOnline.UI.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "La contraseña es requerida")]
-        [StringLength(100, ErrorMessage = "El {0} debe tener al menos {2} y un máximo de {1} caracteres.", MinimumLength = 6)]
+        [StringLength(20, ErrorMessage = "La contraseña  debe tener al menos {2} y un máximo de {1} caracteres.", MinimumLength = 8)]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
         public string Password { get; set; }
