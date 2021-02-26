@@ -122,7 +122,7 @@ namespace AsopaabiOnline.AccesoADatos
         {
             var laBaseDeDatos = new Contexto();
             var elResultado = from elProducto in laBaseDeDatos.Producto
-                              where elProducto.Categoria == CategoriaDeProducto.Otro
+                              where elProducto.Categoria == CategoriaDeProducto.Otros
                               select elProducto;
 
             return elResultado.ToList();

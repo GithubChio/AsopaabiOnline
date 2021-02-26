@@ -29,124 +29,135 @@
     <script src="~/sweetAlert/sweetalert.min.js"></script>
 
 </head>
-<body   style="background-color: #CFD8DC">
+<body style="background-color: #CFD8DC">
     <header>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <nav class="navbar navbar-expand-lg navbar-light bg-light box-shadow mb-3">
+                <a class="navbar-brand" asp-action="Tienda" asp-controller="Home">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light box-shadow mb-3" >
-            <div class="container">
-                <div style="margin-right:60px ">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Tienda" >
-                        <img src="~/imagenes/logo.jpeg" width="60" height="60" class="d-inline-block align-top" alt="">
-                        Asopaabi Online
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </div>
-                @if (User.Identity.IsAuthenticated)
-                {
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <img src="~/imagenes/logo.jpeg" width="40" height="40" class="d-inline-block align-top" alt="">
+                    Asopaabi Online
+                </a>
 
-                <partial name="_LoginPartial" />
+                <div class="container">
+                    <div>
 
-
-                   
-                <ul class="navbar-nav flex-grow-1">
-
-                    @if (User.IsInRole("Deshabilitado"))
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    @if (User.Identity.IsAuthenticated)
                     {
-                        <li class="nav-item">
-                            <a class="nav-link " asp-controller="Cuenta" asp-action="DisableView">
-                                <i class="fas fa-users-slash"></i> Cuenta deshabilitada
-                            </a>
-                        </li>
-                    }
+                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                            <div style="margin-left:30px !important;">
+                                <partial name="_LoginPartial" />
 
-
-                    @if (User.IsInRole("Cliente") || User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link " asp-controller="CarritoDeCompras" asp-action="CarritoDeCompras">
-                                <i class="fas fa-shopping-cart text-info m"></i>
-                            </a>
-                        </li>
-
-
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                                <i class="fas fa-store-alt"></i> Información
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
-                                    <i class="fas fa-map-marked-alt"></i> Dirección
-                                </a>
-
-                                <div class="dropdown-divider"></div>
-
-                                <a class="dropdown-item" asp-action="Mostrar" asp-controller="HistorialPedidos"><i class="fas fa-history"></i> Historial</a>
                             </div>
 
 
-                        </li>
-                    }
-                     @if (User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
-                    {
+
+                            <ul class="navbar-nav ">
+
+                                @if (User.IsInRole("Deshabilitado"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link " asp-controller="Cuenta" asp-action="DisableView">
+                                            <i class="fas fa-users-slash"></i> Cuenta deshabilitada
+                                        </a>
+                                    </li>
+                                }
 
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                                <i class="fas fa-cogs"></i> Configuración
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                                <a class="dropdown-item" asp-controller="Productos" asp-action="Mostrar">
-                                    <i class="fas fa-leaf"></i> Productos
-                                </a>
-                                <a class="dropdown-item" asp-controller="Pedidos" asp-action="Mostrar">
-                                    <i class="fas fa-cart-arrow-down"></i> Pedidos
-                                </a>
-
-                                @if (User.IsInRole("Administrador"))
+                                @if (User.IsInRole("Cliente") || User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
                                 {
 
-                                    <div class="dropdown-divider"></div>
 
 
-                                    <a class="dropdown-item" asp-controller="Administrador" asp-action="RolesList"><i class="fas fa-user-tag"></i> Roles </a>
-                                    <button class="btn  dropdown-toggle" type="button" aria-labelledby="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-cog"></i> Usuarios</button>
-                                    <div class="dropdown-menu">
-                                        <a class=" dropdown-item" asp-controller="Administrador" asp-action="UserList"><i class="fas fa-users"></i>  Usuarios</a>
-                                        <a class="dropdown-item" asp-controller="Administrador" asp-action="DisableUsersList"><i class="fas fa-users-slash"></i>Deshabilitados</a>
-                                        <a class="dropdown-item" asp-controller="Administrador" asp-action="CustomerList"><i class="far fa-address-book"></i> Clientes </a>
-                                        <a class="dropdown-item" asp-controller="Administrador" asp-action="EmployeeList"><i class="fas fa-user-tie"></i> Empleados</a>
 
-                                    </div>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                            <i class="fas fa-store-alt"></i> Información
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
+                                                <i class="fas fa-map-marked-alt"></i> Dirección
+                                            </a>
+
+                                            <div class="dropdown-divider"></div>
+
+                                            <a class="dropdown-item" asp-action="Mostrar" asp-controller="HistorialPedidos"><i class="fas fa-history"></i> Historial</a>
+                                        </div>
+
+
+                                    </li>
+
+
+                                }
+                                @if (User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
+                                {
+
+
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                            <i class="fas fa-cogs"></i> Configuración
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                            <a class="dropdown-item" asp-controller="Productos" asp-action="Mostrar">
+                                                <i class="fas fa-leaf"></i> Productos
+                                            </a>
+                                            <a class="dropdown-item" asp-controller="Pedidos" asp-action="Mostrar">
+                                                <i class="fas fa-cart-arrow-down"></i> Pedidos
+                                            </a>
+
+                                            @if (User.IsInRole("Administrador"))
+                                            {
+
+                                                <div class="dropdown-divider"></div>
+
+
+                                                <a class="dropdown-item" asp-controller="Administrador" asp-action="RolesList"><i class="fas fa-user-tag"></i> Roles </a>
+                                                <button class="btn  dropdown-toggle" type="button" aria-labelledby="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-cog"></i> Usuarios</button>
+                                                <div class="dropdown-menu">
+                                                    <a class=" dropdown-item" asp-controller="Administrador" asp-action="UserList"><i class="fas fa-users"></i>  Usuarios</a>
+                                                    <a class="dropdown-item" asp-controller="Administrador" asp-action="DisableUsersList"><i class="fas fa-users-slash"></i>Deshabilitados</a>
+                                                    <a class="dropdown-item" asp-controller="Administrador" asp-action="CustomerList"><i class="far fa-address-book"></i> Clientes </a>
+                                                    <a class="dropdown-item" asp-controller="Administrador" asp-action="EmployeeList"><i class="fas fa-user-tie"></i> Empleados</a>
+
+                                                </div>
+
+                                            }
+
+                                        </div>
+                                    </li>
 
                                 }
 
-                            </div>
-                        </li>
 
+                                @if (User.IsInRole("Cliente") || User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-controller="CarritoDeCompras" asp-action="CarritoDeCompras">
+                                            <i class="fas fa-shopping-cart "></i> Carrito
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
                     }
 
 
 
 
-                </ul>
                 </div>
-                }
-               
 
+            </nav>
 
-
-            </div>
-        </nav>
-
-
+        }
     </header>
 
     <div class="container-fluid">
@@ -157,27 +168,30 @@
         </main>
     </div>
     <br />
-    <footer class="border-top footer text-muted" style="  background-color: #f8f9fa;">
-   
-        <div class="container ">
-            <span>
-                &copy; 2020 -Asopaabi Online
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <a style="padding-left:70%;"> Hola @User.Identity.Name!</a>
-                }
+    @if (User.Identity.IsAuthenticated)
+    {
+        <footer class="border-top footer text-muted" style="  background-color: #f8f9fa;">
+
+            <div class="container ">
+                <span>
+                    &copy; 2020 -Asopaabi Online
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a style="padding-left:70%;"> Hola @User.Identity.Name!</a>
+                    }
                 </span>
-        </div>
+            </div>
 
 
 
-    </footer>
+        </footer>
 
+    }
+    
 
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
-</body>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+    </body>
 </html>

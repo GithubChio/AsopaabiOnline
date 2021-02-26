@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using AsopaabiOnline.UI.Models.Enums;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace AsopaabiOnline.UI.Controllers
 {
@@ -22,6 +22,7 @@ namespace AsopaabiOnline.UI.Controllers
         {
            
             this.userManager = userManager;
+           
         }
 
 
@@ -34,6 +35,23 @@ namespace AsopaabiOnline.UI.Controllers
             return View(list);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> TiendaAsync(string Search)
+        {
+            Contexto _context = new Contexto();
+
+        var list = from product in _context.Producto
+                       select product;
+
+            if (!String.IsNullOrEmpty(Search))
+            {
+                list = list.Where(s => s.Nombre.Contains(Search));
+
+
+            }
+
+            return View(await list.ToListAsync());
+        }
 
 
 

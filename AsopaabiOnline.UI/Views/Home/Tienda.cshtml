@@ -5,7 +5,17 @@
  
 }
 
-<div class="container">
+
+
+<div >
+
+
+    <div class="col-12">
+        <form class="row"  asp-action="Tienda" asp-controller="Home" method="post">
+            <input  name="Search" class="form-control col-9 mr-sm-5" type="search" placeholder="Buscar" aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0 col-2" type="submit">Buscar</button>
+        </form>
+    </div><br /><br />
    
     <div class="row">
 
@@ -24,7 +34,7 @@
             {
                 estadoProductoClass = "badge badge-pill badge-info";
             }
-        <form class="col-4" action="AñadirAlCarrito" method="post" >
+        <form class="col-3" action="AñadirAlCarrito" method="post" >
             <div style="margin:5px;">
                 <div class="card">
                     <img class="card-img-top" height="200" src="~/imagenes/@Model[product].Imagen" asp-append-version="true" />
@@ -35,12 +45,12 @@
 
                        
 
-                        <input required disabled="@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible)" id="@product" name="cantidad" min="0" style="width:50px;float:right; right:0;" type="number"
+                        <input required disabled="@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible)" id="@product" name="cantidad" min="0" style="width:50px;float:right; right:0; margin-top:3px;" type="number"
                                data-toggle="tooltip" data-placement="top" title="cantidad a comprar" />
 
                         <div>
 
-                            <button disabled="@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible)" style="float:right; right:0; margin-right:5px;" type="submit" asp-controller="CarritoDeCompras" asp-action="AñadirAlCarrito" asp-route-id="@Model[product].Id" class="btn btn-primary rounded-circle"
+                            <button disabled="@(Model[product].Estado == AsopaabiOnline.Modelo.EstadoDeProducto.NoDisponible)" style="float:right; right:0; margin-right:5px; margin-top:0;" type="submit" asp-controller="CarritoDeCompras" asp-action="AñadirAlCarrito" asp-route-id="@Model[product].Id" class="btn btn-primary rounded-circle"
                                     data-toggle="tooltip" data-placement="top" title="Añadir al carrito">
                                 <i class="fas fa-plus"></i>
                             </button>

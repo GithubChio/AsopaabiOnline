@@ -15,7 +15,7 @@ namespace AsopaabiOnline.Modelo
         [Display(Name = "Flores Aromáticas")]
         
         FloresAromaticas = 4,
-        Otro = 5
+        Otros = 5
 
     }
 }

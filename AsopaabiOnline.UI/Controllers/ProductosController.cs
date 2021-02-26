@@ -222,9 +222,15 @@ namespace AsopaabiOnline.UI.Controllers
 
         }
 
-        
 
-    
+        [HttpGet]
+      
+        public IActionResult MenuProductos()
+        {
+            return View();
+        }
+
+
 
     }
 
