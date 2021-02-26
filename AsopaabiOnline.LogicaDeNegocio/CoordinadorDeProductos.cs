@@ -28,7 +28,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
             var elProductoAActualizar = elGestor.ObtenerProductoPorId(elProducto.Id);
 
             elProductoAActualizar.Id = elProducto.Id;
-            elProductoAActualizar.Codigo = elProducto.Codigo;
+          
             elProductoAActualizar.Imagen = elProducto.Imagen;
             elProductoAActualizar.Nombre = elProducto.Nombre;
             elProductoAActualizar.UnidadDeMedida = elProducto.UnidadDeMedida;

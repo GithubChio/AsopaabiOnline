@@ -10,9 +10,28 @@
 <div class="row justify-content-md-center">
     <div class="card w-75 ">
         <div class="card-header">
-            <h3 class="card-title "> @ViewBag.Title</h3>
+            <h3 class="card-title  text-center"> @ViewBag.Title</h3>
 
+            <div class="dropdown">
+                <a class="btn dropdown-toggle btn-lg" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                   data-placement="top" title="Configuraciones del perfil">
+                    <i class="fas fa-user-cog text-info"> </i>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
+                        <i class="fas fa-map-marked-alt"></i> Dirección
+                    </a>
+                    <a class="dropdown-item" asp-action="ChangePassword" asp-controller="Clientes">
+                        <i class="fas fa-key"></i> Cambiar contraseña
+                    </a>
+
+                </div>
+            </div>
         </div>
+
+      
+
 
         <div class="card-body text-center">
             <br />
@@ -32,16 +51,11 @@
                    data-toggle="tooltip" data-placement="top" title="ver detalles"> <i class="fas fa-search-plus text-info"></i></a> |
                 <a asp-action="EditarPerfil" asp-controller="Clientes" asp-route-id="@User.Identity.Name" class="btn btn-lg"
                    data-toggle="tooltip" data-placement="top" title="Actualizar"><i class="fas fa-user-edit text-success"></i></a>
-               
+
             </div>
         </div>
 
-        <div class="card-footer text-center">
-            <a asp-action="ChangePassword" asp-controller="Clientes" class="btn btn-warning btn-lg">Cambiar contraseña </a>
-            <a class="btn btn-info btn-lg" asp-controller="DireccionesParaPedidos" asp-action="Mostrar">
-                <i class="fas fa-map-marked-alt"></i> Dirección
-            </a>
-        </div>
+       
     </div>
 
 </div>

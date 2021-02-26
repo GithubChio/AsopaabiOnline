@@ -143,12 +143,6 @@ namespace AsopaabiOnline.UI.Controllers
                 if (elCoordinador.SiExiste(elProducto) )
                 {
 
-                    if (elCoordinador.SiExiteCodigo(elProducto))
-                    {
-                        Alert("Parece que ya existe un producto con ese código, Inténtalo de nuevo agregando otro código diferente! ", NotificationType.warning);
-                        return View(elProducto);
-                    }
-
                     if (elProducto.ImageFile != null)
                     {
                         elProducto.Imagen = SubirImagen(elProducto);

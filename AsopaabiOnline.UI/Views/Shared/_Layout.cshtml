@@ -70,27 +70,14 @@
                                 }
 
 
-                                @if (User.IsInRole("Cliente") || User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
-                                {
-
-
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-action="Mostrar" asp-controller="HistorialPedidos"><i class="fas fa-history"></i> Historial</a>
-                                       
-                                    </li>
-
-                                    
-
-
-                                }
+                               
                                 @if (User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
                                 {
 
 
                                     <li class="nav-item dropdown">
-                                        <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                                            <i class="fas fa-cogs"></i> Configuración
+                                        <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                             data-placement="top" title="Configuraciones administrativas"> <i class="fas fa-cogs"></i> Configuración
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
@@ -128,9 +115,16 @@
                                 @if (User.IsInRole("Cliente") || User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-controller="CarritoDeCompras" asp-action="CarritoDeCompras">
-                                            <i class="fas fa-shopping-cart "></i> Carrito
+                                        <a class="nav-link text-dark" asp-controller="CarritoDeCompras" asp-action="CarritoDeCompras"
+                                            data-toggle="tooltip" data-placement="top" title="Carrito de compras"> <i class="fas fa-shopping-cart "></i> Carrito
                                         </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-action="Mostrar" asp-controller="HistorialPedidos"
+                                           data-toggle="tooltip" data-placement="top" title="Historial de pedidos">
+                                       <i class="fas fa-history"></i> Historial</a>
+
                                     </li>
                                 }
                             </ul>
