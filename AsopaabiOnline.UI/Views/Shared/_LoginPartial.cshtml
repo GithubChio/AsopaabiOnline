@@ -6,23 +6,29 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Clientes" asp-action="Perfil"  asp-route-id="@User.Identity.Name">
-                <i class="fas fa-user-circle"></i> Perfil</a>
+            <a class="nav-link text-dark" asp-controller="Clientes" asp-action="Perfil" asp-route-id="@User.Identity.Name">
+                <i class="fas fa-user-circle"></i> Perfil
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Home" asp-action="AcercaDeNosotros" data-toggle="tooltip" data-placement="top" title="Acerca de Nosotros">
+                <i class="fas fa-info-circle text-black-50"></i>
+            </a>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-controller="Cuenta" asp-action="Logout" asp-route-returnUrl="@Url.Action("Tienda", "Home", new { usuario = "" })">
-        
+
                 <button type="submit" class="nav-link btn btn-link text-dark"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
             </form>
         </li>
-    }
-    else
-    {
+        }
+        else
+        {
         <li class="nav-item">
             <a class="nav-link text-dark" asp-controller="Cuenta" asp-action="Register">Registro</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark" asp-controller="Cuenta" asp-action="Login"><i class="fas fa-sign-in-alt"></i> Inicio Sesión </a>
         </li>
-    }
-</ul>
+        }
+    </ul>

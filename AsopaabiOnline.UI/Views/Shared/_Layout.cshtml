@@ -33,110 +33,122 @@
     <header>
         @if (User.Identity.IsAuthenticated)
         {
-            <nav class="navbar navbar-expand-lg navbar-light bg-light box-shadow mb-3">
-                <a class="navbar-brand" asp-action="Tienda" asp-controller="Home">
-
-                    <img src="~/imagenes/logo.jpeg" width="40" height="40" class="d-inline-block align-top" alt="">
-                    Asopaabi Online
-                </a>
-
-                <div class="container">
-                    <div>
-
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                    </div>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                            <div style="margin-left:30px !important;">
-                                <partial name="_LoginPartial" />
-
-                            </div>
-
-
-
-                            <ul class="navbar-nav ">
-
-                                @if (User.IsInRole("Deshabilitado"))
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link " asp-controller="Cuenta" asp-action="DisableView">
-                                            <i class="fas fa-users-slash"></i> Cuenta deshabilitada
-                                        </a>
-                                    </li>
-                                }
-
-
-                               
-                                @if (User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
-                                {
-
-
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                             data-placement="top" title="Configuraciones administrativas"> <i class="fas fa-cogs"></i> Configuración
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                                            <a class="dropdown-item" asp-controller="Productos" asp-action="Mostrar">
-                                                <i class="fas fa-leaf"></i> Productos
-                                            </a>
-                                            <a class="dropdown-item" asp-controller="Pedidos" asp-action="Mostrar">
-                                                <i class="fas fa-cart-arrow-down"></i> Pedidos
-                                            </a>
-
-                                            @if (User.IsInRole("Administrador"))
-                                            {
-
-                                                <div class="dropdown-divider"></div>
-
-
-                                                <a class="dropdown-item" asp-controller="Administrador" asp-action="RolesList"><i class="fas fa-user-tag"></i> Roles </a>
-                                                <button class="btn  dropdown-toggle" type="button" aria-labelledby="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-cog"></i> Usuarios</button>
-                                                <div class="dropdown-menu">
-                                                    <a class=" dropdown-item" asp-controller="Administrador" asp-action="UserList"><i class="fas fa-users"></i>  Usuarios</a>
-                                                    <a class="dropdown-item" asp-controller="Administrador" asp-action="DisableUsersList"><i class="fas fa-users-slash"></i>Deshabilitados</a>
-                                                    <a class="dropdown-item" asp-controller="Administrador" asp-action="CustomerList"><i class="far fa-address-book"></i> Clientes </a>
-                                                    <a class="dropdown-item" asp-controller="Administrador" asp-action="EmployeeList"><i class="fas fa-user-tie"></i> Empleados</a>
-
-                                                </div>
-
-                                            }
-
-                                        </div>
-                                    </li>
-
-                                }
-
-
-                                @if (User.IsInRole("Cliente") || User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-controller="CarritoDeCompras" asp-action="CarritoDeCompras"
-                                            data-toggle="tooltip" data-placement="top" title="Carrito de compras"> <i class="fas fa-shopping-cart "></i> Carrito
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-action="Mostrar" asp-controller="HistorialPedidos"
-                                           data-toggle="tooltip" data-placement="top" title="Historial de pedidos">
-                                       <i class="fas fa-history"></i> Historial</a>
-
-                                    </li>
-                                }
-                            </ul>
-                        </div>
-                    }
+        <nav class="navbar navbar-expand-lg navbar-light bg-light box-shadow mb-3">
 
 
 
 
+            <a class="navbar-brand" asp-action="Tienda" asp-controller="Home" data-toggle="tooltip" data-placement="top" title="Tienda Asopaabi Online">
+
+                <img src="~/imagenes/logo.jpeg" width="40" height="40" class="d-inline-block align-top" alt="">
+                Asopaabi Online
+            </a>
+
+           
+            <div class="container">
+                <div>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                 </div>
 
-            </nav>
+
+
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <div style="margin-left:30px !important;">
+                            <partial name="_LoginPartial" />
+
+                        </div>
+
+
+
+                        <ul class="navbar-nav ">
+
+                            @if (User.IsInRole("Deshabilitado"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link " asp-controller="Cuenta" asp-action="DisableView">
+                                        <i class="fas fa-users-slash"></i> Cuenta deshabilitada
+                                    </a>
+                                </li>
+                            }
+
+
+
+                            @if (User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
+                            {
+
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                       data-placement="top" title="Configuraciones administrativas">
+                                        <i class="fas fa-cogs"></i> Configuración
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                        <a class="dropdown-item" asp-controller="Productos" asp-action="Mostrar">
+                                            <i class="fas fa-leaf"></i> Productos
+                                        </a>
+                                        <a class="dropdown-item" asp-controller="Pedidos" asp-action="Mostrar">
+                                            <i class="fas fa-cart-arrow-down"></i> Pedidos
+                                        </a>
+
+                                        @if (User.IsInRole("Administrador"))
+                                        {
+
+                                            <div class="dropdown-divider"></div>
+
+
+                                            <a class="dropdown-item" asp-controller="Administrador" asp-action="RolesList"><i class="fas fa-user-tag"></i> Roles </a>
+                                            <button class="btn  dropdown-toggle" type="button" aria-labelledby="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-cog"></i> Usuarios</button>
+                                            <div class="dropdown-menu">
+                                                <a class=" dropdown-item" asp-controller="Administrador" asp-action="UserList"><i class="fas fa-users"></i>  Usuarios</a>
+                                                <a class="dropdown-item" asp-controller="Administrador" asp-action="DisableUsersList"><i class="fas fa-users-slash"></i>Deshabilitados</a>
+                                                <a class="dropdown-item" asp-controller="Administrador" asp-action="CustomerList"><i class="far fa-address-book"></i> Clientes </a>
+                                                <a class="dropdown-item" asp-controller="Administrador" asp-action="EmployeeList"><i class="fas fa-user-tie"></i> Empleados</a>
+
+                                            </div>
+
+                                        }
+
+                                    </div>
+                                </li>
+
+                            }
+
+
+                            @if (User.IsInRole("Cliente") || User.IsInRole("Administrador") || User.IsInRole("AsistenteAdministrativo"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="CarritoDeCompras" asp-action="CarritoDeCompras"
+                                       data-toggle="tooltip" data-placement="top" title="Carrito de compras">
+                                        <i class="fas fa-shopping-cart "></i> Carrito
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-action="Mostrar" asp-controller="HistorialPedidos"
+                                       data-toggle="tooltip" data-placement="top" title="Historial de pedidos">
+                                        <i class="fas fa-history"></i> Historial
+                                    </a>
+
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+
+
+
+
+            </div>
+
+        </nav>
 
         }
     </header>
@@ -161,6 +173,8 @@
                         <a style="padding-left:70%;"> Hola @User.Identity.Name!</a>
                     }
                 </span>
+
+                
             </div>
 
 
