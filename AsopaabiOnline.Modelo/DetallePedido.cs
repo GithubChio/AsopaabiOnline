@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AsopaabiOnline.Modelo
 {
@@ -10,6 +11,7 @@ namespace AsopaabiOnline.Modelo
         public int IdProducto { get; set; }
         public int IdPedido { get; set; }
 
+      
         
         public virtual Pedido IdPedidoNavigation { get; set; }
         public virtual Producto IdProductoNavigation { get; set; }

@@ -22,6 +22,7 @@ namespace AsopaabiOnline.UI.Controllers
             return View(elCoordinador.ListarPedidos());
         }
 
+
         [HttpGet]
         [Route("Pedidos/Actualizar")]
         public IActionResult Actualizar(int id)

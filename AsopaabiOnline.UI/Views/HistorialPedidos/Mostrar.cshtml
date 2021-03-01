@@ -24,6 +24,7 @@
                 <label>Fecha de Entrega : @historial.IdPedidoNavigation.FechaEntrega.Date.ToShortDateString()</label>
                 <br />
                 <label>Estado : @historial.IdPedidoNavigation.Estado </label>
+
                 <br />
                 <label>Cliente </label>
                 <br />
@@ -32,7 +33,8 @@
                 <label>Cédula: @historial.IdPedidoNavigation.IdClienteNavigation.Dni</label>
                 <br />
                 <label>Teléfono: @historial.IdPedidoNavigation.IdClienteNavigation.PhoneNumber</label><br /><br />
-                <a asp-action="Mostrar" asp-controller="Pagos" asp-route-id="@historial.IdPedido">Ver comprobante de pago</a>
+                <a asp-action="Mostrar" asp-controller="Pagos" asp-route-id="@historial.IdPedido">Ver pago</a>
+               
 
             </div>
         </div>

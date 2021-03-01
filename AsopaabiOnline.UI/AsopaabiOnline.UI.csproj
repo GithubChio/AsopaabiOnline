@@ -50,4 +50,8 @@
     <Folder Include="wwwroot\imagenes\Iconos\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\EmailTemplates\PedidoEmail.html" />
+  </ItemGroup>
+
 </Project>

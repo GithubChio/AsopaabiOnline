@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.UI.Services;
+﻿using AsopaabiOnline.Modelo;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
@@ -42,6 +43,7 @@ namespace AsopaabiOnline.UI.Services
 
             return elCliente.SendEmailAsync(elMensaje);
         }
+      
     }
 
 }

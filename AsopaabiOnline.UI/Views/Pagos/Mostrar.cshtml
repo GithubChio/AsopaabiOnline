@@ -1,4 +1,5 @@
-﻿@model IEnumerable<AsopaabiOnline.Modelo.Pago>
+﻿@model   IEnumerable<AsopaabiOnline.Modelo.Pago>
+
 @using AsopaabiOnline.Modelo
 @{
     ViewBag.title = "Pago";
@@ -12,7 +13,7 @@
 {
     @foreach (var historial in Model)
     {
-        <div class="card text-center">
+        <div class="card text-center" id="pago">
             <div class="card-header">
                 Comprobante de pago #@historial.Id
             </div>
@@ -22,10 +23,15 @@
                 <p class="card-text">
                     @Html.DisplayFor(modelItem => historial.OpcionesDePago)&nbsp;&nbsp;<i class="@(historial.OpcionesDePago == OpcionesDePago.Efectivo ? "fas fa-money-bill-alt text-success":"fas fa-university text-primary")"></i>
                 </p>
+
+
+
+                <a asp-action="MostrarDetalles" asp-controller="DetallePedido" asp-route-id="@historial.IdPedidoNavigation.Id">Ver detalles</a>
             </div>
             <div class="card-footer text-muted">
-               Total: @Html.DisplayFor(modelItem => historial.Monto)
+                Total: @Html.DisplayFor(modelItem => historial.Monto)
             </div>
+
         </div>
     }
 }
@@ -33,3 +39,6 @@ else
 {
     <h3> Aún no hay pagos agregados</h3>
 }
+
+
+

@@ -19,7 +19,7 @@ namespace AsopaabiOnline.AccesoADatos
         public List<HistorialPedido> ListarHistorialDePedidos(string idCliente)
         {
             var laBaseDeDatos = new Contexto();
-            var elResultado = from elHistorial in laBaseDeDatos.HistorialPedido
+            var elResultado = from elHistorial in laBaseDeDatos.HistorialPedido orderby elHistorial.IdPedidoNavigation.FechaPedido descending
                               where elHistorial.IdCliente == idCliente
                               select elHistorial;
 

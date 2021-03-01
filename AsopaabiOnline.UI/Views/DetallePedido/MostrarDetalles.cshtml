@@ -1,0 +1,33 @@
+﻿@model IEnumerable<AsopaabiOnline.Modelo.DetallePedido>
+
+@{
+    ViewBag.title = "Detalle del pedido";
+}
+<div class="card">
+    <div class="card-header text-center">
+        @ViewBag.title
+    </div>
+    <div class="card-body">
+        <h6>Productos</h6><hr /><br />
+        @if (Model.Any())
+        {
+            @foreach (var detalle in Model)
+            {
+
+
+                ViewBag.subtotal = (@detalle.IdProductoNavigation.Precio * @detalle.Cantidad);
+
+
+                <label>Nombre: @detalle.IdProductoNavigation.Nombre </label><br />
+                <label>Cantidad: @detalle.Cantidad  @detalle.IdProductoNavigation.UnidadDeMedida </label><br />
+                <label>Precio: @detalle.IdProductoNavigation.Precio </label><br />
+                <label>Subtotal: @ViewBag.subtotal </label><br />
+                <hr />
+               
+            }
+        }
+
+    </div>
+</div>
+
+

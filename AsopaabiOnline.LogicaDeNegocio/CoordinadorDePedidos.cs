@@ -31,7 +31,7 @@ namespace AsopaabiOnline.LogicaDeNegocio
             return elGestor.ObtenerLaListaDePedidos();
         }
 
-        
+
         public void Actualizar (Modelo.Pedido elPedido)
         {
             GestorDePedidos elGestor = new GestorDePedidos();

@@ -19,7 +19,7 @@ namespace AsopaabiOnline.AccesoADatos
         public List<Pedido> ObtenerLaListaDePedidos()
         {
             var laBaseDeDatos = new Contexto();
-            var elResultado = from losPedidos in laBaseDeDatos.Pedido
+            var elResultado = from losPedidos in laBaseDeDatos.Pedido orderby losPedidos.FechaPedido descending
                               select losPedidos;
 
             return elResultado.ToList();
@@ -49,6 +49,7 @@ namespace AsopaabiOnline.AccesoADatos
             laBaseDeDatos.SaveChanges();
 
         }
+
 
         public List<Pedido> ObtenerLaListaDePedidosRecientes()
         {

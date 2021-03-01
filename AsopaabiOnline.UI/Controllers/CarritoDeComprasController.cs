@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+
 using System.Linq;
 using System.Threading.Tasks;
 using AsopaabiOnline.LogicaDeNegocio;
@@ -7,18 +9,25 @@ using AsopaabiOnline.Modelo;
 using AsopaabiOnline.UI.Helpers;
 using AsopaabiOnline.UI.Models;
 using AsopaabiOnline.UI.Models.Enums;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsopaabiOnline.UI.Controllers
 {
     public class CarritoDeComprasController : BaseController
     {
+       
         private readonly UserManager<User> userManager;
-        public CarritoDeComprasController(UserManager<User> userManager)
+        private readonly IEmailSender emailSender;
+        private readonly IWebHostEnvironment _env;
+        public CarritoDeComprasController(UserManager<User> userManager,IEmailSender sender,IWebHostEnvironment environment)
         {
 
             this.userManager = userManager;
+            this.emailSender = sender;
+            this._env = environment;
 
         }
 
@@ -163,6 +172,7 @@ namespace AsopaabiOnline.UI.Controllers
                 historialPedido.IdPedido = existePedido.Id;
                 db.HistorialPedido.Add(historialPedido);
                 await db.SaveChangesAsync();
+                await emailSender.SendEmailAsync("chio28.rr@gmail.com", "Pedido", PlantillaCorreoPedido(existePedido, total));
                 Alert("Su pedido ha sido enviado.", NotificationType.success);
                 return RedirectToAction("Mostrar", "HistorialPedidos");
 
@@ -246,6 +256,35 @@ namespace AsopaabiOnline.UI.Controllers
                 }
             }
             return false;
+        }
+        public string PlantillaCorreoPedido(Pedido pedido, float total)
+        {
+
+
+            string body = string.Empty;
+            //using streamreader for reading my htmltemplate   
+            var pathToFile = _env.WebRootPath
+                          + Path.DirectorySeparatorChar.ToString()
+                          + "EmailTemplates"
+                          + Path.DirectorySeparatorChar.ToString()
+                          + "PedidoEmail.html";
+
+
+            using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
+            {
+                body = SourceReader.ReadToEnd();
+            }
+            string direccion = $"{pedido.IdDireccionNavigation.IdProvinciaNavigation.Nombre},{pedido.IdDireccionNavigation.IdCantonNavigation.Nombre},{pedido.IdDireccionNavigation.IdDistritoNavigation.Nombre}";
+            string direccionDetalles = $" {pedido.IdDireccionNavigation.Detalles}";
+            body =  body.Replace("{fechaPedido}", pedido.FechaPedido.Date.ToShortDateString());
+            body = body.Replace("{direccion}",direccion);
+            body = body.Replace("{direccionDetalles}", direccionDetalles);
+            body = body.Replace("{cliente}", pedido.IdClienteNavigation.FullName);
+            body = body.Replace("{metodoDePago}", pedido.TipoPago.ToString());
+            body = body.Replace("{Total}", total.ToString());
+
+
+            return body;
         }
     }
 }
