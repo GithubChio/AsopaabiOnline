@@ -18,5 +18,6 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
 
         }
+       
     }
 }

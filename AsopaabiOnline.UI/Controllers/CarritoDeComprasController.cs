@@ -152,6 +152,8 @@ namespace AsopaabiOnline.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> GenerarPedido(Pedido pedido, float total)
         {
+            
+
             List<Producto> carritoDeCompras = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");
             var user = await userManager.GetUserAsync(HttpContext.User);
             var db = new Contexto();
@@ -163,16 +165,17 @@ namespace AsopaabiOnline.UI.Controllers
 
             }
             bool seGuardoDetalle = idPedido == 0 ? false : await InsertDetallePedidoAsync(carritoDeCompras, idPedido, db);
-
+       
             if (seGuardoDetalle)
             {
                 HistorialPedido historialPedido = new HistorialPedido();
                 Pedido existePedido = db.Pedido.Find(idPedido);
                 historialPedido.IdCliente = existePedido.IdCliente;
                 historialPedido.IdPedido = existePedido.Id;
+
                 db.HistorialPedido.Add(historialPedido);
                 await db.SaveChangesAsync();
-                await emailSender.SendEmailAsync("chio28.rr@gmail.com", "Pedido", PlantillaCorreoPedido(existePedido, total));
+                await emailSender.SendEmailAsync("chio28.rr@gmail.com", "Pedido", PlantillaCorreoPedido(existePedido, total,carritoDeCompras ));
                 Alert("Su pedido ha sido enviado.", NotificationType.success);
                 return RedirectToAction("Mostrar", "HistorialPedidos");
 
@@ -238,9 +241,12 @@ namespace AsopaabiOnline.UI.Controllers
             {
                 try
                 {
+
                     Pago pago = new Pago();
+                    
                     pago.IdPedido = idPedido;
                     pago.Monto = total;
+                   ViewBag.opcionesDePago = pedido.TipoPago;
                     pago.OpcionesDePago = pedido.TipoPago;
                     db.Pago.Add(pago);
                     await db.SaveChangesAsync();
@@ -257,11 +263,9 @@ namespace AsopaabiOnline.UI.Controllers
             }
             return false;
         }
-        public string PlantillaCorreoPedido(Pedido pedido, float total)
+        public string PlantillaCorreoPedido(Pedido pedido, float total, List<Producto> carritoDeCompras)
         {
-          
-
-
+            
             string body = string.Empty;
             //using streamreader for reading my htmltemplate   
             var pathToFile = _env.WebRootPath
@@ -281,11 +285,31 @@ namespace AsopaabiOnline.UI.Controllers
             body = body.Replace("{direccion}",direccion);
             body = body.Replace("{direccionDetalles}", direccionDetalles);
             body = body.Replace("{cliente}", pedido.IdClienteNavigation.FullName);
-            body = body.Replace("{metodoDePago}", pedido.TipoPago.ToString());
+            body = body.Replace("{fechaDeEntrega}", pedido.FechaEntrega.Date.ToShortDateString());
+            body = body.Replace("{metodoDePago}", (@ViewBag.opcionesDePago).ToString());
             body = body.Replace("{Total}", total.ToString());
+            body = body.Replace("{trs}", DrawTable(carritoDeCompras));
+            body = body.Replace("{notas}", pedido.Notas);
 
 
             return body;
         }
+        private string DrawTable(List<Producto> carritoDeCompras)
+        {
+            string trs = "";
+            foreach(var producto in carritoDeCompras)
+            {
+                trs +=
+                "<tr><td style=\"font-size: 12px; font-family: 'Open Sans', sans-serif; color: #bd4e09;  line-height: 18px;  vertical-align: top; padding:10px 0\" class=\"article\">" + producto.Nombre+"</td>" +
+                 "<td style=\"font-size: 12px; font-family: 'Open Sans', sans-serif; color: #bd4e09;  line-height: 18px;  vertical-align: top; padding:10px 0;\"><small>" + producto.Cantidad + " </small></td>" +
+                 " <td style=\"font-size: 12px; font-family: 'Open Sans', sans-serif; color: #bd4e09;  line-height: 18px;  vertical-align: top; padding:10px 0;\" align=\"center\">  " + producto.Precio  + "</td> " +
+                "<td style=\"font-size: 12px; font-family: 'Open Sans', sans-serif; color: #bd4e09;  line-height: 18px;  vertical-align: top; padding:10px 0;\" align=\"right\">" + producto.Subtotal+ "</td></tr>";
+            }
+            return trs;
+              
+        }
+
+       
+        
     }
 }

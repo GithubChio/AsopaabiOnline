@@ -1,6 +1,7 @@
 ﻿using AsopaabiOnline.AccesoADatos;
 using AsopaabiOnline.Modelo;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,6 +15,6 @@ namespace AsopaabiOnline.LogicaDeNegocio
            return  gestorDePago.ListarPago(idPedido);
         }
 
-
+       
     }
 }
