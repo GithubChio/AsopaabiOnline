@@ -9,10 +9,10 @@ namespace AsopaabiOnline.LogicaDeNegocio
     public class CoordinadorDeDetallePedido
     {
 
-        public List<DetallePedido> ListarDetallePedido(int id)
+        public List<DetallePedido> ListarDetallePedido(Pedido pedido)
         {
             GestorDetallePedido elGestor = new GestorDetallePedido();
-            return elGestor.ObtenerLaListaDetallPedido(id);
+            return elGestor.ObtenerLaListaDetallPedido(pedido.Id);
         }
     }
 }

@@ -259,6 +259,7 @@ namespace AsopaabiOnline.UI.Controllers
         }
         public string PlantillaCorreoPedido(Pedido pedido, float total)
         {
+          
 
 
             string body = string.Empty;

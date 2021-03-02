@@ -18,5 +18,12 @@ namespace AsopaabiOnline.UI.Controllers
             CoordinadorDePagos coordinadorDePagos = new CoordinadorDePagos();
             return View(coordinadorDePagos.ListarPagos(pedidoIngresado.Id));
         }
+        [HttpGet]
+        public IActionResult MostrarPagoAdministrativo(Pedido pedidoIngresado)
+        {
+            ViewBag.simboloDeColon = "₡";
+            CoordinadorDePagos coordinadorDePagos = new CoordinadorDePagos();
+            return View(coordinadorDePagos.ListarPagos(pedidoIngresado.Id));
+        }
     }
 }

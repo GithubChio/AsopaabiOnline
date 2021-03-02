@@ -12,7 +12,7 @@ namespace AsopaabiOnline.AccesoADatos
         {
             var laBaseDeDatos = new Contexto();
             var elResultado = from detalle in laBaseDeDatos.DetallePedido
-                             where detalle.IdPedidoNavigation.Id == id
+                             where detalle.IdPedido == id
                              
                               select detalle;
 

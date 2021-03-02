@@ -55,7 +55,9 @@ namespace AsopaabiOnline.Modelo
 
         [NotMapped]
 
-        public int Subtotal { get { return ( Cantidad * Precio ); } } 
+        public int Subtotal { get { return ( Cantidad * Precio ); } }
+   
+        
 
 
         [NotMapped]
