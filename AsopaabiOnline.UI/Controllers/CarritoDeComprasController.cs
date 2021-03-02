@@ -156,6 +156,8 @@ namespace AsopaabiOnline.UI.Controllers
 
             List<Producto> carritoDeCompras = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");
             var user = await userManager.GetUserAsync(HttpContext.User);
+            var emailUser = await userManager.GetEmailAsync(user);
+           
             var db = new Contexto();
             int idPedido = await InsertPedidoAsync(pedido, db, user);
             if (idPedido != 0)
@@ -175,7 +177,8 @@ namespace AsopaabiOnline.UI.Controllers
 
                 db.HistorialPedido.Add(historialPedido);
                 await db.SaveChangesAsync();
-                await emailSender.SendEmailAsync("chio28.rr@gmail.com", "Pedido", PlantillaCorreoPedido(existePedido, total,carritoDeCompras ));
+                await emailSender.SendEmailAsync(emailUser, "Pedido", PlantillaCorreoPedido(existePedido, total,carritoDeCompras ));
+              
                 Alert("Su pedido ha sido enviado.", NotificationType.success);
                 return RedirectToAction("Mostrar", "HistorialPedidos");
 
@@ -282,6 +285,7 @@ namespace AsopaabiOnline.UI.Controllers
             string direccion = $"{pedido.IdDireccionNavigation.IdProvinciaNavigation.Nombre},{pedido.IdDireccionNavigation.IdCantonNavigation.Nombre},{pedido.IdDireccionNavigation.IdDistritoNavigation.Nombre}";
             string direccionDetalles = $" {pedido.IdDireccionNavigation.Detalles}";
             body =  body.Replace("{fechaPedido}", pedido.FechaPedido.Date.ToShortDateString());
+            body = body.Replace("{idPedido}", pedido.Id.ToString());
             body = body.Replace("{direccion}",direccion);
             body = body.Replace("{direccionDetalles}", direccionDetalles);
             body = body.Replace("{cliente}", pedido.IdClienteNavigation.FullName);

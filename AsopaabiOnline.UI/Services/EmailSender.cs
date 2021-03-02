@@ -30,7 +30,7 @@ namespace AsopaabiOnline.UI.Services
             var elCliente = new SendGridClient(apiKey);
             var elMensaje = new SendGridMessage()
             {
-                From = new EmailAddress("rocioquiros95@hotmail.com", "AsopaabiOnline.Support"),
+                From = new EmailAddress("rocioquiros95@hotmail.com", "AsopaabiOnline"),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message
