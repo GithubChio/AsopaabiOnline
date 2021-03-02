@@ -13,6 +13,8 @@ using System.Text.Encodings.Web;
 using AsopaabiOnline.Modelo;
 using AsopaabiOnline.UI.Models.Enums;
 using AsopaabiOnline.LogicaDeNegocio;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace AsopaabiOnline.UI.Controllers
 {
@@ -24,13 +26,16 @@ namespace AsopaabiOnline.UI.Controllers
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IEmailSender emailSender;
         private readonly string DefaultRoleName = "Cliente";
+        private readonly IWebHostEnvironment _env;
 
-        public CuentaController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager, IEmailSender emailSender)
+        public CuentaController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager, IEmailSender emailSender, IWebHostEnvironment _env)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
             this.emailSender = emailSender;
+            this._env = _env;
+
         }
 
 
@@ -236,6 +241,8 @@ namespace AsopaabiOnline.UI.Controllers
             if (ModelState.IsValid)
             {
                 var user = await userManager.FindByEmailAsync(input.Email);
+
+               
                 if (user == null )
                 {
                     // Don't reveal that the user does not exist or is not confirmed
@@ -246,8 +253,7 @@ namespace AsopaabiOnline.UI.Controllers
                // code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                 var callbackUrl = Url.Action( action: "ResetPassword", controller:"Cuenta",values: new { userId=user.UserName,code = code}, protocol: Request.Scheme);
 
-                await emailSender.SendEmailAsync( input.Email,"Restablecer Contraseña",
-                    $"Por favor restablezca su contraseña dando <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>click aquí</a>.");
+                await emailSender.SendEmailAsync( input.Email,"Restablecer Contraseña", templateForgotPassword(input, callbackUrl));
 
                 return RedirectToAction("ForgotPasswordConfirmation");
             }
@@ -257,6 +263,30 @@ namespace AsopaabiOnline.UI.Controllers
 
 
 
+
+
+        public  string templateForgotPassword(ForgotPassword input, string callbackUrl)
+        {
+
+            string body = string.Empty;
+            //using streamreader for reading my htmltemplate   
+            var pathToFile = _env.WebRootPath
+                          + Path.DirectorySeparatorChar.ToString()
+                          + "EmailTemplates"
+                          + Path.DirectorySeparatorChar.ToString()
+                          + "ForgotPasswordEmail.html";
+
+
+            using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
+            {
+                body = SourceReader.ReadToEnd();
+            }
+            string  callback = $"{HtmlEncoder.Default.Encode(callbackUrl)}";
+            body = body.Replace("{usuario}", input.Email);
+            body = body.Replace("{callback}", callback);
+
+            return body;
+        }
         public IActionResult ForgotPasswordConfirmation()
         {
             return View();
