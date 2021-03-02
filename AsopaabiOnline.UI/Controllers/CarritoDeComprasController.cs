@@ -152,39 +152,46 @@ namespace AsopaabiOnline.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> GenerarPedido(Pedido pedido, float total)
         {
-            
 
-            List<Producto> carritoDeCompras = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");
-            var user = await userManager.GetUserAsync(HttpContext.User);
-            var emailUser = await userManager.GetEmailAsync(user);
-           
-            var db = new Contexto();
-            int idPedido = await InsertPedidoAsync(pedido, db, user);
-            if (idPedido != 0)
+            try
             {
-                bool seGuardoPago = await InsertPago(db, idPedido, pedido, total);
-                var d = seGuardoPago;
+               
+                List<Producto> carritoDeCompras = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");
+                var user = await userManager.GetUserAsync(HttpContext.User);
+                var emailUser = await userManager.GetEmailAsync(user);
 
+                var db = new Contexto();
+                int idPedido = await InsertPedidoAsync(pedido, db, user);
+                if (idPedido != 0)
+                {
+                    bool seGuardoPago = await InsertPago(db, idPedido, pedido, total);
+                    var d = seGuardoPago;
+
+                }
+                bool seGuardoDetalle = idPedido == 0 ? false : await InsertDetallePedidoAsync(carritoDeCompras, idPedido, db);
+
+                if (seGuardoDetalle)
+                {
+                    HistorialPedido historialPedido = new HistorialPedido();
+                    Pedido existePedido = db.Pedido.Find(idPedido);
+                    historialPedido.IdCliente = existePedido.IdCliente;
+                    historialPedido.IdPedido = existePedido.Id;
+
+                    db.HistorialPedido.Add(historialPedido);
+                    await db.SaveChangesAsync();
+                    await emailSender.SendEmailAsync(emailUser, "Pedido", PlantillaCorreoPedido(existePedido, total, carritoDeCompras));
+
+                    Alert("Su pedido ha sido enviado.", NotificationType.success);
+                    return RedirectToAction("Mostrar", "HistorialPedidos");
+
+                }
+                return RedirectToAction("CarritoDeCompras");
             }
-            bool seGuardoDetalle = idPedido == 0 ? false : await InsertDetallePedidoAsync(carritoDeCompras, idPedido, db);
-       
-            if (seGuardoDetalle)
+            catch
             {
-                HistorialPedido historialPedido = new HistorialPedido();
-                Pedido existePedido = db.Pedido.Find(idPedido);
-                historialPedido.IdCliente = existePedido.IdCliente;
-                historialPedido.IdPedido = existePedido.Id;
-
-                db.HistorialPedido.Add(historialPedido);
-                await db.SaveChangesAsync();
-                await emailSender.SendEmailAsync(emailUser, "Pedido", PlantillaCorreoPedido(existePedido, total,carritoDeCompras ));
-              
-                Alert("Su pedido ha sido enviado.", NotificationType.success);
-                return RedirectToAction("Mostrar", "HistorialPedidos");
-
+                Alert("Algo ha salido mal, inténtalo de nuevo!", NotificationType.error);
+                return RedirectToAction("Tienda", "Home");
             }
-            return RedirectToAction("CarritoDeCompras");
-
         }
         private async Task<int> InsertPedidoAsync(Pedido pedido, Contexto db, User user)
         {

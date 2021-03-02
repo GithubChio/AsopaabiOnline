@@ -42,7 +42,7 @@ namespace AsopaabiOnline.Modelo
         public EstadoDePedido Estado { get; set; }
         [NotMapped]
        
-       [Display(Name = " Métodos de pago")]
+        [Display(Name = " Métodos de pago")]
         public OpcionesDePago TipoPago { get; set; }
      
         [Display(Name ="Dirección")]

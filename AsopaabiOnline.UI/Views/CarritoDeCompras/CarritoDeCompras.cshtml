@@ -93,7 +93,34 @@
             <br />
             <hr />
             <partial model="Model.pedido" name="~/Views/Shared/_PedidoPartial.cshtml" />
-            <button style="margin-top:5%;" id="btn_generar_pedido" type="submit" class="btn btn-info  btn-block">Generar pedido</button>
+
+            <button style="margin-top:5%;"  class="btn btn-info  btn-block" data-toggle="modal" data-target="#generarPedido">Generar pedido</button>
+
+
+
+
+            <div class="modal fade" id="generarPedido" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Generar Pedido</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                           Usd esta apunto de enviar su pedido a Asopaabi, le recordamos que una vez enviado no podrá cancelarlo.
+                            ¿Desea enviarlo de todos modos?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button id="btn_generar_pedido" type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
         </form>
     </div>
