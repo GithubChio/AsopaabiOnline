@@ -108,7 +108,7 @@ namespace AsopaabiOnline.UI.Controllers
             }
             catch
             {
-                Alert("Algo ha salido mal. Llena los campos obligatorios.", NotificationType.success);
+                Alert("¡Algo ha salido mal!,  completa los campos obligatorios.", NotificationType.error);
                 return View();
             }
 
@@ -153,6 +153,7 @@ namespace AsopaabiOnline.UI.Controllers
             }
         }
 
+        
         public bool isExistEmail(User user)
         {
             var result = UsersListByEmail(user);
@@ -176,31 +177,51 @@ namespace AsopaabiOnline.UI.Controllers
    
         public async Task<IActionResult> Login(Login model)
         {
-            if (ModelState.IsValid)
+            try
             {
-               
-                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
-                if (result.Succeeded)
+                if (ModelState.IsValid)
                 {
+                    var user = await userManager.FindByEmailAsync(model.Email);
+                    
+                    if (isExistEmail(user))
+                    {
+                        var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
+                        if (result.Succeeded)
+                        {
 
-                    return RedirectToAction("Tienda", "Home");
+                            return RedirectToAction("Tienda", "Home");
+                        }
+
+                        if (result.IsLockedOut)
+                        {
+                            Alert("Usuario bloqueado.", NotificationType.info);
+                            return RedirectToAction("Lockout");
+                        }
+                    
+
+                    else
+                    {
+                        Alert("Intento de inicio de sesión no válido.", NotificationType.warning);
+                        return View();
+                    }
+
+                    }
+                    else
+                    {
+                        Alert("Este usuario no existe, por favor registrate primero.", NotificationType.warning);
+                        return View();
+                    }
+                    
                 }
 
-                if (result.IsLockedOut)
-                {
-                    Alert("Usuario bloqueado.", NotificationType.info);
-                    return RedirectToAction("Lockout");
-                }
-               
-
-                else
-                {
-                    Alert("Intento de inicio de sesión no válido.", NotificationType.error);
-                    return View();
-                }
+                return View(model);
             }
-
-            return View(model);
+            catch
+            {
+                Alert("¡Algo ha salido mal!, este usuario no existe o revisa que las credenciales esten correctamente.", NotificationType.error);
+                return View();
+            }
+           
         }
 
 
