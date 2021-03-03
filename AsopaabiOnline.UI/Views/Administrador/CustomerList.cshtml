@@ -71,8 +71,12 @@
                         <td>
 
 
-                            <a asp-action="UserDetails" asp-controller="Administrador" class="btn btn-lg " asp-route-id="@user.Id" 
-                                data-toggle="tooltip" data-placement="top" title="ver detalles"><i class="fas fa-search-plus text-info"></i> </a>
+                            <a asp-action="UserDetails" asp-controller="Administrador" class="btn btn-lg " asp-route-id="@user.Id"
+                               data-toggle="tooltip" data-placement="top" title="ver detalles"><i class="fas fa-search-plus text-info"></i> </a> |
+                            <a class="btn btn-lg" asp-action="MostrarHistorialPorClientesEnEspecifico" asp-controller="HistorialPedidos" asp-route-id="@user.Id"
+                               data-toggle="tooltip" data-placement="top" title="Historial de pedidos">
+                                <i class="fas fa-history"></i>
+                            </a>
 
                         </td>
                     </tr>

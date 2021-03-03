@@ -25,5 +25,14 @@ namespace AsopaabiOnline.UI.Controllers
 
             return View(coordinadorDeHistorial.ListarHistorialDePedidos(user.Id));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> MostrarHistorialPorClientesEnEspecifico(string id)
+        {
+            CoordinadorDeHistorialPedidos coordinadorDeHistorial = new CoordinadorDeHistorialPedidos();
+            var user = await userManager.FindByIdAsync(id);
+
+            return View(coordinadorDeHistorial.ListarHistorialDePedidos(user.Id));
+        }
     }
 }
