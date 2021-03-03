@@ -130,7 +130,7 @@ namespace AsopaabiOnline.UI.Controllers
                     {
                         foreach (var oldRoleName in oldRoleList.ToList())
                         {
-                            if (oldRoleName == "Administrador")
+                            if (oldRoleName == "Administrador" )
                             {
                                 Alert($"No se puede cambiar de rol por que es un usuario administrador.", NotificationType.warning);
                                 return RedirectToAction("UserList");

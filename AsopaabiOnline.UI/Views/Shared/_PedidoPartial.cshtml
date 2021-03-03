@@ -10,11 +10,21 @@
 
 
     <div class="col-4">
-        <label asp-for="IdDireccion" class="control-label"></label>
-        <select asp-for="IdDireccion" asp-items=@(new SelectList(Model.ListaDeDirecciones,"Id","Detalles")) class="form-control" required>
-            <option selected="selected" disabled value="">Seleccione una opción</option>
-        </select>
-        <span asp-validation-for="IdDireccion" class="text-danger"></span>
+        @if (Model.ListaDeDirecciones.Count > 0)
+        {
+            <label asp-for="IdDireccion" class="control-label"></label>
+            <select asp-for="IdDireccion" asp-items=@(new SelectList(Model.ListaDeDirecciones,"Id","Detalles")) class="form-control" required>
+                <option selected="selected" disabled value="">Seleccione una opción</option>
+            </select>
+            <span asp-validation-for="IdDireccion" class="text-danger"></span>
+        }
+        else {
+        
+        <label class="text-center">No hay direcciones</label><br />
+        <a asp-action="Agregar" asp-controller="DireccionesParaPedidos" class="btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true">Agregar una direccion</a>
+
+        }
+
     </div>
 
 
