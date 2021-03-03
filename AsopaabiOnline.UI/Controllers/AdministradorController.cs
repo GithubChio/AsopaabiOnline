@@ -23,6 +23,25 @@ namespace AsopaabiOnline.UI.Controllers
 
 
 
+        
+        public bool AdminListHasUser()
+        {
+           var admin = userManager.Users.Where(user =>  user.UserType == Models.Enums.UserType.Administrador);
+               
+          if (admin != null && admin.ToList().Count > 1)
+           {
+                return true;
+           }
+           else
+           {
+                return false;
+           }
+              
+            
+
+        }
+
+
         [HttpGet]
         public IActionResult UserList()
         {
@@ -100,13 +119,18 @@ namespace AsopaabiOnline.UI.Controllers
 
                         foreach (var oldRoleName in oldRoleList.ToList())
                         {
+                            
+
                             if (oldRoleName =="Administrador")
                             {
-                                Alert($"Parece que este usuario ya tiene el rol administrador", NotificationType.warning);
+                                Alert($"Parece que este usuario ya tiene el rol administrador", NotificationType.info);
                                 return RedirectToAction("UserList");
                             }
+                            else
+                            {
+                                await userManager.RemoveFromRoleAsync(user, oldRoleName);
+                            }
 
-                            await userManager.RemoveFromRoleAsync(user, oldRoleName);
                         }
 
                         await userManager.AddToRoleAsync(user, roleName);
@@ -119,6 +143,17 @@ namespace AsopaabiOnline.UI.Controllers
                         roleName = "AsistenteAdministrativo";
                         foreach (var oldRoleName in oldRoleList.ToList())
                         {
+                            if (oldRoleName == "Administrador" && AdminListHasUser())
+                            {
+                                await userManager.RemoveFromRoleAsync(user, oldRoleName);
+                            }
+                            else
+                            {
+                                Alert("Este usuario es el único usuario administrador, primero agregue otro administrador antes de cambiarle el rol.", NotificationType.info);
+                                return RedirectToAction("UserList");
+
+                            }
+
                             await userManager.RemoveFromRoleAsync(user, oldRoleName);
                         }
 
@@ -130,11 +165,17 @@ namespace AsopaabiOnline.UI.Controllers
                     {
                         foreach (var oldRoleName in oldRoleList.ToList())
                         {
-                            if (oldRoleName == "Administrador" )
+                            if (oldRoleName == "Administrador" && AdminListHasUser())
                             {
-                                Alert($"No se puede cambiar de rol por que es un usuario administrador.", NotificationType.warning);
-                                return RedirectToAction("UserList");
+                                await userManager.RemoveFromRoleAsync(user, oldRoleName);
                             }
+                            else
+                            {
+                                Alert("Este usuario es el único usuario administrador, primero agregue otro administrador antes de cambiarle el rol.", NotificationType.info);
+                                return RedirectToAction("UserList");
+
+                            }
+
                             await userManager.RemoveFromRoleAsync(user, oldRoleName);
                         }
                         roleName = "Cliente";
@@ -152,7 +193,7 @@ namespace AsopaabiOnline.UI.Controllers
                     }
                     foreach (var elError in elResultado.Errors)
                     {
-                        Alert("Algo ha salido mal, Inténtalo de nuevo!", NotificationType.error);
+                        Alert("Algo ha salido mal, inténtalo de nuevo.", NotificationType.error);
                        
                         ModelState.AddModelError("", elError.Description);
                     }
@@ -161,7 +202,7 @@ namespace AsopaabiOnline.UI.Controllers
             }
             catch
             {
-                Alert("Algo ha salido mal, Inténtalo de nuevo!", NotificationType.error);
+                Alert("Algo ha salido mal, inténtalo de nuevo.", NotificationType.error);
 
                 return RedirectToAction("UserList");
             }
@@ -266,7 +307,7 @@ namespace AsopaabiOnline.UI.Controllers
             }
             catch
             {
-                Alert("Algo ha salido mal, Inténtalo de nuevo!", NotificationType.error);
+                Alert("Algo ha salido mal, inténtalo de nuevo.", NotificationType.error);
 
                 return RedirectToAction("UserList");
             }
@@ -331,7 +372,7 @@ namespace AsopaabiOnline.UI.Controllers
             }
             catch
             {
-                Alert("Algo ha salido mal, Inténtalo de nuevo!", NotificationType.error);
+                Alert("Algo ha salido mal, inténtalo de nuevo.", NotificationType.error);
 
                 return RedirectToAction("UserList");
             }
@@ -410,26 +451,32 @@ namespace AsopaabiOnline.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddRole(Role role)
         {
-            if (ModelState.IsValid)
+            try
             {
-                IdentityRole newRole = new IdentityRole
+                if (ModelState.IsValid)
                 {
-                    Name = role.Name
-                };
-                IdentityResult result = await roleManager.CreateAsync(newRole);
+                    IdentityRole newRole = new IdentityRole
+                    {
+                        Name = role.Name
+                    };
+                    IdentityResult result = await roleManager.CreateAsync(newRole);
 
-                if (result.Succeeded)
-                {
-                    Alert($"Rol agregado.", NotificationType.success);
-                    return RedirectToAction("RolesList", "Administrador");
-                }
-                foreach (IdentityError elError in result.Errors)
-                {
-                    ModelState.AddModelError("", elError.Description);
-                }
+                    if (result.Succeeded)
+                    {
+                        Alert($"Rol agregado.", NotificationType.success);
+                        return RedirectToAction("RolesList", "Administrador");
+                    }
+                    
 
+                }
+                return View(role);
             }
-            return View(role);
+            catch 
+            {
+                Alert("Algo ha salido mal, inténtalo de nuevo.", NotificationType.error);
+                return View("RolesList");
+            }
+           
         }
 
         [HttpGet]
@@ -524,7 +571,7 @@ namespace AsopaabiOnline.UI.Controllers
             }
             catch
             {
-                Alert($"Algo ha salido mal,inténtalo de nuevo", NotificationType.error);
+                Alert("Algo ha salido mal,inténtalo de nuevo.", NotificationType.error);
                 return View();
             }
         }

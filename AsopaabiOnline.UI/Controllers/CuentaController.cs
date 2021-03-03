@@ -257,27 +257,36 @@ namespace AsopaabiOnline.UI.Controllers
 
         public async Task<IActionResult> ForgotPassword(ForgotPassword input)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var user = await userManager.FindByEmailAsync(input.Email);
-
-               
-                if (user == null )
+                if (ModelState.IsValid)
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
+                    var user = await userManager.FindByEmailAsync(input.Email);
+
+
+                    if (user == null)
+                    {
+                        // Don't reveal that the user does not exist or is not confirmed
+                        return RedirectToAction("ForgotPasswordConfirmation");
+                    }
+
+                    var code = await userManager.GeneratePasswordResetTokenAsync(user);
+                    // code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    var callbackUrl = Url.Action(action: "ResetPassword", controller: "Cuenta", values: new { userId = user.UserName, code = code }, protocol: Request.Scheme);
+
+                    await emailSender.SendEmailAsync(input.Email, "Restablecer Contraseña", templateForgotPassword(input, callbackUrl));
+
                     return RedirectToAction("ForgotPasswordConfirmation");
                 }
 
-                var code = await userManager.GeneratePasswordResetTokenAsync(user);
-               // code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                var callbackUrl = Url.Action( action: "ResetPassword", controller:"Cuenta",values: new { userId=user.UserName,code = code}, protocol: Request.Scheme);
-
-                await emailSender.SendEmailAsync( input.Email,"Restablecer Contraseña", templateForgotPassword(input, callbackUrl));
-
-                return RedirectToAction("ForgotPasswordConfirmation");
+                return View();
             }
-
-            return View();
+            catch
+            {
+                Alert("¡Algo ha salido mal!, Inténtalo de nuevo.", NotificationType.error);
+                return View("Login");
+            }
+           
         }
 
 
@@ -313,20 +322,33 @@ namespace AsopaabiOnline.UI.Controllers
 
         [HttpGet]
         public IActionResult ResetPassword(string code = null)
+
         {
-            if (code == null)
+            try
             {
-                Alert("Se debe proporcionar un código para restablecer la contraseña.", NotificationType.error);
-                return View();
-            }
-            else
-            {
-                ResetPassword  resetPassword = new ResetPassword
+                if (code == null)
                 {
-                    Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
-                };
-                return View(resetPassword);
+                    Alert("Se debe proporcionar un código para restablecer la contraseña.", NotificationType.error);
+                    return View();
+                }
+                else
+                {
+                    ResetPassword resetPassword = new ResetPassword
+                    {
+                        Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
+                    };
+                    return View(resetPassword);
+                }
             }
+            catch
+            {
+                Alert("¡Algo ha salido mal!, Inténtalo de nuevo.", NotificationType.error);
+                return View("Login");
+            }
+
+
+
+            
         }
 
 
@@ -334,27 +356,38 @@ namespace AsopaabiOnline.UI.Controllers
 
         public async Task<IActionResult> ResetPassword(ResetPassword Input)
         {
-            if (ModelState.IsValid)
+
+
+            try
             {
-                var user = await userManager.FindByEmailAsync(Input.Email);
-                if (user == null)
+                if (ModelState.IsValid)
                 {
-                    // Don't reveal that the user does not exist
-                    return RedirectToAction("ResetPasswordConfirmation");
-                }
+                    var user = await userManager.FindByEmailAsync(Input.Email);
+                    if (user == null)
+                    {
+                        // Don't reveal that the user does not exist
+                        return RedirectToAction("ResetPasswordConfirmation");
+                    }
 
-                var result = await userManager.ResetPasswordAsync(user,Input.Code, Input.Password);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("ResetPasswordConfirmation");
-                }
+                    var result = await userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("ResetPasswordConfirmation");
+                    }
 
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
                 }
+                return View();
             }
-            return View();
+            catch
+            {
+                Alert("¡Algo ha salido mal!, Inténtalo de nuevo.", NotificationType.error);
+                return View("Login");
+            }
+            
         }
 
         public IActionResult ResetPasswordConfirmation()

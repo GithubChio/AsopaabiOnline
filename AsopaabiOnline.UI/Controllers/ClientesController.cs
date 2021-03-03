@@ -217,30 +217,37 @@ namespace AsopaabiOnline.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> SetPassword(SetPassword Input)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View();
-            }
-
-            var user = await userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return NotFound($"No se pudo cargar el usuario con ID'{userManager.GetUserId(User)}'.");
-            }
-
-            var addPasswordResult = await userManager.AddPasswordAsync(user, Input.NewPassword);
-            if (!addPasswordResult.Succeeded)
-            {
-                foreach (var error in addPasswordResult.Errors)
+                if (!ModelState.IsValid)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    return View();
                 }
-                return View();
-            }
 
-            await signInManager.RefreshSignInAsync(user);
-          
-            return RedirectToAction("Perfil");
+                var user = await userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    Alert("No se pudo cargar el usuario.", NotificationType.warning);
+                    return View("Perfil");
+                }
+
+                var addPasswordResult = await userManager.AddPasswordAsync(user, Input.NewPassword);
+                if (addPasswordResult.Succeeded)
+                {
+                    await signInManager.RefreshSignInAsync(user);
+                }
+
+
+
+                return RedirectToAction("Perfil");
+            }
+            catch 
+            {
+
+                Alert("Algo ha salido mal, inténtalo de nuevo.", NotificationType.error);
+                return View("Perfil");
+            }
+           
         }
 
 
@@ -250,7 +257,7 @@ namespace AsopaabiOnline.UI.Controllers
             var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
-                Alert("Usuario inválido.", NotificationType.warning);
+                Alert("No se pudo cargar el usuario.", NotificationType.warning);
                 return View();
             }
 
@@ -274,7 +281,7 @@ namespace AsopaabiOnline.UI.Controllers
                     var user = await userManager.GetUserAsync(User);
                     if (user == null)
                     {
-                        Alert("Usuario inválido.", NotificationType.warning);
+                        Alert("No se pudo cargar el usuario.", NotificationType.warning);
                         return View();
                     }
 
