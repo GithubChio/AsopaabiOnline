@@ -196,14 +196,12 @@ namespace AsopaabiOnline.UI.Controllers
                         {
                             Alert("Usuario bloqueado.", NotificationType.info);
                             return RedirectToAction("Lockout");
-                        }
-                    
-
-                    else
-                    {
+                        } 
+                        else
+                        {
                         Alert("Intento de inicio de sesión no válido.", NotificationType.warning);
                         return View();
-                    }
+                        }
 
                     }
                     else
