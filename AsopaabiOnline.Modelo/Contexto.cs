@@ -40,7 +40,7 @@ namespace AsopaabiOnline.Modelo
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseLazyLoadingProxies(useLazyLoadingProxies: true).UseSqlServer("Server=DESKTOP-GID5PN2;Database=ASOPAABI_ONLINE;User ID=sa;Password=1234;");
+                optionsBuilder.UseLazyLoadingProxies(useLazyLoadingProxies: true).UseSqlServer("Server=tcp:asopaabionlinetest.database.windows.net,1433;Initial Catalog=asopaabionline;Persist Security Info=False;User ID=asopaabionlineuser;Password=123456789asopaabi% MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
 
