@@ -190,7 +190,7 @@ namespace AsopaabiOnline.UI.Controllers
                     await db.SaveChangesAsync();
                     await emailSender.SendEmailAsync(emailUser, "Pedido", PlantillaCorreoPedido(existePedido, total, carritoDeCompras));
 
-                    Alert("Su pedido ha sido enviado.", NotificationType.success);
+                    Alert("Pedido  enviado.", NotificationType.success);
                     return RedirectToAction("Mostrar", "HistorialPedidos");
 
                 }
