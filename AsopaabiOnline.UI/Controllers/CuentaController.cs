@@ -176,31 +176,39 @@ namespace AsopaabiOnline.UI.Controllers
    
         public async Task<IActionResult> Login(Login model)
         {
-            if (ModelState.IsValid)
+            try
             {
-               
-                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
-                if (result.Succeeded)
+                if (ModelState.IsValid)
                 {
 
-                    return RedirectToAction("Tienda", "Home");
+                    var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
+                    if (result.Succeeded)
+                    {
+
+                        return RedirectToAction("Tienda", "Home");
+                    }
+
+                    if (result.IsLockedOut)
+                    {
+                        Alert("Usuario bloqueado.", NotificationType.info);
+                        return RedirectToAction("Lockout");
+                    }
+
+
+                    else
+                    {
+                        Alert("Intento de inicio de sesión no válido.", NotificationType.error);
+                        return View();
+                    }
                 }
 
-                if (result.IsLockedOut)
-                {
-                    Alert("Usuario bloqueado.", NotificationType.info);
-                    return RedirectToAction("Lockout");
-                }
-               
-
-                else
-                {
-                    Alert("Intento de inicio de sesión no válido.", NotificationType.error);
-                    return View();
-                }
+                return View(model);
             }
-
-            return View(model);
+            catch
+            {
+                Alert("Algo ha salido mal. Llena los campos obligatorios.", NotificationType.success);
+                return View();
+            }
         }
 
 
