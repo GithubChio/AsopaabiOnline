@@ -30,23 +30,34 @@ namespace AsopaabiOnline.UI.Models
         [Required(ErrorMessage = "El nombre es requerido")]
         [DataType(DataType.Text)]
         [Display(Name = "Nombre")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Solo se permiten letras y la primera debe ser mayúscula.")]
         public string FirstName { get; set; }
 
         [DataType(DataType.Text)]
         [Display(Name = "Segundo Nombre")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Solo se permiten letras y la primera debe ser mayúscula.")]
         public string SecondName { get; set; }
 
         [DataType(DataType.Text)]
         [Display(Name = "Primer apellido")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Solo se permiten letras y la primera debe ser mayúscula.")]
         public string FirstLastName { get; set; }
 
         [DataType(DataType.Text)]
         [Display(Name = "Segundo Apellido")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Solo se permiten letras y la primera debe ser mayúscula.")]
         public string SecondLastName { get; set; }
 
-        [DataType(DataType.Text)]
-        [Display(Name = "Número de teléfono secundario")]
+        [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^(\d{8})$", ErrorMessage = "el número de celular debe tener 8 digitos númericos")]
+        [Display(Name = "Número de teléfono secundario")]
+
+        public override string PhoneNumber { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^(\d{8})$", ErrorMessage = "el número de celular debe tener 8 digitos númericos")]
+        [Display(Name = "Número de teléfono secundario")]
+   
         public string PhoneNumber2 { get; set; }
 
 

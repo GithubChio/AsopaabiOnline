@@ -111,7 +111,7 @@ namespace AsopaabiOnline.UI.Controllers
                 }
                 else
                 {
-                  ;
+                  
                     user.FirstName = input.FirstName;
                     user.SecondName = input.SecondName;
                     user.FirstLastName = input.FirstLastName;
@@ -120,26 +120,23 @@ namespace AsopaabiOnline.UI.Controllers
                     user.PhoneNumber2 = input.PhoneNumber2;
                     user.ActivityType = input.ActivityType;
 
-
+                    
                     var elResultado = await userManager.UpdateAsync(user);
 
                     if (elResultado.Succeeded)
                     {
                         await signInManager.RefreshSignInAsync(user);
-                        Alert("Su perfil ha sido actualizado", NotificationType.success);
+                        Alert("Su perfil ha sido actualizado.", NotificationType.success);
                         
                         return RedirectToAction("Perfil");
                     }
-                    foreach (var elError in elResultado.Errors)
-                    {
-                        ModelState.AddModelError("", elError.Description);
-                    }
+                   
                 }
                 return View(input);
             }
             catch
             {
-                Alert("Algo ha salido mal, inténtalo de nuevo.", NotificationType.error);
+                Alert("No se ha podido actualizar su perfil, inténtalo de nuevo.", NotificationType.error);
                 return RedirectToAction("Perfil");
             }
 
@@ -195,21 +192,33 @@ namespace AsopaabiOnline.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> SetPassword()
         {
-            var user = await userManager.GetUserAsync(User);
-            if (user == null)
+            try
             {
-                
-                return NotFound($"No se pudo cargar el usuario con ID'{userManager.GetUserId(User)}'.");
+                var user = await userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    Alert("No se pudo cargar el usuario ", NotificationType.warning);
+
+                    return View();
+
+                }
+
+                var hasPassword = await userManager.HasPasswordAsync(user);
+
+                if (hasPassword)
+                {
+
+                    return RedirectToAction("ChangePassword");
+           
+                }
+
+                return View();
             }
-
-            var hasPassword = await userManager.HasPasswordAsync(user);
-
-            if (hasPassword)
+            catch
             {
-                return RedirectToAction("ChangePassword");
+                Alert("Algo ha salido mal, inténtalo de nuevo", NotificationType.error);
+                return RedirectToAction("Perfil");
             }
-
-            return View();
         }
 
 
@@ -217,40 +226,44 @@ namespace AsopaabiOnline.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> SetPassword(SetPassword Input)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
 
-            var user = await userManager.GetUserAsync(User);
-            if (user == null)
+            try
             {
-                return NotFound($"No se pudo cargar el usuario con ID'{userManager.GetUserId(User)}'.");
-            }
-
-            var addPasswordResult = await userManager.AddPasswordAsync(user, Input.NewPassword);
-            if (!addPasswordResult.Succeeded)
-            {
-                foreach (var error in addPasswordResult.Errors)
+                var user = await userManager.GetUserAsync(User);
+                if (user == null)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    Alert("No se pudo cargar el usuario ", NotificationType.warning);
                 }
-                return View();
+
+                var addPasswordResult = await userManager.AddPasswordAsync(user, Input.NewPassword);
+                if (addPasswordResult.Succeeded)
+                {
+
+                    await signInManager.RefreshSignInAsync(user);
+
+                }
+
+                return RedirectToAction("Perfil");
+            }
+            catch 
+            {
+
+                Alert("Algo ha salido mal, inténtalo de nuevo", NotificationType.error);
+                return RedirectToAction("Perfil");
             }
 
-            await signInManager.RefreshSignInAsync(user);
-          
-            return RedirectToAction("Perfil");
+           
         }
 
 
         [HttpGet]
         public async Task<IActionResult> ChangePassword()
         {
+            try { 
             var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
-                Alert("Usuario inválido.", NotificationType.warning);
+                Alert("No se pudo cargar el usuario", NotificationType.warning);
                 return View();
             }
 
@@ -263,6 +276,13 @@ namespace AsopaabiOnline.UI.Controllers
 
             return View();
         }
+            catch 
+            {
+
+                Alert("Algo ha salido mal, inténtalo de nuevo", NotificationType.error);
+                return RedirectToAction("Perfil");
+    }
+}
 
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePassword Input)
@@ -274,7 +294,7 @@ namespace AsopaabiOnline.UI.Controllers
                     var user = await userManager.GetUserAsync(User);
                     if (user == null)
                     {
-                        Alert("Usuario inválido.", NotificationType.warning);
+                        Alert("No se pudo cargar el usuario", NotificationType.warning);
                         return View();
                     }
 
@@ -287,18 +307,14 @@ namespace AsopaabiOnline.UI.Controllers
                         Alert("Contraseña cambiada.", NotificationType.success);
                         return RedirectToAction("Perfil");
                     }
-                    Alert("Debe completar los campos correctamente o su contraseña actual es inválida.", NotificationType.warning);
-                    return View();
+                   
                 }
-                else
-                {
-                    Alert("Debe completar los campos correctamente o su contraseña actual es inválida.", NotificationType.warning);
-                    return View();
-                }
+                Alert("Debe completar los campos correctamente o su contraseña actual es inválida", NotificationType.warning);
+                return View();
             }
             catch
             {
-                Alert("Algo ha salido mal, inténtalo de nuevo.", NotificationType.error);
+                Alert("No se ha podido cambiar su contraseña, inténtalo de nuevo.", NotificationType.error);
                 return RedirectToAction("Perfil");
             }
 

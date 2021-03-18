@@ -94,21 +94,18 @@ namespace AsopaabiOnline.UI.Controllers
 
                         //await signInManager.SignInAsync(user, isPersistent: false);
                         await userManager.AddToRoleAsync(user, DefaultRoleName);
-                        Alert("Usuario registrado.", NotificationType.success);
+                        Alert("Usuario registrado", NotificationType.success);
                         return RedirectToAction("Login");
 
                     }
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
+                   
                 }
 
                 return View(model);
             }
             catch
             {
-                Alert("Algo ha salido mal. Llena los campos obligatorios.", NotificationType.success);
+                Alert("No se ha podido registrar, inténtalo de nuevo", NotificationType.error);
                 return View();
             }
 
@@ -190,23 +187,19 @@ namespace AsopaabiOnline.UI.Controllers
 
                     if (result.IsLockedOut)
                     {
-                        Alert("Usuario bloqueado.", NotificationType.info);
+                        Alert("Usuario bloqueado", NotificationType.info);
                         return RedirectToAction("Lockout");
                     }
 
 
-                    else
-                    {
-                        Alert("Intento de inicio de sesión no válido.", NotificationType.error);
-                        return View();
-                    }
+              
                 }
 
                 return View(model);
             }
             catch
             {
-                Alert("Algo ha salido mal. Llena los campos obligatorios.", NotificationType.success);
+                Alert("No se ha podido iniciar sesión, inténtalo de nuevo", NotificationType.error);
                 return View();
             }
         }
@@ -246,27 +239,38 @@ namespace AsopaabiOnline.UI.Controllers
 
         public async Task<IActionResult> ForgotPassword(ForgotPassword input)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var user = await userManager.FindByEmailAsync(input.Email);
-
-               
-                if (user == null )
+                if (ModelState.IsValid)
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
+                    var user = await userManager.FindByEmailAsync(input.Email);
+
+
+                    if (user == null)
+                    {
+                        // Don't reveal that the user does not exist or is not confirmed
+                        return RedirectToAction("ForgotPasswordConfirmation");
+                    }
+
+                    var code = await userManager.GeneratePasswordResetTokenAsync(user);
+                    // code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    var callbackUrl = Url.Action(action: "ResetPassword", controller: "Cuenta", values: new { userId = user.UserName, code = code }, protocol: Request.Scheme);
+
+                    await emailSender.SendEmailAsync(input.Email, "Restablecer Contraseña", templateForgotPassword(input, callbackUrl));
+
                     return RedirectToAction("ForgotPasswordConfirmation");
                 }
 
-                var code = await userManager.GeneratePasswordResetTokenAsync(user);
-               // code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                var callbackUrl = Url.Action( action: "ResetPassword", controller:"Cuenta",values: new { userId=user.UserName,code = code}, protocol: Request.Scheme);
+                return View();
+            }
+            catch 
+            {
 
-                await emailSender.SendEmailAsync( input.Email,"Restablecer Contraseña", templateForgotPassword(input, callbackUrl));
-
-                return RedirectToAction("ForgotPasswordConfirmation");
+                Alert("Algo ha ocurrido, inténtalo de nuevo", NotificationType.error);
+                return View();
             }
 
-            return View();
+           
         }
 
 
@@ -303,19 +307,29 @@ namespace AsopaabiOnline.UI.Controllers
         [HttpGet]
         public IActionResult ResetPassword(string code = null)
         {
-            if (code == null)
+            try
             {
-                Alert("Se debe proporcionar un código para restablecer la contraseña.", NotificationType.error);
+                if (code == null)
+                {
+                    Alert("Se debe proporcionar un código para restablecer la contraseña", NotificationType.info);
+                    return View();
+                }
+                else
+                {
+                    ResetPassword resetPassword = new ResetPassword
+                    {
+                        Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
+                    };
+                    return View(resetPassword);
+                }
+            }
+            catch 
+            {
+
+                Alert("Algo ha ocurrido, inténtalo de nuevo", NotificationType.error);
                 return View();
             }
-            else
-            {
-                ResetPassword  resetPassword = new ResetPassword
-                {
-                    Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
-                };
-                return View(resetPassword);
-            }
+            
         }
 
 
@@ -323,6 +337,7 @@ namespace AsopaabiOnline.UI.Controllers
 
         public async Task<IActionResult> ResetPassword(ResetPassword Input)
         {
+            try { 
             if (ModelState.IsValid)
             {
                 var user = await userManager.FindByEmailAsync(Input.Email);
@@ -338,12 +353,16 @@ namespace AsopaabiOnline.UI.Controllers
                     return RedirectToAction("ResetPasswordConfirmation");
                 }
 
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                
             }
             return View();
+            }
+            catch
+            {
+
+                Alert("Algo ha ocurrido, inténtalo de nuevo", NotificationType.error);
+                return View();
+            }
         }
 
         public IActionResult ResetPasswordConfirmation()

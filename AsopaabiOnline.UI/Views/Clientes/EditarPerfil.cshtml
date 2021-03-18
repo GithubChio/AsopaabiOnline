@@ -41,13 +41,13 @@
 
                 <div class="form-group">
                     <label>Número de teléfono principal</label>
-                    <input asp-for="PhoneNumber" class="form-control" />
+                    <input asp-for="PhoneNumber" class="form-control"  />
                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="PhoneNumber2" class="control-label"></label>
-                    <input asp-for="PhoneNumber2" class="form-control" required />
+                    <input asp-for="PhoneNumber2" class="form-control"   required />
                     <span asp-validation-for="PhoneNumber2" class="text-danger"></span>
                 </div>
 
@@ -77,3 +77,6 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
