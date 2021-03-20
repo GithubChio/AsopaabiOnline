@@ -34,7 +34,7 @@
                 <br />
                 <label>Teléfono: @historial.IdPedidoNavigation.IdClienteNavigation.PhoneNumber</label><br /><br />
                 <a asp-action="Mostrar" asp-controller="Pagos" asp-route-id="@historial.IdPedido">Ver pago</a>
-               
+
 
             </div>
         </div>
@@ -47,14 +47,14 @@
 else
 {
 
-    <div class="card  col-md-11 m-5 w-100" >
 
-        <div class="card-body text-center">
-
-            <p class="card-title text-uppercase">No hay pedidos agregados</p>
-            <a  asp-action="CarritoDeCompras" asp-controller="Home" class="btn btn-primary">Comprar</a>
+    <div class="card text-center m-5">
+        <div class="card-body">
+            <h3>No hay pedidos agregados</h3>
+            <a asp-action="CarritoDeCompras" asp-controller="CarritoDeCompras" class="btn btn-success btn-lg" data-toggle="tooltip" data-placement="top" title="Ir a la Tienda"><i class="fas fa-cart-plus"></i></a>
         </div>
     </div>
 
-   
+
+
 }

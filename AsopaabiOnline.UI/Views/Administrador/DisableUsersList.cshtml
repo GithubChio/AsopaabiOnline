@@ -11,81 +11,83 @@
 
 {<div class="card">
 
-    <div class="card-header text-center">
-        <h3 class="card-title">@ViewBag.Title</h3>
+        <div class="card-header text-center">
+            <h3 class="card-title">@ViewBag.Title</h3>
 
-    </div>
+        </div>
 
-    <div class="card-body m-5">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>
-                        #
-                    </th>
-                    <th>
-                        <label>Cédula</label>
-                    </th>
-                    <th>
-                        <label>Nombre</label>
-                    </th>
-                    <th>
-                        <label>Apellido</label>
-                    </th>
-                    <th>
-                        <label>Correo Electrónico</label>
-                    </th>
-
-                    <th>
-                        <label> Opciones</label>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @{ int rowNumber = 0; }
-                @foreach (var user in Model)
-                {
+        <div class="card-body m-5">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>
-                            @(rowNumber += 1)
-                        </td>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            <label>Cédula</label>
+                        </th>
+                        <th>
+                            <label>Nombre</label>
+                        </th>
+                        <th>
+                            <label>Apellido</label>
+                        </th>
+                        <th>
+                            <label>Correo Electrónico</label>
+                        </th>
 
-                        <td>
-                            <h5 class="card-title">@user.DNI</h5>
-                        </td>
-
-                        <td>
-                            <h5 class="card-title">@user.Name</h5>
-                        </td>
-
-                        <td>
-                            <h5 class="card-title">@user.LastName</h5>
-                        </td>
-                        <td>
-                            <h5 class="card-title">@user.Email</h5>
-                        </td>
-
-                        <td>
-                            <a asp-action="UserDetails" asp-controller="Administrador" class="btn btn-lg " asp-route-id="@user.Id"
-                                data-toggle="tooltip" data-placement="top" title="ver detalles"><i class="fas fa-search-plus text-info"></i> </a>
-
-                        </td>
+                        <th>
+                            <label> Opciones</label>
+                        </th>
                     </tr>
+                </thead>
+                <tbody>
+                    @{ int rowNumber = 0; }
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>
+                                @(rowNumber += 1)
+                            </td>
 
-                }
+                            <td>
+                                <h5 class="card-title">@user.DNI</h5>
+                            </td>
 
-            </tbody>
-        </table>
+                            <td>
+                                <h5 class="card-title">@user.Name</h5>
+                            </td>
 
+                            <td>
+                                <h5 class="card-title">@user.LastName</h5>
+                            </td>
+                            <td>
+                                <h5 class="card-title">@user.Email</h5>
+                            </td>
+
+                            <td>
+                                <a asp-action="UserDetails" asp-controller="Administrador" class="btn btn-lg " asp-route-id="@user.Id"
+                                   data-toggle="tooltip" data-placement="top" title="ver detalles"><i class="fas fa-search-plus text-info"></i> </a>
+
+                            </td>
+                        </tr>
+
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
     </div>
-</div>
 }
 else
 {
-    <div class="card">
-        <div class="card-header">
-            No hay ningún usuario deshabilitado 
+
+    <div class="card text-center m-5">
+        <div class="card-body">
+            <h3> No hay usuarios deshabilitados</h3>
+         
         </div>
     </div>
-   
+
 }

@@ -93,13 +93,12 @@
 else
 {
 
-
     <div class="card text-center m-5">
         <div class="card-body">
-
-            <h3 class="card-title">No hay direcciones</h3>
-            <a class="btn" asp-controller="DireccionesParaPedidos" asp-action="Agregar" style="border-radius:25px; background-color:#96c401"
-               data-toggle="tooltip" data-placement="top" title="Agregar una dirección nueva">Agregar </a>
+            <h3>No hay direcciones agregadas</h3>
+            <a asp-action="Agregar" asp-controller="DireccionesParaPedidos" class="btn btn-success btn-lg" data-toggle="tooltip" data-placement="top" title="Agregar dirección">
+            <i class="fas fa-plus-circle"></i></a>
         </div>
     </div>
+
 }

@@ -17,14 +17,14 @@ namespace AsopaabiOnline.UI.Models
                     var regex = new Regex(@"^[1-9]-\d{4}-\d{4}$");
                     return regex.Match(value?.ToString()).Success
                         ? ValidationResult.Success
-                        : new ValidationResult("ingrese un formato válido para cédula física. Ej: 1-0222-0222");
+                        : new ValidationResult("Ingrese un formato válido para cédula física. Ej: 1-0222-0222");
                 }
                 if (register.DniType == DNIType.cedulaJuridica)
                 {
                     var regex = new Regex(@"^[1-9]-\d{3}-\d{6}$");
                     return regex.Match(value.ToString()).Success
                         ? ValidationResult.Success
-                        : new ValidationResult("ingrese un formato válido para cédula jurídica.Ej: 1-0222-256236");
+                        : new ValidationResult("Ingrese un formato válido para cédula jurídica.Ej: 1-0222-256236");
                 }
             }
             return new ValidationResult("DNI inválido");
