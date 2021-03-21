@@ -133,7 +133,7 @@ namespace AsopaabiOnline.UI.Controllers
                 if (elCoordinador.SiExiste(laDireccion))
                 {
                     elCoordinador.Eliminar(laDireccion);
-                    Alert( $"la dirección #{laDireccion.Id} ha sido eliminada.", NotificationType.success);
+                    Alert( $"La dirección #{laDireccion.Id} ha sido eliminada.", NotificationType.success);
                 }
                 else
                 {

@@ -126,7 +126,7 @@ namespace AsopaabiOnline.UI.Controllers
                     if (elResultado.Succeeded)
                     {
                         await signInManager.RefreshSignInAsync(user);
-                        Alert("Su perfil ha sido actualizado.", NotificationType.success);
+                        Alert("Perfil editado correctamente", NotificationType.success);
                         
                         return RedirectToAction("Perfil");
                     }

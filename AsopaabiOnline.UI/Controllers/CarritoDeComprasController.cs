@@ -153,8 +153,7 @@ namespace AsopaabiOnline.UI.Controllers
         public async Task<IActionResult> GenerarPedido(Pedido pedido, float total)
         {
 
-            try
-            {
+            
                
                 List<Producto> carritoDeCompras = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");
                 var user = await userManager.GetUserAsync(HttpContext.User);
@@ -186,12 +185,7 @@ namespace AsopaabiOnline.UI.Controllers
 
                 }
                 return RedirectToAction("CarritoDeCompras");
-            }
-            catch
-            {
-                Alert("Algo ha salido mal, inténtalo de nuevo!", NotificationType.error);
-                return RedirectToAction("Tienda", "Home");
-            }
+            
         }
         private async Task<int> InsertPedidoAsync(Pedido pedido, Contexto db, User user)
         {

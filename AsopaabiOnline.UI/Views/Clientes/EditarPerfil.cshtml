@@ -8,6 +8,11 @@
 <div class="row justify-content-md-center">
     <div class="card w-50">
         <h3 class="card-header text-center">@ViewBag.Title</h3>
+
+
+        <br />
+        <h6 class="card-subtitle mb-2  text-muted text-center">Los campos marcados con  un asterisco (*) son requeridos.</h6>
+        <br />
         <div class="card-body">
             <form asp-controller="Clientes" asp-action="EditarPerfil" asp-route-id="@User.Identity.Name" method="post">
 
@@ -41,13 +46,13 @@
 
                 <div class="form-group">
                     <label>Número de teléfono principal</label>
-                    <input asp-for="PhoneNumber" class="form-control"  />
+                    <input asp-for="PhoneNumber" class="form-control" />
                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="PhoneNumber2" class="control-label"></label>
-                    <input asp-for="PhoneNumber2" class="form-control"   required />
+                    <label asp-for="PhoneNumber2" class="control-label"></label> <small> <i class="fas fa-asterisk text-danger"></i></small>
+                    <input asp-for="PhoneNumber2" class="form-control" required />
                     <span asp-validation-for="PhoneNumber2" class="text-danger"></span>
                 </div>
 
