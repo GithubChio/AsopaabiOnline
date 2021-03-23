@@ -11,7 +11,8 @@
     <div class="card-header text-center"> <h4 class="card-title ">@ViewBag.title</h4></div>
    
     <div class="m-4">
-        <form action="/CarritoDeCompras/GenerarPedido" method="post" id="formCarrito">
+
+        <form action="GenerarPedido" controller="CarritoDeCompras"  method="post" >
             <table class="table table-stripedd">
                 <thead>
                     <tr>
@@ -94,7 +95,7 @@
             <hr />
             <partial model="Model.pedido" name="~/Views/Shared/_PedidoPartial.cshtml" />
 
-            <button style="margin-top:5%;"  class="btn btn-info  btn-block" data-toggle="modal" data-target="#generarPedido">Generar pedido</button>
+            <button style="margin-top:5%;" class="btn btn-info  btn-block" data-toggle="modal" data-target="#generarPedido">Generar pedido</button>
 
 
 
@@ -109,43 +110,24 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                           Usted esta apunto de enviar su pedido a Asopaabi, le recordamos que una vez enviado no podrá cancelarlo.
+                            Usted está a punto de enviar su pedido a Asopaabi, le recordamos que una vez enviado no podrá cancelarlo.
                             ¿Desea enviarlo de todos modos?
                         </div>
                         <div class="modal-footer">
+
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button id="btn_generar_pedido" type="submit" class="btn btn-primary">Enviar</button>
+
+                            <button type="submit"   class="btn btn-primary">Enviar</button>
+
                         </div>
                     </div>
                 </div>
             </div>
 
-
-
         </form>
+    
     </div>
     </div>
-    <script type="text/javascript">
-        $(function () {
-            $("formCarrito").submit(function () {
-              
-                $.ajax({
-                    type: "POST",
-                    url: "/CarritoDeCompras/GenerarPedido",
-                    data: $('#formCarrito').serialize(),
-                    success: function (response) {
-                        alert("Hello: " + response.Name + " .\nCurrent Date and Time: " + response.DateTime);
-                    },
-                    failure: function (response) {
-                        alert(response.responseText);
-                    },
-                    error: function (response) {
-                        alert(response.responseText);
-
-                   }
-                });
-            });
-        });
-    </script>
+   
 
 

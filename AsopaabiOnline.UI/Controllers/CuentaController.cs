@@ -178,7 +178,7 @@ namespace AsopaabiOnline.UI.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
+                    var result = await signInManager.PasswordSignInAsync(model.Email, model.Password,false, lockoutOnFailure: true);
                     if (result.Succeeded)
                     {
 

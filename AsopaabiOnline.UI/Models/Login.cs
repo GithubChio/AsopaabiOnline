@@ -18,8 +18,7 @@ namespace AsopaabiOnline.UI.Models
         [Display(Name = "Contraseña")]
         public string Password { get; set; }
 
-        [Display(Name = "Recordarme?")]
-        public bool RememberMe { get; set; }
+       
 
     }
 }

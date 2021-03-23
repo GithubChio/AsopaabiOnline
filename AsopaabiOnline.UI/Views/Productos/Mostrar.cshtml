@@ -29,6 +29,12 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model=>model.Id)
+                        </th>
 
                         <th>
                             @Html.DisplayNameFor(model => model.Imagen)
@@ -60,6 +66,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @{ int rowNumber = 0; }
                     @foreach (var item in Model)
                     {
 
@@ -76,52 +83,57 @@
                         {
                             estadoProducto = "badge badge-pill badge-info";
                         }
-                        <tr>
+                    <tr>
+                        <td>
+                            @(rowNumber += 1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+
+                        <td>
+
+                            <label>
+                                <img class="rounded" src="~/imagenes/@item.Imagen" height="150" width="150" asp-append-version="true" />
+                            </label>
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Codigo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
 
 
-                            <td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnidadDeMedida)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Categoria)
+                        </td>
+                        <td>
+                            <span class="@estadoProducto">
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </span>
+                        </td>
+                        <td>
 
-                                <label>
-                                    <img class="rounded" src="~/imagenes/@item.Imagen" height="150" width="150" asp-append-version="true" />
-                                </label>
+                            @Html.DisplayFor(modelItem => item.Precio)
+                        </td>
 
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Codigo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Nombre)
-                            </td>
+                        <td>
+                            <a asp-action="Actualizar" asp-route-id="@item.Id" class="bn btn-lg" data-toggle="tooltip" data-placement="top" title="Actualizar "><i class="fas fa-edit text-success"></i></a> |
 
-
-                            <td>
-                                @Html.DisplayFor(modelItem => item.UnidadDeMedida)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Categoria)
-                            </td>
-                            <td>
-                                <span class="@estadoProducto">
-                                    @Html.DisplayFor(modelItem => item.Estado)
-                                </span>
-                            </td>
-                            <td>
-
-                                @Html.DisplayFor(modelItem => item.Precio)
-                            </td>
-
-                            <td>
-                                <a asp-action="Actualizar" asp-route-id="@item.Id" class="bn btn-lg" data-toggle="tooltip" data-placement="top" title="Actualizar "><i class="fas fa-edit text-success"></i></a> |
-
-                                <a asp-action="Eliminar" class="btn btn-lg" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Eliminar"> <i class="fas fa-trash text-danger"></i></a>
+                            <a asp-action="Eliminar" class="btn btn-lg" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Eliminar"> <i class="fas fa-trash text-danger"></i></a>
 
 
 
 
 
 
-                            </td>
-                        </tr>
+                        </td>
+                    </tr>
                     }
 
                 </tbody>
