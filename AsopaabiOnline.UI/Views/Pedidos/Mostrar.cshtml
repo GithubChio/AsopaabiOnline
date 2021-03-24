@@ -59,17 +59,19 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.FechaEntrega)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Notas)
-                            </th>
+                            
                             <th>
                                 @Html.DisplayNameFor(model => model.Estado)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.IdDireccion)
                             </th>
-
-                            
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdCliente)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Notas)
+                            </th>
                             <th>
                                 <label>Opciones</label>
                             </th>
@@ -95,49 +97,58 @@
                             {
                                 estadoPedidoClass = "badge badge-pill badge-warning";
                             }
-                            <tr>
-                                <td>
-                                    @(rowNumber += 1)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Id)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FechaPedido)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FechaEntrega)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Notas)
-                                </td>
-                                <td>
-                                    <span class="@estadoPedidoClass">
-                                        @Html.DisplayFor(modelItem => item.Estado)
-                                    </span>
-                                </td>
-                                <td>
-                                    <label>Provincia: @item.IdDireccionNavigation.IdProvinciaNavigation.Nombre  </label>
-                                    <br />
-                                    <label>Cantón: @item.IdDireccionNavigation.IdCantonNavigation.Nombre  </label>
-                                    <br />
-                                    <label>Distrito: @item.IdDireccionNavigation.IdDistritoNavigation.Nombre  </label>
-                                    <br />
-                                    <label>Detalles: @item.IdDireccionNavigation.Detalles  </label>
+                        <tr>
+                            <td>
+                                @(rowNumber += 1)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FechaPedido)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FechaEntrega)
+                            </td>
 
-                                </td>
-                                
+                            <td>
+                                <span class="@estadoPedidoClass">
+                                    @Html.DisplayFor(modelItem => item.Estado)
+                                </span>
+                            </td>
+                            <td>
+                                <label>Provincia: @item.IdDireccionNavigation.IdProvinciaNavigation.Nombre  </label>
+                                <br />
+                                <label>Cantón: @item.IdDireccionNavigation.IdCantonNavigation.Nombre  </label>
+                                <br />
+                                <label>Distrito: @item.IdDireccionNavigation.IdDistritoNavigation.Nombre  </label>
+                                <br />
+                                <label>Detalles: @item.IdDireccionNavigation.Detalles  </label>
 
-                                <td>
+                            </td>
+                            <td>
+                                <label>Nombre: @item.IdClienteNavigation.FullName  </label>
+                                <br />
+                                <label>Cédula: @item.IdClienteNavigation.Dni  </label>
+                                <br />
+                                <label>Correo Electrónico: @item.IdClienteNavigation.Email  </label>
+                                <br />
+                                <label>Teléfono: @item.IdClienteNavigation.PhoneNumber  </label>
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Notas)
+                            </td>
+                            <td>
 
 
-                                    <a asp-action="Actualizar" asp-route-id="@item.Id" class="bn btn-lg" data-toggle="tooltip" data-placement="top" title="Actualizar "><i class="fas fa-edit text-success"></i></a> |
-                                    <a asp-action="CambiarEstadoDePedido" asp-route-id="@item.Id" class="bn btn-lg" data-toggle="tooltip" data-placement="top" title="Cambiar estado de pedido"><i class="fas fa-exchange-alt"></i> </a> |
-                                    <a asp-action="Mostrar" asp-controller="DetallePedido" asp-route-id="@item.Id" class="bn btn-lg" data-toggle="tooltip" data-placement="top" title="Detalles de pedido"><i class="fas fa-clipboard-check"></i> </a>
+                                <a asp-action="Actualizar" asp-route-id="@item.Id" class="bn btn-lg" data-toggle="tooltip" data-placement="top" title="Actualizar "><i class="fas fa-edit text-success"></i></a> |
+                                <a asp-action="CambiarEstadoDePedido" asp-route-id="@item.Id" class="bn btn-lg" data-toggle="tooltip" data-placement="top" title="Cambiar estado de pedido"><i class="fas fa-exchange-alt"></i> </a> |
+                                <a asp-action="Mostrar" asp-controller="DetallePedido" asp-route-id="@item.Id" class="bn btn-lg" data-toggle="tooltip" data-placement="top" title="Detalles de pedido"><i class="fas fa-clipboard-check"></i> </a>
 
 
-                                </td>
-                            </tr>
+                            </td>
+                        </tr>
                         }
 
                     </tbody>

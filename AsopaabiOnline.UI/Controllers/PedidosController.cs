@@ -92,18 +92,18 @@ namespace AsopaabiOnline.UI.Controllers
                 CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
                 if (elCoordinador.SiEstadoEsEnProceso(elPedido))
                 {
-                    Alert("Parece que este pedido ya esta en proceso.", NotificationType.warning);
+                    Alert("Parece que este pedido ya está en proceso.", NotificationType.warning);
                 }
                 else if (elCoordinador.SiEstadoEsFinalizado(elPedido))
                 {
-                    Alert("No se puede cambiar por que este pedido ya esta finalizado.", NotificationType.warning);
+                    Alert("No se puede cambiar porque este pedido ya esta finalizado.", NotificationType.warning);
                     return RedirectToAction("Mostrar");
                 }
                     
                 else
                 {
                     elCoordinador.CambiarAPedidoEnProceso(elPedido);
-                    Alert("Se ha actualizado el estado de este pedido.", NotificationType.success);
+                    Alert("Pedido actualizado ha estado en proceso", NotificationType.success);
                 }
                
 
@@ -138,13 +138,13 @@ namespace AsopaabiOnline.UI.Controllers
                 }
                 else if (elCoordinador.SiEstadoEsReciente(elPedido))
                 {
-                    Alert("Primero se debe cambiar a estado en proceso para que el cliente le de seguimiento", NotificationType.warning);
+                    Alert("Primero se debe cambiar a estado en proceso para que el cliente le dé seguimiento", NotificationType.warning);
                     return RedirectToAction("Mostrar");
                 }
                 else
                 {
                     elCoordinador.CambiarAPedidoFinalizado(elPedido);
-                    Alert("Se ha actualizado el estado de este pedido.", NotificationType.success);
+                    Alert("Pedido actualizado ha estado finalizado", NotificationType.success);
                 }
 
 
