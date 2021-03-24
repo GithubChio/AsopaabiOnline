@@ -1,27 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Acerca de Nosotros";
+    ViewBag.title = "Acerca de Nosotros";
 }
-<h3 class=" card-header text-center">@ViewData["Title"]</h3>
+<h3 class=" card-header text-center text-white" style="background-color:#0591a1"> @ViewBag.title</h3>
 
 <br />
 
+
 <div class="row ">
 
-    <div class="card w-25 text-center m-5">
-        <div class="card-header">
-            <h5>Contacto</h5>
-        </div>
-        <div class="card-body">
 
-            <p>
-                <label>Teléfono: 6193-4518 </label><br />
-                <label> asopaabi&commat;gmail.com</label>
-            </p>
-
-
-        </div>
-    </div>
-    <br />
     <div class="card w-25 text-center m-5">
         <div class="card-header">
             <h5>Reseña Histórica</h5>
@@ -35,7 +22,6 @@
                 con el fin de crear fuentes de empleo en la zona de
                 influencia y mejorar la calidad de vida de las familias.
             </p>
-
 
         </div>
 
@@ -97,22 +83,29 @@
         </div>
     </div>
     <br />
-    <div class="card  w-75 text-center m-5">
-        <div class="card-header">
-            <h5>Valores</h5>
+
+
+    <div class="card w-25 text-center m-5">
+        <div class="card-header ">
+            <h5>Contacto</h5>
         </div>
         <div class="card-body">
 
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Compromiso</li>
-                <li class="list-group-item">Fidelidad</li>
-                <li class="list-group-item">Respeto</li>
-                <li class="list-group-item">Compañerismo</li>
-                <li class="list-group-item">Transparencia</li>
-                <li class="list-group-item">Comunicación Asertiva</li>
-            </ul>
+            <p>
+                <label>Teléfono: 6193-4518 </label><hr />
+                <h6 class="card-title">Correo Electrónico</h6>
+                <label> asopaabi&commat;gmail.com</label><br />
+                <label> asopaabi&commat;outlook.es</label>
+            </p>
+           <hr />
+            <a href="https://www.facebook.com/asopaabi" class="btn btn-primary btn-lg" 
+                data-toggle="tooltip" data-placement="top" title="ir a la página de facebook"> <i class="fab fa-facebook"></i> Facebook </a>
+
 
         </div>
     </div>
+    <br />
+   
+    
 
 </div>
