@@ -12,7 +12,7 @@ namespace AsopaabiOnline.UI.Controllers
 {
     public class PedidosController : BaseController
     {
-       
+        //Método para mostrar la lista de pedidos
 
         [HttpGet]
         [Route("Pedidos/Mostrar")]
@@ -22,6 +22,8 @@ namespace AsopaabiOnline.UI.Controllers
             return View(elCoordinador.ListarPedidos());
         }
 
+
+        //Método GET y SET para actualizar un pedido
 
         [HttpGet]
         [Route("Pedidos/Actualizar")]
@@ -54,15 +56,13 @@ namespace AsopaabiOnline.UI.Controllers
             }
             catch
             {
-                Alert("Algo ha salido mal, inténtalo de nuevo!", NotificationType.error);
+                Alert("No es posible actualizar este pedido. ¡Inténtalo de nuevo!", NotificationType.error);
                 return RedirectToAction("Mostrar");
             }
         }
 
 
-      
-       
-
+        //Permite mostrar la pantalla para cambiar el estado del pedido
         [HttpGet]
         [Route("Pedidos/CambiarEstadoDePedido")]
         public IActionResult CambiarEstadoDePedido(int id)
@@ -73,6 +73,7 @@ namespace AsopaabiOnline.UI.Controllers
             return View();
         }
 
+        //Método GET y POST que permite cambiar el estado del pedido a en proceso 
         [HttpGet]
         [Route("Pedidos/CambiarAPedidoEnProceso")]
         public IActionResult CambiarAPedidoEnProceso(int id)
@@ -90,17 +91,17 @@ namespace AsopaabiOnline.UI.Controllers
             try
             {
                 CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
-                if (elCoordinador.SiEstadoEsEnProceso(elPedido))
+                if (elCoordinador.SiEstadoEsEnProceso(elPedido)) //si ya esta en estado en proceso le muestra un mensaje de advertencia
                 {
                     Alert("Parece que este pedido ya está en proceso.", NotificationType.warning);
                 }
-                else if (elCoordinador.SiEstadoEsFinalizado(elPedido))
+                else if (elCoordinador.SiEstadoEsFinalizado(elPedido)) //si esta en estado finalizado le muestra un mensaje de advertencia
                 {
                     Alert("No se puede cambiar porque este pedido ya esta finalizado.", NotificationType.warning);
                     return RedirectToAction("Mostrar");
                 }
                     
-                else
+                else 
                 {
                     elCoordinador.CambiarAPedidoEnProceso(elPedido);
                     Alert("Pedido actualizado ha estado en proceso", NotificationType.success);
@@ -116,6 +117,9 @@ namespace AsopaabiOnline.UI.Controllers
             }
         }
 
+
+
+        //Método GET y POST que permite cambiar el estado del pedido a finalizado
         [HttpGet]
         [Route("Pedidos/CambiarAPedidoFinalizado")]
         public IActionResult CambiarAPedidoFinalizado(int id)
@@ -132,11 +136,11 @@ namespace AsopaabiOnline.UI.Controllers
             try
             {
                 CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
-                if (elCoordinador.SiEstadoEsFinalizado(elPedido))
+                if (elCoordinador.SiEstadoEsFinalizado(elPedido)) //si ya esta en estado finalizado le muestra un mensaje de advertencia
                 {
                     Alert("Parece que este pedido ya esta finalizado.", NotificationType.warning);
                 }
-                else if (elCoordinador.SiEstadoEsReciente(elPedido))
+                else if (elCoordinador.SiEstadoEsReciente(elPedido)) //si esta en estado reciente le muestra un mensaje de advertencia
                 {
                     Alert("Primero se debe cambiar a estado en proceso para que el cliente le dé seguimiento", NotificationType.warning);
                     return RedirectToAction("Mostrar");
@@ -163,7 +167,7 @@ namespace AsopaabiOnline.UI.Controllers
 
 
 
-
+        //Método para ver la lista de pedidos recientes
 
         [HttpGet]
         [Route("Pedidos/PedidosRecientes")]
@@ -172,6 +176,7 @@ namespace AsopaabiOnline.UI.Controllers
             CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
             return View(elCoordinador.ListarPedidosRecientes());
         }
+        //Método para ver la lista de pedidos en proceso
 
         [HttpGet]
         [Route("Pedidos/PedidosEnProceso")]
@@ -181,6 +186,7 @@ namespace AsopaabiOnline.UI.Controllers
             return View(elCoordinador.ListarPedidosEnProceso());
         }
 
+        //Método para ver la lista de pedidos finalizados
         [HttpGet]
         [Route("Pedidos/PedidosFinalizados")]
         public IActionResult PedidosFinalizados()

@@ -18,6 +18,8 @@ namespace AsopaabiOnline.UI.Controllers
             this.userManager = userManager;
 
         }
+
+        //Método para mostrar el historial de pedidos en la vista de clientes
         public async Task<IActionResult> Mostrar()
         {
             CoordinadorDeHistorialPedidos coordinadorDeHistorial = new CoordinadorDeHistorialPedidos();
@@ -26,6 +28,8 @@ namespace AsopaabiOnline.UI.Controllers
             return View(coordinadorDeHistorial.ListarHistorialDePedidos(user.Id));
         }
 
+
+        //Método para mostrar el historial de pedidos buscando a un cliente en especifico en la vista de clientes de administradores
         [HttpGet]
         public async Task<IActionResult> MostrarHistorialPorClientesEnEspecifico(string id)
         {

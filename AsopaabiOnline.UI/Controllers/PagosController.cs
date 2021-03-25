@@ -10,7 +10,7 @@ namespace AsopaabiOnline.UI.Controllers
 {
     public class PagosController : Controller
     {
-
+        //Método  para mostrar el pago de un pedido
 
         [HttpGet]
         public IActionResult Mostrar(Pedido pedidoIngresado)
@@ -18,12 +18,7 @@ namespace AsopaabiOnline.UI.Controllers
             CoordinadorDePagos coordinadorDePagos = new CoordinadorDePagos();
             return View(coordinadorDePagos.ListarPagos(pedidoIngresado.Id));
         }
-        [HttpGet]
-        public IActionResult MostrarPagoAdministrativo(Pedido pedidoIngresado)
-        {
-            ViewBag.simboloDeColon = "₡";
-            CoordinadorDePagos coordinadorDePagos = new CoordinadorDePagos();
-            return View(coordinadorDePagos.ListarPagos(pedidoIngresado.Id));
-        }
+
+      
     }
 }

@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using AsopaabiOnline.UI.Models.Enums;
 
 namespace AsopaabiOnline.UI
-{
+{ 
+
+    // Controlador base utilizado para realizar las notificaciones con mensajes de alerta, peligro o error.
     public class BaseController : Controller
     {
         public void Alert(string message, NotificationType notificationType)

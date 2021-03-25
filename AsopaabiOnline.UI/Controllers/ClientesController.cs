@@ -25,7 +25,8 @@ namespace AsopaabiOnline.UI.Controllers
             this.signInManager = signInManager;
         }
 
-    
+        //Método para mostrar el perfil del usuario
+
         [HttpGet]
         public async Task<IActionResult> Perfil()
         {
@@ -64,7 +65,7 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
-
+        //Método  GET y POST obtener el usuario y editar los datos solicitados.
         [HttpGet]
 
         public async Task<IActionResult> EditarPerfil()
@@ -142,8 +143,8 @@ namespace AsopaabiOnline.UI.Controllers
 
         }
 
-       
 
+        //Método para mostrar  los detalles del usuario
         [HttpGet]
         public async Task<IActionResult> VerDetalles()
         {
@@ -186,9 +187,7 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
-
-
-
+        //Método  GET y POST de seguridad para crear una nueva contraseña en caso que el usuario no disponga de una.
         [HttpGet]
         public async Task<IActionResult> SetPassword()
         {
@@ -255,6 +254,8 @@ namespace AsopaabiOnline.UI.Controllers
            
         }
 
+
+        //Método  GET y POST para cambiar la  contraseña.
 
         [HttpGet]
         public async Task<IActionResult> ChangePassword()

@@ -41,7 +41,7 @@ namespace AsopaabiOnline.UI.Controllers
 
 
 
-       
+        //Método  GET y POST para registrar usuarios 
 
         [HttpGet]
         public IActionResult Register()
@@ -112,6 +112,7 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
+        //Método  para listar usarios por email 
         public List<User> UsersListByEmail(User user)
         {
 
@@ -124,7 +125,7 @@ namespace AsopaabiOnline.UI.Controllers
             return result.ToList();
         }
 
-
+        //Método  para listar usarios por DNI 
         public List<User> UsersListByDNI(User user)
         {
 
@@ -137,6 +138,7 @@ namespace AsopaabiOnline.UI.Controllers
             return result.ToList();
         }
 
+        //Método para buscar en la lista de usuarios por DNI si existe o no un usuario
         public bool isExistDNI(User user)
         {
             var result = UsersListByDNI(user);
@@ -150,6 +152,7 @@ namespace AsopaabiOnline.UI.Controllers
             }
         }
 
+        //Método para buscar en la lista de usuarios por email si existe o no un usuario
         public bool isExistEmail(User user)
         {
             var result = UsersListByEmail(user);
@@ -163,6 +166,8 @@ namespace AsopaabiOnline.UI.Controllers
             }
         }
 
+
+        //Método GET y POST para iniciar sesion 
         [HttpGet]
         public IActionResult Login()
         {
@@ -206,7 +211,7 @@ namespace AsopaabiOnline.UI.Controllers
 
 
 
- 
+        //Método para cerrar sesion 
         public async Task<IActionResult> Logout()
         {
 
@@ -218,8 +223,8 @@ namespace AsopaabiOnline.UI.Controllers
 
         }
 
-       
-        
+
+        //Método para bloquear un usuario despues de 3 intentos fallidos de contraseña
 
         [HttpGet]
         public IActionResult Lockout()
@@ -228,11 +233,11 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
-
+        //Método GET y POST para enviar correo para restablecer contraseña en caso de olvido de contraseña
         [HttpGet]
         public IActionResult ForgotPassword()
         {
-            return View();
+            return View(); 
         }
 
        [HttpPost]
@@ -248,7 +253,7 @@ namespace AsopaabiOnline.UI.Controllers
 
                     if (user == null)
                     {
-                        // Don't reveal that the user does not exist or is not confirmed
+                        // No revele que el usuario no existe o no está confirmado
                         return RedirectToAction("ForgotPasswordConfirmation");
                     }
 
@@ -256,7 +261,7 @@ namespace AsopaabiOnline.UI.Controllers
                     // code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Action(action: "ResetPassword", controller: "Cuenta", values: new { userId = user.UserName, code = code }, protocol: Request.Scheme);
 
-                    await emailSender.SendEmailAsync(input.Email, "Restablecer Contraseña", templateForgotPassword(input, callbackUrl));
+                    await emailSender.SendEmailAsync(input.Email, "Restablecer Contraseña", templateForgotPassword(input, callbackUrl)); // se  envia el correo con un codigo unico generado para restablecer la contraseña
 
                     return RedirectToAction("ForgotPasswordConfirmation");
                 }
@@ -276,12 +281,13 @@ namespace AsopaabiOnline.UI.Controllers
 
 
 
-
+        //Plantilla de olvido de contraseña 
         public  string templateForgotPassword(ForgotPassword input, string callbackUrl)
         {
 
             string body = string.Empty;
-            //using streamreader for reading my htmltemplate   
+            // uso de streamreader para leer  plantilla html
+
             var pathToFile = _env.WebRootPath
                           + Path.DirectorySeparatorChar.ToString()
                           + "EmailTemplates"
@@ -304,6 +310,8 @@ namespace AsopaabiOnline.UI.Controllers
             return View();
         }
 
+
+        //Método GET yPost para restablecer  contraseña
         [HttpGet]
         public IActionResult ResetPassword(string code = null)
         {
@@ -318,7 +326,7 @@ namespace AsopaabiOnline.UI.Controllers
                 {
                     ResetPassword resetPassword = new ResetPassword
                     {
-                        Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
+                        Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code)) //se obtiene el codigo que fue generado y si es el mismo  se presenta la pantalla de restablecer contraseña
                     };
                     return View(resetPassword);
                 }
@@ -340,14 +348,14 @@ namespace AsopaabiOnline.UI.Controllers
             try { 
             if (ModelState.IsValid)
             {
-                var user = await userManager.FindByEmailAsync(Input.Email);
+                var user = await userManager.FindByEmailAsync(Input.Email); // se busca el usuario por email
                 if (user == null)
                 {
-                    // Don't reveal that the user does not exist
+                  
                     return RedirectToAction("ResetPasswordConfirmation");
                 }
 
-                var result = await userManager.ResetPasswordAsync(user,Input.Code, Input.Password);
+                var result = await userManager.ResetPasswordAsync(user,Input.Code, Input.Password); // se restablece la contraseña 
                 if (result.Succeeded)
                 {
                     return RedirectToAction("ResetPasswordConfirmation");
@@ -365,12 +373,15 @@ namespace AsopaabiOnline.UI.Controllers
             }
         }
 
+
+        //Método GET para confirmar el restablecimiento de contraseña
+
         public IActionResult ResetPasswordConfirmation()
         {
             return View();
         }
 
-
+        //Método GET para mostrar la vista de deshabilitado
 
         [HttpGet]
         public IActionResult DisableView()

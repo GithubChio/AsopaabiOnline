@@ -25,7 +25,7 @@ namespace AsopaabiOnline.UI.Controllers
            
         }
 
-
+        //Método GET y POST para ir a la vista de la tienda de compras
         public IActionResult Tienda()
         {
             CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
@@ -53,7 +53,7 @@ namespace AsopaabiOnline.UI.Controllers
             return View(await list.ToListAsync());
         }
 
-
+        //Permite ir a la vista de acerca de nosotros
 
         [HttpGet]
         public IActionResult AcercaDeNosotros()
@@ -62,11 +62,7 @@ namespace AsopaabiOnline.UI.Controllers
             return View();
         }
 
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
+        
 
 
 

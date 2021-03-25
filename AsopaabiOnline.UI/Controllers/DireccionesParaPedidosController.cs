@@ -20,7 +20,7 @@ namespace AsopaabiOnline.UI.Controllers
 
         }
 
-
+         //Método GET y POST para agregar direcciones
 
         [HttpGet]
     
@@ -81,7 +81,7 @@ namespace AsopaabiOnline.UI.Controllers
 
      
 
-
+        //Método para cargar los cantones en el select de la vista
         public JsonResult CargarCantones(int id)
         {
             CoordinadorDeCantones elCoordinador = new CoordinadorDeCantones();
@@ -89,6 +89,8 @@ namespace AsopaabiOnline.UI.Controllers
             return Json(new SelectList(losCantones, "Id", "Nombre"));
         }
 
+
+        //Método para cargar los distritos en el select de la vista
         public JsonResult CargarDistritos(int id)
         {
             CoordinadorDeDistritos elCoordinador = new CoordinadorDeDistritos();
@@ -96,6 +98,8 @@ namespace AsopaabiOnline.UI.Controllers
             return Json(new SelectList(losDistritos, "Id", "Nombre"));
         }
 
+
+        //Método para mostrar la lista de direcciones
         [HttpGet]
         [Route("DireccionesParaPedidos/Mostrar")]
         public async Task<IActionResult> Mostrar()
@@ -109,7 +113,7 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
-       
+        //Método GET y POST para eliminar una direccion por id
 
         [HttpGet]
         [Route("DireccionesParaPedidos/Eliminar")]
@@ -130,14 +134,14 @@ namespace AsopaabiOnline.UI.Controllers
             {
                 CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
 
-                if (elCoordinador.SiExiste(laDireccion))
+                if (elCoordinador.SiExiste(laDireccion)) 
                 {
                     elCoordinador.Eliminar(laDireccion);
                     Alert( $"La dirección #{laDireccion.Id} ha sido eliminada.", NotificationType.success);
                 }
                 else
                 {
-                    Alert($"La dirección {laDireccion.Id} no existe", NotificationType.warning);
+                    Alert($"La dirección que intenta eliminar no existe", NotificationType.warning);
                 }
                
                    
@@ -149,7 +153,7 @@ namespace AsopaabiOnline.UI.Controllers
             }
             catch
             {
-                Alert($"No se puede eliminar por que hay un pedido con la dirección #{laDireccion.Id}. ", NotificationType.error);
+                Alert($"No es posible eliminar esa dirección", NotificationType.error);
 
                 return  RedirectToAction("Mostrar");
                

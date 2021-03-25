@@ -22,6 +22,8 @@ namespace AsopaabiOnline.UI.Controllers
         private readonly UserManager<User> userManager;
         private readonly IEmailSender emailSender;
         private readonly IWebHostEnvironment _env;
+
+
         public CarritoDeComprasController(UserManager<User> userManager,IEmailSender sender,IWebHostEnvironment environment)
         {
 
@@ -31,7 +33,7 @@ namespace AsopaabiOnline.UI.Controllers
 
         }
 
-     
+     //Método para añadir productos al carrito de compras
 
         [HttpPost]
         public IActionResult AñadirAlCarrito(int id, int cantidad)
@@ -88,7 +90,7 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
-
+        //Método GET para visualizar el carrito de compras
         [HttpGet]
         public async Task<IActionResult> CarritoDeCompras()
         {
@@ -121,7 +123,7 @@ namespace AsopaabiOnline.UI.Controllers
 
         }
 
-
+        //Método  para quitar un producto del carrito de compras
         public IActionResult QuitarDelCarrito(int id)
         {
             List<Producto> carritoDeCompras = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");
@@ -131,7 +133,7 @@ namespace AsopaabiOnline.UI.Controllers
             return RedirectToAction("CarritoDeCompras");
         }
 
-
+        //Método comprobar que exista un producto en especifico en el carrito de compras
         private int siExiste(int id)
         {
 
@@ -147,7 +149,7 @@ namespace AsopaabiOnline.UI.Controllers
             return -1;
         }
 
-
+        //Método para generar el pedido del carrito de compras
 
         [HttpPost]
         public async Task<IActionResult> GenerarPedido(Pedido pedido, float total)
@@ -187,6 +189,8 @@ namespace AsopaabiOnline.UI.Controllers
                 return RedirectToAction("CarritoDeCompras");
             
         }
+
+        //Método para agregar pedido a la base de datos
         private async Task<int> InsertPedidoAsync(Pedido pedido, Contexto db, User user)
         {
             using (var dbContextTransaction = db.Database.BeginTransaction())
@@ -208,6 +212,8 @@ namespace AsopaabiOnline.UI.Controllers
             }
             return 0;
         }
+
+        //Método para agregar el detalle del pedido a la base de datos
         private async Task<bool> InsertDetallePedidoAsync(List<Producto> carritoDeCompras, int idPedido, Contexto db)
         {
             using (var dbContextTransaction = db.Database.BeginTransaction())
@@ -239,6 +245,8 @@ namespace AsopaabiOnline.UI.Controllers
             }
             return false;
         }
+
+        //Método para agregar el pago del pedido a la base de datos
         private async Task<bool> InsertPago(Contexto db, int idPedido, Pedido pedido, float total)
         {
             using (var dbContextTransaction = db.Database.BeginTransaction())
@@ -267,6 +275,8 @@ namespace AsopaabiOnline.UI.Controllers
             }
             return false;
         }
+
+        //Método para enviar plantilla del comprobante de pago al cliente
         public string PlantillaCorreoPedido(Pedido pedido, float total, List<Producto> carritoDeCompras)
         {
             
@@ -299,6 +309,9 @@ namespace AsopaabiOnline.UI.Controllers
 
             return body;
         }
+
+
+        //Método para dibujar la tabla con los productos, cantidad, precio y subtotal en la plantilla para enviar al correo
         private string DrawTable(List<Producto> carritoDeCompras)
         {
             string trs = "";

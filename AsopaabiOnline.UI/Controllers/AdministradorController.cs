@@ -21,7 +21,7 @@ namespace AsopaabiOnline.UI.Controllers
             this.roleManager = roleManager;
         }
 
-
+         //Método GET para listar los usuarios
 
         [HttpGet]
         public IActionResult UserList()
@@ -33,6 +33,9 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
         
+
+
+        //Método GET y POST para obtener y realizar la actualización de datos de los usuarios 
 
         [HttpGet]
 
@@ -169,7 +172,7 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
-
+        //Método GET para listar los  detalles de los usuarios
 
         [HttpGet]
         public async Task<IActionResult> UserDetails(string id)
@@ -209,7 +212,7 @@ namespace AsopaabiOnline.UI.Controllers
 
 
 
-
+        // Método para habilitar los usuarios que han sido deshabilitados
 
         [HttpPost]
         public async Task<IActionResult> Enable(User input)
@@ -274,7 +277,7 @@ namespace AsopaabiOnline.UI.Controllers
 
         }
 
-
+        // Método para deshabilitar los usuarios 
 
         [HttpPost]
         public async Task<IActionResult> Disable(User input)
@@ -339,6 +342,8 @@ namespace AsopaabiOnline.UI.Controllers
 
         }
 
+
+        //Método GET para listar los usuarios deshabilitados
         [HttpGet]
 
         public async Task<IActionResult> DisableUsersList()
@@ -350,6 +355,7 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
+        //Método GET para listar los clientes
 
         [HttpGet]
         public IActionResult CustomerList()
@@ -377,6 +383,7 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
+        //Método GET para listar los empleados
         [HttpGet]
         public IActionResult EmployeeList()
         {
@@ -400,7 +407,7 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
-
+        //Método GET y POST para agregar un  rol 
         [HttpGet]
         public IActionResult AddRole()
         {
@@ -432,6 +439,9 @@ namespace AsopaabiOnline.UI.Controllers
             return View(role);
         }
 
+
+        //Método GET para listar los roles existentes
+
         [HttpGet]
         public IActionResult RolesList()
         {
@@ -439,7 +449,7 @@ namespace AsopaabiOnline.UI.Controllers
             return View(list);
         }
 
-
+        //Método GET y POST para eliminar un  rol 
         [HttpGet]
 
         public async Task<IActionResult> DeleteRole(string id)

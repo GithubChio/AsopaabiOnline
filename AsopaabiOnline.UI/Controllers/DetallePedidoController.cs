@@ -10,6 +10,8 @@ namespace AsopaabiOnline.UI.Controllers
 {
     public class DetallePedidoController : Controller
     {
+
+        //Método para mostrar los detalles de un pedido 
         [HttpGet]
         public IActionResult MostrarDetalles(Pedido pedido)
         {
@@ -19,16 +21,5 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
-
-
-        public IActionResult Mostrar(Pedido pedido)
-        {
-            ViewBag.pedido = pedido.Id;
-            CoordinadorDeDetallePedido elCoordinador = new CoordinadorDeDetallePedido();
-            return View(elCoordinador.ListarDetallePedido(pedido));
-           
-
-
-        }
     }
 }
