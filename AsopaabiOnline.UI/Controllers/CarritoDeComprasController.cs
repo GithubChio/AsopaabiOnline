@@ -152,7 +152,7 @@ namespace AsopaabiOnline.UI.Controllers
         //Método para generar el pedido del carrito de compras
 
         [HttpPost]
-        public async Task<IActionResult> GenerarPedido(Pedido pedido, float total)
+        public async Task<JsonResult> GenerarPedido(Pedido pedido, float total)
         {
 
             
@@ -183,11 +183,11 @@ namespace AsopaabiOnline.UI.Controllers
                     await emailSender.SendEmailAsync(emailUser, "Pedido", PlantillaCorreoPedido(existePedido, total, carritoDeCompras));
 
                     Alert("Su pedido ha sido enviado.", NotificationType.success);
-                    return RedirectToAction("Mostrar", "HistorialPedidos");
+                    return Json(new {redirectUrl = Url.Action("Mostrar", "HistorialPedidos")});
 
                 }
-                return RedirectToAction("CarritoDeCompras");
-            
+                return Json(new { redirectUrl = Url.Action("CarritoCompras") });
+
         }
 
         //Método para agregar pedido a la base de datos

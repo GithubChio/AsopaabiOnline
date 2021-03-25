@@ -9,10 +9,10 @@
 
 <div class="card">
     <div class="card-header text-center"> <h4 class="card-title ">@ViewBag.title</h4></div>
-   
+
     <div class="m-4">
 
-        <form action="GenerarPedido" controller="CarritoDeCompras"  method="post" >
+        <form id="formCarrito">
             <table class="table table-stripedd">
                 <thead>
                     <tr>
@@ -95,12 +95,12 @@
             <hr />
             <partial model="Model.pedido" name="~/Views/Shared/_PedidoPartial.cshtml" />
 
-            <button style="margin-top:5%;" class="btn btn-info  btn-block" data-toggle="modal" data-target="#generarPedido">Generar pedido</button>
+            <button type="submit" style="margin-top:5%;" class="btn btn-info  btn-block">Generar pedido</button>
 
 
 
 
-            <div class="modal fade" id="generarPedido" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="gPedido" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -117,7 +117,7 @@
 
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
-                            <button type="submit"   class="btn btn-primary">Enviar</button>
+                            <button type="submit" id="enviarPedido" class="btn btn-primary">Enviar</button>
 
                         </div>
                     </div>
@@ -125,9 +125,31 @@
             </div>
 
         </form>
-    
+
     </div>
-    </div>
-   
+</div>
 
 
+
+<script type="text/javascript">
+    $('#formCarrito').on('submit', function (e) {        $('#gPedido').modal('show');        e.preventDefault();    });
+
+    $("#enviarPedido").click(() => {
+            $.ajax({
+                type: "POST",
+                url: "/CarritoDeCompras/GenerarPedido",
+                data: $('#formCarrito').serialize(),
+                success: function (response) {
+                    $('#gPedido').modal('hide');                    console.log(response)                    window.location.href = response.redirectUrl
+                },
+                failure: function (response) {
+
+                },
+                error: function (response) {
+
+                }
+            });
+    })
+        
+  
+</script>
