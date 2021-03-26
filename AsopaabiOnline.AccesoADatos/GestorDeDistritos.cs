@@ -8,6 +8,10 @@ namespace AsopaabiOnline.AccesoADatos
 {
     public class GestorDeDistritos
     {
+
+        //--------------------------Distritos de la provincia de san jose----------------------------------------------------------------------
+
+        //Se obtienen los distritos del canton de San Jose 
         public List<Distrito> ObtenerDistritosDelCantonDeSanJose()
         {
 
@@ -17,7 +21,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
-       
+
+        //Se obtienen los distritos del canton de Escazu
         public List<Distrito> ObtenerDistritosDelCantonDeEscazu()
         {
             var laBaseDeDatos = new Contexto();
@@ -26,6 +31,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //Se obtienen los distritos del canton de Desamparados
         public List<Distrito> ObtenerDistritosDelCantonDeDesamparados()
         {
             var laBaseDeDatos = new Contexto();
@@ -35,6 +42,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+        //Se obtienen los distritos del canton de Puriscal
         public List<Distrito> ObtenerDistritosDelCantonDePuriscal()
         {
             var laBaseDeDatos = new Contexto();
@@ -43,6 +51,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //Se obtienen los distritos del canton de Tarrazu
         public List<Distrito> ObtenerDistritosDelCantonDeTarrazu()
         {
             var laBaseDeDatos = new Contexto();
@@ -52,8 +62,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
-       
-
+        //Se obtienen los distritos del canton de Aserri
         public List<Distrito> ObtenerDistritosDelCantonDeAserri()
         {
             var laBaseDeDatos = new Contexto();
@@ -62,6 +71,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de  Mora
         public List<Distrito> ObtenerDistritosDelCantonDeMora()
         {
             var laBaseDeDatos = new Contexto();
@@ -70,6 +80,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de Goicoechea
         public List<Distrito> ObtenerDistritosDelCantonDeGoicoechea()
         {
             var laBaseDeDatos = new Contexto();
@@ -78,6 +89,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //Se obtienen los distritos del canton de Santa Ana
         public List<Distrito> ObtenerDistritosDelCantonDeSantaAna()
         {
             var laBaseDeDatos = new Contexto();
@@ -86,6 +99,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //Se obtienen los distritos del canton de  Alajuelita
         public List<Distrito> ObtenerDistritosDelCantonDeAlajuelita()
         {
             var laBaseDeDatos = new Contexto();
@@ -94,6 +109,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de  Vazquez de Colorado
         public List<Distrito> ObtenerDistritosDelCantonDeVazquezDeCoronado()
         {
             var laBaseDeDatos = new Contexto();
@@ -102,6 +118,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de  Acosta
         public List<Distrito> ObtenerDistritosDelCantonDeAcosta()
         {
             var laBaseDeDatos = new Contexto();
@@ -110,6 +127,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de Tibas
         public List<Distrito> ObtenerDistritosDelCantonDeTibas()
         {
             var laBaseDeDatos = new Contexto();
@@ -118,7 +136,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
-
+        //Se obtienen los distritos del canton de Moravia
         public List<Distrito> ObtenerDistritosDelCantonDeMoravia()
         {
             var laBaseDeDatos = new Contexto();
@@ -127,7 +145,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
-
+        //Se obtienen los distritos del canton de Montes de Oca
         public List<Distrito> ObtenerDistritosDelCantonDeMontesDeOca()
         {
             var laBaseDeDatos = new Contexto();
@@ -136,6 +154,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de Turrucabares
         public List<Distrito> ObtenerDistritosDelCantonDeTurrubares()
         {
             var laBaseDeDatos = new Contexto();
@@ -144,6 +163,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de Dota
         public List<Distrito> ObtenerDistritosDelCantonDeDota()
         {
             var laBaseDeDatos = new Contexto();
@@ -152,6 +172,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de Curridabat
         public List<Distrito> ObtenerDistritosDelCantonDeCurridabat()
         {
             var laBaseDeDatos = new Contexto();
@@ -160,6 +181,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de Perez Zeledon 
 
         public List<Distrito> ObtenerDistritosDelCantonDePerezZeledon()
         {
@@ -169,6 +191,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de Leon Cortes Castro
         public List<Distrito> ObtenerDistritosDelCantonDeLeonCortesCastro()
         {
             var laBaseDeDatos = new Contexto();
@@ -181,7 +204,9 @@ namespace AsopaabiOnline.AccesoADatos
 
 
 
-        //------------------------------------------------------------------------------------------------
+        //-----------------------------Distritos de la provincia de Alajuela-------------------------------------------------------------------
+
+        //Se obtienen los distritos del canton de Alajuela
         public List<Distrito> ObtenerDistritosDelCantonDeAlajuela()
         {
 
@@ -192,6 +217,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+        //Se obtienen los distritos del canton de San Ramon
         public List<Distrito> ObtenerDistritosDelCantonDeSanRamon()
         {
 
@@ -201,6 +227,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //Se obtienen los distritos del canton de Grecia
         public List<Distrito> ObtenerDistritosDelCantonDeGrecia()
         {
 
@@ -210,6 +238,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //Se obtienen los distritos del canton de San Mateo
         public List<Distrito> ObtenerDistritosDelCantonDeSanMateo()
         {
 
@@ -219,6 +249,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de Atenas
         public List<Distrito> ObtenerDistritosDelCantonDeAtenas()
         {
 
@@ -228,6 +259,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //Se obtienen los distritos del canton de Naranjo
         public List<Distrito> ObtenerDistritosDelCantonDeNaranjo()
         {
 
@@ -237,6 +270,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de Palmares
         public List<Distrito> ObtenerDistritosDelCantonDePalmares()
         {
 
@@ -246,6 +280,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de Poas
         public List<Distrito> ObtenerDistritosDelCantonDePoas()
         {
 
@@ -255,6 +290,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de Orotina
         public List<Distrito> ObtenerDistritosDelCantonDeOrotina()
         {
 
@@ -265,7 +301,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
-
+        //Se obtienen los distritos del canton de San Carlos
         public List<Distrito> ObtenerDistritosDelCantonDeSanCarlos()
         {
 
@@ -275,6 +311,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de Zarcero
         public List<Distrito> ObtenerDistritosDelCantonDeZarcero()
         {
 
@@ -285,6 +322,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+        //Se obtienen los distritos del canton de Valdeverde Vega
         public List<Distrito> ObtenerDistritosDelCantonDeValverdeVega()
         {
 
@@ -294,7 +332,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
-
+        //Se obtienen los distritos del canton de Upala
         public List<Distrito> ObtenerDistritosDelCantonDeUpala()
         {
 
@@ -304,7 +342,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
-
+        //Se obtienen los distritos del canton de Los Chiles
         public List<Distrito> ObtenerDistritosDelCantonDeLosChiles()
         {
 
@@ -314,6 +352,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de Guatuso
         public List<Distrito> ObtenerDistritosDelCantonDeGuatuso()
         {
 
@@ -327,8 +366,9 @@ namespace AsopaabiOnline.AccesoADatos
 
 
 
-        //-------------------------------------------------------------------------------------------------
+        //-------------------------------------------Distritos de la provincia de Cartago------------------------------------------------------
 
+        //Se obtienen los distritos del canton de Cartago
         public List<Distrito> ObtenerDistritosDelCantonDeCartago()
         {
 
@@ -339,6 +379,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+        //Se obtienen los distritos del canton de Paraiso
         public List<Distrito> ObtenerDistritosDelCantonDeParaiso()
         {
 
@@ -348,6 +389,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de La Union
         public List<Distrito> ObtenerDistritosDelCantonDeLaUnion()
         {
 
@@ -358,6 +400,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+        //Se obtienen los distritos del canton de Jimenez
         public List<Distrito> ObtenerDistritosDelCantonDeJimenez()
         {
 
@@ -367,7 +410,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
-
+        //Se obtienen los distritos del canton de Turrialba
         public List<Distrito> ObtenerDistritosDelCantonDeTurrialba()
         {
 
@@ -377,6 +420,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de Alvarado
         public List<Distrito> ObtenerDistritosDelCantonDeAlvarado()
         {
 
@@ -386,6 +430,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de Oreamuno
         public List<Distrito> ObtenerDistritosDelCantonDeOreamuno()
         {
 
@@ -395,6 +440,7 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        //Se obtienen los distritos del canton de El Guarco
         public List<Distrito> ObtenerDistritosDelCantonDeElGuarco()
         {
 
@@ -406,7 +452,8 @@ namespace AsopaabiOnline.AccesoADatos
         }
        
 
-        //--------------------------------------------------------------------------------------------------------------
+        //-----------------------------------------Distritos de la provincia de Heredia---------------------------------------------------------------------
+
 
         public List<Distrito> ObtenerDistritosDelCantonDeHeredia()
         {

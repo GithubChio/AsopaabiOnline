@@ -8,38 +8,44 @@ namespace AsopaabiOnline.AccesoADatos
 {
     public class GestorDeProductos
     {
+
+        //Permite agregar un producto en la base de datos 
         public void Agregar(Producto elProducto)
         {
             var laBaseDeDatos = new Contexto();
-            laBaseDeDatos.Producto.Add(elProducto);
+            //agregamos y guardamos el nuevo producto en la base de datos
+            laBaseDeDatos.Producto.Add(elProducto); 
             laBaseDeDatos.Entry(elProducto).State = Microsoft.EntityFrameworkCore.EntityState.Added;
             laBaseDeDatos.SaveChanges();
         }
+
+        //Obtener la lista de productos 
         public List<Producto> ObtenerListaDeProductos()
         {
             var laBaseDeDatos = new Contexto();
+            //se busca todos los productos existentes en la base de datos
+
             var elResultado = from elProducto in laBaseDeDatos.Producto
                               select elProducto;
-
             return elResultado.ToList();
         }
 
-        
+        //se obtiene  un producto en especifico
 
         public Modelo.Producto  ObtenerProductoPorId(int id)
         {
             var laBaseDeDatos = new Contexto();
-            var elResultado = laBaseDeDatos.Producto.Find(id);
+            var elResultado = laBaseDeDatos.Producto.Find(id); //se busca la existencia de un producto en la base de datos
             return elResultado;
         }
 
 
-       
+       //Metodo que permite actualizar un producto 
         public void Actualizar(Producto elProductoAActualizar)
         {
             var laBaseDeDatos = new Contexto();
-            var elProductoEnLaBD = ObtenerProductoPorId(elProductoAActualizar.Id);
-
+            var elProductoEnLaBD = ObtenerProductoPorId(elProductoAActualizar.Id); //Encontramos el producto a actualizar
+            //le asignamos los nuevos valores
             elProductoEnLaBD.Id = elProductoAActualizar.Id;
             elProductoEnLaBD.Codigo = elProductoAActualizar.Codigo;
             elProductoEnLaBD.Imagen = elProductoAActualizar.Imagen;
@@ -50,83 +56,39 @@ namespace AsopaabiOnline.AccesoADatos
             elProductoEnLaBD.Categoria = elProductoAActualizar.Categoria;
             elProductoEnLaBD.Estado = elProductoAActualizar.Estado;
 
+            //actualizamos y guardamos los cambios 
             laBaseDeDatos.Entry(elProductoEnLaBD).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             laBaseDeDatos.SaveChanges();
 
         }
-
+         
+        //Permite eliminar un producto de la base de datos.
         public void Eliminar(Producto elProductoAEliminar)
         {
             var laBaseDeDatos = new Contexto();
-            var elProductoEnLaBD = ObtenerProductoPorId(elProductoAEliminar.Id);
-
+            var elProductoEnLaBD = ObtenerProductoPorId(elProductoAEliminar.Id); //Encontramos el producto
+            //eliminamos de la base de datos
             laBaseDeDatos.Producto.Remove(elProductoEnLaBD);
             laBaseDeDatos.Remove(elProductoEnLaBD).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+          //guardamos cambios
+            
             laBaseDeDatos.SaveChanges();
         }
 
-
+        //Obtenemos una lista de productos por codigo 
         public List<Producto> ObtenerProductosPorCodigo(string codigo)
         {
             var laBaseDeDatos = new Contexto();
-            var elResultado = from elProducto in laBaseDeDatos.Producto
+            //si el codigo del producto buscado es encontrado en la base de datos
+            var elResultado = from elProducto in laBaseDeDatos.Producto 
                               where elProducto.Codigo == codigo
                               select elProducto;
 
-            return elResultado.ToList();
-
-        }
-        public List<Producto> ObtenerListaDeProductosConCategoriaDeFruta()
-        {
-            var laBaseDeDatos = new Contexto();
-            var elResultado = from elProducto in laBaseDeDatos.Producto
-                              where elProducto.Categoria == CategoriaDeProducto.Frutas
-                              select elProducto;
-
-            return elResultado.ToList();
-
-        }
-        public List<Producto> ObtenerListaDeProductosConCategoriaHortalizas()
-        {
-            var laBaseDeDatos = new Contexto();
-            var elResultado = from elProducto in laBaseDeDatos.Producto
-                              where elProducto.Categoria == CategoriaDeProducto.Hortalizas
-                              select elProducto;
-
-            return elResultado.ToList();
-
-        }
-        public List<Producto> ObtenerListaDeProductosConCategoriaRaicesYTuberculos()
-        {
-            var laBaseDeDatos = new Contexto();
-            var elResultado = from elProducto in laBaseDeDatos.Producto
-                              where elProducto.Categoria == CategoriaDeProducto.Raices_y_Tuberculos
-                              select elProducto;
-
+            //se devuelve la lista del resultado 
             return elResultado.ToList();
 
         }
 
-        public List<Producto> ObtenerListaDeProductosConCategoriaFloresAromaticas()
-        {
-            var laBaseDeDatos = new Contexto();
-            var elResultado = from elProducto in laBaseDeDatos.Producto
-                              where elProducto.Categoria == CategoriaDeProducto.FloresAromaticas
-                              select elProducto;
-
-            return elResultado.ToList();
-
-        }
-
-        public List<Producto> ObtenerListaDeProductosConCategoriaOtros()
-        {
-            var laBaseDeDatos = new Contexto();
-            var elResultado = from elProducto in laBaseDeDatos.Producto
-                              where elProducto.Categoria == CategoriaDeProducto.Otros
-                              select elProducto;
-
-            return elResultado.ToList();
-
-        }
+       
     }
 }
