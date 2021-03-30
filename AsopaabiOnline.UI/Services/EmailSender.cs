@@ -32,9 +32,11 @@ namespace AsopaabiOnline.UI.Services
             {
                 From = new EmailAddress("asopaabi@outlook.es", "AsopaabiOnline"),
                 Subject = subject,
+                 
                 PlainTextContent = message,
                 HtmlContent = message
             };
+            elMensaje.AddCc(new EmailAddress("asopaabi@outlook.es"));
             elMensaje.AddTo(new EmailAddress(email));
 
             // Disable click tracking.

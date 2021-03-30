@@ -8,17 +8,33 @@ namespace AsopaabiOnline.UI.Models
         public int MinAge { get; set; }
         public int MaxAge { get; set; }
 
-        public override bool IsValid(object value)
+        protected override  ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value == null)
-                return true;
+            var register = (Register)validationContext.ObjectInstance;
+          
+            if (value != null)
+            {
+                if (register.DniType == DNIType.cedulaFisica)
+                {
+                    var val = (DateTime)value;
 
-            var val = (DateTime)value;
+                    if (val.AddYears(MinAge) > DateTime.Now)
+                        return new ValidationResult("no se aceptan menores de edad");
 
-            if (val.AddYears(MinAge) > DateTime.Now)
-                return false;
+                    if(val.AddYears(MaxAge) > DateTime.Now)
+                    {
+                        return ValidationResult.Success;
+                    }
+                }
+                if (register.DniType == DNIType.cedulaJuridica)
+                {
+                    return ValidationResult.Success;
 
-            return (val.AddYears(MaxAge) > DateTime.Now);
+                }
+
+            }
+            return new ValidationResult("Fecha requerida");
         }
+       
     }
 }

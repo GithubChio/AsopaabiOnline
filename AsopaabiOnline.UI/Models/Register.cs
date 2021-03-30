@@ -53,13 +53,13 @@ namespace AsopaabiOnline.UI.Models
         [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Solo se permiten letras y la primera debe ser mayúscula.")]
         public string SecondName { get; set; }
 
-        [Required(ErrorMessage = "El primer apellido es requerido")]
+        
         [DataType(DataType.Text)]
         [Display(Name = "Primer apellido")]
         [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Solo se permiten letras y la primera debe ser mayúscula.")]
         public string FirstLastName { get; set; }
 
-        [Required(ErrorMessage = "El segundo apellido es requerido")]
+        
         [DataType(DataType.Text)]
         [Display(Name = "Segundo Apellido")]
         [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Solo se permiten letras y la primera debe ser mayúscula.")]

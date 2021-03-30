@@ -30,9 +30,13 @@
 
                 <div class="form-group">
                     <label asp-for="DNI" class="control-label"></label><small> <i class="fas fa-asterisk text-danger"></i></small>
+
                     <input asp-for="DNI" class="form-control" />
+
                     <div id="elResultado" class="text-danger" />
                     <span asp-validation-for="DNI" class="text-danger"></span>
+                    <small id="passwordHelpBlock" class="form-text text-muted"> Si es cédula física: Ej: 1-0222-0222 / si es cédula Juridíca: Ej: 1-0222-256236</small>
+
                 </div>
 
 
@@ -41,23 +45,28 @@
                     <input asp-for="FirstName" class="form-control" />
                     <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="SecondName" class="control-label"></label>
-                    <input asp-for="SecondName" class="form-control" />
-                    <span asp-validation-for="SecondName" class="text-danger"></span>
+                <div id="custom-div">
+
+                    <div class="form-group">
+                        <label asp-for="SecondName" class="control-label"></label>
+                        <input asp-for="SecondName" class="form-control" />
+                        <span asp-validation-for="SecondName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FirstLastName" class="control-label"></label>
+                        <input asp-for="FirstLastName" class="form-control" />
+                        <span asp-validation-for="FirstLastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SecondLastName" class="control-label"></label>
+                        <input asp-for="SecondLastName" class="form-control" />
+                        <span asp-validation-for="SecondLastName" class="text-danger"></span>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label asp-for="FirstLastName" class="control-label"></label><small> <i class="fas fa-asterisk text-danger"></i></small>
-                    <input asp-for="FirstLastName" class="form-control" />
-                    <span asp-validation-for="FirstLastName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="SecondLastName" class="control-label"></label><small> <i class="fas fa-asterisk text-danger"></i></small>
-                    <input asp-for="SecondLastName" class="form-control" />
-                    <span asp-validation-for="SecondLastName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="DateOfBirth" class="control-label"></label><small> <i class="fas fa-asterisk text-danger"></i></small>
+
+                    <label id="label-juridica"  class="control-label"></label>
+                    <small> <i class="fas fa-asterisk text-danger"></i></small>
                     <input asp-for="DateOfBirth" class="form-control" required />
                     <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                 </div>
@@ -172,8 +181,12 @@
                 console.log(DNITYPE)
                 if (DNITYPE == 1) {
                     dniType = 1
+                    $("#label-juridica").text("Fecha de Nacimiento")
+                    $("#custom-div").show()
                 } else {
                     dniType = 2
+                    $("#label-juridica").text("Fecha de creación")
+                    $("#custom-div").hide()
                 }
             });;
 

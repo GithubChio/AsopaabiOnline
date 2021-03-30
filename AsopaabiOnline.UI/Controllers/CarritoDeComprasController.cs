@@ -160,7 +160,7 @@ namespace AsopaabiOnline.UI.Controllers
                 List<Producto> carritoDeCompras = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");
                 var user = await userManager.GetUserAsync(HttpContext.User);
                 var emailUser = await userManager.GetEmailAsync(user);
-
+                var emailDephault = "asopaabi@outlook.es";
                 var db = new Contexto();
                 int idPedido = await InsertPedidoAsync(pedido, db, user);
                 if (idPedido != 0)
@@ -181,8 +181,9 @@ namespace AsopaabiOnline.UI.Controllers
                     db.HistorialPedido.Add(historialPedido);
                     await db.SaveChangesAsync();
                     await emailSender.SendEmailAsync(emailUser, "Pedido", PlantillaCorreoPedido(existePedido, total, carritoDeCompras));
+                   await emailSender.SendEmailAsync(emailDephault, "Pedido", PlantillaCorreoPedido(existePedido, total, carritoDeCompras));
 
-                    Alert("Su pedido ha sido enviado.", NotificationType.success);
+                Alert("Su pedido ha sido enviado.", NotificationType.success);
                     return Json(new {redirectUrl = Url.Action("Mostrar", "HistorialPedidos")});
 
                 }
