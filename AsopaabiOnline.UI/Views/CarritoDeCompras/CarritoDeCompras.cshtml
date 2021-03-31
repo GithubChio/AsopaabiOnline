@@ -117,7 +117,9 @@
 
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
-                            <button type="submit" id="enviarPedido" class="btn btn-primary">Enviar</button>
+                            <button type="submit" id="enviarPedido" class="btn btn-primary" >
+                              
+                            </button>
 
                         </div>
                     </div>
@@ -132,9 +134,12 @@
 
 
 <script type="text/javascript">
-    $('#formCarrito').on('submit', function (e) {        $('#gPedido').modal('show');        e.preventDefault();    });
+    $('#formCarrito').on('submit', function (e) {        $('#gPedido').modal('show');        e.preventDefault();          });
+
+   
 
     $("#enviarPedido").click(() => {
+       
             $.ajax({
                 type: "POST",
                 url: "/CarritoDeCompras/GenerarPedido",
@@ -149,6 +154,9 @@
 
                 }
             });
+
+       
+       
     })
         
   

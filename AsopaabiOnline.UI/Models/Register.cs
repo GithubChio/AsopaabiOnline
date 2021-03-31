@@ -33,12 +33,12 @@ namespace AsopaabiOnline.UI.Models
 
         [Required(ErrorMessage = "El número de identificación es requerido")]
         [DataType(DataType.Text)]
-        [Display(Name = "Número de identificación")]
+        [Display(Name = "Número de Identificación")]
         [DNITypeValidation]
         public string DNI { get; set; }
         
         [NotMapped]
-        [Display(Name = "Tipo de identificación")]
+        [Display(Name = "Tipo de Identificación")]
         public DNIType DniType { get; set; }
 
 
@@ -55,7 +55,7 @@ namespace AsopaabiOnline.UI.Models
 
         
         [DataType(DataType.Text)]
-        [Display(Name = "Primer apellido")]
+        [Display(Name = "Primer Apellido")]
         [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$", ErrorMessage = "Solo se permiten letras y la primera debe ser mayúscula.")]
         public string FirstLastName { get; set; }
 
