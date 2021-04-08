@@ -33,12 +33,13 @@ namespace AsopaabiOnline.UI.Controllers
 
         }
 
-     //Método para añadir productos al carrito de compras
+        //Método para añadir productos al carrito de compras
 
         [HttpPost]
         public IActionResult AñadirAlCarrito(int id, int cantidad)
         {
-
+            try 
+            { 
             CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
             var producto = elCoordinador.ObtenerProductoPorId(id);
             if (producto == null || cantidad == 0)
@@ -85,7 +86,12 @@ namespace AsopaabiOnline.UI.Controllers
 
             }
             return RedirectToAction("Tienda", "Home");
-
+            
+            }
+            catch{
+                Alert("No se ha podido agregar al carrito", NotificationType.error);
+                return RedirectToAction("Tienda", "Home");
+            }
 
         }
 
@@ -162,8 +168,8 @@ namespace AsopaabiOnline.UI.Controllers
                 var emailUser = await userManager.GetEmailAsync(user);
                 var emailDephault = "asopaabi@outlook.es";
                 var db = new Contexto();
-                int idPedido = await InsertPedidoAsync(pedido, db, user);
-                if (idPedido != 0)
+                int idPedido = await InsertPedidoAsync(pedido, db, user); //agregar un pedido de forma asyncronica a la tabla Pedido.
+            if (idPedido != 0)
                 {
                     bool seGuardoPago = await InsertPago(db, idPedido, pedido, total);
                     var d = seGuardoPago;
@@ -188,7 +194,7 @@ namespace AsopaabiOnline.UI.Controllers
 
                 }
                 return Json(new { redirectUrl = Url.Action("CarritoCompras") });
-
+            
         }
 
         //Método para agregar pedido a la base de datos
@@ -201,8 +207,8 @@ namespace AsopaabiOnline.UI.Controllers
                     CoordinadorDePedidos coordinadorDePedidos = new CoordinadorDePedidos();
 
                     pedido.IdCliente = user.Id;
-                    coordinadorDePedidos.Agregar(pedido);
-                    await dbContextTransaction.CommitAsync();
+                    coordinadorDePedidos.Agregar(pedido);  // Agrega el pedido con ayuda del coordinador de pedidos
+                    await dbContextTransaction.CommitAsync(); // Se hace un commit para asegurar la transacción
                     return pedido.Id;
                 }
                 catch (Exception)

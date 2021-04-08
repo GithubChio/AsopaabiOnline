@@ -19,9 +19,7 @@ namespace AsopaabiOnline.UI.Models
         }
 
       
-        
-      
-
+       
         [Required(ErrorMessage = "Por favor ingrese su identificación")]
         [DataType(DataType.Text)]
         [Display(Name = "Número de identificación")]
@@ -56,7 +54,7 @@ namespace AsopaabiOnline.UI.Models
 
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^(\d{8})$", ErrorMessage = "el número de celular debe tener 8 digitos númericos")]
-        [Display(Name = "Número de teléfono secundario")]
+        [Display(Name = "Teléfono secundario")]
    
         public string PhoneNumber2 { get; set; }
 

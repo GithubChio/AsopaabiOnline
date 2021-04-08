@@ -8,7 +8,7 @@ namespace AsopaabiOnline.AccesoADatos
 {
     public class GestorDePagos
     {
-        //Se obtiene el  pago de un pedido
+        //Se busca en la tabla de Pago el pago de un pedido
         public List<Pago> ListarPago(int idPedido)
         {
             var laBaseDeDatos = new Contexto();

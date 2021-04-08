@@ -5,11 +5,11 @@ using System.Text;
 using System.Linq;
 
 namespace AsopaabiOnline.AccesoADatos
-{
+{                                                                           //clase: gestor de  distritos
     public class GestorDeDistritos
     {
 
-        //--------------------------Distritos de la provincia de san jose----------------------------------------------------------------------
+        //--------------------------DISTRITOS DE LA PROVINCIA DE SAN JOSE----------------------------------------------------------------------
 
         //Se obtienen los distritos del canton de San Jose 
         public List<Distrito> ObtenerDistritosDelCantonDeSanJose()
@@ -204,7 +204,7 @@ namespace AsopaabiOnline.AccesoADatos
 
 
 
-        //-----------------------------Distritos de la provincia de Alajuela-------------------------------------------------------------------
+        //-----------------------------DISTRITOS DE LA PROVINCIA DE ALAJUELA-------------------------------------------------------------------
 
         //Se obtienen los distritos del canton de Alajuela
         public List<Distrito> ObtenerDistritosDelCantonDeAlajuela()
@@ -366,7 +366,7 @@ namespace AsopaabiOnline.AccesoADatos
 
 
 
-        //-------------------------------------------Distritos de la provincia de Cartago------------------------------------------------------
+        //-------------------------------------------DISTRITOS DE LA PROVINCIA DE CARTAGO  ---------------------------------------------------------
 
         //Se obtienen los distritos del canton de Cartago
         public List<Distrito> ObtenerDistritosDelCantonDeCartago()
@@ -450,11 +450,12 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
-       
-
-        //-----------------------------------------Distritos de la provincia de Heredia---------------------------------------------------------------------
 
 
+        //-----------------------------------------DISTRITOS DE LA PROVINCIA DE HEREDIA---------------------------------------------------------------------------
+
+
+        //se busca en la tabla Distrito  los distritos del canton de heredia 
         public List<Distrito> ObtenerDistritosDelCantonDeHeredia()
         {
 
@@ -464,6 +465,10 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+
+
+        //se busca en la tabla Distrito  los distritos del canton de  Barva
         public List<Distrito> ObtenerDistritosDelCantonDeBarva()
         {
 
@@ -473,6 +478,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de  Santo Domingo
         public List<Distrito> ObtenerDistritosDelCantonDeSantoDomingo()
         {
 
@@ -482,6 +489,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de santa barbara
         public List<Distrito> ObtenerDistritosDelCantonDeSantaBarbara()
         {
 
@@ -491,6 +500,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de san rafael 
         public List<Distrito> ObtenerDistritosDelCantonDeSanRafael()
         {
 
@@ -500,6 +511,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de  san isidro
         public List<Distrito> ObtenerDistritosDelCantonDeSanIsidro()
         {
 
@@ -509,6 +522,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+       
+        //se busca en la tabla Distrito  los distritos del canton de  belen 
         public List<Distrito> ObtenerDistritosDelCantonDeBelen()
         {
 
@@ -518,6 +533,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        
+        //se busca en la tabla Distrito  los distritos del canton de  flores 
         public List<Distrito> ObtenerDistritosDelCantonDeFlores()
         {
 
@@ -527,6 +544,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de san pablo
         public List<Distrito> ObtenerDistritosDelCantonDeSanPablo()
         {
 
@@ -537,6 +556,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+        //se busca en la tabla Distrito  los distritos del canton de sarapiqui
         public List<Distrito> ObtenerDistritosDelCantonDeSarapiqui()
         {
 
@@ -547,7 +567,9 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
-        //------------------------------------------------------------------------------------------------------------------------
+        //------------------------------------------------DISTRITOS DE LA PROVINCIA DE GUANACASTE-------------------------------------------------------------
+
+        //se busca en la tabla Distrito  los distritos del canton de liberia
         public List<Distrito> ObtenerDistritosDelCantonDeLiberia()
         {
 
@@ -557,6 +579,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de Nicoya
         public List<Distrito> ObtenerDistritosDelCantonDeNicoya()
         {
 
@@ -567,6 +591,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+        //se busca en la tabla Distrito  los distritos del canton de santa cruz
         public List<Distrito> ObtenerDistritosDelCantonDeSantaCruz()
         {
 
@@ -576,6 +601,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de bagaces
         public List<Distrito> ObtenerDistritosDelCantonDeBagaces()
         {
 
@@ -585,6 +612,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de carrillo
         public List<Distrito> ObtenerDistritosDelCantonDeCarrillo()
         {
 
@@ -594,6 +623,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de cañas
         public List<Distrito> ObtenerDistritosDelCantonDeCañas()
         {
 
@@ -603,6 +634,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de abagares
         public List<Distrito> ObtenerDistritosDelCantonDeAbangares()
         {
 
@@ -612,6 +645,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de tilaran
         public List<Distrito> ObtenerDistritosDelCantonDeTilaran()
         {
 
@@ -621,6 +656,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de nandayure
         public List<Distrito> ObtenerDistritosDelCantonDeNandayure()
         {
 
@@ -631,6 +668,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+        //se busca en la tabla Distrito  los distritos del canton de la cruz
         public List<Distrito> ObtenerDistritosDelCantonDeLaCruz()
         {
 
@@ -640,6 +678,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de Hojancha
 
         public List<Distrito> ObtenerDistritosDelCantonDeHojancha()
         {
@@ -652,7 +692,9 @@ namespace AsopaabiOnline.AccesoADatos
         }
 
 
-        //---------------------------------------------------------------------------------------------------------------------------
+        //------------------------------------------------DISTRITOS DE LA PROVINCIA DE PUNTARENAS---------------------------------------------------------------------------
+
+        //se busca en la tabla Distrito  los distritos del canton de puntarenas
         public List<Distrito> ObtenerDistritosDelCantonDePuntarenas()
         {
 
@@ -663,6 +705,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+        //se busca en la tabla Distrito  los distritos del canton de esparza
         public List<Distrito> ObtenerDistritosDelCantonDeEsparza()
         {
 
@@ -673,6 +716,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+        //se busca en la tabla Distrito  los distritos del canton de buenos aires
         public List<Distrito> ObtenerDistritosDelCantonDeBuenosAires()
         {
 
@@ -682,6 +726,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de montes de oro
         public List<Distrito> ObtenerDistritosDelCantonDeMontesDeOro()
         {
 
@@ -691,6 +737,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de osa
         public List<Distrito> ObtenerDistritosDelCantonDeOsa()
         {
 
@@ -701,6 +749,8 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+        //se busca en la tabla Distrito  los distritos del canton de aguirre
+
         public List<Distrito> ObtenerDistritosDelCantonDeAguirre()
         {
 
@@ -710,6 +760,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de golfito
         public List<Distrito> ObtenerDistritosDelCantonDeGolfito()
         {
 
@@ -719,6 +771,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de coto brus
         public List<Distrito> ObtenerDistritosDelCantonDeCotoBrus()
         {
 
@@ -728,6 +782,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de parrita
         public List<Distrito> ObtenerDistritosDelCantonDeParrita()
         {
 
@@ -737,6 +793,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+        
+        //se busca en la tabla Distrito  los distritos del canton de corredores
 
         public List<Distrito> ObtenerDistritosDelCantonDeCorredores()
         {
@@ -747,6 +805,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de garabito
         public List<Distrito> ObtenerDistritosDelCantonDeGarabito()
         {
 
@@ -756,7 +816,10 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
-        //------------------------------------------------------------------------------------------------------------------------------
+
+        //----------------------------------------------------------DISTRITOS DE LA PROVINCIA DE LIMON--------------------------------------------------------------------
+
+        //se busca en la tabla Distrito  los distritos del canton de limon
         public List<Distrito> ObtenerDistritosDelCantonDeLimon()
         {
 
@@ -767,6 +830,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+        //se busca en la tabla Distrito  los distritos del canton de pococi
         public List<Distrito> ObtenerDistritosDelCantonDePococi()
         {
 
@@ -776,6 +840,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de siquirres
         public List<Distrito> ObtenerDistritosDelCantonDeSiquirres()
         {
 
@@ -786,6 +852,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+        //se busca en la tabla Distrito  los distritos del canton de talamanca
         public List<Distrito> ObtenerDistritosDelCantonDeTalamanca()
         {
 
@@ -795,6 +862,8 @@ namespace AsopaabiOnline.AccesoADatos
                               select elDistrito;
             return elResultado.ToList();
         }
+
+        //se busca en la tabla Distrito  los distritos del canton de matina
         public List<Distrito> ObtenerDistritosDelCantonDeMatina()
         {
 
@@ -805,6 +874,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado.ToList();
         }
 
+        //se busca en la tabla Distrito  los distritos del canton de guacimo
         public List<Distrito> ObtenerDistritosDelCantonDeGuacimo()
         {
 

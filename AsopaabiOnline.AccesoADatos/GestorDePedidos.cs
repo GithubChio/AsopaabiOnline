@@ -9,14 +9,14 @@ namespace AsopaabiOnline.AccesoADatos
     public class GestorDePedidos
     {
 
-        //Permite agregar un pedido en la base de datos 
+        //Permite agregar un nuevo pedido en la tabla de Pedido
         public void Agregar(Modelo.Pedido elPedido)
         {
             Modelo.Contexto laBaseDeDatos = new Contexto();
-            //agregamos y guardamos el nuevo pedido en la base de datos
-            laBaseDeDatos.Pedido.Add(elPedido);
-            laBaseDeDatos.Entry(elPedido).State = Microsoft.EntityFrameworkCore.EntityState.Added;
-            laBaseDeDatos.SaveChanges();
+           
+            laBaseDeDatos.Pedido.Add(elPedido); //comienza el proceso para agregar el pedido en la tabla de Pedido  pero se guarda hasta que se indique el comando SaveChanges()
+            laBaseDeDatos.Entry(elPedido).State = Microsoft.EntityFrameworkCore.EntityState.Added; //el comando entry proporciona acceso a la información de seguimiento de cambios y las operaciones a la entidad.
+            laBaseDeDatos.SaveChanges();//Guarda todos los cambios hechos en el contexto de la  base de datos 
         }
 
         //Obtener la lista de pedidos
@@ -33,7 +33,7 @@ namespace AsopaabiOnline.AccesoADatos
         }
 
 
-        //obtenemos un pedido en especifico
+        //obtenemos de la tabla de Pedido un pedido en especifico por medio del id
         public Modelo.Pedido ObtenerPedidoPorId(int id)
         {
             var laBaseDeDatos = new Contexto();
@@ -41,7 +41,7 @@ namespace AsopaabiOnline.AccesoADatos
             return elResultado;
         }
 
-        //Metodo que permite actualizar un pedido 
+        //permite actualizar un pedido en la tabla de Pedido
         public void Actualizar(Pedido elPedidoAActualizar)
         {
             var laBaseDeDatos = new Contexto();
@@ -55,41 +55,42 @@ namespace AsopaabiOnline.AccesoADatos
             elPedidoEnLaBD.IdCliente = elPedidoAActualizar.IdCliente;
             //actualizamos y guardamos los cambios 
             laBaseDeDatos.Entry(elPedidoEnLaBD).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            laBaseDeDatos.SaveChanges();
+            laBaseDeDatos.SaveChanges(); //Guarda todos los cambios hechos en el contexto de la  base de datos 
 
         }
 
-        //Obtener la lista de pedidos recientes
+        //Busca en la tabla de Pedido la lista de pedidos en estado reciente
         public List<Pedido> ObtenerLaListaDePedidosRecientes()
         {
             var laBaseDeDatos = new Contexto();
-            //si en la base de datos el pedido esta en estado reciente 
+            //si en la base de datos el pedido esta en estado reciente
             var elResultado = from losPedidos in laBaseDeDatos.Pedido
                               where losPedidos.Estado == Modelo.EstadoDePedido.Reciente
                               select losPedidos;
-            //devuelve la lista de pedidos recientes
-            return elResultado.ToList();
+          
+            return elResultado.ToList();   //devuelve la lista de pedidos recientes
         }
-        //Obtener la lista de pedidos en proceso
+
+        //Busca en la tabla de Pedido la lista de pedidos en estado  en proceso
         public List<Pedido> ObtenerLaListaDePedidosEnProceso()
         { //si en la base de datos el pedido esta en estado en proceso
             var laBaseDeDatos = new Contexto();
             var elResultado = from losPedidos in laBaseDeDatos.Pedido
                               where losPedidos.Estado == Modelo.EstadoDePedido.EnProceso
                               select losPedidos;
-            //devuelve la lista de pedidos en  proceso
-            return elResultado.ToList();
+        
+            return elResultado.ToList();  //devuelve la lista de pedidos en proceso
         }
 
-        //Obtener la lista de pedidos finalizados
+        //Busca en la tabla de Pedido la lista de pedidos en estado finalizados
         public List<Pedido> ObtenerLaListaDePedidosFinalizados()
         {//si en la base de datos el pedido esta en estado finalizado
             var laBaseDeDatos = new Contexto();
             var elResultado = from losPedidos in laBaseDeDatos.Pedido
                               where losPedidos.Estado == Modelo.EstadoDePedido.Finalizado
                               select losPedidos;
-            //devuelve la lista de pedidos finalizados
-            return elResultado.ToList();
+            
+            return elResultado.ToList();//devuelve la lista de pedidos finalizados
         }
 
        

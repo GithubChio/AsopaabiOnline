@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace AsopaabiOnline.AccesoADatos
-{
+{                                                       
     public class GestorDeHistorialPedidos
     {
 
@@ -16,7 +16,7 @@ namespace AsopaabiOnline.AccesoADatos
             //se agrega el historial de pedido a la base de datos
             laBaseDeDatos.HistorialPedido.Add(historialPedido);
             laBaseDeDatos.Entry(historialPedido).State = Microsoft.EntityFrameworkCore.EntityState.Added;
-            //se guardan los cambios
+            //Guarda todos los cambios hechos en el contexto de la  base de datos 
             laBaseDeDatos.SaveChanges();
         }
 

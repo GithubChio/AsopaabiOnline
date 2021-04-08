@@ -120,7 +120,7 @@ namespace AsopaabiOnline.UI.Controllers
         public IActionResult Eliminar(int id)
         {
             CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
-            var laDireccionEncontrada = elCoordinador.ObtenerDireccionesPorId(id);
+            var laDireccionEncontrada = elCoordinador.ObtenerDireccionPorId(id);
 
 
             return View(laDireccionEncontrada);

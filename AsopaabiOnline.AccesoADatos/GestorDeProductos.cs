@@ -19,7 +19,7 @@ namespace AsopaabiOnline.AccesoADatos
             laBaseDeDatos.SaveChanges();
         }
 
-        //Obtener la lista de productos 
+        //Permite obtener la lista de productos 
         public List<Producto> ObtenerListaDeProductos()
         {
             var laBaseDeDatos = new Contexto();

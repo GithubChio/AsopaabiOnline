@@ -50,9 +50,13 @@ namespace AsopaabiOnline.UI.Controllers
                         SecondName = user.SecondName,
                         FirstLastName = user.FirstLastName,
                         SecondLastName = user.SecondLastName,
+                        Email= user.Email,
+                        ActivityType = user.ActivityType
 
 
                     };
+
+
 
                     return View(model);
                 }
@@ -71,7 +75,7 @@ namespace AsopaabiOnline.UI.Controllers
         public async Task<IActionResult> EditarPerfil()
         {
 
-            var user = await userManager.GetUserAsync(User);
+            var user = await userManager.GetUserAsync(User); //obtenemos el usuario logueado
             if (user == null)
             {
                 Alert("El perfil no fue encontrado", NotificationType.warning);
