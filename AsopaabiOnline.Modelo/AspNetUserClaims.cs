@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AsopaabiOnline.Modelo
-{
+{  //clase modelo AspNetUserClaims
     public partial class AspNetUserClaims
     {
         public int Id { get; set; }

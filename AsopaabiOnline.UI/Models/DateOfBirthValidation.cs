@@ -2,7 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace AsopaabiOnline.UI.Models
-{
+{ 
+    //clase para validar la fecha de nacimiento
+
     public class DateOfBirthValidation : ValidationAttribute
     {
         public int MinAge { get; set; }
@@ -14,11 +16,11 @@ namespace AsopaabiOnline.UI.Models
           
             if (value != null)
             {
-                if (register.DniType == DNIType.cedulaFisica)
+                if (register.DniType == DNIType.cedulaFisica) // si es cedula fisica
                 {
                     var val = (DateTime)value;
 
-                    if (val.AddYears(MinAge) > DateTime.Now)
+                    if (val.AddYears(MinAge) > DateTime.Now) //no acepta menores de edad
                         return new ValidationResult("no se aceptan menores de edad");
 
                     if(val.AddYears(MaxAge) > DateTime.Now)
@@ -26,9 +28,9 @@ namespace AsopaabiOnline.UI.Models
                         return ValidationResult.Success;
                     }
                 }
-                if (register.DniType == DNIType.cedulaJuridica)
+                if (register.DniType == DNIType.cedulaJuridica) //si es juridica 
                 {
-                    return ValidationResult.Success;
+                    return ValidationResult.Success; //acepta cualquier fecha
 
                 }
 

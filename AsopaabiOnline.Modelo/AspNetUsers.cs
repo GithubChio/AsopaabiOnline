@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AsopaabiOnline.Modelo
-{
+{     //clase modelo AspNetUsers
     public partial class AspNetUsers
     {
         public AspNetUsers()

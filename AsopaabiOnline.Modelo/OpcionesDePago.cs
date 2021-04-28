@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace AsopaabiOnline.Modelo
-{
-   public enum  OpcionesDePago
+{      //clase enum para guardar las opciones de pago
+    public enum  OpcionesDePago
     {
         Efectivo =1,
         [Display(Name ="Por transacción Bancaria")]

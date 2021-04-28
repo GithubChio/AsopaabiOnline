@@ -12,14 +12,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsopaabiOnline.UI.Controllers
-{
-    public class ClientesController : BaseController
+{ // controlador de clientes 
+    public class ClientesController : BaseController//hereda el controlador base para la notificacion de mensajes.
     {
-        private readonly SignInManager<User> signInManager;
+        private readonly SignInManager<User> signInManager; //instancia de la clase de usuario para iniciar sesion 
        
-        private readonly UserManager<User> userManager;
+        private readonly UserManager<User> userManager; //instancia de la clase  usuario para administrar los usuarios
 
-        public ClientesController (UserManager<User> userManager, SignInManager<User> signInManager)
+        public ClientesController (UserManager<User> userManager, SignInManager<User> signInManager)//constructor del controlador de clientes
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -33,16 +33,16 @@ namespace AsopaabiOnline.UI.Controllers
             try
             {
 
-                var user = await userManager.GetUserAsync(User);
-                if (user == null)
+                var user = await userManager.GetUserAsync(User); //el administrador de usuario obtiene el usuario logueado
+                if (user == null) //si no se encuentra el usuario 
                 {
-                    Alert("El perfil no fue encontrado", NotificationType.error);
+                    Alert("El perfil no fue encontrado", NotificationType.info); //mensaje informativo
 
                     return View("Error");
                 }
                 else
                 {
-                    User model = new Models.User()
+                    User model = new Models.User() 
                     {
                         Id = user.Id,
                         DNI = user.DNI,
@@ -75,10 +75,10 @@ namespace AsopaabiOnline.UI.Controllers
         public async Task<IActionResult> EditarPerfil()
         {
 
-            var user = await userManager.GetUserAsync(User); //obtenemos el usuario logueado
+            var user = await userManager.GetUserAsync(User); //el administrador de usuario obtiene el usuario logueado
             if (user == null)
             {
-                Alert("El perfil no fue encontrado", NotificationType.warning);
+                Alert("El perfil no fue encontrado", NotificationType.info); //mensaje informativo 
                 return View("Error");
             }
             else
@@ -108,7 +108,7 @@ namespace AsopaabiOnline.UI.Controllers
         {
             try
             {
-                var user = await userManager.GetUserAsync(User);
+                var user = await userManager.GetUserAsync(User); //el administrador de usuario obtiene el usuario logueado
                 if (user == null)
                 {
                     Alert("El usuario no fue encontrado", NotificationType.warning);
@@ -116,6 +116,7 @@ namespace AsopaabiOnline.UI.Controllers
                 }
                 else
                 {
+                    //se asignan los valores ingresados en vez de los anteriores
                   
                     user.FirstName = input.FirstName;
                     user.SecondName = input.SecondName;
@@ -126,11 +127,11 @@ namespace AsopaabiOnline.UI.Controllers
                     user.ActivityType = input.ActivityType;
 
                     
-                    var elResultado = await userManager.UpdateAsync(user);
+                    var elResultado = await userManager.UpdateAsync(user);  //el administrador de usuario actualiza el perfil 
 
                     if (elResultado.Succeeded)
                     {
-                        await signInManager.RefreshSignInAsync(user);
+                        await signInManager.RefreshSignInAsync(user);//se actualiza el inicio de sesion 
                         Alert("Perfil editado correctamente", NotificationType.success);
                         
                         return RedirectToAction("Perfil");
@@ -197,7 +198,7 @@ namespace AsopaabiOnline.UI.Controllers
         {
             try
             {
-                var user = await userManager.GetUserAsync(User);
+                var user = await userManager.GetUserAsync(User); //el administrador de usuario obtiene el usuario logueado
                 if (user == null)
                 {
                     Alert("No se pudo cargar el usuario ", NotificationType.warning);
@@ -206,12 +207,12 @@ namespace AsopaabiOnline.UI.Controllers
 
                 }
 
-                var hasPassword = await userManager.HasPasswordAsync(user);
+                var hasPassword = await userManager.HasPasswordAsync(user); //el administrador busca la contraseña del usuario 
 
-                if (hasPassword)
+                if (hasPassword) //si tiene contraseña
                 {
 
-                    return RedirectToAction("ChangePassword");
+                    return RedirectToAction("ChangePassword"); //se redige a la pantalla de cambiar contraseña
            
                 }
 
@@ -232,17 +233,17 @@ namespace AsopaabiOnline.UI.Controllers
 
             try
             {
-                var user = await userManager.GetUserAsync(User);
+                var user = await userManager.GetUserAsync(User);//el administrador de usuario obtiene el usuario logueado
                 if (user == null)
                 {
                     Alert("No se pudo cargar el usuario ", NotificationType.warning);
                 }
 
-                var addPasswordResult = await userManager.AddPasswordAsync(user, Input.NewPassword);
+                var addPasswordResult = await userManager.AddPasswordAsync(user, Input.NewPassword); //el administrador de usuarios agrega la nueva contraseña
                 if (addPasswordResult.Succeeded)
                 {
 
-                    await signInManager.RefreshSignInAsync(user);
+                    await signInManager.RefreshSignInAsync(user); //se refresca el inicio de sesion 
 
                 }
 
@@ -265,18 +266,18 @@ namespace AsopaabiOnline.UI.Controllers
         public async Task<IActionResult> ChangePassword()
         {
             try { 
-            var user = await userManager.GetUserAsync(User);
-            if (user == null)
+            var user = await userManager.GetUserAsync(User); //el administrador de usuario obtiene el usuario logueado
+                if (user == null)
             {
                 Alert("No se pudo cargar el usuario", NotificationType.warning);
                 return View();
             }
 
-            var hasPassword = await userManager.HasPasswordAsync(user);
+            var hasPassword = await userManager.HasPasswordAsync(user); // el administrador de usuario verifica si hay una contraseña
 
-            if (!hasPassword)
+            if (!hasPassword) //si no hay contraseña
             {
-                return RedirectToAction("SetPassword");
+                return RedirectToAction("SetPassword"); //redirecciona a la pantalla de establecer contraseña
             }
 
             return View();
@@ -284,7 +285,7 @@ namespace AsopaabiOnline.UI.Controllers
             catch 
             {
 
-                Alert("Algo ha salido mal, inténtalo de nuevo", NotificationType.error);
+                Alert("Algo ha salido mal, inténtalo de nuevo", NotificationType.error); 
                 return RedirectToAction("Perfil");
     }
 }
@@ -296,18 +297,18 @@ namespace AsopaabiOnline.UI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var user = await userManager.GetUserAsync(User);
+                    var user = await userManager.GetUserAsync(User); //el administrador de usuario obtiene el usuario logueado
                     if (user == null)
                     {
                         Alert("No se pudo cargar el usuario", NotificationType.warning);
                         return View();
                     }
 
-                    var changePasswordResult = await userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
+                    var changePasswordResult = await userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword); // el administrador de usuario cambia la contraseña
                     if (changePasswordResult.Succeeded)
                     {
 
-                        await signInManager.RefreshSignInAsync(user);
+                        await signInManager.RefreshSignInAsync(user); //se actualiza el inicio de sesion con la nueva contraseña
 
                         Alert("Contraseña cambiada.", NotificationType.success);
                         return RedirectToAction("Perfil");

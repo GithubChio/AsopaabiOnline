@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace AsopaabiOnline.UI.Services
-{
+{//clase IEmailsender para configurar el envio de correo electronico 
     public class EmailSender: IEmailSender
     {
 

@@ -15,15 +15,15 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsopaabiOnline.UI.Controllers
-{
-    public class CarritoDeComprasController : BaseController
+{  //clase controlador del carrito de compras
+    public class CarritoDeComprasController : BaseController//hereda el controlador base para la notificacion de mensajes.
     {
        
-        private readonly UserManager<User> userManager;
-        private readonly IEmailSender emailSender;
-        private readonly IWebHostEnvironment _env;
+        private readonly UserManager<User> userManager; //instancia de la clase  usuario para que sirva como administrador
+        private readonly IEmailSender emailSender;  //instancia de la clase por defecto IEmailsender  para  enviar correos 
+        private readonly IWebHostEnvironment _env; //instacia de la clase IWebhostEnvironment para agregar/eliminar carpetas en el wwwroot del codigo
 
-
+        //constructor del controlador de carrito de compras
         public CarritoDeComprasController(UserManager<User> userManager,IEmailSender sender,IWebHostEnvironment environment)
         {
 
@@ -41,43 +41,43 @@ namespace AsopaabiOnline.UI.Controllers
             try 
             { 
             CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
-            var producto = elCoordinador.ObtenerProductoPorId(id);
+            var producto = elCoordinador.ObtenerProductoPorId(id); //el coordinador obtiene el producto buscado por id
             if (producto == null || cantidad == 0)
             {
                 Alert("Primero debe agregar la cantidad de producto al carrito. ¡Inténtelo de nuevo!", NotificationType.warning);
             }
-            else
+            else  //si el producto no es nulo y la cantidad es valida 
             {
 
-                producto.Cantidad = cantidad;
+                producto.Cantidad = cantidad;  //se guarda la cantidad en la tabla producto 
 
 
-                if (SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList") == null)
-                {
+                if (SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList") == null)   // condicion: si la lista de productos del carrito esta nulo
+                    {
 
-                    List<Producto> lista = new List<Producto>();
+                    List<Producto> lista = new List<Producto>(); //se crea la lista de productos del carrito
 
-                    lista.Add(producto);
-                    SessionHelper.SetObjectAsJson(HttpContext.Session, "cartList", lista);
+                        lista.Add(producto); //se agrega el producto insgresado
+                    SessionHelper.SetObjectAsJson(HttpContext.Session, "cartList", lista); 
                     Alert("Agregado al carrito.", NotificationType.success);
 
                 }
                 else
-                {
+                { //condicion: si la lista de los productos del carrito de compras no esta nulo 
 
-                    var listaActual = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");
+                    var listaActual = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList"); //se obtiene la lista
 
-                    var indice = siExiste(producto.Id);
-                    if (indice != -1)
+                    var indice = siExiste(producto.Id);  // se busca la existencia del producto por id 
+                    if (indice != -1) //condicion: si el producto ya existe en la lista del carrito
                     {
-                        listaActual[indice].Cantidad += producto.Cantidad;
-                        listaActual.Insert(indice, producto);
-                        listaActual.RemoveAt(indice);
+                        listaActual[indice].Cantidad += producto.Cantidad;  //se agrega la cantidad al producto de la lista
+                        listaActual.Insert(indice, producto); // se inserta el producto a la lista
+                        listaActual.RemoveAt(indice); //se elimina el antiguo producto 
 
                     }
-                    else
+                    else  //condicion: si el producto no existe en el carrito
                     {
-                        listaActual.Add(producto);
+                        listaActual.Add(producto); //se agrega el producto al carrito
                     }
                     SessionHelper.SetObjectAsJson(HttpContext.Session, "cartList", listaActual);
                     Alert("Agregado al carrito.", NotificationType.success);
@@ -100,27 +100,27 @@ namespace AsopaabiOnline.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> CarritoDeCompras()
         {
-            var user = await userManager.GetUserAsync(HttpContext.User);
+            var user = await userManager.GetUserAsync(HttpContext.User); //el administrador de usuarios obtiene el usuario logueado
             ViewBag.simboloDeColon = "₡";
-            if (SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList") == null)
+            if (SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList") == null) 
             {
 
                 Alert("No hay productos en el carrito", NotificationType.info);
                 return RedirectToAction("Tienda", "Home");
             }
             else
-            {
+            { //condicion: si el carrito tiene productos 
 
-                var carritoDeCompras = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");
+                var carritoDeCompras = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");  //se obtiene la lista del carrito de compras
                 ViewBag.cart = carritoDeCompras;
-                ViewBag.total = carritoDeCompras.Sum(producto => producto.Precio * producto.Cantidad);
+                ViewBag.total = carritoDeCompras.Sum(producto => producto.Precio * producto.Cantidad);  //se suma el total del carrito
 
 
-                CoordinadorDeDireccionesParaPedidos coordinadorDeDireccionesParaPedidos = new CoordinadorDeDireccionesParaPedidos();
+                CoordinadorDeDireccionesParaPedidos coordinadorDeDireccionesParaPedidos = new CoordinadorDeDireccionesParaPedidos(); 
 
-                CartViewModel viewModel = new CartViewModel();
-                viewModel.pedido = new Pedido();
-                viewModel.pedido.ListaDeDirecciones = coordinadorDeDireccionesParaPedidos.ListarDirecciones(user.Id);
+                CartViewModel viewModel = new CartViewModel();  //se crea un objeto de la clase modelo cartViewModel o ¨carrito de compras model¨
+                viewModel.pedido = new Pedido();   //se agrega un nuevo pedido
+                viewModel.pedido.ListaDeDirecciones = coordinadorDeDireccionesParaPedidos.ListarDirecciones(user.Id);   //se listan las direcciones utilizadas en la vista 
                 return View(viewModel);
             }
 
@@ -132,10 +132,10 @@ namespace AsopaabiOnline.UI.Controllers
         //Método  para quitar un producto del carrito de compras
         public IActionResult QuitarDelCarrito(int id)
         {
-            List<Producto> carritoDeCompras = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");
-            int index = siExiste(id);
-            carritoDeCompras.RemoveAt(index);
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "cartList", carritoDeCompras);
+            List<Producto> carritoDeCompras = SessionHelper.GetObjectFromJson<List<Producto>>(HttpContext.Session, "cartList");  //instancia del carrito de compras 
+            int index = siExiste(id);      //si busca la existencia  del producto o indice 
+            carritoDeCompras.RemoveAt(index); //se elimina de la lista del carrito de compras
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cartList", carritoDeCompras); 
             return RedirectToAction("CarritoDeCompras");
         }
 
@@ -204,7 +204,7 @@ namespace AsopaabiOnline.UI.Controllers
             {
                 try
                 {
-                    CoordinadorDePedidos coordinadorDePedidos = new CoordinadorDePedidos();
+                    CoordinadorDePedidos coordinadorDePedidos = new CoordinadorDePedidos(); //se crea un objeto del coordinador de pedidos
 
                     pedido.IdCliente = user.Id;
                     coordinadorDePedidos.Agregar(pedido);  // Agrega el pedido con ayuda del coordinador de pedidos
@@ -261,15 +261,16 @@ namespace AsopaabiOnline.UI.Controllers
                 try
                 {
 
-                    Pago pago = new Pago();
-                    
+                    Pago pago = new Pago(); //se crea un objeto de la clase Pago 
+                      //se guardan los datos de pago 
                     pago.IdPedido = idPedido;
                     pago.Monto = total;
                    ViewBag.opcionesDePago = pedido.TipoPago;
                     pago.OpcionesDePago = pedido.TipoPago;
-                    db.Pago.Add(pago);
-                    await db.SaveChangesAsync();
-                    await dbContextTransaction.CommitAsync();
+                    
+                    db.Pago.Add(pago);//se agrega el pago a la tabla Pago 
+                    await db.SaveChangesAsync(); //se guardan los cambios
+                    await dbContextTransaction.CommitAsync(); 
 
                     return true;
 
@@ -288,7 +289,7 @@ namespace AsopaabiOnline.UI.Controllers
         {
             
             string body = string.Empty;
-            //using streamreader for reading my htmltemplate   
+            //using streamreader para leer la plantilla  html   
             var pathToFile = _env.WebRootPath
                           + Path.DirectorySeparatorChar.ToString()
                           + "EmailTemplates"

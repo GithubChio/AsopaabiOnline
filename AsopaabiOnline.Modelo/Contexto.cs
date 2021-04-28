@@ -5,19 +5,21 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 
 namespace AsopaabiOnline.Modelo
-{
+{    //clase modelo CONTEXTO con herencia del DBContext para actualizar/agregar/eliminar/buscar  las tablas de la base de datos 
     public partial class Contexto : DbContext
     {
-        public Contexto()
+        public Contexto()    //contructor de la clase 
         {
          
         }
 
-        public Contexto(DbContextOptions<Contexto> options)
+        public Contexto(DbContextOptions<Contexto> options) 
             : base(options)
         {
         }
 
+
+        //Get y sets de las tablas Modelo 
         public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
@@ -36,6 +38,8 @@ namespace AsopaabiOnline.Modelo
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
 
+
+        //metodo para ir a la conexion string
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -43,7 +47,7 @@ namespace AsopaabiOnline.Modelo
                 optionsBuilder.UseLazyLoadingProxies(useLazyLoadingProxies: true).UseSqlServer("Server=DESKTOP-GID5PN2;Database=ASOPAABI_ONLINE;User ID=sa;Password=1234;");
             }
         }
-
+         //se obtienen las  relaciones de las tablas de la base de datos 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AspNetRoleClaims>(entity =>

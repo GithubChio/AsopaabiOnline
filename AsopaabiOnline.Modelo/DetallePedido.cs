@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AsopaabiOnline.Modelo
-{
+{    //clase modelo DetallePedido
     public partial class DetallePedido
     {
         public int Id { get; set; }

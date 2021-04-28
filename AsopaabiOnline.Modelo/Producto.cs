@@ -7,17 +7,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace AsopaabiOnline.Modelo
-{
+{           //clase modelo Producto
     public partial class Producto
     {
-        public Producto()
+        public Producto()//constructor de la clase 
         {
             DetallePedido = new HashSet<DetallePedido>();
         }
+        //atributos de la clase 
 
         [Key]
-      
-        
+     
         public int Id { get; set; }
 
         [Display(Name = "Código")]

@@ -11,7 +11,8 @@ using AsopaabiOnline.UI.Models.Enums;
 
 namespace AsopaabiOnline.UI.Controllers
 {
-    public class ProductosController : BaseController
+    //controlador de productos
+    public class ProductosController : BaseController //hereda el controlador base para la notificacion de mensajes.
     {
        private readonly IWebHostEnvironment hostEnvironment;
 
@@ -37,15 +38,15 @@ namespace AsopaabiOnline.UI.Controllers
             try
             {
                 CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();  // se crea un objeto coordinador.
-                if ( !elCoordinador.SiExiste(elProducto) || elProducto != null)
+                if ( !elCoordinador.SiExiste(elProducto) || elProducto != null) //si no existe el producto 
                 {
-                    if (elCoordinador.SiExiteCodigo(elProducto))
+                    if (elCoordinador.SiExiteCodigo(elProducto)) //se valida la existencia de el codigo a ingresar para que no sea el mismo 
                     {
                         Alert("Parece que ya existe un producto con ese código,Inténtalo de nuevo agregando otro código diferente! ", NotificationType.warning);
                         return View(elProducto);
                     }
                     elProducto.Imagen = SubirImagen(elProducto); // se carga la imagen al codigo y se le asigna el nombre de la imagen del producto que se va a guardar
-                    elCoordinador.Agregar(elProducto); // se agregan los productos a la base de datos
+                    elCoordinador.Agregar(elProducto); // se agregan los productos a la tabla PRODUCTO de la base de datos 
                     Alert("Producto guardado.", NotificationType.success);
 
 
@@ -149,12 +150,12 @@ namespace AsopaabiOnline.UI.Controllers
                 if (elCoordinador.SiExiste(elProducto) )
                 {
 
-                    if (elProducto.ImageFile != null) //si se carga el archivo de la imagen entonces se copia al folder 
+                    if (elProducto.ImageFile != null) //si se carga el archivo de la imagen 
                     {
-                        elProducto.Imagen = SubirImagen(elProducto); //se sube la imagen al folder del codigo
+                        elProducto.Imagen = SubirImagen(elProducto); //se sube la imagen al folder del codigo y se le asigna la direccion al atributo imagen para ser actualizado en la tabla 
                     }
 
-                    elCoordinador.Actualizar(elProducto); // actualiza los productos
+                    elCoordinador.Actualizar(elProducto); // actualiza el producto deseado a la tabla de PRODUCTO
                     Alert("Producto actualizado.", NotificationType.success);
                 }
                 else
@@ -185,7 +186,7 @@ namespace AsopaabiOnline.UI.Controllers
         public IActionResult Eliminar(int id)
         {
             CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
-            var elProductoEncontrado = elCoordinador.ObtenerProductoPorId(id);
+            var elProductoEncontrado = elCoordinador.ObtenerProductoPorId(id); //Se busca el producto a eliminar 
 
             return View(elProductoEncontrado);
         }
@@ -199,10 +200,10 @@ namespace AsopaabiOnline.UI.Controllers
             try
             {
                 CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
-                if (elCoordinador.SiExiste(elProducto))
+                if (elCoordinador.SiExiste(elProducto))//si existe el producto 
                 {
-                    EliminarRutaDeImagen(elProducto); //se elimina la imagen del folder del codigo local 
-                    elCoordinador.Eliminar(elProducto); //se elimina el producto
+                    EliminarRutaDeImagen(elProducto); //se elimina la imagen del folder ´wwwroot/imagenes´  local 
+                    elCoordinador.Eliminar(elProducto); //se elimina el producto deseado de la tabla PRODUCTO
                     Alert("Producto eliminado.", NotificationType.success);
 
                 }

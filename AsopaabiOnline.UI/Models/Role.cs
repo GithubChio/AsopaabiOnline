@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace AsopaabiOnline.UI.Models
-{
+{//clase modelo pra crear el Rol
     public class Role
     {
         [Key]

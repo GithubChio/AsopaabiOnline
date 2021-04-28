@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace AsopaabiOnline.Modelo
-{
+{   //clase enum para guardar los estados de producto
     public enum EstadoDeProducto
     {
         Disponible = 1,

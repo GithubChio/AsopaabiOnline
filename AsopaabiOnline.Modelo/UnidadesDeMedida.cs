@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace AsopaabiOnline.Modelo
-{
+{                //clase enum para guardar las unidades de medida
     public enum UnidadesDeMedida
     {
         [Display(Name ="Empaque Kg")]

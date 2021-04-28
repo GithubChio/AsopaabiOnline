@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace AsopaabiOnline.UI.Models
-{
+{ //clase modelo para iniciar sesion 
     public class Login
     {
         [Required(ErrorMessage = "El correo es requerido")]

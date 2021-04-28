@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AsopaabiOnline.Modelo
-{
+{   //clase modelo AspNetUserRoles
     public partial class AspNetUserRoles
     {
         public string UserId { get; set; }

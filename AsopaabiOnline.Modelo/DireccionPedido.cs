@@ -4,20 +4,21 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AsopaabiOnline.Modelo
-{
+{     //clase modelo  DireccionPedido
     public partial class DireccionPedido
     {
-        public DireccionPedido()
+        public DireccionPedido()//constructor de la clase 
         {
             Pedido = new HashSet<Pedido>();
         }
+
+        //atributos de la clase 
 
         [Key]
       
         public int Id { get; set; }
 
 
-        
             
         [Display(Name ="Provincia")]
         public int IdProvincia { get; set; }

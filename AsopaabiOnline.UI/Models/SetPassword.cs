@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace AsopaabiOnline.UI.Models
-{
+{//clase modelo para establecer una nueva contraseña
     public class SetPassword
     {
 

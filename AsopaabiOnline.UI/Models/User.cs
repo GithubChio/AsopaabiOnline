@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace AsopaabiOnline.UI.Models
-{
+{//clase modelo de Usuario
     public class User: IdentityUser
     {
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AsopaabiOnline.Modelo
-{
+{   //clase modelo AspNetUserLogins
     public partial class AspNetUserLogins
     {
         public string LoginProvider { get; set; }

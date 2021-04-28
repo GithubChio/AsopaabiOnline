@@ -3,8 +3,8 @@ using Newtonsoft.Json;
 
 namespace AsopaabiOnline.UI.Helpers
 {
-  
-        public static class SessionHelper
+    //clase SessionHelper para crear la lista del carrito de compras temporal 
+    public static class SessionHelper
     {
         public static void SetObjectAsJson(this ISession session, string key, object value)
         {

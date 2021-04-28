@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace AsopaabiOnline.UI.Models
-{
+{//clase para cambiar la contraseña
     public class ChangePassword
     {
 

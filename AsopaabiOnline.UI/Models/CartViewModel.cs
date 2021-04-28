@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AsopaabiOnline.UI.Models
 {
+    //Clase enum para el carrito de compra
     public class CartViewModel
     {
         public Pedido pedido { get; set; }

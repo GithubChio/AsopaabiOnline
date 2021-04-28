@@ -9,11 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AsopaabiOnline.UI.Controllers
 {
+    //Controlador administrador 
     public class AdministradorController : BaseController
     {
-        private readonly RoleManager<IdentityRole> roleManager;
-        private readonly UserManager<User> userManager;
-        private readonly SignInManager<User> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;//instancia de la clase  IdentityRole para que sirva como administrador de los roles
+        private readonly UserManager<User> userManager;//instancia de la clase  usuario para que sirva como administrador
+        private readonly SignInManager<User> signInManager;//instancia de la clase  usuario para que sirva como administrador del inicio de sesion 
         public AdministradorController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
@@ -26,7 +27,7 @@ namespace AsopaabiOnline.UI.Controllers
         [HttpGet]
         public IActionResult UserList()
         {
-            var list = userManager.Users;
+            var list = userManager.Users;  //el administrador de usuarios brinda la lista de todos los usuarios
 
 
             return View(list);
@@ -41,16 +42,16 @@ namespace AsopaabiOnline.UI.Controllers
 
         public async Task<IActionResult> EditUser(string id)
         {
-            var user = await userManager.FindByIdAsync(id);
-            var userRole = await userManager.GetRolesAsync(user);
-            ViewBag.Roles = userRole.ToList();
+            var user = await userManager.FindByIdAsync(id);  //el administrador de usuario encuentra el usuario por id
+            var userRole = await userManager.GetRolesAsync(user); //el administrador de roles encuentra el rol del usuario solicitado
+            ViewBag.Roles = userRole.ToList();//el administrador de roles  lista todos los roles del usuario buscado
             if (user == null)
             {
                 ViewBag.Message = $"el usuario con el id= {id} no fue encontrado";
                 return View("Error");
             }
             else
-            {
+            {   //se obtienen los datos del usuario a editar 
                 User userToEdit = new Models.User()
                 {
                     Id = user.Id,
@@ -80,9 +81,9 @@ namespace AsopaabiOnline.UI.Controllers
             try
             {
                 string roleName = "";
-                var user = await userManager.FindByIdAsync(input.Id);
+                var user = await userManager.FindByIdAsync(input.Id);//el administrador de usuario encuentra el usuario por id
 
-                var oldRoleList = await userManager.GetRolesAsync(user);
+                var oldRoleList = await userManager.GetRolesAsync(user);//el administrador de usuario encuentra el rol del usuario solicitado
 
                 if (user == null)
                 {
@@ -92,16 +93,17 @@ namespace AsopaabiOnline.UI.Controllers
                 }
                 else
                 {
+                    // se editan los datos del usuario 
                     user.Id = input.Id;
                     user.UserType = input.UserType;
                     user.CustomerType = input.CustomerType;
 
 
-                    if (input.UserType.Equals(AsopaabiOnline.UI.Models.Enums.UserType.Administrador))
+                    if (input.UserType.Equals(AsopaabiOnline.UI.Models.Enums.UserType.Administrador)) //condicion: si el usuario selecciona el tipo de usuario Administrador
                     {
-                        roleName = "Administrador";
+                        roleName = "Administrador"; 
 
-                        foreach (var oldRoleName in oldRoleList.ToList())
+                        foreach (var oldRoleName in oldRoleList.ToList())  //se recorre la lista de roles de ese usuario 
                         {
                             if (oldRoleName =="Administrador")
                             {
@@ -109,56 +111,51 @@ namespace AsopaabiOnline.UI.Controllers
                                 return RedirectToAction("UserList");
                             }
 
-                            await userManager.RemoveFromRoleAsync(user, oldRoleName);
+                            await userManager.RemoveFromRoleAsync(user, oldRoleName); //se elimina el rol antiguo 
                         }
 
-                        await userManager.AddToRoleAsync(user, roleName);
+                        await userManager.AddToRoleAsync(user, roleName); //se agrega el rol Administrador 
 
 
 
                     }
-                    else if (input.UserType.Equals(AsopaabiOnline.UI.Models.Enums.UserType.AsistenteAdministrativo))
+                    else if (input.UserType.Equals(AsopaabiOnline.UI.Models.Enums.UserType.AsistenteAdministrativo))  //condicion: si el usuario selecciona el tipo de usuario asistente administrativo
                     {
                         roleName = "AsistenteAdministrativo";
-                        foreach (var oldRoleName in oldRoleList.ToList())
+                        foreach (var oldRoleName in oldRoleList.ToList())  //se recorre la lista de roles de ese usuario 
                         {
-                            await userManager.RemoveFromRoleAsync(user, oldRoleName);
+                            await userManager.RemoveFromRoleAsync(user, oldRoleName);  //se elimina el rol antiguo 
                         }
 
-                        await userManager.AddToRoleAsync(user, roleName);
+                        await userManager.AddToRoleAsync(user, roleName);  //se agrega el rol asistente administrativo
 
 
                     }
-                    else
+                    else  //condicion: si el usuario selecciona el tipo de usuario Cliente
                     {
-                        foreach (var oldRoleName in oldRoleList.ToList())
+                        foreach (var oldRoleName in oldRoleList.ToList())//se recorre la lista de roles de ese usuario 
                         {
                             if (oldRoleName == "Administrador" )
                             {
                                 Alert($"No se puede cambiar de rol por que es un usuario administrador.", NotificationType.warning);
                                 return RedirectToAction("UserList");
                             }
-                            await userManager.RemoveFromRoleAsync(user, oldRoleName);
+                            await userManager.RemoveFromRoleAsync(user, oldRoleName); //se elimina el rol antiguo 
                         }
                         roleName = "Cliente";
-                        await userManager.AddToRoleAsync(user, roleName);
+                        await userManager.AddToRoleAsync(user, roleName);//se agrega el rol Cliente
 
                     }
 
 
-                    var elResultado = await userManager.UpdateAsync(user);
+                    var elResultado = await userManager.UpdateAsync(user); //el administrador actualiza el usuario 
 
                     if (elResultado.Succeeded)
                     {
                         Alert("Usuario actualizado.", NotificationType.success);
                         return RedirectToAction("UserList");
                     }
-                    foreach (var elError in elResultado.Errors)
-                    {
-                        Alert("Algo ha salido mal, Inténtalo de nuevo!", NotificationType.error);
-                       
-                        ModelState.AddModelError("", elError.Description);
-                    }
+                   
                 }
                 return View(input);
             }
@@ -177,16 +174,16 @@ namespace AsopaabiOnline.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> UserDetails(string id)
         {
-            var user = await userManager.FindByIdAsync(id);
-            var userRole = await userManager.GetRolesAsync(user);
-            ViewBag.Roles = userRole.ToList();
+            var user = await userManager.FindByIdAsync(id); //el administrador de usuario encuentra el usuario por id
+            var userRole = await userManager.GetRolesAsync(user);  //el administrador de usuario encuentra el rol del usuario solicitado
+            ViewBag.Roles = userRole.ToList(); //el administrador de roles  lista todos los roles del usuario buscado
             if (user == null)
             {
                 ViewBag.ErrorMessage = $"el usuario con el id= {id} no fue encontrado";
                 return View("Error");
             }
             else
-            {
+            {//se detallan los datos del usuario para enviarlos a la vista 
                 User userDetails = new Models.User()
                 {
                     Id = user.Id,
@@ -221,9 +218,9 @@ namespace AsopaabiOnline.UI.Controllers
             {
                 string roleName = "Cliente";
 
-                var user = await userManager.FindByIdAsync(input.Id);
+                var user = await userManager.FindByIdAsync(input.Id);//el administrador de usuario encuentra el usuario por id 
 
-                var oldRoleList = await userManager.GetRolesAsync(user);
+                var oldRoleList = await userManager.GetRolesAsync(user); //el administrador de usuario encuentra el rol del usuario solicitado
 
                 if (user == null)
                 {
@@ -234,12 +231,12 @@ namespace AsopaabiOnline.UI.Controllers
                 {
                     user.Id = input.Id;
 
-                    foreach (var oldRoleName in oldRoleList.ToList())
+                    foreach (var oldRoleName in oldRoleList.ToList()) //se recorren la lista de roles del usuario 
                     {
-                        if (oldRoleName == "Deshabilitado")
+                        if (oldRoleName == "Deshabilitado") //condicion: si esta deshabilitado 
                         {
-                            await userManager.RemoveFromRoleAsync(user, oldRoleName);
-                            await userManager.AddToRoleAsync(user, roleName);
+                            await userManager.RemoveFromRoleAsync(user, oldRoleName); //se elimina el rol antiguo del usuario 
+                            await userManager.AddToRoleAsync(user, roleName); //el administrador de usuarios agrega el nuevo rol habilitado
                            
                            
                         }
@@ -252,17 +249,14 @@ namespace AsopaabiOnline.UI.Controllers
 
                     }
 
-                    var elResultado = await userManager.UpdateAsync(user);
+                    var elResultado = await userManager.UpdateAsync(user); //el administrador de usuarios actualiza el usuario
 
                     if (elResultado.Succeeded)
                     {
                         Alert($"Se ha habilitado a su rol de cliente. ", NotificationType.success);
                         return RedirectToAction("UserList");
                     }
-                    foreach (var elError in elResultado.Errors)
-                    {
-                        ModelState.AddModelError("", elError.Description);
-                    }
+                   
 
                 }
                 return View(input);
@@ -286,9 +280,9 @@ namespace AsopaabiOnline.UI.Controllers
             {
                 string roleName = "Deshabilitado";
 
-                var user = await userManager.FindByIdAsync(input.Id);
+                var user = await userManager.FindByIdAsync(input.Id);//el administrador de usuario encuentra el usuario por id 
 
-                var oldRoleList = await userManager.GetRolesAsync(user);
+                var oldRoleList = await userManager.GetRolesAsync(user); //el administrador de usuario encuentra el rol del usuario solicitado
 
                 if (user == null)
                 {
@@ -300,7 +294,7 @@ namespace AsopaabiOnline.UI.Controllers
                 {
                     user.Id = input.Id;
 
-                    foreach (var oldRoleName in oldRoleList.ToList())
+                    foreach (var oldRoleName in oldRoleList.ToList())//se recorren la lista de roles del usuario 
                     {
                         if (oldRoleName == "Deshabilitado")
                         {
@@ -308,26 +302,23 @@ namespace AsopaabiOnline.UI.Controllers
                           
                           return  RedirectToAction("DisableUsersList");
                         }
-                        else
+                        else //condicion: si no esta deshabilitado 
                         {
-                            await userManager.RemoveFromRoleAsync(user, oldRoleName);
-                            await userManager.AddToRoleAsync(user, roleName);
+                            await userManager.RemoveFromRoleAsync(user, oldRoleName);//se elimina el rol antiguo del usuario 
+                            await userManager.AddToRoleAsync(user, roleName);//el administrador de usuarios agrega el nuevo rol deshabilitado
                         }
 
                     }
 
                    
-                    var elResultado = await userManager.UpdateAsync(user);
+                    var elResultado = await userManager.UpdateAsync(user);//el administrador de usuarios actualiza el usuario
 
                     if (elResultado.Succeeded)
                     {
                         Alert($"Usuario deshabilitado", NotificationType.success);
                         return RedirectToAction("UserList");
                     }
-                    foreach (var elError in elResultado.Errors)
-                    {
-                        ModelState.AddModelError("", elError.Description);
-                    }
+                  
 
                 }
                 return View(input);

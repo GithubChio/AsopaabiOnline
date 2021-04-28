@@ -10,7 +10,8 @@ using AsopaabiOnline.UI.Models.Enums;
 
 namespace AsopaabiOnline.UI.Controllers
 {
-    public class PedidosController : BaseController
+    //controlador de Pedidos
+    public class PedidosController : BaseController //hereda el controlador base para la notificacion de mensajes.
     {
         //Método para mostrar la lista de pedidos
 
@@ -19,7 +20,7 @@ namespace AsopaabiOnline.UI.Controllers
         public IActionResult Mostrar()
         {
             CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
-            return View(elCoordinador.ListarPedidos());
+            return View(elCoordinador.ListarPedidos()); //el coordinador de pedidos lista los pedidos encontrados 
         }
 
 
@@ -30,7 +31,7 @@ namespace AsopaabiOnline.UI.Controllers
         public IActionResult Actualizar(int id)
         {
             CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
-            var elPedidoEncontrado = elCoordinador.ObtenerPedidoPorId(id);
+            var elPedidoEncontrado = elCoordinador.ObtenerPedidoPorId(id); //el coordinador busca el pedido por Id y se lo pasa a la vista 
 
             return View(elPedidoEncontrado);
         }
@@ -43,9 +44,9 @@ namespace AsopaabiOnline.UI.Controllers
                 
                 CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
                 
-                if (elCoordinador.siExite(elPedido))
+                if (elCoordinador.siExite(elPedido)) //el coordinador verifica la existencia antes de actualizar
                 {
-                    elCoordinador.Actualizar(elPedido);
+                    elCoordinador.Actualizar(elPedido); //el coordinador procede a actualizar el pedido
                     Alert("Pedido actualizado.", NotificationType.success);
                 }
                 else
@@ -68,7 +69,7 @@ namespace AsopaabiOnline.UI.Controllers
         public IActionResult CambiarEstadoDePedido(int id)
         {
             CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
-            var elPedidoEncontrado = elCoordinador.ObtenerPedidoPorId(id);
+            var elPedidoEncontrado = elCoordinador.ObtenerPedidoPorId(id); 
             ViewBag.IdDelPedido = elPedidoEncontrado.Id;
             return View();
         }
@@ -80,7 +81,7 @@ namespace AsopaabiOnline.UI.Controllers
         {
 
             CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
-            var elPedidoEncontrado = elCoordinador.ObtenerPedidoPorId(id);
+            var elPedidoEncontrado = elCoordinador.ObtenerPedidoPorId(id); //se obtiene el pedido por el id
 
             return View(elPedidoEncontrado);
         }
@@ -125,7 +126,7 @@ namespace AsopaabiOnline.UI.Controllers
         public IActionResult CambiarAPedidoFinalizado(int id)
         {
             CoordinadorDePedidos elCoordinador = new CoordinadorDePedidos();
-            var elPedidoEncontrado = elCoordinador.ObtenerPedidoPorId(id);
+            var elPedidoEncontrado = elCoordinador.ObtenerPedidoPorId(id);//el coordinador obtiene un pedido por id
 
             return View(elPedidoEncontrado);
         }

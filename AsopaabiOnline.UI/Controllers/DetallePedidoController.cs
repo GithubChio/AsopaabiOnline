@@ -7,7 +7,7 @@ using AsopaabiOnline.Modelo;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsopaabiOnline.UI.Controllers
-{
+{ // controlador de detalles del pedido
     public class DetallePedidoController : Controller
     {
 
@@ -16,7 +16,7 @@ namespace AsopaabiOnline.UI.Controllers
         public IActionResult MostrarDetalles(Pedido pedido)
         {
             CoordinadorDeDetallePedido elCoordinador = new CoordinadorDeDetallePedido();
-            return View(elCoordinador.ListarDetallePedido(pedido));
+            return View(elCoordinador.ListarDetallePedido(pedido)); //el coordinador obtiene la lista de detalles del pedido
         
         }
 

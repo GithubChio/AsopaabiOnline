@@ -13,12 +13,13 @@ using AsopaabiOnline.UI.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace AsopaabiOnline.UI.Controllers
-{
-    public class HomeController : BaseController
+{ //controlador de Home
+    public class HomeController : BaseController //hereda el controlador base para la notificacion de mensajes.
+    
     {
        
-        private readonly UserManager<User> userManager;
-        public HomeController( UserManager<User> userManager)
+        private readonly UserManager<User> userManager;   //instancia de la clase  usuario para que sirva como administrador
+        public HomeController( UserManager<User> userManager) //constructor del controlador home
         {
            
             this.userManager = userManager;
@@ -29,7 +30,7 @@ namespace AsopaabiOnline.UI.Controllers
         public IActionResult Tienda()
         {
             CoordinadorDeProductos elCoordinador = new CoordinadorDeProductos();
-            var list = elCoordinador.ListarProductos();
+            var list = elCoordinador.ListarProductos();//el coordinador trae la lista de productos
             ViewBag.simboloDeColon = "₡";
 
             return View(list);
@@ -40,17 +41,17 @@ namespace AsopaabiOnline.UI.Controllers
         {
             Contexto _context = new Contexto();
 
-        var list = from product in _context.Producto
-                       select product;
+        var list = from product in _context.Producto 
+                       select product;//se consulta  la lista de productos 
 
-            if (!String.IsNullOrEmpty(Search))
+            if (!String.IsNullOrEmpty(Search)) //metodo  para  buscar productos en la tienda
             {
                 list = list.Where(s => s.Nombre.Contains(Search));
 
 
             }
 
-            return View(await list.ToListAsync());
+            return View(await list.ToListAsync()); //muesta en la tienda el producto buscado 
         }
 
         //Permite ir a la vista de acerca de nosotros

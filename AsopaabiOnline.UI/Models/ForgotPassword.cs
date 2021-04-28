@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace AsopaabiOnline.UI.Models
-{
+{// clase para obtener el correo en caso de olvido de contraseña
     public class ForgotPassword
     {
         [Required(ErrorMessage = "El correo es requerido")]

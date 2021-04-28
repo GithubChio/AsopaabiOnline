@@ -5,16 +5,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace AsopaabiOnline.Modelo
-{
+{            //clase modelo  Pedido
     public partial class Pedido
     {
-        public Pedido()
+        public Pedido()//constructor de la clase 
         {
 
             DetallePedido = new HashSet<DetallePedido>();
             HistorialPedido = new HashSet<HistorialPedido>();
             Pago = new HashSet<Pago>();
         }
+        //atributos de la clase 
 
         [Key]
 

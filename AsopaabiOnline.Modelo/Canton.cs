@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AsopaabiOnline.Modelo
-{
+{     //clase modelo Canton
     public partial class Canton
-    {
-        public Canton()
+    {   
+        public Canton()  //constructor de la clase 
         {
             DireccionPedido = new HashSet<DireccionPedido>();
             Distrito = new HashSet<Distrito>();
         }
+          
 
+        //atributos de la clase 
         public int Id { get; set; }
 
         public string Nombre { get; set; }

@@ -10,11 +10,12 @@ using AsopaabiOnline.UI.Models;
 using AsopaabiOnline.UI.Models.Enums;
 
 namespace AsopaabiOnline.UI.Controllers
-{
-    public class DireccionesParaPedidosController : BaseController
+{//controlador de direcciones para pedidos
+    public class DireccionesParaPedidosController : BaseController //hereda el controlador base para la notificacion de mensajes.
+
     {
-        private readonly UserManager<User> userManager;
-        public DireccionesParaPedidosController(UserManager<User> userManager)
+        private readonly UserManager<User> userManager; //instancia de la clase  usuario para que sirva como administrador
+        public DireccionesParaPedidosController(UserManager<User> userManager)//constructor del controlador direcciones para pedidos 
         {
             this.userManager = userManager;
 
@@ -29,13 +30,13 @@ namespace AsopaabiOnline.UI.Controllers
 
             Modelo.DireccionPedido laDireccionDelPedido = new Modelo.DireccionPedido();
 
-            CoordinadorDeProvincias elCoordinadorDeProvincias = new CoordinadorDeProvincias();
+            CoordinadorDeProvincias elCoordinadorDeProvincias = new CoordinadorDeProvincias(); 
 
 
-            laDireccionDelPedido.LaListaDeProvincias = elCoordinadorDeProvincias.ListarProvincias();
+            laDireccionDelPedido.LaListaDeProvincias = elCoordinadorDeProvincias.ListarProvincias();//el coordinador obtiene la lista de provincias 
 
 
-            return View(laDireccionDelPedido);
+            return View(laDireccionDelPedido); //se muestran las provincias en la vista
         }
 
         [HttpPost]
@@ -46,19 +47,19 @@ namespace AsopaabiOnline.UI.Controllers
             {
                 if (laDireccion != null)
                 {
-                    var user = await userManager.GetUserAsync(HttpContext.User);
-                    CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
-                    laDireccion.IdCliente = user.Id;
-                    elCoordinador.Agregar(laDireccion);
+                    var user = await userManager.GetUserAsync(HttpContext.User); //el administrador de usuarios obtiene el usuario del inicio de sesion
+                    CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos(); //se crea una instancia del coordinador de direcciones para pedidos
+                    laDireccion.IdCliente = user.Id;  //se asigna el id del cliente a la direccion 
+                    elCoordinador.Agregar(laDireccion); //el coordinador agrega la nueva direccion 
 
-                    Alert("Dirección guardada.", NotificationType.success);
+                    Alert("Dirección guardada.", NotificationType.success); //se muestra un mensaje de exito
                    
 
 
                 }
-                else
+                else //si no se agrega 
                 {
-                    Alert("Complete todos los campos.", NotificationType.warning);
+                    Alert("Complete todos los campos.", NotificationType.info); // se  muestra un mensaje de informacion  
                     return View();
                 }
 
@@ -68,11 +69,11 @@ namespace AsopaabiOnline.UI.Controllers
 
 
             }
-            catch
+            catch //si ocurre un error
             {
 
 
-                Alert("Complete todos los campos.", NotificationType.error);
+                Alert("Complete todos los campos.", NotificationType.error); // se muestra un mensaje de error
                 return View();
             }
            
@@ -85,8 +86,8 @@ namespace AsopaabiOnline.UI.Controllers
         public JsonResult CargarCantones(int id)
         {
             CoordinadorDeCantones elCoordinador = new CoordinadorDeCantones();
-            var losCantones = elCoordinador.ListarCantonesPorIdDeProvincia(id);
-            return Json(new SelectList(losCantones, "Id", "Nombre"));
+            var losCantones = elCoordinador.ListarCantonesPorIdDeProvincia(id); //el coordinador brinda la lista de cantones por id de provincia 
+            return Json(new SelectList(losCantones, "Id", "Nombre")); //se listan en un select
         }
 
 
@@ -94,8 +95,8 @@ namespace AsopaabiOnline.UI.Controllers
         public JsonResult CargarDistritos(int id)
         {
             CoordinadorDeDistritos elCoordinador = new CoordinadorDeDistritos();
-            var losDistritos = elCoordinador.ListarDistritosPorIdDeCanton(id);
-            return Json(new SelectList(losDistritos, "Id", "Nombre"));
+            var losDistritos = elCoordinador.ListarDistritosPorIdDeCanton(id);//el coordinador brinda la lista de los distritos por id de canton 
+            return Json(new SelectList(losDistritos, "Id", "Nombre"));//se listan en un select
         }
 
 
@@ -106,10 +107,10 @@ namespace AsopaabiOnline.UI.Controllers
         {
 
             CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
-            var user = await userManager.GetUserAsync(HttpContext.User);
+            var user = await userManager.GetUserAsync(HttpContext.User); //el administrador de usuario trae el usuario logueado
 
 
-            return  View(elCoordinador.ListarDirecciones(user.Id));
+            return  View(elCoordinador.ListarDirecciones(user.Id)); //el coordinador devuelve a la vista la lista de direcciones por id de usuario
         }
 
 
@@ -120,10 +121,10 @@ namespace AsopaabiOnline.UI.Controllers
         public IActionResult Eliminar(int id)
         {
             CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
-            var laDireccionEncontrada = elCoordinador.ObtenerDireccionPorId(id);
+            var laDireccionEncontrada = elCoordinador.ObtenerDireccionPorId(id); //el coordinador obtiene la direccion a eliminar por id 
 
 
-            return View(laDireccionEncontrada);
+            return View(laDireccionEncontrada);// retorna a la vista  la direccion encontrada 
         }
 
         [HttpPost]
@@ -132,16 +133,16 @@ namespace AsopaabiOnline.UI.Controllers
         {
             try
             {
-                CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos();
+                CoordinadorDeDireccionesParaPedidos elCoordinador = new CoordinadorDeDireccionesParaPedidos(); //se crea una instancia del  coordinador de direcciones para pedidos
 
-                if (elCoordinador.SiExiste(laDireccion)) 
+                if (elCoordinador.SiExiste(laDireccion)) //se valida que exista la direccion 
                 {
-                    elCoordinador.Eliminar(laDireccion);
-                    Alert( $"La dirección #{laDireccion.Id} ha sido eliminada.", NotificationType.success);
+                    elCoordinador.Eliminar(laDireccion);//el coordinador procede a eliminar la direccion 
+                    Alert( $"La dirección #{laDireccion.Id} ha sido eliminada.", NotificationType.success); //se muestra el mensaje de exito
                 }
-                else
+                else //si no existe
                 {
-                    Alert($"La dirección que intenta eliminar no existe", NotificationType.warning);
+                    Alert($"La dirección que intenta eliminar no existe", NotificationType.warning); //se advierte que el usuario no exite
                 }
                
                    

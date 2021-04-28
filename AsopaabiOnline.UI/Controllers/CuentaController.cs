@@ -18,17 +18,18 @@ using System.IO;
 
 namespace AsopaabiOnline.UI.Controllers
 {
-   
-    public class CuentaController : BaseController
+   //controlador de cuenta 
+    public class CuentaController : BaseController //hereda el controlador base para la notificacion de mensajes.
     {
-        private readonly SignInManager<User> signInManager;
-        private readonly UserManager<User> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
-        private readonly IEmailSender emailSender;
-        private readonly string DefaultRoleName = "Cliente";
+        private readonly SignInManager<User> signInManager; //instancia de la clase usuario para iniciar sesion 
+        private readonly UserManager<User> userManager; //instancia de la clase usuario para que sirva como administrador
+        private readonly RoleManager<IdentityRole> roleManager; //instancia de la clase por defecto identity role para administrar roles
+        private readonly IEmailSender emailSender; // metodo para enviar mensajes
+        private readonly string DefaultRoleName = "Cliente"; 
         private readonly IWebHostEnvironment _env;
 
-        public CuentaController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager, IEmailSender emailSender, IWebHostEnvironment _env)
+        public CuentaController(UserManager<User> userManager, SignInManager<User> signInManager,          //constructor del controlador de la cuenta
+            RoleManager<IdentityRole> roleManager, IEmailSender emailSender, IWebHostEnvironment _env) 
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -55,10 +56,10 @@ namespace AsopaabiOnline.UI.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid)  
                 {
                    
-                    var user = new User
+                    var user = new User  
                     {
                         UserName = model.Email,
                         Email = model.Email,
@@ -76,24 +77,24 @@ namespace AsopaabiOnline.UI.Controllers
 
 
                     };
-                    if (isExistEmail(user))
-                    {
+                    if (isExistEmail(user))  //se valida que la existencia del email ingresado no este
+                    { 
                         Alert("Parece que ya existe un usuario con este correo electrónico.", NotificationType.warning);
                         return View();
                     }
 
-                    if (isExistDNI(user))
+                    if (isExistDNI(user)) //se valida que la existencia del DNI no exista 
                     {
                         Alert("Parece que ya existe un usuario con esta cédula.", NotificationType.warning);
                         return View();
                     }
                     
-                    var result = await userManager.CreateAsync(user, model.Password);
-                    if (result.Succeeded)
+                    var result = await userManager.CreateAsync(user, model.Password); // el admnistrador de usuario registra un nuevo usuario
+                    if (result.Succeeded) //si se registra 
                     {
 
                         //await signInManager.SignInAsync(user, isPersistent: false);
-                        await userManager.AddToRoleAsync(user, DefaultRoleName);
+                        await userManager.AddToRoleAsync(user, DefaultRoleName); //se agrega el rol de cliente por defecto
                         Alert("Usuario registrado", NotificationType.success);
                         return RedirectToAction("Login");
 
@@ -112,33 +113,34 @@ namespace AsopaabiOnline.UI.Controllers
         }
 
 
-        //Método  para listar usarios por email 
+        // lista usarios por un  email en especifico
         public List<User> UsersListByEmail(User user)
         {
 
-            var Database = HttpContext.User;
+            var Database = HttpContext.User; 
             var result = from User in userManager.Users
                          where User.Email == user.Email
-                         select User;
+                         select User;   //se consulta en la lista de usuarios la existencia de un email 
 
 
             return result.ToList();
         }
 
-        //Método  para listar usarios por DNI 
+        //lista usarios por un  DNI en especifico 
         public List<User> UsersListByDNI(User user)
         {
 
             var Database = HttpContext.User;
             var result = from User in userManager.Users
                        where User.DNI == user.DNI
-                       select User;
+                       select User;  //se consulta en la lista de usuarios la existencia de un DNI
 
 
             return result.ToList();
         }
 
-        //Método para buscar en la lista de usuarios por DNI si existe o no un usuario
+      
+        //verifica si existe el DNI buscado 
         public bool isExistDNI(User user)
         {
             var result = UsersListByDNI(user);
@@ -152,7 +154,7 @@ namespace AsopaabiOnline.UI.Controllers
             }
         }
 
-        //Método para buscar en la lista de usuarios por email si existe o no un usuario
+        //verifica si existe el email buscado
         public bool isExistEmail(User user)
         {
             var result = UsersListByEmail(user);
@@ -183,14 +185,14 @@ namespace AsopaabiOnline.UI.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    var result = await signInManager.PasswordSignInAsync(model.Email, model.Password,false, lockoutOnFailure: true);
-                    if (result.Succeeded)
+                    var result = await signInManager.PasswordSignInAsync(model.Email, model.Password,false, lockoutOnFailure: true); //se inicia sesion 
+                    if (result.Succeeded) //si inicia sesion  
                     {
 
-                        return RedirectToAction("Tienda", "Home");
+                        return RedirectToAction("Tienda", "Home"); //se redirecciona a la tienda 
                     }
 
-                    if (result.IsLockedOut)
+                    if (result.IsLockedOut) 
                     {
                         Alert("Usuario bloqueado", NotificationType.info);
                         return RedirectToAction("Lockout");
@@ -215,7 +217,7 @@ namespace AsopaabiOnline.UI.Controllers
         public async Task<IActionResult> Logout()
         {
 
-            await signInManager.SignOutAsync();
+            await signInManager.SignOutAsync(); // el administrador de inicio de sesion, cierra sesion 
 
             return RedirectToAction("Login");
 
@@ -248,7 +250,7 @@ namespace AsopaabiOnline.UI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var user = await userManager.FindByEmailAsync(input.Email);
+                    var user = await userManager.FindByEmailAsync(input.Email);  //el administrador de usuarios encuentra el usuario por email.
 
 
                     if (user == null)
